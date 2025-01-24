@@ -2,17 +2,23 @@ extends Node2D
 var running = true
 var active = false
 var bpm = Global.get_song_data().bpm
+var hit = false
 
 func _ready():
 	self.modulate.a = 0
 	$fireTimer.wait_time = 1/(bpm/60)*2
 	$fireTimer.start()
 	$area.connect("body_entered", Callable(self, "_player_entered"))
+	$area.connect("body_exited", Callable(self, "_player_exited"))
 
 
 func _process(delta):
 	if running:
 			self.modulate.a += delta
+		
+	if active and hit:
+		Global.hit()
+		hit = false
 	
 	if active:
 		if $area/Laser.scale.x < 10:
@@ -31,4 +37,8 @@ func _on_fire_timer_timeout():
 
 func _player_entered(body):
 	if body is CharacterBody2D:
-		print("hit!")
+		hit = true
+
+func _player_exited(body):
+	if body is CharacterBody2D:
+		hit = false

@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmvxj0pb544fp"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_lqcmr"]
+[ext_resource type="Shader" path="res://motionblur.gdshader" id="1_s2dw5"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="3_qga1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hawuy"]
+size = Vector2(126, 126)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hn211"]
+shader = ExtResource("1_s2dw5")
+shader_parameter/dir = Vector2(0, 0)
+shader_parameter/quality = 20
+
+[node name="Player" type="Node2D"]
+scale = Vector2(1.414, 1.414)
+
+[node name="character" type="CharacterBody2D" parent="."]
+scale = Vector2(0.632677, 0.624336)
+script = ExtResource("1_lqcmr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character"]
+position = Vector2(-2, 0)
+shape = SubResource("RectangleShape2D_hawuy")
+
+[node name="playerSprite" type="Sprite2D" parent="character"]
+material = SubResource("ShaderMaterial_hn211")
+position = Vector2(-3.16117, 0)
+scale = Vector2(8, 8)
+texture = ExtResource("3_qga1h")
+
+[node name="camera" type="Camera2D" parent="character"]
+position = Vector2(-3, -89)
+scale = Vector2(3.03837, 2.96985)
+ignore_rotation = false
+zoom = Vector2(0.8, 0.8)
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+
+[node name="dash" type="Timer" parent="character"]
+wait_time = 0.055
+one_shot = true
+
+[node name="dashCooldown" type="Timer" parent="character"]
+wait_time = 0.1
+one_shot = true
+
+[node name="land" type="Timer" parent="character"]
+wait_time = 0.3
+one_shot = true
+
+[node name="jump" type="Timer" parent="character"]
+wait_time = 0.05
+
+[connection signal="timeout" from="character/dash" to="character" method="_on_dash_timeout"]
+[connection signal="timeout" from="character/dashCooldown" to="character" method="_on_dash_cooldown_timeout"]
+[connection signal="timeout" from="character/jump" to="character" method="_on_jump_timeout"]

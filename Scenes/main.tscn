@@ -1,3 +1,30 @@
-[gd_scene format=3 uid="uid://cxcc3ulv26so3"]
+[gd_scene load_steps=4 format=3 uid="uid://cxcc3ulv26so3"]
 
-[node name="Node2D" type="Node2D"]
+[ext_resource type="PackedScene" uid="uid://y2a8gdq5kb1w" path="res://Scenes/centerplatform.tscn" id="1_7cerc"]
+[ext_resource type="Script" path="res://Scripts/events.gd" id="1_jdvwc"]
+[ext_resource type="PackedScene" uid="uid://dmvxj0pb544fp" path="res://Scenes/player.tscn" id="2_0seis"]
+
+[node name="root" type="Node2D"]
+script = ExtResource("1_jdvwc")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2475.0
+offset_top = -2899.0
+offset_right = 3615.0
+offset_bottom = 3259.0
+color = Color(0, 0, 0, 1)
+
+[node name="Platform" parent="." instance=ExtResource("1_7cerc")]
+position = Vector2(945, 982)
+scale = Vector2(18.4238, 1.11229)
+
+[node name="Player" parent="." instance=ExtResource("2_0seis")]
+position = Vector2(931, 403)
+
+[node name="bpm" type="Timer" parent="."]
+
+[node name="songplayer" type="AudioStreamPlayer2D" parent="."]
+max_distance = 100000.0
+attenuation = 9.25115e-05
+
+[connection signal="timeout" from="bpm" to="." method="_on_bpm_timeout"]

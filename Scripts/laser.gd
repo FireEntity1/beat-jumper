@@ -6,6 +6,7 @@ var hit = false
 
 func _ready():
 	self.modulate.a = 0
+	self.modulate.r = 0
 	$fireTimer.wait_time = 1/(bpm/60)*2
 	$fireTimer.start()
 	$area.connect("body_entered", Callable(self, "_player_entered"))
@@ -15,12 +16,14 @@ func _ready():
 func _process(delta):
 	if running:
 			self.modulate.a += delta
+			self.modulate.r += delta
 		
 	if active and hit:
 		Global.hit()
 		hit = false
 	
 	if active:
+		self.modulate.r = 1
 		if $area/Laser.scale.x < 10:
 			$area/Laser.scale.x += 40*delta
 		$fireTimer.wait_time = 1/(bpm/60)

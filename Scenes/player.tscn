@@ -30,7 +30,7 @@ scale = Vector2(8, 8)
 texture = ExtResource("3_qga1h")
 
 [node name="camera" type="Camera2D" parent="character"]
-position = Vector2(-3, -89)
+position = Vector2(-3.35343, -209.558)
 scale = Vector2(3.03837, 2.96985)
 ignore_rotation = false
 zoom = Vector2(0.8, 0.8)

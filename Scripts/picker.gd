@@ -24,7 +24,6 @@ func _on_file_dialog_dir_selected(dir: String):
 				print(dir + "/" + filename)
 			filename = directory.get_next()
 		load_ogg(dir + "/song.ogg")
-		
 
 func load_ogg(path):
 	var sound = AudioStreamOggVorbis.load_from_file(path)

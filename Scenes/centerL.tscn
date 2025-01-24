@@ -8,6 +8,7 @@ size = Vector2(38, 38)
 
 [node name="obstacle" type="Node2D"]
 position = Vector2(980, 209)
+scale = Vector2(1.5, 1)
 script = ExtResource("1_0g8re")
 
 [node name="area" type="Area2D" parent="."]

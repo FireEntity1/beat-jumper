@@ -1,9 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://cxcc3ulv26so3"]
+[gd_scene load_steps=8 format=3 uid="uid://cxcc3ulv26so3"]
 
 [ext_resource type="PackedScene" uid="uid://y2a8gdq5kb1w" path="res://Scenes/centerplatform.tscn" id="1_7cerc"]
 [ext_resource type="Script" path="res://Scripts/events.gd" id="1_jdvwc"]
 [ext_resource type="PackedScene" uid="uid://dmvxj0pb544fp" path="res://Scenes/player.tscn" id="2_0seis"]
 [ext_resource type="PackedScene" uid="uid://4n43wji62ppx" path="res://Scenes/ui.tscn" id="4_hbupg"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="4_ks8vw"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="6_ediib"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kh1il"]
+shader = ExtResource("4_ks8vw")
+shader_parameter/screen_resolution = Vector2(0, 0)
+shader_parameter/scanline_intensity = 0.0
+shader_parameter/color_bleed_weight = 0.0
 
 [node name="root" type="Node2D"]
 script = ExtResource("1_jdvwc")
@@ -16,7 +24,7 @@ offset_bottom = 3259.0
 color = Color(0, 0, 0, 1)
 
 [node name="Platform" parent="." instance=ExtResource("1_7cerc")]
-position = Vector2(945, 982)
+position = Vector2(943, 977)
 scale = Vector2(18.4238, 1.11229)
 
 [node name="Player" parent="." instance=ExtResource("2_0seis")]
@@ -41,5 +49,11 @@ offset_top = -421.0
 offset_right = -347.0
 offset_bottom = -162.0
 metadata/_edit_use_anchors_ = true
+
+[node name="crt" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_kh1il")
+position = Vector2(954, 289)
+scale = Vector2(267.5, 149.625)
+texture = ExtResource("6_ediib")
 
 [connection signal="timeout" from="bpm" to="." method="_on_bpm_timeout"]

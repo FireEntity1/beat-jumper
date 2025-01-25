@@ -7,6 +7,7 @@ var hit = false
 func _ready():
 	self.modulate.a = 0
 	self.modulate.r = 0
+	self.modulate.g = 0
 	$fireTimer.wait_time = 1/(bpm/60)*2
 	$fireTimer.start()
 	$area.connect("body_entered", Callable(self, "_player_entered"))
@@ -17,6 +18,7 @@ func _process(delta):
 	if running:
 			self.modulate.a += delta
 			self.modulate.r += delta
+			self.modulate.g += delta
 		
 	if active and hit:
 		Global.hit()

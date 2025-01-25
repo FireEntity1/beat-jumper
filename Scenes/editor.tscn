@@ -9,15 +9,31 @@ anchors_preset = 0
 script = ExtResource("1_ij4yu")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 0
 offset_right = 1930.0
 offset_bottom = 1086.0
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="scroll" type="ScrollContainer" parent="."]
+layout_mode = 2
 offset_left = 4.0
-offset_top = 110.0
+offset_top = 122.0
 offset_right = 1917.0
-offset_bottom = 1066.0
+offset_bottom = 972.0
+horizontal_scroll_mode = 0
+
+[node name="vbox" type="VBoxContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="eventlist" type="ItemList" parent="scroll/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_qy24j")
+allow_rmb_select = true
+allow_search = false
+auto_height = true
 
 [node name="FileDialog" type="FileDialog" parent="."]
 title = "Open a File"
@@ -56,7 +72,70 @@ offset_bottom = 112.0
 theme = ExtResource("2_qy24j")
 placeholder_text = "enter song name"
 
+[node name="play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 69.0
+offset_top = 21.0
+offset_right = 312.0
+offset_bottom = 100.0
+theme = ExtResource("2_qy24j")
+text = "PLAY"
+
+[node name="songPlayer" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(977, 550)
+volume_db = -11.39
+
+[node name="bpmTimer" type="Timer" parent="."]
+
+[node name="newEvent" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1836.0
+offset_top = 1000.0
+offset_right = 1887.0
+offset_bottom = 1050.0
+theme = ExtResource("2_qy24j")
+text = "+"
+
+[node name="save" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1292.0
+offset_top = 22.0
+offset_right = 1451.0
+offset_bottom = 88.0
+theme = ExtResource("2_qy24j")
+text = "SAVE"
+
+[node name="saveDialog" type="FileDialog" parent="."]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+filters = PackedStringArray("*.json")
+use_native_dialog = true
+
+[node name="seek" type="VScrollBar" parent="."]
+layout_mode = 0
+offset_left = 1843.0
+offset_top = 138.0
+offset_right = 1903.0
+offset_bottom = 955.0
+
+[node name="seekBar" type="ProgressBar" parent="seek"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 808.0
+mouse_filter = 2
+fill_mode = 2
+show_percentage = false
+
+[connection signal="item_selected" from="scroll/vbox/eventlist" to="." method="_on_eventlist_item_selected"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="button_up" from="load" to="." method="_on_load_button_up"]
 [connection signal="text_changed" from="bpm" to="." method="_on_bpm_text_changed"]
 [connection signal="text_changed" from="name" to="." method="_on_name_text_changed"]
+[connection signal="button_up" from="play" to="." method="_on_play_button_up"]
+[connection signal="timeout" from="bpmTimer" to="." method="_on_bpm_timer_timeout"]
+[connection signal="button_up" from="newEvent" to="." method="_on_new_event_button_up"]
+[connection signal="button_up" from="save" to="." method="_on_save_button_up"]
+[connection signal="dir_selected" from="saveDialog" to="." method="_on_save_dialog_dir_selected"]
+[connection signal="value_changed" from="seek" to="." method="_on_seek_value_changed"]

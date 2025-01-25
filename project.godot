@@ -30,6 +30,10 @@ window/stretch/aspect="expand"
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
 
+[gui]
+
+theme/custom="res://theme.tres"
+
 [input]
 
 dash={

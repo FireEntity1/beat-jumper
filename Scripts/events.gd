@@ -57,11 +57,13 @@ func _on_bpm_timeout():
 				"diagL":
 					var instance = diagL.instantiate()
 					add_child(instance)
-				"crtOn":
+		if n.type == "crtOn" or n.type== "crtOff":
+			if n.beat == beat:
+				if n.type == "crtOn":
 					$crt.material.set_shader_parameter("screen_resolution", Vector2(DisplayServer.window_get_size().x,DisplayServer.window_get_size().y/8))
-					$crt.material.set_shader_parameter("scanline_intensity", 0.3)
-					$crt.material.set_shader_parameter("color_bleed_weight", 0.3)
-				"crtOff":
+					$crt.material.set_shader_parameter("scanline_intensity", 0.5)
+					$crt.material.set_shader_parameter("color_bleed_weight", 0.5)
+				if n.type == "crtOff":
 					$crt.material.set_shader_parameter("screen_resolution", Vector2(0,0))
 					$crt.material.set_shader_parameter("scanline_intensity", 0)
 					$crt.material.set_shader_parameter("color_bleed_weight", 0)

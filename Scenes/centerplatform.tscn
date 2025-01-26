@@ -67,3 +67,4 @@ autoplay = "default"
 [node name="collision" type="CollisionShape2D" parent="static"]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_np56j")
+one_way_collision = true

@@ -12,10 +12,12 @@ grow_vertical = 2
 script = ExtResource("1_qodkl")
 
 [node name="Label" type="Label" parent="."]
+modulate = Color(1, 0, 0.529412, 1)
 layout_mode = 0
-offset_left = 39.0
+offset_left = 35.0
 offset_top = -12.0
-offset_right = 56.0
+offset_right = 53.0
 offset_bottom = 30.0
 scale = Vector2(7.33659, 5.69334)
 text = "0"
+horizontal_alignment = 1

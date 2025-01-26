@@ -7,7 +7,7 @@
 size = Vector2(38, 38)
 
 [node name="obstacle" type="Node2D"]
-position = Vector2(980, 149)
+position = Vector2(980, 236)
 rotation = 1.5708
 scale = Vector2(1.5, 1)
 script = ExtResource("1_25ca3")

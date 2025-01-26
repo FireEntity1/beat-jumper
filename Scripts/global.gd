@@ -4,6 +4,10 @@ var song_data: Dictionary = {}
 var song
 var hits = 0
 
+var settings = {
+	"volume": 10
+}
+
 func set_song_data(data: Dictionary):
 	song_data = data
 
@@ -21,3 +25,9 @@ func hit():
 
 func getHits():
 	return hits
+
+func changeVolume(value):
+	settings.volume = value
+
+func getVolume():
+	return settings.volume

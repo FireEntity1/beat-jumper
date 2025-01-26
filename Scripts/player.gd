@@ -20,6 +20,10 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	
+	if self.position.y > 700:
+		self.position.y = 325
+		self.position.x = 0
+		Global.hit()
 
 	# handle jump and double jump !
 	if Input.is_action_just_pressed("ui_up") and is_on_floor() and jumps > 0:
@@ -30,7 +34,7 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 		jumps = 0
 		jumpSquish()
-		
+	
 	if blur and is_on_floor():
 		landed = true
 		$land.start()

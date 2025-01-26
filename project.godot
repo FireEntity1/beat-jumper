@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Beat Jumper"
-run/main_scene="res://Scenes/songpicker.tscn"
+run/main_scene="res://Scenes/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 

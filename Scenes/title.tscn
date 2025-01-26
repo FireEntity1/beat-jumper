@@ -1,0 +1,145 @@
+[gd_scene load_steps=12 format=3 uid="uid://mcmgyadrgea6"]
+
+[ext_resource type="Script" path="res://Scripts/title.gd" id="1_0ymk6"]
+[ext_resource type="Shader" path="res://bg.gdshader" id="2_fv34d"]
+[ext_resource type="Texture2D" uid="uid://bfbsctrs63ojo" path="res://Sprites/logo.png" id="3_u61f0"]
+[ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="4_eet4v"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="5_dr2ga"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="6_cp2ip"]
+[ext_resource type="AudioStream" uid="uid://dhp6emic5y4db" path="res://SFX/click.mp3" id="7_g20hr"]
+[ext_resource type="AudioStream" uid="uid://60els7nnrasa" path="res://SFX/select.mp3" id="8_qyhn5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0krq0"]
+shader = ExtResource("2_fv34d")
+shader_parameter/spin_rotation_speed = 0.0
+shader_parameter/move_speed = 12.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.808966, 0.229698, 0.688873, 1)
+shader_parameter/colour_2 = Color(0.385769, 0.267493, 0.871269, 1)
+shader_parameter/colour_3 = Color(0.086, 0.137, 0.145, 1)
+shader_parameter/contrast = 2.14
+shader_parameter/lighting = 0.2
+shader_parameter/spin_amount = 0.0
+shader_parameter/pixel_filter = 1920.0
+shader_parameter/is_rotating = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vesql"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ur4mi"]
+shader = ExtResource("5_dr2ga")
+shader_parameter/screen_resolution = Vector2(480, 128)
+shader_parameter/scanline_intensity = 0.137
+shader_parameter/color_bleed_weight = 0.238
+
+[node name="title" type="Node2D"]
+script = ExtResource("1_0ymk6")
+
+[node name="bgShader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_0krq0")
+offset_left = -1219.0
+offset_top = -983.0
+offset_right = 3053.0
+offset_bottom = 1667.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2176.0
+offset_top = -2959.0
+offset_right = 3914.0
+offset_bottom = 3199.0
+color = Color(0, 0, 0, 0.863)
+
+[node name="logo" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_vesql")
+position = Vector2(978, 246)
+scale = Vector2(1.71756, 1.71756)
+texture = ExtResource("3_u61f0")
+
+[node name="demo" type="Button" parent="."]
+offset_left = 417.0
+offset_top = 390.0
+offset_right = 1540.0
+offset_bottom = 579.0
+theme = ExtResource("4_eet4v")
+theme_override_font_sizes/font_size = 125
+text = "Play DEMO"
+
+[node name="load" type="Button" parent="."]
+offset_left = 496.0
+offset_top = 613.0
+offset_right = 1461.0
+offset_bottom = 802.0
+theme = ExtResource("4_eet4v")
+theme_override_font_sizes/font_size = 125
+text = "Load song"
+
+[node name="editor" type="Button" parent="."]
+offset_left = 496.0
+offset_top = 835.0
+offset_right = 1461.0
+offset_bottom = 1024.0
+theme = ExtResource("4_eet4v")
+theme_override_font_sizes/font_size = 125
+text = "Editor"
+
+[node name="settings" type="Button" parent="."]
+offset_left = 36.0
+offset_top = 961.0
+offset_right = 423.0
+offset_bottom = 1062.0
+theme = ExtResource("4_eet4v")
+theme_override_font_sizes/font_size = 50
+text = "settings"
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_g20hr")
+volume_db = 11.885
+
+[node name="select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_qyhn5")
+volume_db = 12.877
+
+[node name="settingsWindow" type="Window" parent="."]
+size = Vector2i(250, 500)
+visible = false
+
+[node name="vbox" type="VBoxContainer" parent="settingsWindow"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 51.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("4_eet4v")
+
+[node name="volLabel" type="Label" parent="settingsWindow/vbox"]
+layout_mode = 2
+theme = ExtResource("4_eet4v")
+text = "Volume"
+
+[node name="vol" type="HSlider" parent="settingsWindow/vbox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("4_eet4v")
+min_value = 1.0
+max_value = 10.0
+value = 10.0
+
+[node name="ItemList" type="ItemList" parent="settingsWindow/vbox"]
+layout_mode = 2
+theme = ExtResource("4_eet4v")
+
+[node name="crt" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ur4mi")
+position = Vector2(985, 528)
+scale = Vector2(209.125, 143.5)
+texture = ExtResource("6_cp2ip")
+
+[connection signal="button_up" from="demo" to="." method="_on_demo_button_up"]
+[connection signal="mouse_entered" from="demo" to="." method="_on_demo_mouse_entered"]
+[connection signal="button_up" from="load" to="." method="_on_load_button_up"]
+[connection signal="mouse_entered" from="load" to="." method="_on_load_mouse_entered"]
+[connection signal="button_up" from="editor" to="." method="_on_editor_button_up"]
+[connection signal="mouse_entered" from="editor" to="." method="_on_editor_mouse_entered"]
+[connection signal="button_up" from="settings" to="." method="_on_settings_button_up"]
+[connection signal="mouse_entered" from="settings" to="." method="_on_editor_mouse_entered"]
+[connection signal="value_changed" from="settingsWindow/vbox/vol" to="." method="_on_vol_value_changed"]

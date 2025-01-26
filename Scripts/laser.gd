@@ -3,6 +3,7 @@ var running = true
 var active = false
 var bpm = Global.get_song_data().bpm
 var hit = false
+var end = false
 
 func _ready():
 	self.modulate.a = 0
@@ -12,6 +13,8 @@ func _ready():
 	$fireTimer.start()
 	$area.connect("body_entered", Callable(self, "_player_entered"))
 	$area.connect("body_exited", Callable(self, "_player_exited"))
+	$area/collision.shape.size = Vector2(25,25)
+	self.scale.x = 1
 
 
 func _process(delta):
@@ -30,8 +33,14 @@ func _process(delta):
 			$area/Laser.scale.x += 40*delta
 		$fireTimer.wait_time = 1/(bpm/60)
 		
+		if self.modulate.a > 0.5:
+			self.modulate.a -= 6.5*delta
+		else:
+			active = false
+			end = true
+	if end:
 		if self.modulate.a > 0:
-			self.modulate.a -= 5*delta
+			self.modulate.a -= 6.5*delta
 		else:
 			queue_free()
 

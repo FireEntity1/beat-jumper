@@ -1,8 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://l7crhnguxm25"]
+[gd_scene load_steps=8 format=3 uid="uid://l7crhnguxm25"]
 
 [ext_resource type="Script" path="res://Scripts/picker.gd" id="1_02erq"]
+[ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="2_c3n00"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="3_l88dq"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="4_m686j"]
+[ext_resource type="AudioStream" uid="uid://dhp6emic5y4db" path="res://SFX/click.mp3" id="5_t8qku"]
+[ext_resource type="AudioStream" uid="uid://60els7nnrasa" path="res://SFX/select.mp3" id="6_xrlnu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6aduj"]
+shader = ExtResource("3_l88dq")
+shader_parameter/screen_resolution = Vector2(480, 128)
+shader_parameter/scanline_intensity = 0.137
+shader_parameter/color_bleed_weight = 0.238
 
 [node name="picker" type="Node2D"]
+position = Vector2(3, 13)
 script = ExtResource("1_02erq")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -21,4 +33,45 @@ file_mode = 2
 access = 2
 use_native_dialog = true
 
+[node name="return" type="Button" parent="."]
+offset_left = 416.0
+offset_top = 139.0
+offset_right = 1539.0
+offset_bottom = 328.0
+theme = ExtResource("2_c3n00")
+theme_override_font_sizes/font_size = 125
+text = "return"
+
+[node name="pick" type="Button" parent="."]
+offset_left = 434.0
+offset_top = 470.0
+offset_right = 1557.0
+offset_bottom = 659.0
+theme = ExtResource("2_c3n00")
+theme_override_font_sizes/font_size = 125
+text = "pick folder"
+
+[node name="crt" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_6aduj")
+position = Vector2(985, 528)
+scale = Vector2(165.625, 143.5)
+texture = ExtResource("4_m686j")
+
+[node name="notice" type="AcceptDialog" parent="."]
+size = Vector2i(250, 150)
+theme = ExtResource("2_c3n00")
+ok_button_text = " ok "
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_t8qku")
+volume_db = 11.885
+
+[node name="select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xrlnu")
+volume_db = 12.877
+
 [connection signal="dir_selected" from="FileDialog" to="." method="_on_file_dialog_dir_selected"]
+[connection signal="button_up" from="return" to="." method="_on_return_button_up"]
+[connection signal="mouse_entered" from="return" to="." method="_on_return_mouse_entered"]
+[connection signal="button_up" from="pick" to="." method="_on_pick_button_up"]
+[connection signal="mouse_entered" from="pick" to="." method="_on_pick_mouse_entered"]

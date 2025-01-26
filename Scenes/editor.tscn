@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://diso5skb1x1y3"]
+[gd_scene load_steps=4 format=3 uid="uid://diso5skb1x1y3"]
 
 [ext_resource type="Script" path="res://Scripts/editor.gd" id="1_ij4yu"]
 [ext_resource type="Theme" uid="uid://ds4embrwki5gr" path="res://theme.tres" id="2_qy24j"]
+[ext_resource type="AudioStream" uid="uid://dqkt1bnwn8sq6" path="res://SFX/hitsound.wav" id="3_rweov"]
 
 [node name="editor" type="Control"]
 layout_mode = 3
@@ -45,19 +46,19 @@ use_native_dialog = true
 
 [node name="load" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1719.0
-offset_top = 30.0
-offset_right = 1895.0
-offset_bottom = 78.0
+offset_left = 1589.0
+offset_top = 35.0
+offset_right = 1765.0
+offset_bottom = 85.0
 theme = ExtResource("2_qy24j")
 text = "LOAD"
 
 [node name="bpm" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 1492.0
-offset_top = 24.0
-offset_right = 1680.0
-offset_bottom = 90.0
+offset_left = 1236.0
+offset_top = 30.0
+offset_right = 1413.0
+offset_bottom = 96.0
 theme = ExtResource("2_qy24j")
 placeholder_text = "ENTER BPM"
 
@@ -74,16 +75,15 @@ placeholder_text = "enter song name"
 
 [node name="play" type="Button" parent="."]
 layout_mode = 0
-offset_left = 69.0
+offset_left = 189.0
 offset_top = 21.0
-offset_right = 312.0
+offset_right = 432.0
 offset_bottom = 100.0
 theme = ExtResource("2_qy24j")
 text = "PLAY"
 
 [node name="songPlayer" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(977, 550)
-volume_db = -11.39
 
 [node name="bpmTimer" type="Timer" parent="."]
 
@@ -98,10 +98,10 @@ text = "+"
 
 [node name="save" type="Button" parent="."]
 layout_mode = 0
-offset_left = 1292.0
-offset_top = 22.0
-offset_right = 1451.0
-offset_bottom = 88.0
+offset_left = 1420.0
+offset_top = 27.0
+offset_right = 1579.0
+offset_bottom = 93.0
 theme = ExtResource("2_qy24j")
 text = "SAVE"
 
@@ -128,6 +128,35 @@ mouse_filter = 2
 fill_mode = 2
 show_percentage = false
 
+[node name="tick" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rweov")
+volume_db = 14.858
+
+[node name="return" type="Button" parent="."]
+layout_mode = 0
+offset_left = 22.0
+offset_top = 27.0
+offset_right = 167.0
+offset_bottom = 93.0
+theme = ExtResource("2_qy24j")
+text = "BACK"
+
+[node name="new" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1793.0
+offset_top = 31.0
+offset_right = 1886.0
+offset_bottom = 91.0
+text = "NEW"
+
+[node name="newDialog" type="FileDialog" parent="."]
+title = "Open a File"
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.ogg")
+use_native_dialog = true
+
 [connection signal="item_selected" from="scroll/vbox/eventlist" to="." method="_on_eventlist_item_selected"]
 [connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="button_up" from="load" to="." method="_on_load_button_up"]
@@ -139,3 +168,6 @@ show_percentage = false
 [connection signal="button_up" from="save" to="." method="_on_save_button_up"]
 [connection signal="dir_selected" from="saveDialog" to="." method="_on_save_dialog_dir_selected"]
 [connection signal="value_changed" from="seek" to="." method="_on_seek_value_changed"]
+[connection signal="button_up" from="return" to="." method="_on_return_button_up"]
+[connection signal="button_up" from="new" to="." method="_on_new_button_up"]
+[connection signal="file_selected" from="newDialog" to="." method="_on_new_dialog_file_selected"]

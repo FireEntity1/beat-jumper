@@ -1,0 +1,14 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bn8pv5hy8sih1"]
+
+[ext_resource type="FontFile" uid="uid://x6avxncgqjyx" path="res://tarrget.otf" id="1_0tj70"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7g03u"]
+bg_color = Color(0, 0, 0, 1)
+
+[resource]
+default_font = ExtResource("1_0tj70")
+Button/colors/icon_focus_color = Color(0, 0, 0, 1)
+Button/colors/icon_hover_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1_0tj70")
+Button/styles/normal = SubResource("StyleBoxFlat_7g03u")
+Label/fonts/font = ExtResource("1_0tj70")

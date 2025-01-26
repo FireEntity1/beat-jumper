@@ -1,7 +1,7 @@
 extends Control
 
-var song_data: Dictionary
-var song: AudioStreamOggVorbis
+var song_data: Dictionary # the whole data json file!!
+var song: AudioStreamOggVorbis # song itself
 var songLength
 
 var loaded = false
@@ -14,10 +14,10 @@ var edit_dialog = AcceptDialog.new()
 
 var selected: int
 
-const event_types = ["bottomL","middleL","topL","leftL","centerL","rightL","diagL","diagR","crtOn","crtOff"]
+const event_types = ["bottomL","middleL","topL","leftL","centerL","rightL","diagL","diagR","crtOn","crtOff","flash"] # list of possible events
 
 func _ready():
-	$scroll/vbox/eventlist.connect("item_selected", Callable(self, "_event_selected"))
+	$scroll/vbox/eventlist.connect("item_selected", Callable(self, "_event_selected")) #connect map event list
 
 func _process(delta):
 	if loaded:
@@ -127,10 +127,13 @@ func _on_bpm_timer_timeout():
 	for event in song_data.events:
 		if event.beat == beat:
 			$scroll/vbox/eventlist.select(i)
+			if not event.type == "crtOn" and not event.type == "crtOff":
+				$tick.play()
 		i += 1
 
 func _on_new_event_button_up():
-	song_data.events.append({"type":"centerL", "beat":0})
+	var amt = len(song_data.events)
+	song_data.events.append({"type":"centerL", "beat":song_data.events[amt-1].beat+0.5})
 	loadEvents()
 
 func _on_save_button_up():
@@ -142,5 +145,32 @@ func _on_save_dialog_dir_selected(dir):
 func _on_seek_value_changed(value):
 	$songPlayer.play(value*(1/(song_data.bpm/60)))
 	beat = value
+	$bpmTimer.stop()
+	$bpmTimer.start()
 	$seek/seekBar.value = beat
 	print(str(beat))
+
+func _on_return_button_up():
+	get_tree().change_scene_to_file("res://Scenes/title.tscn")
+
+func _on_new_button_up():
+	$newDialog.show()
+
+func _on_new_dialog_file_selected(path):
+	var directory = path.split("song.ogg")
+	if (FileAccess.file_exists(path)):
+		song_data = {
+			"name": "New Song",
+			"bpm": 120,
+			"events": [
+				{
+					"type": "centerL",
+					"beat": 5
+				}
+			]
+		}
+		loadSong(song_data)
+		loadOgg(path)
+	else:
+		$notice.dialog_text = "song.ogg not found"
+		$notice.popup_centered()

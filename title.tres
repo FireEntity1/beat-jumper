@@ -1,8 +1,18 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bn8pv5hy8sih1"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://bn8pv5hy8sih1"]
 
 [ext_resource type="FontFile" uid="uid://x6avxncgqjyx" path="res://tarrget.otf" id="1_0tj70"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="2_evrix"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7g03u"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mwar6"]
+bg_color = Color(0.83283, 0.755731, 0.982495, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_56f4m"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4xi6p"]
 bg_color = Color(0, 0, 0, 1)
 
 [resource]
@@ -11,4 +21,10 @@ Button/colors/icon_focus_color = Color(0, 0, 0, 1)
 Button/colors/icon_hover_color = Color(0, 0, 0, 1)
 Button/fonts/font = ExtResource("1_0tj70")
 Button/styles/normal = SubResource("StyleBoxFlat_7g03u")
+HSlider/icons/grabber = ExtResource("2_evrix")
+HSlider/icons/grabber_highlight = ExtResource("2_evrix")
+HSlider/styles/grabber_area = SubResource("StyleBoxFlat_mwar6")
 Label/fonts/font = ExtResource("1_0tj70")
+Window/constants/title_outline_size = 1
+Window/styles/embedded_border = SubResource("StyleBoxFlat_56f4m")
+Window/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_4xi6p")

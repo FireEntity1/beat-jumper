@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cxcc3ulv26so3"]
+[gd_scene load_steps=13 format=3 uid="uid://cxcc3ulv26so3"]
 
 [ext_resource type="PackedScene" uid="uid://y2a8gdq5kb1w" path="res://Scenes/centerplatform.tscn" id="1_7cerc"]
 [ext_resource type="Script" path="res://Scripts/events.gd" id="1_jdvwc"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="6_ediib"]
 [ext_resource type="Shader" path="res://glitch.gdshader" id="7_gfgp5"]
 [ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="8_5pny6"]
-[ext_resource type="AudioStream" uid="uid://b18vtwf1j3b31" path="res://SFX/damage.mp3" id="10_bg6bd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3in4"]
 shader = ExtResource("2_pm8md")
@@ -24,12 +23,6 @@ shader_parameter/lighting = 0.2
 shader_parameter/spin_amount = 0.0
 shader_parameter/pixel_filter = 1920.0
 shader_parameter/is_rotating = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cn1qg"]
-shader = ExtResource("4_ks8vw")
-shader_parameter/screen_resolution = Vector2(1920, 128)
-shader_parameter/scanline_intensity = 0.287
-shader_parameter/color_bleed_weight = 0.309
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kh1il"]
 shader = ExtResource("4_ks8vw")
@@ -60,7 +53,7 @@ offset_left = -2392.0
 offset_top = -2883.0
 offset_right = 3698.0
 offset_bottom = 3275.0
-color = Color(0, 0, 0, 0.944)
+color = Color(0, 0, 0, 0.87)
 
 [node name="Platform" parent="." instance=ExtResource("1_7cerc")]
 position = Vector2(943, 977)
@@ -91,12 +84,6 @@ offset_right = -347.0
 offset_bottom = -162.0
 metadata/_edit_use_anchors_ = true
 
-[node name="crt" type="Sprite2D" parent="CanvasLayer"]
-material = SubResource("ShaderMaterial_cn1qg")
-position = Vector2(191.25, 114)
-scale = Vector2(17.7188, 13.4375)
-texture = ExtResource("6_ediib")
-
 [node name="name" type="Node2D" parent="CanvasLayer"]
 
 [node name="songName" type="Label" parent="CanvasLayer/name"]
@@ -120,8 +107,5 @@ position = Vector2(968, 322)
 scale = Vector2(267.5, 149.625)
 texture = ExtResource("6_ediib")
 
-[node name="hit" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("10_bg6bd")
-volume_db = 3.962
-
 [connection signal="timeout" from="bpm" to="." method="_on_bpm_timeout"]
+[connection signal="finished" from="songplayer" to="." method="_on_songplayer_finished"]

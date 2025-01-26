@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dmvxj0pb544fp"]
+[gd_scene load_steps=7 format=3 uid="uid://dmvxj0pb544fp"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_lqcmr"]
 [ext_resource type="Shader" path="res://motionblur.gdshader" id="1_s2dw5"]
 [ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="3_qga1h"]
+[ext_resource type="AudioStream" uid="uid://b18vtwf1j3b31" path="res://SFX/damage.mp3" id="4_ba41l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hawuy"]
 size = Vector2(126, 126)
@@ -51,6 +52,28 @@ one_shot = true
 
 [node name="jump" type="Timer" parent="character"]
 wait_time = 0.05
+
+[node name="hit" type="AudioStreamPlayer2D" parent="character"]
+scale = Vector2(1.58059, 1.6017)
+stream = ExtResource("4_ba41l")
+volume_db = 3.962
+
+[node name="hitParticle" type="CPUParticles2D" parent="character"]
+position = Vector2(-2.23563, 44.1771)
+scale = Vector2(1.11781, 1.13275)
+emitting = false
+amount = 30
+lifetime = 0.8
+emission_shape = 3
+emission_rect_extents = Vector2(25, 25)
+direction = Vector2(0, -5)
+initial_velocity_min = 176.77
+initial_velocity_max = 363.64
+angular_velocity_min = -443.64
+angular_velocity_max = 305.45
+scale_amount_min = 11.1
+scale_amount_max = 26.25
+color = Color(0.654902, 0.192157, 0.572549, 1)
 
 [connection signal="timeout" from="character/dash" to="character" method="_on_dash_timeout"]
 [connection signal="timeout" from="character/dashCooldown" to="character" method="_on_dash_cooldown_timeout"]

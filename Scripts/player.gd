@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 600.0
 const JUMP_VELOCITY = -800.0
 var jumps = 2
+var hits = 0
 
 # states
 var blur = false
@@ -15,6 +16,17 @@ var jumped = false
 
 func _ready():
 	pass
+
+func hitAnim():
+	$hit.play()
+	$hitParticle.emitting = true
+	await get_tree().create_timer(0.2).timeout
+	$hitParticle.emitting = false
+
+func _process(delta):
+	if hits != Global.getHits():
+		hitAnim()
+		hits = Global.getHits()
 
 func _physics_process(delta):
 	if not is_on_floor():

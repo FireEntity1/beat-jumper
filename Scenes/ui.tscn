@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://4n43wji62ppx"]
+[gd_scene load_steps=6 format=3 uid="uid://4n43wji62ppx"]
 
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="1_qodkl"]
+[ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="2_lj1e3"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="3_v4iu2"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="4_mnmsi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_au865"]
+shader = ExtResource("3_v4iu2")
+shader_parameter/screen_resolution = Vector2(1920, 128)
+shader_parameter/scanline_intensity = 0.287
+shader_parameter/color_bleed_weight = 0.309
 
 [node name="Ui" type="Control"]
 layout_mode = 3
@@ -14,10 +23,18 @@ script = ExtResource("1_qodkl")
 [node name="Label" type="Label" parent="."]
 modulate = Color(1, 0, 0.529412, 1)
 layout_mode = 0
-offset_left = 35.0
-offset_top = -12.0
-offset_right = 53.0
-offset_bottom = 30.0
-scale = Vector2(7.33659, 5.69334)
+offset_left = 22.0
+offset_top = 8.0
+offset_right = 133.0
+offset_bottom = 121.0
+scale = Vector2(1, 1.833)
+theme = ExtResource("2_lj1e3")
+theme_override_font_sizes/font_size = 125
 text = "0"
 horizontal_alignment = 1
+
+[node name="crt" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_au865")
+position = Vector2(146, 118)
+scale = Vector2(16, 9.125)
+texture = ExtResource("4_mnmsi")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://mcmgyadrgea6"]
+[gd_scene load_steps=13 format=3 uid="uid://mcmgyadrgea6"]
 
 [ext_resource type="Script" path="res://Scripts/title.gd" id="1_0ymk6"]
 [ext_resource type="Shader" path="res://bg.gdshader" id="2_fv34d"]
@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="4_eet4v"]
 [ext_resource type="Shader" path="res://crt.gdshader" id="5_dr2ga"]
 [ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="6_cp2ip"]
+[ext_resource type="StyleBox" uid="uid://cqsvpc7gp5ouu" path="res://Scenes/windowstyle.tres" id="7_f0g6n"]
 [ext_resource type="AudioStream" uid="uid://dhp6emic5y4db" path="res://SFX/click.mp3" id="7_g20hr"]
 [ext_resource type="AudioStream" uid="uid://60els7nnrasa" path="res://SFX/select.mp3" id="8_qyhn5"]
 
@@ -46,7 +47,7 @@ offset_left = -2176.0
 offset_top = -2959.0
 offset_right = 3914.0
 offset_bottom = 3199.0
-color = Color(0, 0, 0, 0.863)
+color = Color(0, 0, 0, 0.755)
 
 [node name="logo" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vesql")
@@ -99,8 +100,11 @@ stream = ExtResource("8_qyhn5")
 volume_db = 12.877
 
 [node name="settingsWindow" type="Window" parent="."]
+position = Vector2i(0, 36)
 size = Vector2i(250, 500)
 visible = false
+theme_override_styles/embedded_border = ExtResource("7_f0g6n")
+theme_override_styles/embedded_unfocused_border = ExtResource("7_f0g6n")
 
 [node name="vbox" type="VBoxContainer" parent="settingsWindow"]
 anchors_preset = 10

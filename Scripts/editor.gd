@@ -22,6 +22,10 @@ func _ready():
 func _process(delta):
 	if loaded:
 		$seek/seekBar.value = $songPlayer.get_playback_position()*(song_data.bpm / 60.0)
+	if playing:
+		$play.text = "PAUSE"
+	else:
+		$play.text = "PLAY"
 
 func _on_load_button_up():
 	$FileDialog.show()

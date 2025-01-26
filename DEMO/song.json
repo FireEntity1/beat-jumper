@@ -1,1586 +1,1586 @@
 {
-    "name": "Cheat Codes - Tokyo Machine",
-    "bpm": 140,
-    "events": [
-        {
-            "type": "flash",
-            "beat": 3
-        },
-        {
-            "type": "middleL",
-            "beat": 3
-        },
-        {
-            "type": "crtOn",
-            "beat": 3
-        },
-        {
-            "type": "topL",
-            "beat": 3
-        },
-        {
-            "type": "crtOff",
-            "beat": 3.5
-        },
-        {
-            "type": "flash",
-            "beat": 4
-        },
-        {
-            "type": "topL",
-            "beat": 4
-        },
-        {
-            "type": "bottomL",
-            "beat": 4.5
-        },
-        {
-            "type": "flash",
-            "beat": 5
-        },
-        {
-            "type": "flash",
-            "beat": 6
-        },
-        {
-            "type": "flash",
-            "beat": 7
-        },
-        {
-            "type": "leftL",
-            "beat": 7.5
-        },
-        {
-            "type": "centerL",
-            "beat": 8
-        },
-        {
-            "type": "flash",
-            "beat": 8
-        },
-        {
-            "type": "rightL",
-            "beat": 8.5
-        },
-        {
-            "type": "flash",
-            "beat": 9
-        },
-        {
-            "type": "diagL",
-            "beat": 9
-        },
-        {
-            "type": "bottomL",
-            "beat": 9.5
-        },
-        {
-            "type": "flash",
-            "beat": 10
-        },
-        {
-            "type": "topL",
-            "beat": 10
-        },
-        {
-            "type": "leftL",
-            "beat": 10.5
-        },
-        {
-            "type": "flash",
-            "beat": 11
-        },
-        {
-            "type": "crtOn",
-            "beat": 11
-        },
-        {
-            "type": "middleL",
-            "beat": 11
-        },
-        {
-            "type": "topL",
-            "beat": 11
-        },
-        {
-            "type": "crtOff",
-            "beat": 11.5
-        },
-        {
-            "type": "flash",
-            "beat": 12
-        },
-        {
-            "type": "centerL",
-            "beat": 12
-        },
-        {
-            "type": "middleL",
-            "beat": 12.5
-        },
-        {
-            "type": "flash",
-            "beat": 13
-        },
-        {
-            "type": "flash",
-            "beat": 14
-        },
-        {
-            "type": "flash",
-            "beat": 15
-        },
-        {
-            "type": "leftL",
-            "beat": 15.5
-        },
-        {
-            "type": "centerL",
-            "beat": 16
-        },
-        {
-            "type": "flash",
-            "beat": 16
-        },
-        {
-            "type": "rightL",
-            "beat": 16.5
-        },
-        {
-            "type": "flash",
-            "beat": 17
-        },
-        {
-            "type": "diagR",
-            "beat": 17
-        },
-        {
-            "type": "bottomL",
-            "beat": 17.5
-        },
-        {
-            "type": "leftL",
-            "beat": 18
-        },
-        {
-            "type": "flash",
-            "beat": 18
-        },
-        {
-            "type": "topL",
-            "beat": 18.5
-        },
-        {
-            "type": "flash",
-            "beat": 19
-        },
-        {
-            "type": "middleL",
-            "beat": 19
-        },
-        {
-            "type": "crtOn",
-            "beat": 19
-        },
-        {
-            "type": "topL",
-            "beat": 19
-        },
-        {
-            "type": "crtOff",
-            "beat": 19.5
-        },
-        {
-            "type": "centerL",
-            "beat": 20
-        },
-        {
-            "type": "flash",
-            "beat": 20
-        },
-        {
-            "type": "bottomL",
-            "beat": 20.5
-        },
-        {
-            "type": "flash",
-            "beat": 21
-        },
-        {
-            "type": "flash",
-            "beat": 22
-        },
-        {
-            "type": "flash",
-            "beat": 23
-        },
-        {
-            "type": "leftL",
-            "beat": 23.5
-        },
-        {
-            "type": "flash",
-            "beat": 24
-        },
-        {
-            "type": "centerL",
-            "beat": 24
-        },
-        {
-            "type": "rightL",
-            "beat": 24.5
-        },
-        {
-            "type": "flash",
-            "beat": 25
-        },
-        {
-            "type": "diagR",
-            "beat": 25
-        },
-        {
-            "type": "bottomL",
-            "beat": 25.5
-        },
-        {
-            "type": "flash",
-            "beat": 26
-        },
-        {
-            "type": "rightL",
-            "beat": 26
-        },
-        {
-            "type": "topL",
-            "beat": 26.5
-        },
-        {
-            "type": "flash",
-            "beat": 27
-        },
-        {
-            "type": "middleL",
-            "beat": 27
-        },
-        {
-            "type": "topL",
-            "beat": 27
-        },
-        {
-            "type": "crtOn",
-            "beat": 27
-        },
-        {
-            "type": "crtOff",
-            "beat": 27.5
-        },
-        {
-            "type": "flash",
-            "beat": 28
-        },
-        {
-            "type": "flash",
-            "beat": 29
-        },
-        {
-            "type": "flash",
-            "beat": 30
-        },
-        {
-            "type": "rightL",
-            "beat": 31
-        },
-        {
-            "type": "leftL",
-            "beat": 31.5
-        },
-        {
-            "type": "rightL",
-            "beat": 32
-        },
-        {
-            "type": "leftL",
-            "beat": 32.5
-        },
-        {
-            "type": "rightL",
-            "beat": 33
-        },
-        {
-            "type": "leftL",
-            "beat": 33.5
-        },
-        {
-            "type": "topL",
-            "beat": 34
-        },
-        {
-            "type": "crtOn",
-            "beat": 35
-        },
-        {
-            "type": "diagR",
-            "beat": 35
-        },
-        {
-            "type": "diagL",
-            "beat": 35
-        },
-        {
-            "type": "leftL",
-            "beat": 35.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 35.5
-        },
-        {
-            "type": "centerL",
-            "beat": 36
-        },
-        {
-            "type": "topL",
-            "beat": 36.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 37
-        },
-        {
-            "type": "centerL",
-            "beat": 37.5
-        },
-        {
-            "type": "topL",
-            "beat": 38
-        },
-        {
-            "type": "middleL",
-            "beat": 38.5
-        },
-        {
-            "type": "centerL",
-            "beat": 39.5
-        },
-        {
-            "type": "leftL",
-            "beat": 40
-        },
-        {
-            "type": "rightL",
-            "beat": 40.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 41.5
-        },
-        {
-            "type": "topL",
-            "beat": 42
-        },
-        {
-            "type": "diagL",
-            "beat": 42.5
-        },
-        {
-            "type": "centerL",
-            "beat": 43.5
-        },
-        {
-            "type": "leftL",
-            "beat": 44
-        },
-        {
-            "type": "rightL",
-            "beat": 44.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 45
-        },
-        {
-            "type": "centerL",
-            "beat": 45.5
-        },
-        {
-            "type": "topL",
-            "beat": 46
-        },
-        {
-            "type": "diagR",
-            "beat": 46.5
-        },
-        {
-            "type": "leftL",
-            "beat": 47.5
-        },
-        {
-            "type": "middleL",
-            "beat": 48
-        },
-        {
-            "type": "diagR",
-            "beat": 48.5
-        },
-        {
-            "type": "rightL",
-            "beat": 49.5
-        },
-        {
-            "type": "topL",
-            "beat": 50
-        },
-        {
-            "type": "leftL",
-            "beat": 50.5
-        },
-        {
-            "type": "leftL",
-            "beat": 51.5
-        },
-        {
-            "type": "centerL",
-            "beat": 52
-        },
-        {
-            "type": "rightL",
-            "beat": 52.5
-        },
-        {
-            "type": "middleL",
-            "beat": 53
-        },
-        {
-            "type": "topL",
-            "beat": 53.5
-        },
-        {
-            "type": "diagL",
-            "beat": 54
-        },
-        {
-            "type": "diagR",
-            "beat": 54.5
-        },
-        {
-            "type": "centerL",
-            "beat": 55.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 56
-        },
-        {
-            "type": "topL",
-            "beat": 56.5
-        },
-        {
-            "type": "rightL",
-            "beat": 57.5
-        },
-        {
-            "type": "middleL",
-            "beat": 58
-        },
-        {
-            "type": "diagL",
-            "beat": 58.5
-        },
-        {
-            "type": "leftL",
-            "beat": 59.5
-        },
-        {
-            "type": "centerL",
-            "beat": 60
-        },
-        {
-            "type": "rightL",
-            "beat": 60.5
-        },
-        {
-            "type": "topL",
-            "beat": 61
-        },
-        {
-            "type": "leftL",
-            "beat": 61.5
-        },
-        {
-            "type": "diagR",
-            "beat": 62
-        },
-        {
-            "type": "middleL",
-            "beat": 62.5
-        },
-        {
-            "type": "middleL",
-            "beat": 67
-        },
-        {
-            "type": "topL",
-            "beat": 67
-        },
-        {
-            "type": "crtOn",
-            "beat": 67
-        },
-        {
-            "type": "crtOff",
-            "beat": 67.5
-        },
-        {
-            "type": "diagL",
-            "beat": 68
-        },
-        {
-            "type": "diagR",
-            "beat": 68.5
-        },
-        {
-            "type": "topL",
-            "beat": 69
-        },
-        {
-            "type": "centerL",
-            "beat": 70
-        },
-        {
-            "type": "topL",
-            "beat": 71
-        },
-        {
-            "type": "middleL",
-            "beat": 71
-        },
-        {
-            "type": "crtOn",
-            "beat": 71
-        },
-        {
-            "type": "crtOff",
-            "beat": 71.5
-        },
-        {
-            "type": "diagL",
-            "beat": 72
-        },
-        {
-            "type": "diagR",
-            "beat": 72.5
-        },
-        {
-            "type": "topL",
-            "beat": 73
-        },
-        {
-            "type": "centerL",
-            "beat": 74
-        },
-        {
-            "type": "topL",
-            "beat": 75
-        },
-        {
-            "type": "crtOn",
-            "beat": 75
-        },
-        {
-            "type": "middleL",
-            "beat": 75
-        },
-        {
-            "type": "crtOff",
-            "beat": 75.5
-        },
-        {
-            "type": "diagL",
-            "beat": 76
-        },
-        {
-            "type": "diagR",
-            "beat": 76.5
-        },
-        {
-            "type": "centerL",
-            "beat": 77
-        },
-        {
-            "type": "topL",
-            "beat": 78
-        },
-        {
-            "type": "bottomL",
-            "beat": 79
-        },
-        {
-            "type": "rightL",
-            "beat": 79.5
-        },
-        {
-            "type": "leftL",
-            "beat": 80
-        },
-        {
-            "type": "topL",
-            "beat": 80.5
-        },
-        {
-            "type": "centerL",
-            "beat": 81
-        },
-        {
-            "type": "leftL",
-            "beat": 82
-        },
-        {
-            "type": "crtOn",
-            "beat": 83
-        },
-        {
-            "type": "middleL",
-            "beat": 83
-        },
-        {
-            "type": "topL",
-            "beat": 83
-        },
-        {
-            "type": "crtOff",
-            "beat": 83.5
-        },
-        {
-            "type": "diagL",
-            "beat": 84
-        },
-        {
-            "type": "diagR",
-            "beat": 84.5
-        },
-        {
-            "type": "centerL",
-            "beat": 85
-        },
-        {
-            "type": "topL",
-            "beat": 86
-        },
-        {
-            "type": "middleL",
-            "beat": 87
-        },
-        {
-            "type": "topL",
-            "beat": 87
-        },
-        {
-            "type": "crtOn",
-            "beat": 87
-        },
-        {
-            "type": "crtOff",
-            "beat": 87.5
-        },
-        {
-            "type": "diagL",
-            "beat": 88
-        },
-        {
-            "type": "diagR",
-            "beat": 88.5
-        },
-        {
-            "type": "centerL",
-            "beat": 89
-        },
-        {
-            "type": "topL",
-            "beat": 90
-        },
-        {
-            "type": "bottomL",
-            "beat": 91
-        },
-        {
-            "type": "leftL",
-            "beat": 91.5
-        },
-        {
-            "type": "topL",
-            "beat": 92
-        },
-        {
-            "type": "rightL",
-            "beat": 92.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 93
-        },
-        {
-            "type": "leftL",
-            "beat": 93.5
-        },
-        {
-            "type": "topL",
-            "beat": 94
-        },
-        {
-            "type": "rightL",
-            "beat": 94.5
-        },
-        {
-            "type": "flash",
-            "beat": 95
-        },
-        {
-            "type": "centerL",
-            "beat": 95
-        },
-        {
-            "type": "flash",
-            "beat": 95.5
-        },
-        {
-            "type": "flash",
-            "beat": 96
-        },
-        {
-            "type": "flash",
-            "beat": 96.5
-        },
-        {
-            "type": "flash",
-            "beat": 97
-        },
-        {
-            "type": "flash",
-            "beat": 98
-        },
-        {
-            "type": "diagL",
-            "beat": 99
-        },
-        {
-            "type": "diagR",
-            "beat": 99
-        },
-        {
-            "type": "crtOn",
-            "beat": 99
-        },
-        {
-            "type": "crtOff",
-            "beat": 99.5
-        },
-        {
-            "type": "topL",
-            "beat": 100
-        },
-        {
-            "type": "centerL",
-            "beat": 100.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 101
-        },
-        {
-            "type": "rightL",
-            "beat": 101
-        },
-        {
-            "type": "crtOff",
-            "beat": 101.5
-        },
-        {
-            "type": "middleL",
-            "beat": 101.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 102
-        },
-        {
-            "type": "flash",
-            "beat": 102
-        },
-        {
-            "type": "rightL",
-            "beat": 102.5
-        },
-        {
-            "type": "topL",
-            "beat": 103
-        },
-        {
-            "type": "flash",
-            "beat": 103
-        },
-        {
-            "type": "leftL",
-            "beat": 103.5
-        },
-        {
-            "type": "centerL",
-            "beat": 104
-        },
-        {
-            "type": "flash",
-            "beat": 104
-        },
-        {
-            "type": "rightL",
-            "beat": 104.5
-        },
-        {
-            "type": "topL",
-            "beat": 105
-        },
-        {
-            "type": "flash",
-            "beat": 105
-        },
-        {
-            "type": "middleL",
-            "beat": 105.5
-        },
-        {
-            "type": "flash",
-            "beat": 106
-        },
-        {
-            "type": "topL",
-            "beat": 107
-        },
-        {
-            "type": "crtOn",
-            "beat": 107
-        },
-        {
-            "type": "diagL",
-            "beat": 107
-        },
-        {
-            "type": "crtOff",
-            "beat": 107.5
-        },
-        {
-            "type": "centerL",
-            "beat": 108
-        },
-        {
-            "type": "topL",
-            "beat": 108.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 109
-        },
-        {
-            "type": "topL",
-            "beat": 109
-        },
-        {
-            "type": "bottomL",
-            "beat": 109
-        },
-        {
-            "type": "crtOff",
-            "beat": 109.5
-        },
-        {
-            "type": "rightL",
-            "beat": 109.5
-        },
-        {
-            "type": "leftL",
-            "beat": 109.5
-        },
-        {
-            "type": "flash",
-            "beat": 110
-        },
-        {
-            "type": "rightL",
-            "beat": 111
-        },
-        {
-            "type": "crtOn",
-            "beat": 111
-        },
-        {
-            "type": "leftL",
-            "beat": 111
-        },
-        {
-            "type": "centerL",
-            "beat": 111.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 111.5
-        },
-        {
-            "type": "topL",
-            "beat": 112
-        },
-        {
-            "type": "bottomL",
-            "beat": 112
-        },
-        {
-            "type": "crtOn",
-            "beat": 112
-        },
-        {
-            "type": "crtOff",
-            "beat": 112.5
-        },
-        {
-            "type": "centerL",
-            "beat": 112.5
-        },
-        {
-            "type": "rightL",
-            "beat": 113
-        },
-        {
-            "type": "leftL",
-            "beat": 113
-        },
-        {
-            "type": "crtOn",
-            "beat": 113
-        },
-        {
-            "type": "crtOff",
-            "beat": 113.5
-        },
-        {
-            "type": "centerL",
-            "beat": 113.5
-        },
-        {
-            "type": "topL",
-            "beat": 114
-        },
-        {
-            "type": "centerL",
-            "beat": 114
-        },
-        {
-            "type": "crtOn",
-            "beat": 114
-        },
-        {
-            "type": "crtOff",
-            "beat": 114.5
-        },
-        {
-            "type": "centerL",
-            "beat": 114.5
-        },
-        {
-            "type": "diagL",
-            "beat": 115
-        },
-        {
-            "type": "crtOn",
-            "beat": 115
-        },
-        {
-            "type": "diagR",
-            "beat": 115
-        },
-        {
-            "type": "crtOff",
-            "beat": 115.5
-        },
-        {
-            "type": "centerL",
-            "beat": 116
-        },
-        {
-            "type": "topL",
-            "beat": 116.5
-        },
-        {
-            "type": "diagR",
-            "beat": 117
-        },
-        {
-            "type": "diagL",
-            "beat": 117
-        },
-        {
-            "type": "crtOn",
-            "beat": 117
-        },
-        {
-            "type": "crtOff",
-            "beat": 117.5
-        },
-        {
-            "type": "centerL",
-            "beat": 118
-        },
-        {
-            "type": "leftL",
-            "beat": 118.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 119
-        },
-        {
-            "type": "rightL",
-            "beat": 119
-        },
-        {
-            "type": "crtOff",
-            "beat": 119.5
-        },
-        {
-            "type": "centerL",
-            "beat": 119.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 120
-        },
-        {
-            "type": "flash",
-            "beat": 120
-        },
-        {
-            "type": "rightL",
-            "beat": 120.5
-        },
-        {
-            "type": "flash",
-            "beat": 121
-        },
-        {
-            "type": "topL",
-            "beat": 121
-        },
-        {
-            "type": "leftL",
-            "beat": 121.5
-        },
-        {
-            "type": "flash",
-            "beat": 122
-        },
-        {
-            "type": "centerL",
-            "beat": 122
-        },
-        {
-            "type": "crtOn",
-            "beat": 122
-        },
-        {
-            "type": "crtOff",
-            "beat": 122.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 123
-        },
-        {
-            "type": "centerL",
-            "beat": 123
-        },
-        {
-            "type": "crtOff",
-            "beat": 123.5
-        },
-        {
-            "type": "leftL",
-            "beat": 124
-        },
-        {
-            "type": "centerL",
-            "beat": 124.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 125
-        },
-        {
-            "type": "bottomL",
-            "beat": 125
-        },
-        {
-            "type": "topL",
-            "beat": 125
-        },
-        {
-            "type": "crtOff",
-            "beat": 125.5
-        },
-        {
-            "type": "centerL",
-            "beat": 125.5
-        },
-        {
-            "type": "topL",
-            "beat": 125.5
-        },
-        {
-            "type": "diagL",
-            "beat": 127
-        },
-        {
-            "type": "diagR",
-            "beat": 127
-        },
-        {
-            "type": "crtOn",
-            "beat": 127
-        },
-        {
-            "type": "crtOff",
-            "beat": 127.5
-        },
-        {
-            "type": "topL",
-            "beat": 128
-        },
-        {
-            "type": "centerL",
-            "beat": 128.5
-        },
-        {
-            "type": "rightL",
-            "beat": 129
-        },
-        {
-            "type": "topL",
-            "beat": 129.5
-        },
-        {
-            "type": "flash",
-            "beat": 130
-        },
-        {
-            "type": "leftL",
-            "beat": 130
-        },
-        {
-            "type": "diagL",
-            "beat": 131
-        },
-        {
-            "type": "diagR",
-            "beat": 131
-        },
-        {
-            "type": "crtOn",
-            "beat": 131
-        },
-        {
-            "type": "middleL",
-            "beat": 131.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 131.5
-        },
-        {
-            "type": "leftL",
-            "beat": 132
-        },
-        {
-            "type": "topL",
-            "beat": 132.5
-        },
-        {
-            "type": "centerL",
-            "beat": 133
-        },
-        {
-            "type": "crtOn",
-            "beat": 133
-        },
-        {
-            "type": "crtOff",
-            "beat": 133.5
-        },
-        {
-            "type": "topL",
-            "beat": 133.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 134
-        },
-        {
-            "type": "topL",
-            "beat": 134.5
-        },
-        {
-            "type": "centerL",
-            "beat": 135
-        },
-        {
-            "type": "middleL",
-            "beat": 135
-        },
-        {
-            "type": "crtOn",
-            "beat": 135
-        },
-        {
-            "type": "crtOff",
-            "beat": 135.5
-        },
-        {
-            "type": "topL",
-            "beat": 135.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 136
-        },
-        {
-            "type": "centerL",
-            "beat": 136.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 137
-        },
-        {
-            "type": "diagL",
-            "beat": 137
-        },
-        {
-            "type": "diagR",
-            "beat": 137
-        },
-        {
-            "type": "crtOff",
-            "beat": 137.5
-        },
-        {
-            "type": "middleL",
-            "beat": 137.5
-        },
-        {
-            "type": "topL",
-            "beat": 138
-        },
-        {
-            "type": "rightL",
-            "beat": 138.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 139
-        },
-        {
-            "type": "middleL",
-            "beat": 139
-        },
-        {
-            "type": "centerL",
-            "beat": 139
-        },
-        {
-            "type": "crtOff",
-            "beat": 139.5
-        },
-        {
-            "type": "leftL",
-            "beat": 139.5
-        },
-        {
-            "type": "topL",
-            "beat": 140
-        },
-        {
-            "type": "rightL",
-            "beat": 140.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 141
-        },
-        {
-            "type": "crtOn",
-            "beat": 141
-        },
-        {
-            "type": "crtOff",
-            "beat": 141.5
-        },
-        {
-            "type": "topL",
-            "beat": 141.5
-        },
-        {
-            "type": "leftL",
-            "beat": 142
-        },
-        {
-            "type": "centerL",
-            "beat": 142.5
-        },
-        {
-            "type": "centerL",
-            "beat": 143
-        },
-        {
-            "type": "middleL",
-            "beat": 143
-        },
-        {
-            "type": "crtOn",
-            "beat": 143
-        },
-        {
-            "type": "rightL",
-            "beat": 143.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 143.5
-        },
-        {
-            "type": "topL",
-            "beat": 144
-        },
-        {
-            "type": "leftL",
-            "beat": 144.5
-        },
-        {
-            "type": "middleL",
-            "beat": 145
-        },
-        {
-            "type": "crtOn",
-            "beat": 145
-        },
-        {
-            "type": "centerL",
-            "beat": 145
-        },
-        {
-            "type": "crtOff",
-            "beat": 145.5
-        },
-        {
-            "type": "rightL",
-            "beat": 145.5
-        },
-        {
-            "type": "leftL",
-            "beat": 146
-        },
-        {
-            "type": "bottomL",
-            "beat": 146.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 147
-        },
-        {
-            "type": "centerL",
-            "beat": 147
-        },
-        {
-            "type": "middleL",
-            "beat": 147
-        },
-        {
-            "type": "crtOff",
-            "beat": 147.5
-        },
-        {
-            "type": "centerL",
-            "beat": 147.5
-        },
-        {
-            "type": "leftL",
-            "beat": 148
-        },
-        {
-            "type": "rightL",
-            "beat": 148.5
-        },
-        {
-            "type": "topL",
-            "beat": 149
-        },
-        {
-            "type": "centerL",
-            "beat": 149
-        },
-        {
-            "type": "crtOn",
-            "beat": 149
-        },
-        {
-            "type": "leftL",
-            "beat": 149.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 149.5
-        },
-        {
-            "type": "topL",
-            "beat": 150
-        },
-        {
-            "type": "bottomL",
-            "beat": 150.5
-        },
-        {
-            "type": "topL",
-            "beat": 151
-        },
-        {
-            "type": "centerL",
-            "beat": 151
-        },
-        {
-            "type": "crtOn",
-            "beat": 151
-        },
-        {
-            "type": "leftL",
-            "beat": 151.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 151.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 152
-        },
-        {
-            "type": "rightL",
-            "beat": 152.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 153
-        },
-        {
-            "type": "diagL",
-            "beat": 153
-        },
-        {
-            "type": "diagR",
-            "beat": 153
-        },
-        {
-            "type": "centerL",
-            "beat": 153.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 153.5
-        },
-        {
-            "type": "leftL",
-            "beat": 154
-        },
-        {
-            "type": "bottomL",
-            "beat": 154.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 155
-        },
-        {
-            "type": "diagL",
-            "beat": 155
-        },
-        {
-            "type": "diagR",
-            "beat": 155
-        },
-        {
-            "type": "leftL",
-            "beat": 155.5
-        },
-        {
-            "type": "crtOff",
-            "beat": 155.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 156
-        },
-        {
-            "type": "rightL",
-            "beat": 156.5
-        },
-        {
-            "type": "middleL",
-            "beat": 157
-        },
-        {
-            "type": "crtOn",
-            "beat": 157
-        },
-        {
-            "type": "crtOff",
-            "beat": 157.5
-        },
-        {
-            "type": "diagR",
-            "beat": 157.5
-        },
-        {
-            "type": "leftL",
-            "beat": 158
-        },
-        {
-            "type": "centerL",
-            "beat": 158.5
-        },
-        {
-            "type": "diagL",
-            "beat": 159.5
-        },
-        {
-            "type": "middleL",
-            "beat": 160
-        },
-        {
-            "type": "diagR",
-            "beat": 160.5
-        },
-        {
-            "type": "leftL",
-            "beat": 161.5
-        },
-        {
-            "type": "bottomL",
-            "beat": 162
-        },
-        {
-            "type": "rightL",
-            "beat": 162.5
-        },
-        {
-            "type": "crtOn",
-            "beat": 163
-        },
-        {
-            "type": "crtOff",
-            "beat": 163.5
-        }
-    ]
+	"name": "Cheat Codes - Tokyo Machine",
+	"bpm": 140,
+	"events": [
+		{
+			"type": "flash",
+			"beat": 3
+		},
+		{
+			"type": "middleL",
+			"beat": 3
+		},
+		{
+			"type": "crtOn",
+			"beat": 3
+		},
+		{
+			"type": "topL",
+			"beat": 3
+		},
+		{
+			"type": "crtOff",
+			"beat": 3.5
+		},
+		{
+			"type": "flash",
+			"beat": 4
+		},
+		{
+			"type": "topL",
+			"beat": 4
+		},
+		{
+			"type": "bottomL",
+			"beat": 4.5
+		},
+		{
+			"type": "flash",
+			"beat": 5
+		},
+		{
+			"type": "flash",
+			"beat": 6
+		},
+		{
+			"type": "flash",
+			"beat": 7
+		},
+		{
+			"type": "leftL",
+			"beat": 7.5
+		},
+		{
+			"type": "centerL",
+			"beat": 8
+		},
+		{
+			"type": "flash",
+			"beat": 8
+		},
+		{
+			"type": "rightL",
+			"beat": 8.5
+		},
+		{
+			"type": "flash",
+			"beat": 9
+		},
+		{
+			"type": "diagL",
+			"beat": 9
+		},
+		{
+			"type": "bottomL",
+			"beat": 9.5
+		},
+		{
+			"type": "flash",
+			"beat": 10
+		},
+		{
+			"type": "topL",
+			"beat": 10
+		},
+		{
+			"type": "leftL",
+			"beat": 10.5
+		},
+		{
+			"type": "flash",
+			"beat": 11
+		},
+		{
+			"type": "crtOn",
+			"beat": 11
+		},
+		{
+			"type": "middleL",
+			"beat": 11
+		},
+		{
+			"type": "topL",
+			"beat": 11
+		},
+		{
+			"type": "crtOff",
+			"beat": 11.5
+		},
+		{
+			"type": "flash",
+			"beat": 12
+		},
+		{
+			"type": "centerL",
+			"beat": 12
+		},
+		{
+			"type": "middleL",
+			"beat": 12.5
+		},
+		{
+			"type": "flash",
+			"beat": 13
+		},
+		{
+			"type": "flash",
+			"beat": 14
+		},
+		{
+			"type": "flash",
+			"beat": 15
+		},
+		{
+			"type": "leftL",
+			"beat": 15.5
+		},
+		{
+			"type": "centerL",
+			"beat": 16
+		},
+		{
+			"type": "flash",
+			"beat": 16
+		},
+		{
+			"type": "rightL",
+			"beat": 16.5
+		},
+		{
+			"type": "flash",
+			"beat": 17
+		},
+		{
+			"type": "diagR",
+			"beat": 17
+		},
+		{
+			"type": "bottomL",
+			"beat": 17.5
+		},
+		{
+			"type": "leftL",
+			"beat": 18
+		},
+		{
+			"type": "flash",
+			"beat": 18
+		},
+		{
+			"type": "topL",
+			"beat": 18.5
+		},
+		{
+			"type": "flash",
+			"beat": 19
+		},
+		{
+			"type": "middleL",
+			"beat": 19
+		},
+		{
+			"type": "crtOn",
+			"beat": 19
+		},
+		{
+			"type": "topL",
+			"beat": 19
+		},
+		{
+			"type": "crtOff",
+			"beat": 19.5
+		},
+		{
+			"type": "centerL",
+			"beat": 20
+		},
+		{
+			"type": "flash",
+			"beat": 20
+		},
+		{
+			"type": "bottomL",
+			"beat": 20.5
+		},
+		{
+			"type": "flash",
+			"beat": 21
+		},
+		{
+			"type": "flash",
+			"beat": 22
+		},
+		{
+			"type": "flash",
+			"beat": 23
+		},
+		{
+			"type": "leftL",
+			"beat": 23.5
+		},
+		{
+			"type": "flash",
+			"beat": 24
+		},
+		{
+			"type": "centerL",
+			"beat": 24
+		},
+		{
+			"type": "rightL",
+			"beat": 24.5
+		},
+		{
+			"type": "flash",
+			"beat": 25
+		},
+		{
+			"type": "diagR",
+			"beat": 25
+		},
+		{
+			"type": "bottomL",
+			"beat": 25.5
+		},
+		{
+			"type": "flash",
+			"beat": 26
+		},
+		{
+			"type": "rightL",
+			"beat": 26
+		},
+		{
+			"type": "topL",
+			"beat": 26.5
+		},
+		{
+			"type": "flash",
+			"beat": 27
+		},
+		{
+			"type": "middleL",
+			"beat": 27
+		},
+		{
+			"type": "topL",
+			"beat": 27
+		},
+		{
+			"type": "crtOn",
+			"beat": 27
+		},
+		{
+			"type": "crtOff",
+			"beat": 27.5
+		},
+		{
+			"type": "flash",
+			"beat": 28
+		},
+		{
+			"type": "flash",
+			"beat": 29
+		},
+		{
+			"type": "flash",
+			"beat": 30
+		},
+		{
+			"type": "rightL",
+			"beat": 31
+		},
+		{
+			"type": "leftL",
+			"beat": 31.5
+		},
+		{
+			"type": "rightL",
+			"beat": 32
+		},
+		{
+			"type": "leftL",
+			"beat": 32.5
+		},
+		{
+			"type": "rightL",
+			"beat": 33
+		},
+		{
+			"type": "leftL",
+			"beat": 33.5
+		},
+		{
+			"type": "topL",
+			"beat": 34
+		},
+		{
+			"type": "crtOn",
+			"beat": 35
+		},
+		{
+			"type": "diagR",
+			"beat": 35
+		},
+		{
+			"type": "diagL",
+			"beat": 35
+		},
+		{
+			"type": "leftL",
+			"beat": 35.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 35.5
+		},
+		{
+			"type": "centerL",
+			"beat": 36
+		},
+		{
+			"type": "topL",
+			"beat": 36.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 37
+		},
+		{
+			"type": "centerL",
+			"beat": 37.5
+		},
+		{
+			"type": "topL",
+			"beat": 38
+		},
+		{
+			"type": "middleL",
+			"beat": 38.5
+		},
+		{
+			"type": "centerL",
+			"beat": 39.5
+		},
+		{
+			"type": "leftL",
+			"beat": 40
+		},
+		{
+			"type": "rightL",
+			"beat": 40.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 41.5
+		},
+		{
+			"type": "topL",
+			"beat": 42
+		},
+		{
+			"type": "diagL",
+			"beat": 42.5
+		},
+		{
+			"type": "centerL",
+			"beat": 43.5
+		},
+		{
+			"type": "leftL",
+			"beat": 44
+		},
+		{
+			"type": "rightL",
+			"beat": 44.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 45
+		},
+		{
+			"type": "centerL",
+			"beat": 45.5
+		},
+		{
+			"type": "topL",
+			"beat": 46
+		},
+		{
+			"type": "diagR",
+			"beat": 46.5
+		},
+		{
+			"type": "leftL",
+			"beat": 47.5
+		},
+		{
+			"type": "middleL",
+			"beat": 48
+		},
+		{
+			"type": "diagR",
+			"beat": 48.5
+		},
+		{
+			"type": "rightL",
+			"beat": 49.5
+		},
+		{
+			"type": "topL",
+			"beat": 50
+		},
+		{
+			"type": "leftL",
+			"beat": 50.5
+		},
+		{
+			"type": "leftL",
+			"beat": 51.5
+		},
+		{
+			"type": "centerL",
+			"beat": 52
+		},
+		{
+			"type": "rightL",
+			"beat": 52.5
+		},
+		{
+			"type": "middleL",
+			"beat": 53
+		},
+		{
+			"type": "topL",
+			"beat": 53.5
+		},
+		{
+			"type": "diagL",
+			"beat": 54
+		},
+		{
+			"type": "diagR",
+			"beat": 54.5
+		},
+		{
+			"type": "centerL",
+			"beat": 55.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 56
+		},
+		{
+			"type": "topL",
+			"beat": 56.5
+		},
+		{
+			"type": "rightL",
+			"beat": 57.5
+		},
+		{
+			"type": "middleL",
+			"beat": 58
+		},
+		{
+			"type": "diagL",
+			"beat": 58.5
+		},
+		{
+			"type": "leftL",
+			"beat": 59.5
+		},
+		{
+			"type": "centerL",
+			"beat": 60
+		},
+		{
+			"type": "rightL",
+			"beat": 60.5
+		},
+		{
+			"type": "topL",
+			"beat": 61
+		},
+		{
+			"type": "leftL",
+			"beat": 61.5
+		},
+		{
+			"type": "diagR",
+			"beat": 62
+		},
+		{
+			"type": "middleL",
+			"beat": 62.5
+		},
+		{
+			"type": "middleL",
+			"beat": 67
+		},
+		{
+			"type": "topL",
+			"beat": 67
+		},
+		{
+			"type": "crtOn",
+			"beat": 67
+		},
+		{
+			"type": "crtOff",
+			"beat": 67.5
+		},
+		{
+			"type": "diagL",
+			"beat": 68
+		},
+		{
+			"type": "diagR",
+			"beat": 68.5
+		},
+		{
+			"type": "topL",
+			"beat": 69
+		},
+		{
+			"type": "centerL",
+			"beat": 70
+		},
+		{
+			"type": "topL",
+			"beat": 71
+		},
+		{
+			"type": "middleL",
+			"beat": 71
+		},
+		{
+			"type": "crtOn",
+			"beat": 71
+		},
+		{
+			"type": "crtOff",
+			"beat": 71.5
+		},
+		{
+			"type": "diagL",
+			"beat": 72
+		},
+		{
+			"type": "diagR",
+			"beat": 72.5
+		},
+		{
+			"type": "topL",
+			"beat": 73
+		},
+		{
+			"type": "centerL",
+			"beat": 74
+		},
+		{
+			"type": "topL",
+			"beat": 75
+		},
+		{
+			"type": "crtOn",
+			"beat": 75
+		},
+		{
+			"type": "middleL",
+			"beat": 75
+		},
+		{
+			"type": "crtOff",
+			"beat": 75.5
+		},
+		{
+			"type": "diagL",
+			"beat": 76
+		},
+		{
+			"type": "diagR",
+			"beat": 76.5
+		},
+		{
+			"type": "centerL",
+			"beat": 77
+		},
+		{
+			"type": "topL",
+			"beat": 78
+		},
+		{
+			"type": "bottomL",
+			"beat": 79
+		},
+		{
+			"type": "rightL",
+			"beat": 79.5
+		},
+		{
+			"type": "leftL",
+			"beat": 80
+		},
+		{
+			"type": "topL",
+			"beat": 80.5
+		},
+		{
+			"type": "centerL",
+			"beat": 81
+		},
+		{
+			"type": "leftL",
+			"beat": 82
+		},
+		{
+			"type": "crtOn",
+			"beat": 83
+		},
+		{
+			"type": "middleL",
+			"beat": 83
+		},
+		{
+			"type": "topL",
+			"beat": 83
+		},
+		{
+			"type": "crtOff",
+			"beat": 83.5
+		},
+		{
+			"type": "diagL",
+			"beat": 84
+		},
+		{
+			"type": "diagR",
+			"beat": 84.5
+		},
+		{
+			"type": "centerL",
+			"beat": 85
+		},
+		{
+			"type": "topL",
+			"beat": 86
+		},
+		{
+			"type": "middleL",
+			"beat": 87
+		},
+		{
+			"type": "topL",
+			"beat": 87
+		},
+		{
+			"type": "crtOn",
+			"beat": 87
+		},
+		{
+			"type": "crtOff",
+			"beat": 87.5
+		},
+		{
+			"type": "diagL",
+			"beat": 88
+		},
+		{
+			"type": "diagR",
+			"beat": 88.5
+		},
+		{
+			"type": "centerL",
+			"beat": 89
+		},
+		{
+			"type": "topL",
+			"beat": 90
+		},
+		{
+			"type": "bottomL",
+			"beat": 91
+		},
+		{
+			"type": "leftL",
+			"beat": 91.5
+		},
+		{
+			"type": "topL",
+			"beat": 92
+		},
+		{
+			"type": "rightL",
+			"beat": 92.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 93
+		},
+		{
+			"type": "leftL",
+			"beat": 93.5
+		},
+		{
+			"type": "topL",
+			"beat": 94
+		},
+		{
+			"type": "rightL",
+			"beat": 94.5
+		},
+		{
+			"type": "flash",
+			"beat": 95
+		},
+		{
+			"type": "centerL",
+			"beat": 95
+		},
+		{
+			"type": "flash",
+			"beat": 95.5
+		},
+		{
+			"type": "flash",
+			"beat": 96
+		},
+		{
+			"type": "flash",
+			"beat": 96.5
+		},
+		{
+			"type": "flash",
+			"beat": 97
+		},
+		{
+			"type": "flash",
+			"beat": 98
+		},
+		{
+			"type": "diagL",
+			"beat": 99
+		},
+		{
+			"type": "diagR",
+			"beat": 99
+		},
+		{
+			"type": "crtOn",
+			"beat": 99
+		},
+		{
+			"type": "crtOff",
+			"beat": 99.5
+		},
+		{
+			"type": "topL",
+			"beat": 100
+		},
+		{
+			"type": "centerL",
+			"beat": 100.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 101
+		},
+		{
+			"type": "rightL",
+			"beat": 101
+		},
+		{
+			"type": "crtOff",
+			"beat": 101.5
+		},
+		{
+			"type": "middleL",
+			"beat": 101.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 102
+		},
+		{
+			"type": "flash",
+			"beat": 102
+		},
+		{
+			"type": "rightL",
+			"beat": 102.5
+		},
+		{
+			"type": "topL",
+			"beat": 103
+		},
+		{
+			"type": "flash",
+			"beat": 103
+		},
+		{
+			"type": "leftL",
+			"beat": 103.5
+		},
+		{
+			"type": "centerL",
+			"beat": 104
+		},
+		{
+			"type": "flash",
+			"beat": 104
+		},
+		{
+			"type": "rightL",
+			"beat": 104.5
+		},
+		{
+			"type": "topL",
+			"beat": 105
+		},
+		{
+			"type": "flash",
+			"beat": 105
+		},
+		{
+			"type": "middleL",
+			"beat": 105.5
+		},
+		{
+			"type": "flash",
+			"beat": 106
+		},
+		{
+			"type": "topL",
+			"beat": 107
+		},
+		{
+			"type": "crtOn",
+			"beat": 107
+		},
+		{
+			"type": "diagL",
+			"beat": 107
+		},
+		{
+			"type": "crtOff",
+			"beat": 107.5
+		},
+		{
+			"type": "centerL",
+			"beat": 108
+		},
+		{
+			"type": "topL",
+			"beat": 108.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 109
+		},
+		{
+			"type": "topL",
+			"beat": 109
+		},
+		{
+			"type": "bottomL",
+			"beat": 109
+		},
+		{
+			"type": "crtOff",
+			"beat": 109.5
+		},
+		{
+			"type": "rightL",
+			"beat": 109.5
+		},
+		{
+			"type": "leftL",
+			"beat": 109.5
+		},
+		{
+			"type": "flash",
+			"beat": 110
+		},
+		{
+			"type": "rightL",
+			"beat": 111
+		},
+		{
+			"type": "crtOn",
+			"beat": 111
+		},
+		{
+			"type": "leftL",
+			"beat": 111
+		},
+		{
+			"type": "centerL",
+			"beat": 111.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 111.5
+		},
+		{
+			"type": "topL",
+			"beat": 112
+		},
+		{
+			"type": "bottomL",
+			"beat": 112
+		},
+		{
+			"type": "crtOn",
+			"beat": 112
+		},
+		{
+			"type": "crtOff",
+			"beat": 112.5
+		},
+		{
+			"type": "centerL",
+			"beat": 112.5
+		},
+		{
+			"type": "rightL",
+			"beat": 113
+		},
+		{
+			"type": "leftL",
+			"beat": 113
+		},
+		{
+			"type": "crtOn",
+			"beat": 113
+		},
+		{
+			"type": "crtOff",
+			"beat": 113.5
+		},
+		{
+			"type": "centerL",
+			"beat": 113.5
+		},
+		{
+			"type": "topL",
+			"beat": 114
+		},
+		{
+			"type": "centerL",
+			"beat": 114
+		},
+		{
+			"type": "crtOn",
+			"beat": 114
+		},
+		{
+			"type": "crtOff",
+			"beat": 114.5
+		},
+		{
+			"type": "centerL",
+			"beat": 114.5
+		},
+		{
+			"type": "diagL",
+			"beat": 115
+		},
+		{
+			"type": "crtOn",
+			"beat": 115
+		},
+		{
+			"type": "diagR",
+			"beat": 115
+		},
+		{
+			"type": "crtOff",
+			"beat": 115.5
+		},
+		{
+			"type": "centerL",
+			"beat": 116
+		},
+		{
+			"type": "topL",
+			"beat": 116.5
+		},
+		{
+			"type": "diagR",
+			"beat": 117
+		},
+		{
+			"type": "diagL",
+			"beat": 117
+		},
+		{
+			"type": "crtOn",
+			"beat": 117
+		},
+		{
+			"type": "crtOff",
+			"beat": 117.5
+		},
+		{
+			"type": "centerL",
+			"beat": 118
+		},
+		{
+			"type": "leftL",
+			"beat": 118.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 119
+		},
+		{
+			"type": "rightL",
+			"beat": 119
+		},
+		{
+			"type": "crtOff",
+			"beat": 119.5
+		},
+		{
+			"type": "centerL",
+			"beat": 119.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 120
+		},
+		{
+			"type": "flash",
+			"beat": 120
+		},
+		{
+			"type": "rightL",
+			"beat": 120.5
+		},
+		{
+			"type": "flash",
+			"beat": 121
+		},
+		{
+			"type": "topL",
+			"beat": 121
+		},
+		{
+			"type": "leftL",
+			"beat": 121.5
+		},
+		{
+			"type": "flash",
+			"beat": 122
+		},
+		{
+			"type": "centerL",
+			"beat": 122
+		},
+		{
+			"type": "crtOn",
+			"beat": 122
+		},
+		{
+			"type": "crtOff",
+			"beat": 122.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 123
+		},
+		{
+			"type": "centerL",
+			"beat": 123
+		},
+		{
+			"type": "crtOff",
+			"beat": 123.5
+		},
+		{
+			"type": "leftL",
+			"beat": 124
+		},
+		{
+			"type": "centerL",
+			"beat": 124.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 125
+		},
+		{
+			"type": "bottomL",
+			"beat": 125
+		},
+		{
+			"type": "topL",
+			"beat": 125
+		},
+		{
+			"type": "crtOff",
+			"beat": 125.5
+		},
+		{
+			"type": "centerL",
+			"beat": 125.5
+		},
+		{
+			"type": "topL",
+			"beat": 125.5
+		},
+		{
+			"type": "diagL",
+			"beat": 127
+		},
+		{
+			"type": "diagR",
+			"beat": 127
+		},
+		{
+			"type": "crtOn",
+			"beat": 127
+		},
+		{
+			"type": "crtOff",
+			"beat": 127.5
+		},
+		{
+			"type": "topL",
+			"beat": 128
+		},
+		{
+			"type": "centerL",
+			"beat": 128.5
+		},
+		{
+			"type": "rightL",
+			"beat": 129
+		},
+		{
+			"type": "topL",
+			"beat": 129.5
+		},
+		{
+			"type": "flash",
+			"beat": 130
+		},
+		{
+			"type": "leftL",
+			"beat": 130
+		},
+		{
+			"type": "diagL",
+			"beat": 131
+		},
+		{
+			"type": "diagR",
+			"beat": 131
+		},
+		{
+			"type": "crtOn",
+			"beat": 131
+		},
+		{
+			"type": "middleL",
+			"beat": 131.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 131.5
+		},
+		{
+			"type": "leftL",
+			"beat": 132
+		},
+		{
+			"type": "topL",
+			"beat": 132.5
+		},
+		{
+			"type": "centerL",
+			"beat": 133
+		},
+		{
+			"type": "crtOn",
+			"beat": 133
+		},
+		{
+			"type": "crtOff",
+			"beat": 133.5
+		},
+		{
+			"type": "topL",
+			"beat": 133.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 134
+		},
+		{
+			"type": "topL",
+			"beat": 134.5
+		},
+		{
+			"type": "centerL",
+			"beat": 135
+		},
+		{
+			"type": "middleL",
+			"beat": 135
+		},
+		{
+			"type": "crtOn",
+			"beat": 135
+		},
+		{
+			"type": "crtOff",
+			"beat": 135.5
+		},
+		{
+			"type": "topL",
+			"beat": 135.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 136
+		},
+		{
+			"type": "centerL",
+			"beat": 136.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 137
+		},
+		{
+			"type": "diagL",
+			"beat": 137
+		},
+		{
+			"type": "diagR",
+			"beat": 137
+		},
+		{
+			"type": "crtOff",
+			"beat": 137.5
+		},
+		{
+			"type": "middleL",
+			"beat": 137.5
+		},
+		{
+			"type": "topL",
+			"beat": 138
+		},
+		{
+			"type": "rightL",
+			"beat": 138.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 139
+		},
+		{
+			"type": "middleL",
+			"beat": 139
+		},
+		{
+			"type": "centerL",
+			"beat": 139
+		},
+		{
+			"type": "crtOff",
+			"beat": 139.5
+		},
+		{
+			"type": "leftL",
+			"beat": 139.5
+		},
+		{
+			"type": "topL",
+			"beat": 140
+		},
+		{
+			"type": "rightL",
+			"beat": 140.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 141
+		},
+		{
+			"type": "crtOn",
+			"beat": 141
+		},
+		{
+			"type": "crtOff",
+			"beat": 141.5
+		},
+		{
+			"type": "topL",
+			"beat": 141.5
+		},
+		{
+			"type": "leftL",
+			"beat": 142
+		},
+		{
+			"type": "centerL",
+			"beat": 142.5
+		},
+		{
+			"type": "centerL",
+			"beat": 143
+		},
+		{
+			"type": "middleL",
+			"beat": 143
+		},
+		{
+			"type": "crtOn",
+			"beat": 143
+		},
+		{
+			"type": "rightL",
+			"beat": 143.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 143.5
+		},
+		{
+			"type": "topL",
+			"beat": 144
+		},
+		{
+			"type": "leftL",
+			"beat": 144.5
+		},
+		{
+			"type": "middleL",
+			"beat": 145
+		},
+		{
+			"type": "crtOn",
+			"beat": 145
+		},
+		{
+			"type": "centerL",
+			"beat": 145
+		},
+		{
+			"type": "crtOff",
+			"beat": 145.5
+		},
+		{
+			"type": "rightL",
+			"beat": 145.5
+		},
+		{
+			"type": "leftL",
+			"beat": 146
+		},
+		{
+			"type": "bottomL",
+			"beat": 146.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 147
+		},
+		{
+			"type": "centerL",
+			"beat": 147
+		},
+		{
+			"type": "middleL",
+			"beat": 147
+		},
+		{
+			"type": "crtOff",
+			"beat": 147.5
+		},
+		{
+			"type": "centerL",
+			"beat": 147.5
+		},
+		{
+			"type": "leftL",
+			"beat": 148
+		},
+		{
+			"type": "rightL",
+			"beat": 148.5
+		},
+		{
+			"type": "topL",
+			"beat": 149
+		},
+		{
+			"type": "centerL",
+			"beat": 149
+		},
+		{
+			"type": "crtOn",
+			"beat": 149
+		},
+		{
+			"type": "leftL",
+			"beat": 149.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 149.5
+		},
+		{
+			"type": "topL",
+			"beat": 150
+		},
+		{
+			"type": "bottomL",
+			"beat": 150.5
+		},
+		{
+			"type": "topL",
+			"beat": 151
+		},
+		{
+			"type": "centerL",
+			"beat": 151
+		},
+		{
+			"type": "crtOn",
+			"beat": 151
+		},
+		{
+			"type": "leftL",
+			"beat": 151.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 151.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 152
+		},
+		{
+			"type": "rightL",
+			"beat": 152.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 153
+		},
+		{
+			"type": "diagL",
+			"beat": 153
+		},
+		{
+			"type": "diagR",
+			"beat": 153
+		},
+		{
+			"type": "centerL",
+			"beat": 153.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 153.5
+		},
+		{
+			"type": "leftL",
+			"beat": 154
+		},
+		{
+			"type": "bottomL",
+			"beat": 154.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 155
+		},
+		{
+			"type": "diagL",
+			"beat": 155
+		},
+		{
+			"type": "diagR",
+			"beat": 155
+		},
+		{
+			"type": "leftL",
+			"beat": 155.5
+		},
+		{
+			"type": "crtOff",
+			"beat": 155.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 156
+		},
+		{
+			"type": "rightL",
+			"beat": 156.5
+		},
+		{
+			"type": "middleL",
+			"beat": 157
+		},
+		{
+			"type": "crtOn",
+			"beat": 157
+		},
+		{
+			"type": "crtOff",
+			"beat": 157.5
+		},
+		{
+			"type": "diagR",
+			"beat": 157.5
+		},
+		{
+			"type": "leftL",
+			"beat": 158
+		},
+		{
+			"type": "centerL",
+			"beat": 158.5
+		},
+		{
+			"type": "diagL",
+			"beat": 159.5
+		},
+		{
+			"type": "middleL",
+			"beat": 160
+		},
+		{
+			"type": "diagR",
+			"beat": 160.5
+		},
+		{
+			"type": "leftL",
+			"beat": 161.5
+		},
+		{
+			"type": "bottomL",
+			"beat": 162
+		},
+		{
+			"type": "rightL",
+			"beat": 162.5
+		},
+		{
+			"type": "crtOn",
+			"beat": 163
+		},
+		{
+			"type": "crtOff",
+			"beat": 163.5
+		}
+	]
 }

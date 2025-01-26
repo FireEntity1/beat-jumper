@@ -34,21 +34,12 @@ func _ready():
 	
 	
 func _process(delta):
-	if hits != Global.getHits():
-		hitAnim()
-		hits = Global.getHits()
 	if isName:
 		if $CanvasLayer/name.modulate.a <= 1:
 			$CanvasLayer/name.modulate.a += delta
 	else:
 		if $CanvasLayer/name.modulate.a >= 0:
 			$CanvasLayer/name.modulate.a -= delta
-	
-func hitAnim():
-	$hit.play()
-	$ColorRect.color = Color(0.08,0.04,0,0.92)
-	await get_tree().create_timer(0.4).timeout
-	$ColorRect.color = Color(0,0,0,0.92)
 	
 func _on_bpm_timeout():
 	beat += 0.5
@@ -70,9 +61,9 @@ func _on_bpm_timeout():
 					$glitch.material.set_shader_parameter("shake_color_rate", 0)
 					isGlitch = false
 				if n.type == "flash":
-					$ColorRect.color = Color(0,0,0,0.88)
+					$ColorRect.color = Color(0,0,0,0.82)
 					await get_tree().create_timer(0.1).timeout
-					$ColorRect.color = Color(0,0,0,0.92)
+					$ColorRect.color = Color(0,0,0,0.87)
 		if n.beat == beat+2:
 			match n.type:
 				"rightL":
@@ -118,3 +109,8 @@ func tempGlitch():
 		$glitch.material.set_shader_parameter("shake_power", 0.01)
 		await get_tree().create_timer(0.1).timeout
 		$glitch.material.set_shader_parameter("shake_power", 0)
+
+
+func _on_songplayer_finished():
+	await get_tree().create_timer(1.5).timeout
+	get_tree().change_scene_to_file("res://Scenes/score.tscn")

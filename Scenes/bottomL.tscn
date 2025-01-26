@@ -7,6 +7,7 @@
 size = Vector2(38, 38)
 
 [node name="obstacle" type="Node2D"]
+modulate = Color(0.36, 1, 1, 1)
 position = Vector2(980, 915)
 rotation = 1.5708
 scale = Vector2(1.5, 1)

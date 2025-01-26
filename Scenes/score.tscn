@@ -1,0 +1,107 @@
+[gd_scene load_steps=10 format=3 uid="uid://cskxqj5xjcst5"]
+
+[ext_resource type="Script" path="res://Scripts/score.gd" id="1_ef1rs"]
+[ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="2_8uefv"]
+[ext_resource type="Shader" path="res://bg.gdshader" id="2_o42dg"]
+[ext_resource type="AudioStream" uid="uid://dhp6emic5y4db" path="res://SFX/click.mp3" id="3_8g7cv"]
+[ext_resource type="Shader" path="res://crt.gdshader" id="3_l8vti"]
+[ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="4_hbyus"]
+[ext_resource type="AudioStream" uid="uid://60els7nnrasa" path="res://SFX/select.mp3" id="4_q2bju"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_teaf6"]
+shader = ExtResource("2_o42dg")
+shader_parameter/spin_rotation_speed = 0.0
+shader_parameter/move_speed = 12.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.808966, 0.229698, 0.688873, 1)
+shader_parameter/colour_2 = Color(0.385769, 0.267493, 0.871269, 1)
+shader_parameter/colour_3 = Color(0.086, 0.137, 0.145, 1)
+shader_parameter/contrast = 2.14
+shader_parameter/lighting = 0.2
+shader_parameter/spin_amount = 0.0
+shader_parameter/pixel_filter = 1920.0
+shader_parameter/is_rotating = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1c2rr"]
+shader = ExtResource("3_l8vti")
+shader_parameter/screen_resolution = Vector2(480, 128)
+shader_parameter/scanline_intensity = 0.137
+shader_parameter/color_bleed_weight = 0.238
+
+[node name="score" type="Node2D"]
+script = ExtResource("1_ef1rs")
+
+[node name="bgShader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_teaf6")
+offset_left = -1219.0
+offset_top = -983.0
+offset_right = 3053.0
+offset_bottom = 1667.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -2176.0
+offset_top = -2959.0
+offset_right = 3914.0
+offset_bottom = 3199.0
+color = Color(0, 0, 0, 0.755)
+
+[node name="confirm" type="Button" parent="."]
+offset_left = 572.0
+offset_top = 846.0
+offset_right = 1338.0
+offset_bottom = 981.0
+theme = ExtResource("2_8uefv")
+theme_override_font_sizes/font_size = 150
+text = "ok"
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8g7cv")
+volume_db = 11.885
+
+[node name="select" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_q2bju")
+volume_db = 12.877
+
+[node name="acc" type="Label" parent="."]
+offset_left = 492.0
+offset_top = 439.0
+offset_right = 2281.0
+offset_bottom = 539.0
+scale = Vector2(0.52, 1)
+theme = ExtResource("2_8uefv")
+theme_override_font_sizes/font_size = 110
+text = " Accuracy: "
+horizontal_alignment = 1
+
+[node name="dodged" type="Label" parent="."]
+offset_left = 358.0
+offset_top = 146.0
+offset_right = 2537.0
+offset_bottom = 281.0
+scale = Vector2(0.56, 1)
+theme = ExtResource("2_8uefv")
+theme_override_colors/font_color = Color(0.664962, 0.920443, 0.729555, 1)
+theme_override_font_sizes/font_size = 125
+text = "Dodged:"
+horizontal_alignment = 1
+
+[node name="hit" type="Label" parent="."]
+offset_left = 348.0
+offset_top = 278.0
+offset_right = 2562.0
+offset_bottom = 413.0
+scale = Vector2(0.559999, 1)
+theme = ExtResource("2_8uefv")
+theme_override_colors/font_color = Color(1, 0.803356, 0.867526, 1)
+theme_override_font_sizes/font_size = 125
+text = "Hit: "
+horizontal_alignment = 1
+
+[node name="crt" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1c2rr")
+position = Vector2(985, 528)
+scale = Vector2(209.125, 143.5)
+texture = ExtResource("4_hbyus")
+
+[connection signal="button_up" from="confirm" to="." method="_on_confirm_button_up"]
+[connection signal="mouse_entered" from="confirm" to="." method="_on_confirm_mouse_entered"]

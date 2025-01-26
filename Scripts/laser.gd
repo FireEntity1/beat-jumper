@@ -8,7 +8,8 @@ var end = false
 func _ready():
 	self.modulate.a = 0
 	self.modulate.r = 0
-	self.modulate.g = 0
+	self.modulate.g = 1
+	self.modulate.b = 1
 	$fireTimer.wait_time = 1/(bpm/60)*2
 	$fireTimer.start()
 	$area.connect("body_entered", Callable(self, "_player_entered"))
@@ -20,8 +21,6 @@ func _ready():
 func _process(delta):
 	if running:
 			self.modulate.a += delta
-			self.modulate.r += delta
-			self.modulate.g += delta
 		
 	if active and hit:
 		Global.hit()
@@ -29,6 +28,8 @@ func _process(delta):
 	
 	if active:
 		self.modulate.r = 1
+		self.modulate.g = 1
+		self.modulate.b = 1
 		if $area/Laser.scale.x < 10:
 			$area/Laser.scale.x += 40*delta
 		$fireTimer.wait_time = 1/(bpm/60)
@@ -38,6 +39,7 @@ func _process(delta):
 		else:
 			active = false
 			end = true
+	
 	if end:
 		if self.modulate.a > 0:
 			self.modulate.a -= 6.5*delta

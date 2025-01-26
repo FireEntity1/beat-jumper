@@ -35,10 +35,8 @@ func _on_load_mouse_entered():
 func _on_editor_mouse_entered():
 	$click.play()
 
-
 func _on_settings_button_up():
 	$settingsWindow.popup_centered()
-
 
 func _on_vol_value_changed(value):
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"),(-1/value)*15)

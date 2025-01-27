@@ -1,6 +1,6 @@
 # Beat Jumper
 
-In *Beat Jumper*, you must dodge incoming lasers, fired with complex patterns perfectly synced to the beat of the music.
+*Beat Jumper* is a rhythm game where you must dodge incoming lasers, fired with complex patterns perfectly synced to the beat of the music.
 
 ### Key Features:
 - **Fully Mapped Demo Level**  

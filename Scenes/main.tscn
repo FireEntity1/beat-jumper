@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cxcc3ulv26so3"]
+[gd_scene load_steps=15 format=3 uid="uid://cxcc3ulv26so3"]
 
 [ext_resource type="PackedScene" uid="uid://y2a8gdq5kb1w" path="res://Scenes/centerplatform.tscn" id="1_7cerc"]
 [ext_resource type="Script" path="res://Scripts/events.gd" id="1_jdvwc"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://dsxftjgt7y2jt" path="res://Sprites/player.png" id="6_ediib"]
 [ext_resource type="Shader" path="res://glitch.gdshader" id="7_gfgp5"]
 [ext_resource type="Theme" uid="uid://bn8pv5hy8sih1" path="res://title.tres" id="8_5pny6"]
+[ext_resource type="AudioStream" uid="uid://b4h088txvtuu8" path="res://SFX/whoosh.mp3" id="10_g7pk3"]
+[ext_resource type="AudioStream" uid="uid://dm78krooiv0s6" path="res://DEMO/song.ogg" id="11_0e3yx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u3in4"]
 shader = ExtResource("2_pm8md")
@@ -107,5 +109,34 @@ position = Vector2(968, 322)
 scale = Vector2(267.5, 149.625)
 texture = ExtResource("6_ediib")
 
+[node name="fade" type="ColorRect" parent="."]
+offset_left = -825.0
+offset_top = -925.0
+offset_right = 2726.0
+offset_bottom = 1671.0
+color = Color(0, 0, 0, 1)
+
+[node name="anim" type="ColorRect" parent="."]
+offset_left = 861.0
+offset_top = -4252.0
+offset_right = 901.0
+offset_bottom = -4212.0
+scale = Vector2(1, 82.36)
+pivot_offset = Vector2(19, 2.67797)
+
+[node name="whoosh" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(940, 770)
+stream = ExtResource("10_g7pk3")
+volume_db = 5.448
+max_distance = 5000.0
+attenuation = 1e-05
+
+[node name="DEMO" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(944, 610)
+stream = ExtResource("11_0e3yx")
+max_distance = 5000.0
+attenuation = 1e-05
+
 [connection signal="timeout" from="bpm" to="." method="_on_bpm_timeout"]
 [connection signal="finished" from="songplayer" to="." method="_on_songplayer_finished"]
+[connection signal="finished" from="DEMO" to="." method="_on_demo_finished"]

@@ -107,6 +107,7 @@ func _physics_process(delta):
 		$playerSprite.scale.x = lerpf($playerSprite.scale.x,12,0.5)
 	else:
 		$playerSprite.scale.y = lerpf($playerSprite.scale.y,8,0.5)
+	
 	move_and_slide()
 	
 	if jumped:

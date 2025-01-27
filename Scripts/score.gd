@@ -17,6 +17,7 @@ func _ready():
 	$acc.text = "Accuracy " + str(int(accuracy)) + "%"
 	$dodged.text = "Dodged: " + str(total-hit) + "/" + str(total)
 	$hit.text = "Hit: " + str(hit)
+	Global.resetHealth()
 
 func _process(delta):
 	pass

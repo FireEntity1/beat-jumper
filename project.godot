@@ -13,7 +13,11 @@ config_version=5
 config/name="Beat Jumper"
 run/main_scene="res://Scenes/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="res://Sprites/logo.png"
+boot_splash/fullsize=false
 config/icon="res://icon.svg"
+boot_splash/minimum_display_time=250
 
 [autoload]
 
@@ -47,4 +51,5 @@ dash={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+textures/vram_compression/import_etc2_astc=true
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

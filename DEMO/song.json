@@ -539,7 +539,7 @@
 			"beat": 68.5
 		},
 		{
-			"type": "topL",
+			"type": "rightL",
 			"beat": 69
 		},
 		{
@@ -571,7 +571,7 @@
 			"beat": 72.5
 		},
 		{
-			"type": "topL",
+			"type": "leftL",
 			"beat": 73
 		},
 		{
@@ -663,7 +663,7 @@
 			"beat": 85
 		},
 		{
-			"type": "topL",
+			"type": "bottomL",
 			"beat": 86
 		},
 		{

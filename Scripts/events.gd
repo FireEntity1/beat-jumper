@@ -6,8 +6,14 @@ var beat = 0
 var hits = 0
 var isName = true
 
+var anim = true
+var isExpanding = false
+var isDemo = false
+
+
 var isGlitch = false
 
+var ended = false
 
 var centerL = preload("res://Scenes/centerL.tscn")
 var rightL = preload("res://Scenes/rightL.tscn")
@@ -19,10 +25,16 @@ var diagL = preload("res://Scenes/diagL.tscn")
 var diagR = preload("res://Scenes/diagR.tscn")
 
 func _ready():
+	isDemo = Global.getDemo()
+	$CanvasLayer.visible = false
+	await get_tree().create_timer(4).timeout
 	$bpm.wait_time = (1/(bpm/60))/2
 	$bpm.start()
-	$songplayer.stream = Global.getSong()
-	$songplayer.play()
+	if not isDemo:
+		$songplayer.stream = Global.getSong()
+		$songplayer.play()
+	else:
+		$DEMO.play()
 	$crt.material.set_shader_parameter("screen_resolution", Vector2(0,0))
 	$crt.material.set_shader_parameter("scanline_intensity", 0)
 	$crt.material.set_shader_parameter("color_bleed_weight", 0)
@@ -31,16 +43,33 @@ func _ready():
 	isName = true
 	await get_tree().create_timer(3).timeout
 	isName = false
-	
-	
+
 func _process(delta):
+	if ended:
+		$fade.modulate.a += delta*1.5
+	
+	if anim:
+		if $anim.position.y < -1200:
+			$anim.position.y += delta*2000
+		else:
+			$whoosh.play()
+			await get_tree().create_timer(0.5).timeout
+			isExpanding = true
+			anim = false
+			await get_tree().create_timer(1).timeout
+			$CanvasLayer.visible = true
+	
+	if isExpanding:
+		$anim.scale.x += delta*60
+		$anim.modulate.a -= delta/3
+		$fade.modulate.a -= delta/3
 	if isName:
 		if $CanvasLayer/name.modulate.a <= 1:
 			$CanvasLayer/name.modulate.a += delta
 	else:
 		if $CanvasLayer/name.modulate.a >= 0:
 			$CanvasLayer/name.modulate.a -= delta
-	
+
 func _on_bpm_timeout():
 	beat += 0.5
 	for n in songdata.events:
@@ -110,7 +139,16 @@ func tempGlitch():
 		await get_tree().create_timer(0.1).timeout
 		$glitch.material.set_shader_parameter("shake_power", 0)
 
-
 func _on_songplayer_finished():
+	ended = true
+	$CanvasLayer.visible = false
+	$fade.modulate.a = 0
+	await get_tree().create_timer(1.5).timeout
+	get_tree().change_scene_to_file("res://Scenes/score.tscn")
+
+func _on_demo_finished():
+	ended = true
+	$CanvasLayer.visible = false
+	$fade.modulate.a = 0
 	await get_tree().create_timer(1.5).timeout
 	get_tree().change_scene_to_file("res://Scenes/score.tscn")

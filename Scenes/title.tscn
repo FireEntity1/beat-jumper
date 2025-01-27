@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://mcmgyadrgea6"]
+[gd_scene load_steps=14 format=3 uid="uid://mcmgyadrgea6"]
 
 [ext_resource type="Script" path="res://Scripts/title.gd" id="1_0ymk6"]
 [ext_resource type="Shader" path="res://bg.gdshader" id="2_fv34d"]
@@ -9,6 +9,7 @@
 [ext_resource type="StyleBox" uid="uid://cqsvpc7gp5ouu" path="res://Scenes/windowstyle.tres" id="7_f0g6n"]
 [ext_resource type="AudioStream" uid="uid://dhp6emic5y4db" path="res://SFX/click.mp3" id="7_g20hr"]
 [ext_resource type="AudioStream" uid="uid://60els7nnrasa" path="res://SFX/select.mp3" id="8_qyhn5"]
+[ext_resource type="AudioStream" uid="uid://dthr8gnloli3w" path="res://SFX/title.ogg" id="10_3f3p8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0krq0"]
 shader = ExtResource("2_fv34d")
@@ -47,7 +48,7 @@ offset_left = -2176.0
 offset_top = -2959.0
 offset_right = 3914.0
 offset_bottom = 3199.0
-color = Color(0, 0, 0, 0.755)
+color = Color(0, 0, 0, 0.608)
 
 [node name="logo" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_vesql")
@@ -91,6 +92,25 @@ theme = ExtResource("4_eet4v")
 theme_override_font_sizes/font_size = 50
 text = "settings"
 
+[node name="help" type="Button" parent="."]
+offset_left = 1513.0
+offset_top = 961.0
+offset_right = 1900.0
+offset_bottom = 1062.0
+theme = ExtResource("4_eet4v")
+theme_override_font_sizes/font_size = 50
+text = "help"
+
+[node name="quit" type="Button" parent="."]
+offset_left = 27.0
+offset_top = 26.0
+offset_right = 189.0
+offset_bottom = 131.0
+scale = Vector2(0.76, 1)
+theme = ExtResource("4_eet4v")
+theme_override_font_sizes/font_size = 75
+text = "X"
+
 [node name="click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_g20hr")
 volume_db = 11.885
@@ -99,9 +119,48 @@ volume_db = 11.885
 stream = ExtResource("8_qyhn5")
 volume_db = 12.877
 
+[node name="helpWindow" type="Window" parent="."]
+position = Vector2i(0, 36)
+size = Vector2i(1200, 800)
+visible = false
+theme = ExtResource("4_eet4v")
+theme_override_styles/embedded_border = ExtResource("7_f0g6n")
+theme_override_styles/embedded_unfocused_border = ExtResource("7_f0g6n")
+
+[node name="vbox" type="VBoxContainer" parent="helpWindow"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="helpText" type="Label" parent="helpWindow/vbox"]
+custom_minimum_size = Vector2(1200, 700)
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "----HOW TO PLAY----
+
+Lasers fire to the beat of the song, try not to get hit!
+
+
+
+----Controls----
+
+Left/right arrow - move
+down arrow - ground slam
+up arrow - jump
+ctrl/shift - dash
+"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="helpConfirm" type="Button" parent="helpWindow/vbox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.688223, 0.940554, 0.673727, 1)
+theme_override_font_sizes/font_size = 70
+text = " ok 
+"
+
 [node name="settingsWindow" type="Window" parent="."]
 position = Vector2i(0, 36)
-size = Vector2i(250, 500)
+size = Vector2i(325, 500)
 visible = false
 theme_override_styles/embedded_border = ExtResource("7_f0g6n")
 theme_override_styles/embedded_unfocused_border = ExtResource("7_f0g6n")
@@ -120,7 +179,11 @@ layout_mode = 2
 theme = ExtResource("4_eet4v")
 text = "Volume"
 
-[node name="vol" type="HSlider" parent="settingsWindow/vbox"]
+[node name="volMargin" type="MarginContainer" parent="settingsWindow/vbox"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+
+[node name="vol" type="HSlider" parent="settingsWindow/vbox/volMargin"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("4_eet4v")
@@ -128,15 +191,40 @@ min_value = 1.0
 max_value = 10.0
 value = 10.0
 
-[node name="ItemList" type="ItemList" parent="settingsWindow/vbox"]
+[node name="buttonMargin" type="MarginContainer" parent="settingsWindow/vbox"]
+custom_minimum_size = Vector2(0, 75)
 layout_mode = 2
-theme = ExtResource("4_eet4v")
+
+[node name="confirm" type="Button" parent="settingsWindow/vbox/buttonMargin"]
+layout_mode = 2
+text = "OK"
+
+[node name="themeCredit" type="Label" parent="settingsWindow/vbox"]
+layout_mode = 2
+text = "----Theme----
+Airstrike
+-By Nibbles-"
+horizontal_alignment = 1
+autowrap_mode = 2
 
 [node name="crt" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_ur4mi")
 position = Vector2(985, 528)
 scale = Vector2(209.125, 143.5)
 texture = ExtResource("6_cp2ip")
+
+[node name="fade" type="ColorRect" parent="."]
+offset_left = -1326.0
+offset_top = -916.0
+offset_right = 3236.0
+offset_bottom = 1722.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="titleMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_3f3p8")
+volume_db = -6.438
+autoplay = true
 
 [connection signal="button_up" from="demo" to="." method="_on_demo_button_up"]
 [connection signal="mouse_entered" from="demo" to="." method="_on_demo_mouse_entered"]
@@ -146,4 +234,13 @@ texture = ExtResource("6_cp2ip")
 [connection signal="mouse_entered" from="editor" to="." method="_on_editor_mouse_entered"]
 [connection signal="button_up" from="settings" to="." method="_on_settings_button_up"]
 [connection signal="mouse_entered" from="settings" to="." method="_on_editor_mouse_entered"]
-[connection signal="value_changed" from="settingsWindow/vbox/vol" to="." method="_on_vol_value_changed"]
+[connection signal="button_up" from="help" to="." method="_on_help_button_up"]
+[connection signal="mouse_entered" from="help" to="." method="_on_editor_mouse_entered"]
+[connection signal="button_up" from="quit" to="." method="_on_quit_button_up"]
+[connection signal="mouse_entered" from="quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="go_back_requested" from="helpWindow" to="." method="_on_help_window_go_back_requested"]
+[connection signal="button_up" from="helpWindow/vbox/helpConfirm" to="." method="_on_help_confirm_button_up"]
+[connection signal="close_requested" from="settingsWindow" to="." method="_on_settings_window_close_requested"]
+[connection signal="go_back_requested" from="settingsWindow" to="." method="_on_settings_window_go_back_requested"]
+[connection signal="value_changed" from="settingsWindow/vbox/volMargin/vol" to="." method="_on_vol_value_changed"]
+[connection signal="button_up" from="settingsWindow/vbox/buttonMargin/confirm" to="." method="_on_confirm_button_up"]

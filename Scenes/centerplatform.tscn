@@ -42,7 +42,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_np56j"]
-size = Vector2(128, 14)
+size = Vector2(112, 14)
 
 [node name="Platform" type="Node2D"]
 script = SubResource("GDScript_ogskg")

@@ -24,4 +24,4 @@ Play and/or download on [itch.io!](https://fire-entity.itch.io/beat-jumper)
 
 ![Screenshot 2025-01-26 at 8 53 31 PM](https://github.com/user-attachments/assets/7483cb6a-e658-4644-a0e4-399e6672dab1)
 
-![Screenshot 2025-01-26 at 8 54 18 PM](https://github.com/user-attachments/assets/540d4aec-11d2-4e05-a41b-571dfd36467e)
+

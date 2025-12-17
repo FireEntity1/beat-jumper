@@ -1,3 +1,5 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+song-projects/.DS_Store
+.DS_Store

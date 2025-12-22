@@ -18,8 +18,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		scale_target = Vector2(1.8,0.3)
 		velocity.y = JUMP_VELOCITY
-		jumps = 1
 		await get_tree().create_timer(0.08).timeout
+		jumps = 1
 		scale_target = Vector2(1,1)
 	if Input.is_action_just_pressed("jump") and not is_on_floor() and jumps > 0:
 		scale_target = Vector2(1.8,0.3)

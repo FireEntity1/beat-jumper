@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://dv6vcbuookgm6"]
+
+[node name="bg_lights" type="Node2D"]
+modulate = Color(2, 2, 2, 1)
+
+[node name="tri_1" type="Polygon2D" parent="."]
+position = Vector2(1843, 994)
+rotation = -0.418879
+scale = Vector2(3.74126, 3.74126)
+polygon = PackedVector2Array(-50, -183, 51, -183, 0, -1)
+
+[node name="tri_2" type="Polygon2D" parent="."]
+position = Vector2(49, 989)
+rotation = 0.419659
+scale = Vector2(3.74126, 3.74126)
+polygon = PackedVector2Array(-50, -183, 51, -183, 0, -1)

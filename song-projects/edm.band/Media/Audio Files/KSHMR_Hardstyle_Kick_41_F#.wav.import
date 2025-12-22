@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dtca4dblb8iiv"
+path="res://.godot/imported/KSHMR_Hardstyle_Kick_41_F#.wav-be94af055ac669036cf943052c4010f1.sample"
+
+[deps]
+
+source_file="res://song-projects/edm.band/Media/Audio Files/KSHMR_Hardstyle_Kick_41_F#.wav"
+dest_files=["res://.godot/imported/KSHMR_Hardstyle_Kick_41_F#.wav-be94af055ac669036cf943052c4010f1.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

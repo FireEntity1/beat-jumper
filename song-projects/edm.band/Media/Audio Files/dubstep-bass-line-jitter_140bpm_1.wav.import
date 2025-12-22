@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://12lmrg0b700s"
+path="res://.godot/imported/dubstep-bass-line-jitter_140bpm_1.wav-ebe742f96706b7e828e07b6ccb540bd2.sample"
+
+[deps]
+
+source_file="res://song-projects/edm.band/Media/Audio Files/dubstep-bass-line-jitter_140bpm_1.wav"
+dest_files=["res://.godot/imported/dubstep-bass-line-jitter_140bpm_1.wav-ebe742f96706b7e828e07b6ccb540bd2.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

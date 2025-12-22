@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv2ys532c6hk5"]
+
+[ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="1_4ignj"]
+
+[node name="title" type="Node2D"]
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 1939.0
+offset_bottom = 1090.0
+color = Color(0, 0, 0, 1)
+
+[node name="Logo" type="Sprite2D" parent="."]
+position = Vector2(962, 528)
+scale = Vector2(0.818519, 0.818519)
+texture = ExtResource("1_4ignj")

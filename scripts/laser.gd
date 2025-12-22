@@ -1,5 +1,8 @@
 extends Node2D
 
+@export var fire_pos: String
+@export var fire_beat: float
+
 var is_fired = false
 var finished = false
 
@@ -14,6 +17,8 @@ func _ready() -> void:
 	queue_free()
 
 func _process(delta: float) -> void:
+	if global.last_beat < fire_beat and global.beat >= fire_beat:
+		is_fired = true
 	if not is_fired and $sprite.modulate.a < 1:
 		$sprite.modulate.a += delta*5
 	if is_fired and not finished:

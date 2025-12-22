@@ -36,7 +36,12 @@ func _physics_process(delta: float) -> void:
 		await get_tree().create_timer(0.08).timeout
 		scale_target = Vector2(1,1)
 	
+	if Input.is_action_just_released("left") or Input.is_action_just_released("right"):
+		scale_target = Vector2(1,1)
+	
 	var direction := Input.get_axis("left", "right")
+	if direction and is_on_floor():
+		scale_target = Vector2(1.2,0.8)
 	if direction:
 		velocity.x = direction * SPEED
 		prev_dir = direction

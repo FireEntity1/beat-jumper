@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cd0l2flrue8ie"]
 
+[ext_resource type="Script" uid="uid://6bbe45ewoge8" path="res://scripts/event_handler.gd" id="1_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://cau03qpr1fblt" path="res://sprites/platform.png" id="1_72e8q"]
 [ext_resource type="PackedScene" uid="uid://dg2baiggrj1" path="res://components/player.tscn" id="2_72e8q"]
-[ext_resource type="PackedScene" uid="uid://dbgowdk1hoq0q" path="res://components/laser.tscn" id="3_d2op2"]
 
 [sub_resource type="Environment" id="Environment_72e8q"]
 background_mode = 3
@@ -30,6 +30,7 @@ scale_min = 6.85
 scale_max = 7.0
 
 [node name="main_game" type="Node2D"]
+script = ExtResource("1_0rdsr")
 
 [node name="bg" type="ColorRect" parent="."]
 offset_left = -3604.0
@@ -47,7 +48,6 @@ scale = Vector2(0.8207, 0.744444)
 
 [node name="collision" type="CollisionShape2D" parent="main_platform"]
 position = Vector2(-2.08148, 195.319)
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_s3esy")
 
 [node name="platform_sprite" type="Sprite2D" parent="main_platform"]
@@ -59,15 +59,12 @@ texture = ExtResource("1_72e8q")
 [node name="player" parent="." instance=ExtResource("2_72e8q")]
 position = Vector2(-11, -4)
 
-[node name="laser" parent="." instance=ExtResource("3_d2op2")]
-position = Vector2(-1560, -375)
-
 [node name="world_particles" type="GPUParticles2D" parent="."]
 modulate = Color(1, 1, 1, 0.085)
 position = Vector2(10, -535)
 scale = Vector2(12.16, 7.60782)
 amount = 256
-lifetime = 16.09
+lifetime = 60.0
 preprocess = 10.0
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_d2op2")

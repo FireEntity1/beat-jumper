@@ -7,7 +7,7 @@ script = ExtResource("1_wu1ai")
 
 [node name="sprite" type="ColorRect" parent="."]
 modulate = Color(8.743, 5.192, 6.831, 0)
-offset_left = -2101.0
-offset_top = 13.0
-offset_right = 5046.0
-offset_bottom = 21.0
+offset_left = -3573.0
+offset_top = -4.0
+offset_right = 3574.0
+offset_bottom = 4.0

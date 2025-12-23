@@ -1,5 +1,6 @@
 extends Node
 
+var bpm = 120
 var beat = 0
 var last_beat = 0
 var grid_mult = Vector2(275,160)

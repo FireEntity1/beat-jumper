@@ -1,12 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://dbgowdk1hoq0q"]
+[gd_scene load_steps=3 format=3 uid="uid://dbgowdk1hoq0q"]
 
 [ext_resource type="Script" uid="uid://00uu26xp50ky" path="res://scripts/laser.gd" id="1_wu1ai"]
 
-[node name="laser" type="Node2D"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wu1ai"]
+blend_mode = 1
+
+[node name="laser" type="Area2D"]
 script = ExtResource("1_wu1ai")
 
 [node name="sprite" type="ColorRect" parent="."]
 modulate = Color(8.743, 5.192, 6.831, 0)
+material = SubResource("CanvasItemMaterial_wu1ai")
 offset_left = -3573.0
 offset_top = -4.0
 offset_right = 3574.0

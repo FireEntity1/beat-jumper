@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bg70uibvbqov3"]
+
+[ext_resource type="Script" uid="uid://cpdcjddrhw5rt" path="res://scripts/laser_circle.gd" id="1_on44s"]
+
+[node name="laser_circle" type="Node2D"]
+script = ExtResource("1_on44s")

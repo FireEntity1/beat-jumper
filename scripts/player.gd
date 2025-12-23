@@ -8,6 +8,8 @@ var prev_dir = 1
 var dashing = false
 var jumps = 1
 
+var was_on_ground = true
+
 var scale_target = Vector2(1,1)
 
 func _physics_process(delta: float) -> void:
@@ -29,6 +31,8 @@ func _physics_process(delta: float) -> void:
 		scale_target = Vector2(1,1)
 	if is_on_floor():
 		jumps = 1
+		was_on_ground = true
+	was_on_ground = is_on_floor()
 	
 	if Input.is_action_just_pressed("slam"):
 		velocity.y = 10000

@@ -25,9 +25,10 @@ direction = Vector3(1, 1, 0)
 spread = 139.337
 initial_velocity_min = 1.1
 initial_velocity_max = 5.0
-gravity = Vector3(0, 10, 0)
+gravity = Vector3(0, 0, 0)
 scale_min = 6.85
 scale_max = 7.0
+scale_over_velocity_max = 323.08
 
 [node name="main_game" type="Node2D"]
 script = ExtResource("1_0rdsr")
@@ -51,7 +52,7 @@ position = Vector2(-2.08148, 195.319)
 shape = SubResource("RectangleShape2D_s3esy")
 
 [node name="platform_sprite" type="Sprite2D" parent="main_platform"]
-modulate = Color(4, 2, 4, 1)
+modulate = Color(3, 2, 3, 1)
 material = SubResource("CanvasItemMaterial_72e8q")
 scale = Vector2(0.877562, 1)
 texture = ExtResource("1_72e8q")
@@ -63,8 +64,9 @@ position = Vector2(-11, -4)
 modulate = Color(1, 1, 1, 0.085)
 position = Vector2(10, -535)
 scale = Vector2(12.16, 7.60782)
-amount = 256
+amount = 512
 lifetime = 60.0
 preprocess = 10.0
+speed_scale = 1.5
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_d2op2")

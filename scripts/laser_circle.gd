@@ -15,7 +15,7 @@ var current = 0
 var laser = preload("res://components/laser.tscn")
 
 func _ready() -> void:
-	global_position = global.apply_grid(pos) + Vector2(-500,350)
+	global_position = global.apply_grid(pos) + Vector2(300,350)
 	var angle = 360.0/edges
 	offset = -90
 	for i in range(amount):

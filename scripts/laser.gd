@@ -5,6 +5,7 @@ extends Area2D
 @export var rot: float
 @export var pos: Vector2
 @export var is_circle = false
+#@export var colour = Color(10.0,7.0,10.0)
 
 var is_fired = false
 var finished = false
@@ -17,6 +18,8 @@ func _ready() -> void:
 	else:
 		position = pos
 	rotation_degrees = rot
+	await get_tree().create_timer(2).timeout
+	queue_free()
 
 func _process(delta: float) -> void:
 	if not is_fired and $sprite.modulate.a < 1:

@@ -20,17 +20,39 @@ var prefire_beat = {
 	"laser_circle": prefire_sec.laser_circle * (bpm / 60.0)
 }
 
+var event_classes = {
+	"movable": ["laser", "laser_circle"],
+	"screen_effect": ["shake", "glitch"]
+}
+
+
 var events = [
+	{
+		"type": "laser",
+		"beat": 5,
+		"pos": Vector2(5,3),
+		"rot": 45
+	},
 	{
 		"type": "laser_circle",
 		"beat": 10,
-		"pos": Vector2(10,1),
+		"pos": Vector2(5,3),
 		"rot": 0,
 		"radius": 300,
 		"amount": 96,
 		"edges": 16,
-		"speed": 1.0/24.0
-	}
+		"speed": 1.0/24.0,
+	},
+	{
+		"type": "laser_circle",
+		"beat": 20,
+		"pos": Vector2(5,2),
+		"rot": 0,
+		"radius": 1000,
+		"amount": 64,
+		"edges": 20,
+		"speed": 1.0/8.0
+	},
 ]
 
 func _ready() -> void:
@@ -48,8 +70,11 @@ func _process(delta: float) -> void:
 		if crossed(last_beat,beat,trigger_beat):
 			var temp = event_types[event.type].instantiate()
 			temp.fire_beat = event.beat
-			temp.pos = event.pos
-			temp.rot = event.rot
+			if event.type in event_classes.movable:
+				temp.pos = event.pos
+				temp.rot = event.rot
+			elif event.type in event_classes.screen_effect:
+				temp.time = event.time
 			match event.type:
 				"laser_circle":
 					temp.speed = event.speed

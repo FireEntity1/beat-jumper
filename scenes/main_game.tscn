@@ -1,15 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://cd0l2flrue8ie"]
+[gd_scene load_steps=12 format=3 uid="uid://cd0l2flrue8ie"]
 
 [ext_resource type="Script" uid="uid://6bbe45ewoge8" path="res://scripts/event_handler.gd" id="1_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://cau03qpr1fblt" path="res://sprites/platform.png" id="1_72e8q"]
 [ext_resource type="PackedScene" uid="uid://dg2baiggrj1" path="res://components/player.tscn" id="2_72e8q"]
+[ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="4_0rdsr"]
 
 [sub_resource type="Environment" id="Environment_72e8q"]
 background_mode = 3
+tonemap_white = 4.25
 glow_enabled = true
 glow_intensity = 2.15
 glow_strength = 0.63
 glow_blend_mode = 1
+volumetric_fog_detail_spread = 2.46229
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3esy"]
 size = Vector2(3240.42, 170.339)
@@ -29,6 +32,23 @@ gravity = Vector3(0, 0, 0)
 scale_min = 6.85
 scale_max = 7.0
 scale_over_velocity_max = 323.08
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0rdsr"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ipu61"]
+width = 1600
+height = 900
+seamless = true
+seamless_blend_skirt = 1.0
+normalize = false
+noise = SubResource("FastNoiseLite_0rdsr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ygxny"]
+shader = ExtResource("4_0rdsr")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ipu61")
+shader_parameter/smoke_color = Color(0.741385, 0.741385, 0.741384, 1)
+shader_parameter/distortion_speed = 0.116
+shader_parameter/density = 0.01
 
 [node name="main_game" type="Node2D"]
 script = ExtResource("1_0rdsr")
@@ -70,3 +90,10 @@ preprocess = 10.0
 speed_scale = 1.5
 trail_enabled = true
 process_material = SubResource("ParticleProcessMaterial_d2op2")
+
+[node name="fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ygxny")
+offset_left = -3000.0
+offset_top = -1894.0
+offset_right = 2989.0
+offset_bottom = 1509.0

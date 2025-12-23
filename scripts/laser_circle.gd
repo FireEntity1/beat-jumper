@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var edges = 12
-@export var radius = 300
-@export var amount = 24
-@export var speed = 0.125
-@export var fire_beat = 1
+@export var edges: int
+@export var radius: int
+@export var amount: int
+@export var speed: float
+@export var fire_beat = 1.0
 var offset
 
 @export var pos: Vector2

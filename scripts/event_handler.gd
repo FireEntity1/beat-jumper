@@ -23,24 +23,13 @@ var prefire_beat = {
 var events = [
 	{
 		"type": "laser_circle",
-		"beat": 5,
-		"pos": Vector2(4,1),
-		"rot": 0
-	},
-	{
-		"type": "laser_circle",
 		"beat": 10,
-		"pos": Vector2(7,1),
-		"rot": 0
-	},
-	{
-		"type": "laser_circle",
-		"beat": 15,
 		"pos": Vector2(10,1),
 		"rot": 0,
-		"radius": 100,
-		"amount": 24,
-		"edges": 6
+		"radius": 300,
+		"amount": 96,
+		"edges": 16,
+		"speed": 1.0/24.0
 	}
 ]
 
@@ -61,8 +50,15 @@ func _process(delta: float) -> void:
 			temp.fire_beat = event.beat
 			temp.pos = event.pos
 			temp.rot = event.rot
+			match event.type:
+				"laser_circle":
+					temp.speed = event.speed
+					temp.radius = event.radius
+					temp.edges = event.edges
+					temp.amount = event.amount
 			add_child(temp)
 			event_index += 1
+			
 		else:
 			break
 			

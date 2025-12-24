@@ -54,10 +54,10 @@ shader_parameter/density = 0.01
 script = ExtResource("1_0rdsr")
 
 [node name="bg" type="ColorRect" parent="."]
-offset_left = -3604.0
-offset_top = -3911.0
-offset_right = 3750.0
-offset_bottom = 3443.0
+offset_left = -2753.0
+offset_top = -1784.0
+offset_right = 2899.0
+offset_bottom = 1316.0
 color = Color(0, 0, 0, 1)
 
 [node name="environment" type="WorldEnvironment" parent="."]

@@ -60,6 +60,7 @@ func _physics_process(delta: float) -> void:
 		dashing = false
 	if dashing:
 		velocity.x = prev_dir * 7000
+		velocity.y = 0
 	
 	scale = scale.move_toward(scale_target,0.09)
 	move_and_slide()

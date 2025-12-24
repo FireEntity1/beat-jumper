@@ -2,7 +2,8 @@ extends Node2D
 
 var event_types = {
 	"laser": preload("res://components/laser.tscn"),
-	"laser_circle": preload("res://components/laser_circle.tscn")
+	"laser_circle": preload("res://components/laser_circle.tscn"),
+	"laser_sweep": preload("res://components/laser_sweep.tscn")
 	}
 @export var bpm = 220
 var beat = 0.0
@@ -12,16 +13,19 @@ var event_index = 0
 
 var prefire_sec = {
 	"laser": 0.8,
-	"laser_circle": 0.8
+	"laser_circle": 0.8,
+	"laser_sweep": 0.8
+	
 }
 
 var prefire_beat = {
 	"laser": prefire_sec.laser * (bpm / 60.0),
-	"laser_circle": prefire_sec.laser_circle * (bpm / 60.0)
+	"laser_circle": prefire_sec.laser_circle * (bpm / 60.0),
+	"laser_sweep": prefire_sec.laser_circle * (bpm / 60.0)
 }
 
 var event_classes = {
-	"movable": ["laser", "laser_circle"],
+	"movable": ["laser", "laser_circle", "laser_sweep"],
 	"screen_effect": ["shake", "glitch"]
 }
 
@@ -38,21 +42,20 @@ var events = [
 		"beat": 10,
 		"pos": Vector2(5,3),
 		"rot": 0,
-		"radius": 300,
-		"amount": 96,
-		"edges": 16,
-		"speed": 1.0/24.0,
+		"radius": 670,
+		"amount": 10,
+		"edges": 10,
+		"speed": 1.0/8.0,
 	},
 	{
-		"type": "laser_circle",
-		"beat": 20,
-		"pos": Vector2(5,2),
-		"rot": 0,
-		"radius": 1000,
-		"amount": 64,
-		"edges": 20,
-		"speed": 1.0/8.0
-	},
+		"type": "laser_sweep",
+		"beat": 15,
+		"pos": Vector2(1,1),
+		"rot": 90,
+		"amount": 90,
+		"speed": 1.0/8.0,
+		"distance": 100
+	}
 ]
 
 func _ready() -> void:
@@ -81,6 +84,10 @@ func _process(delta: float) -> void:
 					temp.radius = event.radius
 					temp.edges = event.edges
 					temp.amount = event.amount
+				"laser_sweep":
+					temp.speed = event.speed
+					temp.amount = event.amount
+					temp.distance = event.distance
 			add_child(temp)
 			event_index += 1
 			

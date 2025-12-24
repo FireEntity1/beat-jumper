@@ -5,6 +5,7 @@ extends Node2D
 @export var amount: int
 @export var speed: float
 @export var fire_beat = 1.0
+@export var distance: int
 var offset
 
 @export var pos: Vector2
@@ -16,15 +17,10 @@ var laser = preload("res://components/laser.tscn")
 
 func _ready() -> void:
 	global_position = global.apply_grid(pos) + Vector2(300,350)
-	var angle = 360.0/edges
-	offset = -90
 	for i in range(amount):
-		var index = i%edges
-		var current_angle_deg = (angle * index) + offset
-		var current_angle_rad = deg_to_rad(current_angle_deg)
 		var temp = laser.instantiate()
-		temp.pos = Vector2.from_angle(current_angle_rad) * radius
-		temp.rot = current_angle_deg + 90
+		temp.rot = rot
+		temp.pos = position + Vector2(distance*i,0)
 		temp.snap = false
 		temp.fire_beat = fire_beat + (speed * (current - 1))
 		add_child(temp)

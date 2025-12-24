@@ -4,7 +4,7 @@ extends Area2D
 @export var fire_beat: float
 @export var rot: float
 @export var pos: Vector2
-@export var is_circle = false
+@export var snap = true
 #@export var colour = Color(10.0,7.0,10.0)
 
 var is_fired = false
@@ -13,7 +13,7 @@ var finished = false
 func _ready() -> void:
 	$sprite.modulate = Color(1,0,1)
 	$sprite.modulate.a = 0
-	if not is_circle:
+	if snap:
 		position = global.apply_grid(pos)
 	else:
 		position = pos

@@ -5,14 +5,15 @@ extends Area2D
 @export var rot: float
 @export var pos: Vector2
 @export var snap = true
-#@export var colour = Color(10.0,7.0,10.0)
-
+@export var colour = "pink"
 var is_fired = false
 var finished = false
 
 func _ready() -> void:
-	$sprite.modulate = Color(1,0,1)
-	$sprite.modulate.a = 0
+	print("Began prefire: ", global.beat, " for fire beat: ", fire_beat)
+	$sprite.modulate.r = global.colours[colour][0]/8
+	$sprite.modulate.g = global.colours[colour][1]/8
+	$sprite.modulate.b = global.colours[colour][2]/8
 	if snap:
 		position = global.apply_grid(pos)
 	else:
@@ -29,7 +30,7 @@ func _process(delta: float) -> void:
 		start_fire_seq()
 	
 	if is_fired and not finished:
-		$sprite.modulate += Color(8*delta,6.8*delta,7.2*delta)
+		$sprite.modulate += Color(global.colours[colour][0]*delta,global.colours[colour][1]*delta,global.colours[colour][2]*delta)
 		$sprite.modulate.a = 4
 	
 	if finished:

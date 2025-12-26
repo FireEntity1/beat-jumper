@@ -9,7 +9,7 @@ blend_mode = 1
 script = ExtResource("1_wu1ai")
 
 [node name="sprite" type="ColorRect" parent="."]
-modulate = Color(8.743, 5.192, 6.831, 0)
+modulate = Color(5, 5, 5, 0)
 material = SubResource("CanvasItemMaterial_wu1ai")
 offset_left = -3573.0
 offset_top = -4.0

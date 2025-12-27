@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cd0l2flrue8ie"]
+[gd_scene load_steps=16 format=3 uid="uid://cd0l2flrue8ie"]
 
 [ext_resource type="Script" uid="uid://6bbe45ewoge8" path="res://scripts/event_handler.gd" id="1_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://cau03qpr1fblt" path="res://sprites/platform.png" id="1_72e8q"]
 [ext_resource type="PackedScene" uid="uid://dg2baiggrj1" path="res://components/player.tscn" id="2_72e8q"]
+[ext_resource type="Shader" uid="uid://37kt6ilqtygj" path="res://shaders/sun.gdshader" id="2_ipu61"]
+[ext_resource type="Texture2D" uid="uid://rnv1uk5hcvoo" path="res://sprites/circle.png" id="3_ygxny"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="4_0rdsr"]
 
 [sub_resource type="Environment" id="Environment_72e8q"]
@@ -12,7 +14,38 @@ glow_enabled = true
 glow_intensity = 2.15
 glow_strength = 0.63
 glow_blend_mode = 1
+glow_hdr_threshold = 0.8
 volumetric_fog_detail_spread = 2.46229
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wi4c7"]
+shader = ExtResource("2_ipu61")
+shader_parameter/color_main = Color(15.847, 7.923, 9.016, 1)
+shader_parameter/color_accent = Color(0, 0, 0, 1)
+shader_parameter/color_glow = Color(0, 0, 0, 1)
+shader_parameter/scanline_speed = 0.0
+shader_parameter/scanline_density = 100.0
+shader_parameter/chromatic_aberration = 0.009
+shader_parameter/brightness = 0.5
+shader_parameter/opacity = 0.017
+shader_parameter/is_circle = true
+shader_parameter/circle_softness = 0.0
+shader_parameter/edge_thickness = 0.01
+shader_parameter/edge_intensity = 1.41
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ygxny"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(-1000, 0, 0)
+emission_shape_scale = Vector3(100, 100, 1)
+emission_shape = 3
+emission_box_extents = Vector3(10, 10, 1)
+velocity_pivot = Vector3(1, 0, 0)
+initial_velocity_min = 1000.0
+initial_velocity_max = 1000.0
+gravity = Vector3(10000, -50, 0)
+linear_accel_min = -100.0
+linear_accel_max = -100.0
+scale_min = 16.38
+scale_max = 77.92
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3esy"]
 size = Vector2(3240.42, 170.339)
@@ -62,6 +95,31 @@ color = Color(0, 0, 0, 1)
 
 [node name="environment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_72e8q")
+
+[node name="parallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.4, 0.4)
+scroll_offset = Vector2(590, 245)
+
+[node name="sun" type="Sprite2D" parent="parallax"]
+material = SubResource("ShaderMaterial_wi4c7")
+scale = Vector2(1.55, 1.55)
+texture = ExtResource("3_ygxny")
+
+[node name="backlit_particles" type="GPUParticles2D" parent="parallax"]
+visible = false
+modulate = Color(0.27, 0.27, 0.27, 0.776471)
+position = Vector2(-603, -559)
+amount = 1024
+lifetime = 3.79
+preprocess = 10.0
+process_material = SubResource("ParticleProcessMaterial_ygxny")
+
+[node name="sun_blocker" type="ColorRect" parent="."]
+offset_left = -1853.0
+offset_top = 242.0
+offset_right = 2047.0
+offset_bottom = 2222.0
+color = Color(0, 0, 0, 1)
 
 [node name="main_platform" type="StaticBody2D" parent="."]
 position = Vector2(2.00006, 145)

@@ -16,7 +16,8 @@ var prefire_sec = {
 	"laser_circle": 0.6,
 	"laser_sweep": 0.6,
 	
-	"platform_colour": 0.0
+	"platform_colour": 0.0,
+	"sun": 0.0
 }
 
 var prefire_beat = {
@@ -24,7 +25,8 @@ var prefire_beat = {
 	"laser_circle": prefire_sec.laser_circle * (bpm / 60.0),
 	"laser_sweep": prefire_sec.laser_sweep * (bpm / 60.0),
 	
-	"platform_colour": prefire_sec.platform_colour * (bpm / 60.0)
+	"platform_colour": prefire_sec.platform_colour * (bpm / 60.0),
+	"sun": prefire_sec.sun * (bpm / 60.0)
 }
 
 var event_classes = {
@@ -34,6 +36,8 @@ var event_classes = {
 
 var target_platform_colour = global.colours_raw["pink"]
 var platform_colour_speed = 1
+var showing_sun = false
+var sun_mult = 0.0
 
 var events = [
 	{
@@ -53,10 +57,15 @@ var events = [
 		"outwards": true,
 		"colour": ["purple", "pink"]
 	},
-		{
+	{
+		"type": "sun",
+		"beat": 5,
+		"length": 10
+	},
+	{
 		"type": "platform_colour",
 		"beat": 5,
-		"colour": "blue",
+		"colour": "hotpink",
 		"speed": 1
 	},
 	{
@@ -133,6 +142,22 @@ func _process(delta: float) -> void:
 	$main_platform/platform_sprite.modulate.g = move_toward($main_platform/platform_sprite.modulate.g,target_platform_colour[1],delta*platform_colour_speed)
 	$main_platform/platform_sprite.modulate.b = move_toward($main_platform/platform_sprite.modulate.b,target_platform_colour[2],delta*platform_colour_speed)
 	
+	if showing_sun:
+		sun_mult = move_toward(sun_mult,7,delta*100)
+		$parallax/backlit_particles.emitting = true
+		#$parallax/backlit_particles.show()
+	else:
+		sun_mult = move_toward(sun_mult,0,delta*100)
+		$parallax/backlit_particles.emitting = false
+		$parallax/backlit_particles.hide()
+	print(sun_mult)
+	
+	$parallax/sun.material.set_shader_parameter("color_main",Color(
+					target_platform_colour.r*sun_mult,
+					target_platform_colour.g*sun_mult,
+					target_platform_colour.b*sun_mult
+				))
+	
 	while event_index < events.size():
 		var event = events[event_index]
 		var trigger_beat = event["beat"] - prefire_beat[event["type"]]
@@ -141,6 +166,10 @@ func _process(delta: float) -> void:
 			if event.type == "platform_colour":
 				target_platform_colour = global.colours_raw[event.colour]
 				platform_colour_speed = event.speed
+				event_index += 1
+				continue
+			elif event.type == "sun":
+				timeout_sun(event.length)
 				event_index += 1
 				continue
 			elif event.type in event_types:
@@ -180,3 +209,8 @@ func sort_by_trigger_beat(a, b):
 	var trigger_a = a["beat"] - prefire_beat[a["type"]]
 	var trigger_b = b["beat"] - prefire_beat[b["type"]]
 	return trigger_a < trigger_b
+
+func timeout_sun(time):
+	showing_sun = true
+	await get_tree().create_timer((60.0/bpm)*time).timeout
+	showing_sun = false

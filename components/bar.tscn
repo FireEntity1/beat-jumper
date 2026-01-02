@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ddmlup3k6ycg4"]
+
+[node name="bar1" type="ColorRect"]
+offset_top = -647.0
+offset_right = 102.0
+offset_bottom = 116.0
+pivot_offset = Vector2(52, 763)

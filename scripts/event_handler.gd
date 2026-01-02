@@ -60,7 +60,7 @@ var events = [
 	{
 		"type": "sun",
 		"beat": 5,
-		"length": 10
+		"length": 5
 	},
 	{
 		"type": "platform_colour",
@@ -141,13 +141,16 @@ func _process(delta: float) -> void:
 	$main_platform/platform_sprite.modulate.r = move_toward($main_platform/platform_sprite.modulate.r,target_platform_colour[0],delta*platform_colour_speed)
 	$main_platform/platform_sprite.modulate.g = move_toward($main_platform/platform_sprite.modulate.g,target_platform_colour[1],delta*platform_colour_speed)
 	$main_platform/platform_sprite.modulate.b = move_toward($main_platform/platform_sprite.modulate.b,target_platform_colour[2],delta*platform_colour_speed)
-	
+	var weight = 1.0 - exp(-1.0 * delta)
 	if showing_sun:
 		sun_mult = move_toward(sun_mult,7,delta*100)
+		$sun_blocker.position.y = move_toward($sun_blocker.position.y,242,delta*4000)
 		$parallax/backlit_particles.emitting = true
+		print($sun_blocker.position.y)
 		#$parallax/backlit_particles.show()
 	else:
-		sun_mult = move_toward(sun_mult,0,delta*100)
+		#sun_mult = move_toward(sun_mult,0,delta*100)
+		$sun_blocker.position.y = move_toward($sun_blocker.position.y,-1500,delta*4000)
 		$parallax/backlit_particles.emitting = false
 		$parallax/backlit_particles.hide()
 	print(sun_mult)

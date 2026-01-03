@@ -38,13 +38,24 @@ var events = [
 		"speed": 1.0/8.0,
 		"distance": 300,
 		"outwards": true,
-		"colour": ["purple", "pink"]
+		"colour": ["green","green"]
 	},
 	{
-		"type": "sun",
+		"type": "laser_sweep",
 		"beat": 5,
-		"length": 1
+		"pos": Vector2(5,1),
+		"rot": 90,
+		"amount": 8,
+		"speed": 1.0/4.0,
+		"distance": 300,
+		"outwards": true,
+		"colour": ["green","green"]
 	},
+	#{
+		#"type": "sun",
+		#"beat": 0,
+		#"length": 7
+	#},
 	{
 		"type": "platform_colour",
 		"beat": 5,
@@ -56,13 +67,19 @@ var events = [
 		"beat": 5,
 		"pos": Vector2(2,5),
 		"rot": 0,
-		"colour": "purple"
+		"colour": "blue"
+	},
+	{
+		"type": "camera_kick",
+		"beat": 3,
+		"status": true,
+		"speed": 1.0/8.0
 	},
 	{
 		"type": "platform_colour",
 		"beat": 7,
-		"colour": "green",
-		"speed": 1
+		"colour": "orange",
+		"speed": 10
 	},
 	{
 		"type": "platform_colour",
@@ -72,11 +89,11 @@ var events = [
 	},
 	{
 		"type": "laser_circle",
-		"beat": 9,
+		"beat": 7,
 		"pos": Vector2(5,3),
 		"rot": 0,
 		"radius": 500,
-		"amount": 32,
+		"amount": 64,
 		"edges": 12,
 		"speed": 1.0/16.0,
 		"colour": ["hotpink", "red"],
@@ -84,8 +101,8 @@ var events = [
 	},
 	{
 		"type": "camera_kick",
-		"beat": 11,
-		"status": true,
+		"beat": 7,
+		"status": false,
 		"speed": 1.0/4.0
 	},
 	{
@@ -101,9 +118,15 @@ var events = [
 		"direction": 1
 	},
 	{
+		"type": "camera_kick",
+		"beat": 11,
+		"status": true,
+		"speed": 1.0/4.0
+	},
+	{
 		"type": "platform_colour",
 		"beat": 11,
-		"colour": "blue",
+		"colour": "hotpink",
 		"speed": 5
 	},
 	{

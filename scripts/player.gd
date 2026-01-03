@@ -26,6 +26,9 @@ func pulse_loop():
 			kick_in = !kick_in
 
 func _process(delta: float) -> void:
+	if not global.camera_kick:
+		chromabb.set_shader_parameter("r_displacement",Vector2(0,0))
+		chromabb.set_shader_parameter("b_displacement",Vector2(0,0))
 	if kick_in:
 		$camera.zoom.x = lerpf($camera.zoom.x,0.69, delta*5)
 		$camera.zoom.y = lerpf($camera.zoom.y,0.69, delta*5)

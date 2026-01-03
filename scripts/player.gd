@@ -10,13 +10,41 @@ var jumps = 1
 
 var was_on_ground = true
 
+var kick_in = false
+
 var scale_target = Vector2(1,1)
+
+@onready var chromabb = $layer/chromabb.material as ShaderMaterial
+
+func _ready() -> void:
+	pulse_loop()
+
+func pulse_loop():
+	while true:
+		await get_tree().create_timer((60.0)*global.camera_kick_speed / global.bpm).timeout
+		if global.camera_kick:
+			kick_in = !kick_in
+
+func _process(delta: float) -> void:
+	if kick_in:
+		$camera.zoom.x = lerpf($camera.zoom.x,0.69, delta*5)
+		$camera.zoom.y = lerpf($camera.zoom.y,0.69, delta*5)
+		chromabb.set_shader_parameter("r_displacement",
+		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(10.0,-4.0),delta*300))
+		chromabb.set_shader_parameter("b_displacement",
+		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-10.0,4.0),delta*300))
+	else:
+		$camera.zoom.x = move_toward($camera.zoom.x,0.67, delta)
+		$camera.zoom.y = move_toward($camera.zoom.y,0.67, delta)
+		chromabb.set_shader_parameter("r_displacement",
+		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(3.0,0),delta*100))
+		chromabb.set_shader_parameter("b_displacement",
+		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-3.0,0),delta*100))
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
-
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		scale_target = Vector2(1.8,0.3)
 		velocity.y = JUMP_VELOCITY

@@ -1,10 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg2baiggrj1"]
+[gd_scene load_steps=6 format=3 uid="uid://dg2baiggrj1"]
 
 [ext_resource type="Script" uid="uid://o3l8jxgj15gh" path="res://scripts/player.gd" id="1_51jd6"]
 [ext_resource type="Texture2D" uid="uid://cp00voqwjwugr" path="res://sprites/player.png" id="2_51jd6"]
+[ext_resource type="Shader" uid="uid://cfougkojpbfp6" path="res://shaders/chromabb.gdshader" id="3_uapwn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0g4kb"]
 size = Vector2(86, 87)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5odhx"]
+shader = ExtResource("3_uapwn")
+shader_parameter/r_displacement = Vector2(3, 0)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(-3, 0)
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_51jd6")
@@ -27,3 +34,12 @@ limit_top = -1300
 limit_right = 2000
 position_smoothing_enabled = true
 rotation_smoothing_enabled = true
+
+[node name="layer" type="CanvasLayer" parent="."]
+
+[node name="chromabb" type="ColorRect" parent="layer"]
+material = SubResource("ShaderMaterial_5odhx")
+offset_left = -39.0
+offset_top = -27.0
+offset_right = 1950.0
+offset_bottom = 1109.0

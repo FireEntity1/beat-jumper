@@ -16,7 +16,6 @@ var bar_energies = []
 var max_energy = 0.1
 
 func _ready() -> void:
-	$"[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-".play(300)
 	for i in range(count):
 		var temp = bar.instantiate()
 		temp.position.x = i * 115
@@ -55,4 +54,3 @@ func _process(delta: float) -> void:
 		else:
 			max_energy = lerp(max_energy, current_max, normalization_speed)
 	bars[32].scale.y = 0
-	bars[33].scale.y = 0

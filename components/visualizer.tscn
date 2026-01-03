@@ -1,16 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6pfcul8lmyr6"]
+[gd_scene load_steps=2 format=3 uid="uid://c6pfcul8lmyr6"]
 
 [ext_resource type="Script" uid="uid://d0xsxoghfwn8r" path="res://scripts/visualizer.gd" id="1_egsck"]
-[ext_resource type="AudioStream" uid="uid://c844h23x0bc8g" path="res://components/[For EGCS 2023 FN-TB] trung-nova - Roars of V.E.N.G.E.A.N.C.E -Take Back Everything-.mp3" id="2_f1uay"]
 
 [node name="visualizer" type="Node2D"]
 script = ExtResource("1_egsck")
-
-[node name="[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(895, 503)
-stream = ExtResource("2_f1uay")
-volume_db = -16.343
-autoplay = true
 
 [node name="cam" type="Camera2D" parent="."]
 position = Vector2(970, -448)

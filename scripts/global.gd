@@ -6,6 +6,29 @@ var last_beat = 0
 var grid_mult = Vector2(275,160)
 var grid_offset = Vector2(-1660,-670)
 
+var camera_kick = false
+var camera_kick_speed = 1.0
+
+var prefire_sec = {
+	"laser": 0.6,
+	"laser_circle": 0.6,
+	"laser_sweep": 0.6,
+	
+	"platform_colour": 0.0,
+	"sun": 0.0,
+	"camera_kick": 0.0
+}
+
+var prefire_beat = {
+	"laser": prefire_sec.laser * (bpm / 60.0),
+	"laser_circle": prefire_sec.laser_circle * (bpm / 60.0),
+	"laser_sweep": prefire_sec.laser_sweep * (bpm / 60.0),
+	
+	"platform_colour": prefire_sec.platform_colour * (bpm / 60.0),
+	"sun": prefire_sec.sun * (bpm / 60.0),
+	"camera_kick": prefire_sec.camera_kick * (bpm / 60.0)
+}
+
 const defaults = {
 	"laser": {
 		"type": "laser",
@@ -23,7 +46,8 @@ const defaults = {
 		"amount": 24,
 		"edges": 12,
 		"speed": 1.0/8.0,
-		"colour": ["pink"]
+		"colour": ["pink"],
+		"direction": 1
 	},
 	"laser_sweep": {
 		"type": "laser_sweep",
@@ -40,8 +64,12 @@ const defaults = {
 		"type": "platform_colour",
 		"beat": 0,
 		"colour": "pink"
+	},
+	"sun": {
+		"type": "sun",
+		"beat": 0,
+		"length": 1
 	}
-	
 }
 
 const colours = {

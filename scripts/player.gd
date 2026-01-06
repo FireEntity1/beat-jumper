@@ -15,6 +15,8 @@ var kick_in = false
 var scale_target = Vector2(1,1)
 
 @onready var chromabb = $layer/chromabb.material as ShaderMaterial
+@onready var shake = $layer2/shake.material as ShaderMaterial
+@onready var vhs = $layer3/vhs.material as ShaderMaterial
 
 func _ready() -> void:
 	pulse_loop()
@@ -43,6 +45,16 @@ func _process(delta: float) -> void:
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(3.0,0),delta*100))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-3.0,0),delta*100))
+	if global.shake:
+		shake.set_shader_parameter("ShakeStrength",global.shake_strength)
+	else:
+		shake.set_shader_parameter("ShakeStrength",0.0)
+	if global.vhs:
+		vhs.set_shader_parameter("intensity",
+		move_toward(vhs.get_shader_parameter("intensity"),1.0,delta))
+	else:
+		vhs.set_shader_parameter("intensity",
+		move_toward(vhs.get_shader_parameter("intensity"),0.0,delta))
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

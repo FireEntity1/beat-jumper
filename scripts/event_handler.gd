@@ -29,9 +29,15 @@ var events = [
 		"colour": "purple",
 		"speed": 1
 	},
+	#{
+		#"type": "shake",
+		#"beat": 3,
+		#"status": true,
+		#"strength": 0.2
+	#},
 	{
 		"type": "laser_sweep",
-		"beat": 4,
+		"beat": 3,
 		"pos": Vector2(5,1),
 		"rot": 90,
 		"amount": 8,
@@ -42,20 +48,59 @@ var events = [
 	},
 	{
 		"type": "laser_sweep",
-		"beat": 5,
-		"pos": Vector2(5,1),
+		"beat": 3.75,
+		"pos": Vector2(3,1),
 		"rot": 90,
 		"amount": 8,
-		"speed": 1.0/4.0,
+		"speed": 1.0/8.0,
 		"distance": 300,
 		"outwards": true,
 		"colour": ["green","green"]
 	},
-	#{
-		#"type": "sun",
-		#"beat": 0,
-		#"length": 7
-	#},
+	{
+		"type": "laser_sweep",
+		"beat": 4.5,
+		"pos": Vector2(5,1),
+		"rot": 90,
+		"amount": 8,
+		"speed": 1.0/8.0,
+		"distance": 300,
+		"outwards": true,
+		"colour": ["green","green"]
+	},
+	{
+		"type": "laser_sweep",
+		"beat": 5.25,
+		"pos": Vector2(5,1),
+		"rot": 90,
+		"amount": 8,
+		"speed": 1.0/8.0,
+		"distance": 300,
+		"outwards": true,
+		"colour": ["green","green"]
+	},
+	{
+		"type": "laser_sweep",
+		"beat": 6,
+		"pos": Vector2(5,1),
+		"rot": 90,
+		"amount": 8,
+		"speed": 1.0/8.0,
+		"distance": 300,
+		"outwards": true,
+		"colour": ["green","green"]
+	},
+	{
+		"type": "laser_sweep",
+		"beat": 6,
+		"pos": Vector2(7,1),
+		"rot": 90,
+		"amount": 8,
+		"speed": 1.0/8.0,
+		"distance": 300,
+		"outwards": true,
+		"colour": ["green","green"]
+	},
 	{
 		"type": "platform_colour",
 		"beat": 5,
@@ -70,22 +115,16 @@ var events = [
 		"colour": "blue"
 	},
 	{
-		"type": "camera_kick",
-		"beat": 3,
-		"status": true,
-		"speed": 1.0/8.0
-	},
-	{
 		"type": "platform_colour",
 		"beat": 7,
-		"colour": "orange",
+		"colour": "black",
 		"speed": 10
 	},
 	{
 		"type": "platform_colour",
-		"beat": 9,
+		"beat": 10,
 		"colour": "hotpink",
-		"speed": 2
+		"speed": 3
 	},
 	{
 		"type": "laser_circle",
@@ -100,10 +139,25 @@ var events = [
 		"direction": 1
 	},
 	{
-		"type": "camera_kick",
+		"type": "visualizer",
 		"beat": 7,
 		"status": false,
-		"speed": 1.0/4.0
+	},
+	{
+		"type": "shake",
+		"beat": 7,
+		"status": false,
+		"strength": 0.5
+	},
+	{
+		"type": "vhs",
+		"beat": 7,
+		"status": true
+	},
+	{
+		"type": "vhs",
+		"beat": 10,
+		"status": false
 	},
 	{
 		"type": "laser_circle",
@@ -118,16 +172,15 @@ var events = [
 		"direction": 1
 	},
 	{
+		"type": "visualizer",
+		"beat": 11,
+		"status": true,
+	},
+	{
 		"type": "camera_kick",
 		"beat": 11,
 		"status": true,
 		"speed": 1.0/4.0
-	},
-	{
-		"type": "platform_colour",
-		"beat": 11,
-		"colour": "hotpink",
-		"speed": 5
 	},
 	{
 		"type": "laser_circle",
@@ -160,6 +213,7 @@ func _process(delta: float) -> void:
 	last_beat = beat
 	beat += (bpm/60)*delta
 	global.beat = beat
+	global.current_col = $main_platform/platform_sprite.modulate
 	$main_platform/platform_sprite.modulate.r = move_toward($main_platform/platform_sprite.modulate.r,target_platform_colour[0],delta*platform_colour_speed)
 	$main_platform/platform_sprite.modulate.g = move_toward($main_platform/platform_sprite.modulate.g,target_platform_colour[1],delta*platform_colour_speed)
 	$main_platform/platform_sprite.modulate.b = move_toward($main_platform/platform_sprite.modulate.b,target_platform_colour[2],delta*platform_colour_speed)
@@ -198,6 +252,20 @@ func _process(delta: float) -> void:
 			elif event.type == "camera_kick":
 				global.camera_kick = event.status
 				global.camera_kick_speed = event.speed
+				event_index += 1
+				continue
+			elif event.type == "shake":
+				global.shake = event.status
+				global.shake_strength = event.strength
+				event_index += 1
+				print("shake set to ", event.status, " strength: ", event.strength)
+				continue
+			elif event.type == "visualizer":
+				global.visualizer = event.status
+				event_index += 1
+				continue
+			elif event.type == "vhs":
+				global.vhs = event.status
 				event_index += 1
 				continue
 			elif event.type in event_types:

@@ -6,8 +6,17 @@ var last_beat = 0
 var grid_mult = Vector2(275,160)
 var grid_offset = Vector2(-1660,-670)
 
+var visualizer = true
+
+var vhs = false
+
 var camera_kick = false
 var camera_kick_speed = 1.0
+
+var current_col: Color
+
+var shake = false
+var shake_strength = 0.5
 
 var prefire_sec = {
 	"laser": 0.6,
@@ -16,7 +25,10 @@ var prefire_sec = {
 	
 	"platform_colour": 0.0,
 	"sun": 0.0,
-	"camera_kick": 0.0
+	"camera_kick": 0.0,
+	"shake": 0.0,
+	"visualizer": 0.0,
+	"vhs": 0.0
 }
 
 var prefire_beat = {
@@ -26,7 +38,10 @@ var prefire_beat = {
 	
 	"platform_colour": prefire_sec.platform_colour * (bpm / 60.0),
 	"sun": prefire_sec.sun * (bpm / 60.0),
-	"camera_kick": prefire_sec.camera_kick * (bpm / 60.0)
+	"camera_kick": prefire_sec.camera_kick * (bpm / 60.0),
+	"shake": prefire_sec.shake * (bpm/60.0),
+	"visualizer": prefire_sec.visualizer * (bpm/60.0),
+	"vhs": prefire_sec.vhs * (bpm/60.0)
 }
 
 const defaults = {
@@ -69,6 +84,28 @@ const defaults = {
 		"type": "sun",
 		"beat": 0,
 		"length": 1
+	},
+	"camera_kick": {
+		"type": "camera_kick",
+		"beat": 0,
+		"status": true,
+		"speed": 1.0/4.0
+	},
+	"shake": {
+		"type": "shake",
+		"beat": 0,
+		"status": true,
+		"strength": 0.5
+	},
+	"visualizer": {
+		"type": "visualizer",
+		"beat": 0,
+		"status": true
+	},
+	"vhs": {
+		"type": "vhs",
+		"beat": 0,
+		"status": true, 
 	}
 }
 
@@ -87,11 +124,12 @@ const colours_raw = {
 	"hotpink": Color(3,1,2.5),
 	"pink": Color(3,2,3),
 	"blue": Color(1,3,3),
-	"green": Color(2,3,2),
+	"green": Color(1.3,2.3,1.3),
 	"red": Color(3,1,1.5),
 	"purple": Color(2,1,3),
 	"orange": Color(3,2,1),
 	"white": Color(3,3,3),
+	"black": Color(0.0,0.0,0.0)
 }
 
 func _ready() -> void:

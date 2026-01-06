@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dg2baiggrj1"]
+[gd_scene load_steps=10 format=3 uid="uid://dg2baiggrj1"]
 
 [ext_resource type="Script" uid="uid://o3l8jxgj15gh" path="res://scripts/player.gd" id="1_51jd6"]
 [ext_resource type="Texture2D" uid="uid://cp00voqwjwugr" path="res://sprites/player.png" id="2_51jd6"]
 [ext_resource type="Shader" uid="uid://cfougkojpbfp6" path="res://shaders/chromabb.gdshader" id="3_uapwn"]
+[ext_resource type="Shader" uid="uid://d1dhhkfpacurf" path="res://shaders/shake.gdshader" id="4_5odhx"]
+[ext_resource type="Shader" uid="uid://b71npkfnggvy6" path="res://shaders/vhs.gdshader" id="5_1kub6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0g4kb"]
 size = Vector2(86, 87)
@@ -12,6 +14,18 @@ shader = ExtResource("3_uapwn")
 shader_parameter/r_displacement = Vector2(3, 0)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(-3, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1kub6"]
+shader = ExtResource("4_5odhx")
+shader_parameter/ShakeStrength = 0.0
+shader_parameter/FactorA = Vector2(100, 100)
+shader_parameter/FactorB = Vector2(1, 1)
+shader_parameter/magnitude = Vector2(0.01, 0.01)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kuobi"]
+shader = ExtResource("5_1kub6")
+shader_parameter/scanline_count = 108.065
+shader_parameter/intensity = 0.0
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_51jd6")
@@ -39,6 +53,26 @@ rotation_smoothing_enabled = true
 
 [node name="chromabb" type="ColorRect" parent="layer"]
 material = SubResource("ShaderMaterial_5odhx")
+offset_left = -39.0
+offset_top = -27.0
+offset_right = 1950.0
+offset_bottom = 1109.0
+
+[node name="layer2" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="shake" type="ColorRect" parent="layer2"]
+material = SubResource("ShaderMaterial_1kub6")
+offset_left = -39.0
+offset_top = -27.0
+offset_right = 1950.0
+offset_bottom = 1109.0
+
+[node name="layer3" type="CanvasLayer" parent="."]
+layer = 3
+
+[node name="vhs" type="ColorRect" parent="layer3"]
+material = SubResource("ShaderMaterial_kuobi")
 offset_left = -39.0
 offset_top = -27.0
 offset_right = 1950.0

@@ -24,15 +24,15 @@ shader = ExtResource("2_ipu61")
 shader_parameter/color_main = Color(15.847, 7.923, 9.016, 1)
 shader_parameter/color_accent = Color(0, 0, 0, 1)
 shader_parameter/color_glow = Color(0, 0, 0, 1)
-shader_parameter/scanline_speed = 0.0
+shader_parameter/scanline_speed = 0.323
 shader_parameter/scanline_density = 100.0
 shader_parameter/chromatic_aberration = 0.009
-shader_parameter/brightness = 0.5
-shader_parameter/opacity = 0.017
+shader_parameter/brightness = 2.0
+shader_parameter/opacity = 0.003
 shader_parameter/is_circle = true
-shader_parameter/circle_softness = 0.0
+shader_parameter/circle_softness = 0.033
 shader_parameter/edge_thickness = 0.01
-shader_parameter/edge_intensity = 1.41
+shader_parameter/edge_intensity = 1.249
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ygxny"]
 particle_flag_disable_z = true
@@ -115,7 +115,7 @@ offset_left = -2443.0
 offset_top = -984.0
 offset_right = 1230.0
 offset_bottom = 406.0
-color = Color(0, 0, 0, 0.65)
+color = Color(0, 0, 0, 0.781)
 
 [node name="backlit_particles" type="GPUParticles2D" parent="parallax"]
 visible = false

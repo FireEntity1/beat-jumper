@@ -51,10 +51,10 @@ func _process(delta: float) -> void:
 		shake.set_shader_parameter("ShakeStrength",0.0)
 	if global.vhs:
 		vhs.set_shader_parameter("intensity",
-		move_toward(vhs.get_shader_parameter("intensity"),1.0,delta))
+		move_toward(vhs.get_shader_parameter("intensity"),global.vhs_intensity,delta*3))
 	else:
 		vhs.set_shader_parameter("intensity",
-		move_toward(vhs.get_shader_parameter("intensity"),0.0,delta))
+		move_toward(vhs.get_shader_parameter("intensity"),0.0,delta*3))
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

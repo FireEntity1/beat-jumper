@@ -30,23 +30,6 @@ func _ready() -> void:
 	angle = 360.0/edges
 	offset = -90
 	start_beat = fire_beat
-	#for i in range(amount):
-		#var index = i%edges
-		#var current_angle_deg = ((angle * index) + offset)*direction
-		#var current_angle_rad = deg_to_rad(current_angle_deg)
-		#var temp = laser.instantiate()
-		#temp.pos = Vector2.from_angle(current_angle_rad) * radius
-		#temp.rot = current_angle_deg + 90
-		#temp.snap = false
-		#temp.fire_beat = fire_beat + current*speed
-		#temp.colour = colour[cur_col]
-		#add_child(temp)
-		#current += 1
-		#if cur_col == max_cols-1:
-			#cur_col = 0
-		#else:
-			#cur_col += 1
-		#await get_tree().create_timer(speed*(60.0/global.bpm)).timeout
 
 func _process(delta: float) -> void:
 	var current_beat = global.beat

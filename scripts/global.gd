@@ -9,6 +9,7 @@ var grid_offset = Vector2(-1660,-670)
 var visualizer = true
 
 var vhs = false
+var vhs_intensity = 0.5
 
 var camera_kick = false
 var camera_kick_speed = 1.0
@@ -106,6 +107,7 @@ const defaults = {
 		"type": "vhs",
 		"beat": 0,
 		"status": true, 
+		"intensity": 0.5
 	}
 }
 

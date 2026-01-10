@@ -152,12 +152,14 @@ var events = [
 	{
 		"type": "vhs",
 		"beat": 7,
-		"status": true
+		"status": true,
+		"intensity": 1.0
 	},
 	{
 		"type": "vhs",
 		"beat": 10,
-		"status": false
+		"status": false,
+		"intensity": 0.5
 	},
 	{
 		"type": "laser_circle",
@@ -194,11 +196,24 @@ var events = [
 		"colour": ["purple"],
 		"direction": -1
 	},
+	
 	{
 		"type": "camera_kick",
 		"beat": 43,
 		"status": false,
 		"speed": 1.0/4.0
+	},
+	{
+		"type": "vhs",
+		"beat": 23,
+		"status": true,
+		"intensity": 0.3
+	},
+	{
+		"type": "vhs",
+		"beat": 27,
+		"status": false,
+		"intensity": 0.3
 	},
 ]
 
@@ -266,6 +281,7 @@ func _process(delta: float) -> void:
 				continue
 			elif event.type == "vhs":
 				global.vhs = event.status
+				global.vhs_intensity = event.intensity
 				event_index += 1
 				continue
 			elif event.type in event_types:

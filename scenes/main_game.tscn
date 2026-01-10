@@ -184,6 +184,6 @@ scale = Vector2(0.35, 1)
 stream = ExtResource("8_70vka")
 volume_db = -16.343
 autoplay = true
-max_distance = 5000.0
+max_distance = 10000.0
 attenuation = 5.31342e-05
 panning_strength = 0.0

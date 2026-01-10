@@ -20,14 +20,13 @@ vec2 uv_curve(vec2 uv)
 void fragment()
 {    
     float r = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * 0.0), 0.0).r;
-    float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * 2.0), 0.0).g;
-    float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * -2.0), 0.0).b;
+    float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * 3.0), 0.0).g;
+    float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * -3.0), 0.0).b;
 
     float s = sin(uv_curve(SCREEN_UV).y * scanline_count * PI * 2.0);
     s = (s * 0.5 + 0.5) * 0.9 + 0.1;
-    vec4 scan_line = vec4(vec3(pow(s, 0.25)), 1.0);
+    vec4 scan_line = vec4(vec3(pow(s, 0.55)), 1.0);
 
-    // Apply intensity (0 = invisible, 1 = normal)
     vec4 crt_color = vec4(r, g, b, 1.0) * scan_line;
     COLOR = mix(vec4(0.0), crt_color, intensity);
 }

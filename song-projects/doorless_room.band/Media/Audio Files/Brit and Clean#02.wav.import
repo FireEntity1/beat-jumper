@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bfn08qkrci3l5"
+path="res://.godot/imported/Brit and Clean#02.wav-e31090c35f2fac5df4f03f0729d5c01e.sample"
+
+[deps]
+
+source_file="res://song-projects/doorless_room.band/Media/Audio Files/Brit and Clean#02.wav"
+dest_files=["res://.godot/imported/Brit and Clean#02.wav-e31090c35f2fac5df4f03f0729d5c01e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

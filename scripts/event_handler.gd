@@ -207,7 +207,7 @@ var events = [
 		"type": "vhs",
 		"beat": 23,
 		"status": true,
-		"intensity": 0.3
+		"intensity": 2.0
 	},
 	{
 		"type": "vhs",

@@ -28,23 +28,31 @@ func pulse_loop():
 			kick_in = !kick_in
 
 func _process(delta: float) -> void:
-	if not global.camera_kick:
+	if not global.camera_kick and not global.chromabb:
 		chromabb.set_shader_parameter("r_displacement",Vector2(0,0))
 		chromabb.set_shader_parameter("b_displacement",Vector2(0,0))
-	if kick_in:
+	if kick_in and not global.chromabb:
 		$camera.zoom.x = lerpf($camera.zoom.x,0.69, delta*5)
 		$camera.zoom.y = lerpf($camera.zoom.y,0.69, delta*5)
 		chromabb.set_shader_parameter("r_displacement",
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(10.0,-4.0),delta*300))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-10.0,4.0),delta*300))
-	else:
+	elif not kick_in and not global.chromabb:
 		$camera.zoom.x = move_toward($camera.zoom.x,0.67, delta)
 		$camera.zoom.y = move_toward($camera.zoom.y,0.67, delta)
 		chromabb.set_shader_parameter("r_displacement",
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(3.0,0),delta*100))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-3.0,0),delta*100))
+	if global.chromabb:
+		var ci = global.chromabb_intensity
+		chromabb.set_shader_parameter("r_displacement",
+		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(ci*3,-ci*1.2),delta*300))
+		chromabb.set_shader_parameter("b_displacement",
+		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-ci*3,ci*1.2),delta*300))
+	print(chromabb.get_shader_parameter("r_displacement"))
+	print(chromabb.get_shader_parameter("b_displacement"))
 	if global.shake:
 		shake.set_shader_parameter("ShakeStrength",global.shake_strength)
 	else:

@@ -144,6 +144,12 @@ var events = [
 		"status": false,
 	},
 	{
+		"type": "chromabb",
+		"beat": 7,
+		"status": true,
+		"intensity": 10.0,
+	},
+	{
 		"type": "shake",
 		"beat": 7,
 		"status": false,
@@ -160,6 +166,12 @@ var events = [
 		"beat": 10,
 		"status": false,
 		"intensity": 0.5
+	},
+	{
+		"type": "chromabb",
+		"beat": 11,
+		"status": false,
+		"intensity": 10.0,
 	},
 	{
 		"type": "laser_circle",
@@ -196,7 +208,6 @@ var events = [
 		"colour": ["purple"],
 		"direction": -1
 	},
-	
 	{
 		"type": "camera_kick",
 		"beat": 43,
@@ -207,7 +218,7 @@ var events = [
 		"type": "vhs",
 		"beat": 23,
 		"status": true,
-		"intensity": 2.0
+		"intensity": 1.0
 	},
 	{
 		"type": "vhs",
@@ -282,6 +293,11 @@ func _process(delta: float) -> void:
 			elif event.type == "vhs":
 				global.vhs = event.status
 				global.vhs_intensity = event.intensity
+				event_index += 1
+				continue
+			elif event.type == "chromabb":
+				global.chromabb = event.status
+				global.chromabb_intensity = event.intensity
 				event_index += 1
 				continue
 			elif event.type in event_types:

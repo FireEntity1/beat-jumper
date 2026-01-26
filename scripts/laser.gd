@@ -26,9 +26,8 @@ func _ready() -> void:
 	else:
 		position = pos
 	if is_slam:
-		position.y = 240
+		position.y = 242
 	await get_tree().create_timer(2).timeout
-	#queue_free()
 
 func _process(delta: float) -> void:
 	rotation_degrees = rot

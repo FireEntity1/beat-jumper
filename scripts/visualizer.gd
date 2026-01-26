@@ -15,6 +15,8 @@ const normalization_speed = 0.002
 var bar_energies = []
 var max_energy = 0.1
 
+var fadein = 0.0
+
 func _ready() -> void:
 	for i in range(count):
 		var temp = bar.instantiate()
@@ -23,10 +25,16 @@ func _ready() -> void:
 	bars = get_children()
 	spectrum = AudioServer.get_bus_effect_instance(0, 0)
 	bar_energies.resize(count)
+	for bar in bars:
+			bar.scale.y = 0
 	for i in range(count):
 		bar_energies[i] = 0.0
 
 func _process(delta: float) -> void:
+	if fadein < 0.2:
+		for bar in bars:
+			bar.scale.y = 0
+		fadein+=delta
 	var prev_hz = 0.0
 	var current_max = 0.0
 	for i in range(count):

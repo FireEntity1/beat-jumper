@@ -29,6 +29,7 @@ func pulse_loop():
 			kick_in = !kick_in
 
 func _process(delta: float) -> void:
+	print("Dashing: ", $sprite.material.get_shader_parameter("dir"))
 	if not global.camera_kick and not global.chromabb:
 		chromabb.set_shader_parameter("r_displacement",Vector2(0,0))
 		chromabb.set_shader_parameter("b_displacement",Vector2(0,0))
@@ -52,7 +53,6 @@ func _process(delta: float) -> void:
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(ci*3,-ci*1.2),delta*300))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-ci*3,ci*1.2),delta*300))
-	print(global.shake)
 	if global.shake:
 		shake.set_shader_parameter("ShakeStrength",global.shake_strength)
 	else:
@@ -110,10 +110,12 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("dash"):
 		dashing = true
+		$sprite.material.set_shader_parameter("dir", Vector2(1,0))
 		scale_target = Vector2(2,0.2)
 		await get_tree().create_timer(0.05).timeout
 		scale_target = Vector2(1,1)
 		dashing = false
+		$sprite.material.set_shader_parameter("dir", Vector2(0,0))
 	if dashing:
 		velocity.x = prev_dir * 7000
 		velocity.y = 0

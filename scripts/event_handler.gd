@@ -33,7 +33,7 @@ var events = [
 	{
 		"type": "laser_circle",
 		"beat": 0+4,
-		"pos": Vector2(5,3),
+		"pos": Vector2(4,3),
 		"rot": 0,
 		"radius": 400,
 		"amount": 12,
@@ -45,7 +45,7 @@ var events = [
 	{
 		"type": "laser_circle",
 		"beat": 2+4,
-		"pos": Vector2(5,3),
+		"pos": Vector2(7,3),
 		"rot": 90,
 		"radius": 400,
 		"amount": 12,
@@ -72,34 +72,40 @@ var events = [
 		"speed": 5
 	},
 	{
+		"type": "laser",
+		"beat": 15,
+		"pos": Vector2(5,5.2),
+		"rot": 0,
+		"colour": "orange"
+	},
+	{
+		"type": "laser",
+		"beat": 15.4,
+		"pos": Vector2(5,4.8),
+		"rot": 0,
+		"colour": "purple"
+	},
+	{
 		"type": "platform_colour",
 		"beat": 4+4,
 		"colour": "pink",
 		"speed": 50
 	},
 	{
-		"type": "laser_slam",
-		"beat": 8,
-		"pos": Vector2(4,1),
-		"rot": 0,
-		"colour": "pink",
-		"length": 3.0
-	},
-	{
 		"type": "laser_sweep",
 		"beat": 11,
-		"pos": Vector2(1,1),
+		"pos": Vector2(5,1),
 		"rot": 90,
-		"amount": 64,
-		"speed": 1.0/32.0,
-		"distance": 200,
+		"amount": 16,
+		"speed": 1.0/16.0,
+		"distance": 300,
 		"outwards": true,
 		"colour": ["pink"]
 	},
 	{
 		"type": "laser_slam",
 		"beat": 8,
-		"pos": Vector2(8,1),
+		"pos": Vector2(6,1),
 		"rot": 0,
 		"colour": "pink",
 		"length": 3.0

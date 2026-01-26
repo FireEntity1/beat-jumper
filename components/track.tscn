@@ -31,5 +31,6 @@ uppercase = true
 
 [node name="hbox" type="HBoxContainer" parent="."]
 layout_mode = 0
+offset_left = 330.0
 offset_right = 1921.0
 offset_bottom = 148.0

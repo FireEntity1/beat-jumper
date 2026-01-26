@@ -105,7 +105,15 @@ var events = [
 	{
 		"type": "laser_slam",
 		"beat": 8,
-		"pos": Vector2(6,1),
+		"pos": Vector2(3,1),
+		"rot": 0,
+		"colour": "pink",
+		"length": 3.0
+	},
+	{
+		"type": "laser_slam",
+		"beat": 8,
+		"pos": Vector2(9,1),
 		"rot": 0,
 		"colour": "pink",
 		"length": 3.0
@@ -375,7 +383,7 @@ var events = [
 func _ready() -> void:
 	bpm += epsilon
 	#$music.play(310.4)
-	$music.play(279.6)
+	$music.play(279.55)
 	events.sort_custom(sort_by_trigger_beat)
 	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
 

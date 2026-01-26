@@ -1,0 +1,85 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbbc0ialstsck"]
+
+[ext_resource type="Script" uid="uid://cmet2ui0aer24" path="res://scripts/editor.gd" id="1_b1cmn"]
+[ext_resource type="Texture2D" uid="uid://bx2hdbcsx4v41" path="res://sprites/music_upload.png" id="2_ba0ut"]
+[ext_resource type="Texture2D" uid="uid://chisdg250e4xb" path="res://sprites/image_upload.png" id="3_q68jb"]
+
+[node name="editor" type="Node2D"]
+script = ExtResource("1_b1cmn")
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 1926.0
+offset_bottom = 1087.0
+color = Color(0, 0, 0, 1)
+
+[node name="title" type="LineEdit" parent="."]
+offset_left = 661.0
+offset_top = 11.0
+offset_right = 1289.0
+offset_bottom = 85.0
+placeholder_text = "SONG TITLE"
+alignment = 1
+
+[node name="subtitle" type="LineEdit" parent="."]
+offset_left = 1301.0
+offset_top = 10.0
+offset_right = 1790.0
+offset_bottom = 84.0
+placeholder_text = "SUB TITLE"
+alignment = 1
+
+[node name="artist" type="LineEdit" parent="."]
+offset_left = 226.0
+offset_top = 11.0
+offset_right = 649.0
+offset_bottom = 85.0
+placeholder_text = "ARTIST"
+alignment = 1
+
+[node name="bpm" type="LineEdit" parent="."]
+offset_left = 1799.0
+offset_top = 11.0
+offset_right = 1904.0
+offset_bottom = 85.0
+placeholder_text = "BPM"
+alignment = 1
+
+[node name="pickmusic" type="TextureButton" parent="."]
+offset_left = 171.0
+offset_top = 3.0
+offset_right = 219.0
+offset_bottom = 51.0
+texture_normal = ExtResource("2_ba0ut")
+
+[node name="pickimage" type="TextureButton" parent="."]
+offset_left = 171.0
+offset_top = 50.0
+offset_right = 222.0
+offset_bottom = 101.0
+texture_normal = ExtResource("3_q68jb")
+
+[node name="scroll" type="ScrollContainer" parent="."]
+custom_minimum_size = Vector2(0, 800)
+offset_top = 238.0
+offset_right = 1919.0
+offset_bottom = 1038.0
+
+[node name="tracks" type="VBoxContainer" parent="scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="song_length" type="Label" parent="."]
+offset_left = 8.0
+offset_top = 1037.0
+offset_right = 215.0
+offset_bottom = 1080.0
+theme_override_font_sizes/font_size = 32
+text = "LENGTH: 0:00"
+
+[node name="song_events" type="Label" parent="."]
+offset_left = 1676.0
+offset_top = 1037.0
+offset_right = 1914.0
+offset_bottom = 1080.0
+theme_override_font_sizes/font_size = 32
+text = "EVENTS: 0"

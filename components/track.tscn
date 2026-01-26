@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://2rgomd5n8qxw"]
+
+[ext_resource type="Script" uid="uid://uon5nvog2d8m" path="res://scripts/track.gd" id="1_7bdol"]
+
+[node name="track" type="ColorRect"]
+custom_minimum_size = Vector2(0, 150)
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 150.0
+grow_horizontal = 2
+color = Color(0.144063, 0.144063, 0.144063, 1)
+script = ExtResource("1_7bdol")
+
+[node name="textbg" type="ColorRect" parent="."]
+layout_mode = 0
+offset_left = -1.0
+offset_right = 333.0
+offset_bottom = 150.0
+color = Color(0, 0, 0, 0.831)
+
+[node name="track_name" type="Label" parent="."]
+layout_mode = 2
+offset_left = 17.0
+offset_top = 2.0
+offset_right = 183.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 48
+text = "LASER"
+autowrap_mode = 2
+uppercase = true
+
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 1921.0
+offset_bottom = 148.0

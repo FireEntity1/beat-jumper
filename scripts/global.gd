@@ -156,6 +156,20 @@ const defaults = {
 	},
 }
 
+const default_map = {
+	"name": "New Map",
+	"bpm": 120.0,
+	"artist": "Artist",
+	"sub": "",
+	"imagename": "image.png",
+	"audiofilename": "song.ogg",
+	"version": 1,
+	"offset": 0.0,
+	
+	"preview_start": 0,
+	"map_data": []
+}
+
 const colours = {
 	"hotpink": [9,2,7],
 	"pink": [8,4,8],

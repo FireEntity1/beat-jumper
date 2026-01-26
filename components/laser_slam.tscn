@@ -1,6 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfrny7stmyr2m"]
+[gd_scene load_steps=5 format=3 uid="uid://cfrny7stmyr2m"]
 
 [ext_resource type="Script" uid="uid://00uu26xp50ky" path="res://scripts/laser.gd" id="1_ch01h"]
+
+[sub_resource type="Curve" id="Curve_ch01h"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0.650602, 0.783333), 0.0, 0.0, 0, 0, Vector2(1, 1.85), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xyndk"]
+curve = SubResource("Curve_ch01h")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ch01h"]
 particle_flag_disable_z = true
@@ -13,22 +21,26 @@ radial_velocity_max = 1000.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.0
 scale_max = 27.32
-scale_over_velocity_max = 328.95
+scale_over_velocity_curve = SubResource("CurveTexture_xyndk")
 
 [node name="laser_slam" type="Area2D"]
 script = ExtResource("1_ch01h")
 is_slam = true
 
 [node name="sprite" type="ColorRect" parent="."]
-offset_top = -7848.0
-offset_right = 94.0
-offset_bottom = 2.0
+modulate = Color(1, 1, 1, 0)
+offset_left = -11.0
+offset_top = -7867.0
+offset_right = 7.0
+offset_bottom = -11.0
+pivot_offset = Vector2(10, 7856)
 
 [node name="particles" type="GPUParticles2D" parent="."]
-position = Vector2(44, 1)
+position = Vector2(-4, -6)
 emitting = false
-amount = 128
-lifetime = 0.55
+amount = 256
+lifetime = 0.94
 preprocess = 0.2
+speed_scale = 6.33
 fixed_fps = 120
 process_material = SubResource("ParticleProcessMaterial_ch01h")

@@ -25,13 +25,12 @@ func _ready() -> void:
 		position = global.apply_grid(pos)
 	else:
 		position = pos
+	if is_slam:
+		position.y = 240
 	await get_tree().create_timer(2).timeout
 	#queue_free()
 
 func _process(delta: float) -> void:
-	if is_slam:
-		position.y = 120
-		print("slam")
 	rotation_degrees = rot
 	if not is_fired and $sprite.modulate.a < 1:
 		$sprite.modulate.a += delta*2
@@ -55,6 +54,9 @@ func start_fire_seq():
 	if is_fired:
 		return
 	is_fired = true
+	if is_slam:
+		$particles.emitting = true
+		$sprite.scale.x = 7
 	print("Fired: ", fire_beat, " at ", global.beat)
 	var hold_time = 0.2
 	if fire_hold >= 0.1:

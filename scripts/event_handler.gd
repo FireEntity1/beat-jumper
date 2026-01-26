@@ -15,7 +15,7 @@ var last_beat = 0.0
 var event_index = 0
 
 var event_classes = {
-	"movable": ["laser", "laser_circle", "laser_sweep", "laser_spread"],
+	"movable": ["laser", "laser_circle", "laser_sweep", "laser_spread","laser_slam"],
 	"screen_effect": ["shake", "glitch","platform_colour", "camera_kick"]
 }
 
@@ -80,29 +80,29 @@ var events = [
 	{
 		"type": "laser_slam",
 		"beat": 8,
-		"pos": Vector2(5,1),
+		"pos": Vector2(4,1),
 		"rot": 0,
-		"colour": "pink"
+		"colour": "pink",
+		"length": 3.0
 	},
 	{
-		"type": "laser_spread",
-		"beat": 4+4,
-		"colours": ["pink"],
-		"speed": 3,
-		"amount": 10,
-		"length": 3.0,
-		"pos": Vector2(5,3),
-		"rot": 0
+		"type": "laser_sweep",
+		"beat": 11,
+		"pos": Vector2(1,1),
+		"rot": 90,
+		"amount": 64,
+		"speed": 1.0/32.0,
+		"distance": 200,
+		"outwards": true,
+		"colour": ["pink"]
 	},
 	{
-		"type": "laser_spread",
-		"beat": 4+4,
-		"colours": ["pink"],
-		"speed": 3,
-		"amount": 10,
-		"length": 3.0,
-		"pos": Vector2(7,3),
-		"rot": 0
+		"type": "laser_slam",
+		"beat": 8,
+		"pos": Vector2(8,1),
+		"rot": 0,
+		"colour": "pink",
+		"length": 3.0
 	},
 	{
 		"type": "glitch",
@@ -129,7 +129,7 @@ var events = [
 		"speed": 3,
 		"amount": 10,
 		"length": 4.0,
-		"pos": Vector2(5,3),
+		"pos": Vector2(5,0),
 		"rot": 0
 	},
 	{
@@ -369,7 +369,7 @@ var events = [
 func _ready() -> void:
 	bpm += epsilon
 	#$music.play(310.4)
-	$music.play(279.5)
+	$music.play(279.6)
 	events.sort_custom(sort_by_trigger_beat)
 	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
 
@@ -473,6 +473,8 @@ func _process(delta: float) -> void:
 						temp.length = event.length
 					"laser_slam":
 						temp.colour = event.colour
+						temp.fire_hold = event.length
+						temp.rot = 0
 				add_child(temp)
 				event_index += 1
 			

@@ -27,8 +27,7 @@ var laser = preload("res://components/laser.tscn")
 func _ready() -> void:
 	start_beat = fire_beat
 	global_position = global.apply_grid(pos) + Vector2(280,350)
-	var max_cols = colour.size()-1
-	
+	max_cols = colour.size()-1
 
 func _process(delta: float) -> void:
 	var current_beat = global.beat

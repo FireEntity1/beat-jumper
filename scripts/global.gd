@@ -90,6 +90,24 @@ const defaults = {
 		"outwards": true,
 		"colour": ["pink"]
 	},
+	"laser_slam": {
+		"type": "laser_slam",
+		"beat": 0,
+		"pos": Vector2(5,1),
+		"rot": 0,
+		"colour": "pink",
+		"length": 4.0
+	},
+	"laser_spread": {
+		"type": "laser_spread",
+		"beat": 0,
+		"colours": ["pink"],
+		"speed": 3,
+		"amount": 12,
+		"length": 4.0,
+		"pos": Vector2(5,0),
+		"rot": 0
+	},
 	"platform_colour": {
 		"type": "platform_colour",
 		"beat": 0,
@@ -129,7 +147,13 @@ const defaults = {
 		"beat": 0,
 		"status": true,
 		"intensity": 1.0,
-	}
+	},
+	"glitch": {
+		"type": "glitch",
+		"beat": 0,
+		"length": 4,
+		"strength": 0.5
+	},
 }
 
 const colours = {

@@ -166,6 +166,7 @@ var temp_testing_map = [
 ]
 
 func _ready() -> void:
+	$scroll/tracks.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for event in global.defaults:
 		var track = TRACK.instantiate()
 		var name: String = global.defaults[event].type
@@ -173,19 +174,25 @@ func _ready() -> void:
 		last_beat[name] = 0.0
 		name = name.replace("_"," ")
 		track.change_name(name)
-		track.custom_minimum_size.x = $song.stream.get_length()*60/bpm
-		track.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		track.custom_minimum_size.x = ($song.stream.get_length()*bpm/60) * EVENT_WIDTH
+		track.size_flags_horizontal = Control.SIZE_EXPAND
 		$scroll/tracks.add_child(track)
+	spawn_events()
+	$hor_scroll.max_value = ($song.stream.get_length()*bpm/60) * EVENT_WIDTH
+	$hor_scroll.value_changed.connect(func(val): 
+		$scroll.scroll_horizontal = int(val)
+	)
+func _process(delta: float) -> void:
+	cursor = $hor_scroll.value / EVENT_WIDTH
+
+func spawn_events():
 	for event in temp_testing_map:
 		var track = $scroll/tracks.get_node(event.type + "/hbox")
 		var event_node = EVENT.instantiate()
 		add_spacer(track,event.beat, event)
 		event_node.load_default(event.type,0)
+		event_node.event_data = event
 		track.add_child(event_node)
-	
-
-func _process(delta: float) -> void:
-	pass
 
 func add_spacer(track, beat, event):
 	var spacer = Control.new()

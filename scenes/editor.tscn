@@ -59,6 +59,12 @@ offset_right = 222.0
 offset_bottom = 101.0
 texture_normal = ExtResource("3_q68jb")
 
+[node name="hor_scroll" type="HScrollBar" parent="."]
+offset_left = 20.0
+offset_top = 134.0
+offset_right = 1899.0
+offset_bottom = 210.0
+
 [node name="scroll" type="ScrollContainer" parent="."]
 custom_minimum_size = Vector2(0, 800)
 offset_top = 238.0

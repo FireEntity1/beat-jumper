@@ -6,7 +6,12 @@ var beat: float
 var event_data: Dictionary
 
 func _ready() -> void:
-	pass
+	var i = 0
+	for key in event_data:
+		var label = Label.new()
+		label.text = key + ": " + str(event_data[key])
+		print(label.text)
+		$edit/container.add_child(label)
 
 func _process(delta: float) -> void:
 	pass

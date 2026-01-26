@@ -3,7 +3,9 @@ extends Node2D
 var event_types = {
 	"laser": preload("res://components/laser.tscn"),
 	"laser_circle": preload("res://components/laser_circle.tscn"),
-	"laser_sweep": preload("res://components/laser_sweep.tscn")
+	"laser_sweep": preload("res://components/laser_sweep.tscn"),
+	"laser_spread": preload("res://components/laser_spread.tscn"),
+	"laser_slam": preload("res://components/laser_slam.tscn")
 	}
 var epsilon = 0.000000001
 @export var bpm: float = 118
@@ -13,7 +15,7 @@ var last_beat = 0.0
 var event_index = 0
 
 var event_classes = {
-	"movable": ["laser", "laser_circle", "laser_sweep"],
+	"movable": ["laser", "laser_circle", "laser_sweep", "laser_spread"],
 	"screen_effect": ["shake", "glitch","platform_colour", "camera_kick"]
 }
 
@@ -24,213 +26,350 @@ var sun_mult = 0.0
 
 var events = [
 	{
-		"type": "platform_colour",
-		"beat": 1,
-		"colour": "purple",
-		"speed": 1
-	},
-	#{
-		#"type": "shake",
-		#"beat": 3,
-		#"status": true,
-		#"strength": 0.2
-	#},
-	{
-		"type": "laser_sweep",
-		"beat": 3,
-		"pos": Vector2(5,1),
-		"rot": 90,
-		"amount": 8,
-		"speed": 1.0/8.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["green","green"]
+		"type": "visualizer",
+		"beat": 4,
+		"status": false
 	},
 	{
-		"type": "laser_sweep",
-		"beat": 3.75,
-		"pos": Vector2(3,1),
-		"rot": 90,
-		"amount": 8,
-		"speed": 1.0/8.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["green","green"]
-	},
-	{
-		"type": "laser_sweep",
-		"beat": 4.5,
-		"pos": Vector2(5,1),
-		"rot": 90,
-		"amount": 8,
-		"speed": 1.0/8.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["green","green"]
-	},
-	{
-		"type": "laser_sweep",
-		"beat": 5.25,
-		"pos": Vector2(5,1),
-		"rot": 90,
-		"amount": 8,
-		"speed": 1.0/8.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["green","green"]
-	},
-	{
-		"type": "laser_sweep",
-		"beat": 6,
-		"pos": Vector2(5,1),
-		"rot": 90,
-		"amount": 8,
-		"speed": 1.0/8.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["green","green"]
-	},
-	{
-		"type": "laser_sweep",
-		"beat": 6,
-		"pos": Vector2(7,1),
-		"rot": 90,
-		"amount": 8,
-		"speed": 1.0/8.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["green","green"]
-	},
-	{
-		"type": "platform_colour",
-		"beat": 5,
-		"colour": "hotpink",
-		"speed": 1
-	},
-	{
-		"type": "laser",
-		"beat": 5,
-		"pos": Vector2(2,5),
+		"type": "laser_circle",
+		"beat": 0+4,
+		"pos": Vector2(5,3),
 		"rot": 0,
-		"colour": "blue"
+		"radius": 400,
+		"amount": 12,
+		"edges": 12,
+		"speed": 1.0/6.0,
+		"colour": ["pink","red"],
+		"direction": 1
+	},
+	{
+		"type": "laser_circle",
+		"beat": 2+4,
+		"pos": Vector2(5,3),
+		"rot": 90,
+		"radius": 400,
+		"amount": 12,
+		"edges": 12,
+		"speed": 1.0/6.0,
+		"colour": ["purple","blue"],
+		"direction": -1
 	},
 	{
 		"type": "platform_colour",
-		"beat": 7,
+		"beat": 4,
+		"colour": "black",
+		"speed": 10
+	},
+	{
+		"type": "visualizer",
+		"beat": 4+4,
+		"status": true
+	},
+	{
+		"type": "platform_colour",
+		"beat": 4+3,
+		"colour": "pink",
+		"speed": 5
+	},
+	{
+		"type": "platform_colour",
+		"beat": 4+4,
+		"colour": "pink",
+		"speed": 50
+	},
+	{
+		"type": "laser_slam",
+		"beat": 8,
+		"pos": Vector2(5,1),
+		"rot": 0,
+		"colour": "pink"
+	},
+	{
+		"type": "laser_spread",
+		"beat": 4+4,
+		"colours": ["pink"],
+		"speed": 3,
+		"amount": 10,
+		"length": 3.0,
+		"pos": Vector2(5,3),
+		"rot": 0
+	},
+	{
+		"type": "laser_spread",
+		"beat": 4+4,
+		"colours": ["pink"],
+		"speed": 3,
+		"amount": 10,
+		"length": 3.0,
+		"pos": Vector2(7,3),
+		"rot": 0
+	},
+	{
+		"type": "glitch",
+		"beat": 4+4,
+		"length": 3,
+		"strength": 0.5
+	},
+	{
+		"type": "platform_colour",
+		"beat": 7+4,
 		"colour": "black",
 		"speed": 10
 	},
 	{
 		"type": "platform_colour",
-		"beat": 10,
-		"colour": "hotpink",
-		"speed": 3
+		"beat": 8+4,
+		"colour": "blue",
+		"speed": 50
 	},
 	{
-		"type": "laser_circle",
-		"beat": 7,
+		"type": "laser_spread",
+		"beat": 8+4,
+		"colours": ["blue"],
+		"speed": 3,
+		"amount": 10,
+		"length": 4.0,
 		"pos": Vector2(5,3),
-		"rot": 0,
-		"radius": 500,
-		"amount": 64,
-		"edges": 12,
-		"speed": 1.0/16.0,
-		"colour": ["hotpink", "red"],
-		"direction": 1
+		"rot": 0
 	},
 	{
-		"type": "visualizer",
-		"beat": 7,
-		"status": false,
+		"type": "laser_spread",
+		"beat": 8+4,
+		"colours": ["blue"],
+		"speed": 3,
+		"amount": 10,
+		"length": 4.0,
+		"pos": Vector2(7,3),
+		"rot": 0
 	},
 	{
-		"type": "chromabb",
-		"beat": 7,
-		"status": true,
-		"intensity": 10.0,
-	},
-	{
-		"type": "shake",
-		"beat": 7,
-		"status": false,
+		"type": "glitch",
+		"beat": 8+4,
+		"length": 4,
 		"strength": 0.5
 	},
 	{
-		"type": "vhs",
-		"beat": 7,
-		"status": true,
-		"intensity": 1.0
-	},
-	{
-		"type": "vhs",
-		"beat": 10,
-		"status": false,
-		"intensity": 0.5
-	},
-	{
-		"type": "chromabb",
-		"beat": 11,
-		"status": false,
-		"intensity": 10.0,
-	},
-	{
-		"type": "laser_circle",
-		"beat": 11,
-		"pos": Vector2(2,3),
-		"rot": 0,
-		"radius": 400,
-		"amount": 64,
-		"edges": 7,
-		"speed": 1.0/2.0,
-		"colour": ["hotpink"],
-		"direction": 1
+		"type": "platform_colour",
+		"beat": 12+4,
+		"colour": "black",
+		"speed": 5
 	},
 	{
 		"type": "visualizer",
-		"beat": 11,
-		"status": true,
+		"beat": 12+4,
+		"status": false
 	},
-	{
-		"type": "camera_kick",
-		"beat": 11,
-		"status": true,
-		"speed": 1.0/4.0
-	},
-	{
-		"type": "laser_circle",
-		"beat": 11.5,
-		"pos": Vector2(8,3),
-		"rot": 0,
-		"radius": 400,
-		"amount": 64,
-		"edges": 7,
-		"speed": 1.0/2.0,
-		"colour": ["purple"],
-		"direction": -1
-	},
-	{
-		"type": "camera_kick",
-		"beat": 43,
-		"status": false,
-		"speed": 1.0/4.0
-	},
-	{
-		"type": "vhs",
-		"beat": 23,
-		"status": true,
-		"intensity": 1.0
-	},
-	{
-		"type": "vhs",
-		"beat": 27,
-		"status": false,
-		"intensity": 0.3
-	},
+	
 ]
+
+#var events = [
+	#{
+		#"type": "laser_spread",
+		#"beat": 2,
+		#"colours": ["pink","blue","red","orange"],
+		#"speed": 2,
+		#"amount": 10,
+		#"length": 8.0,
+		#"pos": Vector2(5,3),
+		#"rot": 0
+	#},
+	##{
+		##"type": "shake",
+		##"beat": 3,
+		##"status": true,
+		##"strength": 0.2
+	##},
+	#{
+		#"type": "platform_colour",
+		#"beat": 5,
+		#"colour": "hotpink",
+		#"speed": 1
+	#},
+	#{
+		#"type": "laser",
+		#"beat": 5,
+		#"pos": Vector2(2,5),
+		#"rot": 0,
+		#"colour": "blue"
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 7,
+		#"colour": "black",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 10,
+		#"colour": "hotpink",
+		#"speed": 3
+	#},
+	#{
+		#"type": "laser_circle",
+		#"beat": 7,
+		#"pos": Vector2(5,3),
+		#"rot": 0,
+		#"radius": 500,
+		#"amount": 64,
+		#"edges": 12,
+		#"speed": 1.0/16.0,
+		#"colour": ["hotpink", "red"],
+		#"direction": 1
+	#},
+	#{
+		#"type": "visualizer",
+		#"beat": 7,
+		#"status": false,
+	#},
+	#{
+		#"type": "chromabb",
+		#"beat": 7,
+		#"status": true,
+		#"intensity": 10.0,
+	#},
+	#{
+		#"type": "shake",
+		#"beat": 7,
+		#"status": false,
+		#"strength": 0.5
+	#},
+	#{
+		#"type": "vhs",
+		#"beat": 7,
+		#"status": true,
+		#"intensity": 1.0
+	#},
+	#{
+		#"type": "vhs",
+		#"beat": 10,
+		#"status": true,
+		#"intensity": 0.25
+	#},
+	#{
+		#"type": "chromabb",
+		#"beat": 11,
+		#"status": false,
+		#"intensity": 10.0,
+	#},
+	#{
+		#"type": "laser_circle",
+		#"beat": 11,
+		#"pos": Vector2(2,3),
+		#"rot": 0,
+		#"radius": 400,
+		#"amount": 64,
+		#"edges": 7,
+		#"speed": 1.0/2.0,
+		#"colour": ["hotpink"],
+		#"direction": 1
+	#},
+	#{
+		#"type": "visualizer",
+		#"beat": 11,
+		#"status": true,
+	#},
+	#{
+		#"type": "camera_kick",
+		#"beat": 11,
+		#"status": true,
+		#"speed": 1.0/4.0
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 11,
+		#"colour": "red",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 12,
+		#"colour": "orange",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 13,
+		#"colour": "green",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 14,
+		#"colour": "blue",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 15,
+		#"colour": "purple",
+		#"speed": 10
+	#},
+		#{
+		#"type": "platform_colour",
+		#"beat": 16,
+		#"colour": "red",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 17,
+		#"colour": "orange",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 18,
+		#"colour": "green",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 19,
+		#"colour": "blue",
+		#"speed": 10
+	#},
+	#{
+		#"type": "platform_colour",
+		#"beat": 20,
+		#"colour": "purple",
+		#"speed": 10
+	#},
+	#{
+		#"type": "laser_circle",
+		#"beat": 11.5,
+		#"pos": Vector2(8,3),
+		#"rot": 0,
+		#"radius": 400,
+		#"amount": 64,
+		#"edges": 7,
+		#"speed": 1.0/2.0,
+		#"colour": ["purple"],
+		#"direction": -1
+	#},
+	#{
+		#"type": "camera_kick",
+		#"beat": 43,
+		#"status": false,
+		#"speed": 1.0/4.0
+	#},
+	#{
+		#"type": "vhs",
+		#"beat": 23,
+		#"status": true,
+		#"intensity": 1.0
+	#},
+	#{
+		#"type": "vhs",
+		#"beat": 27,
+		#"status": false,
+		#"intensity": 0.3
+	#},
+#]
 
 func _ready() -> void:
 	bpm += epsilon
-	$music.play(310.4)
+	#$music.play(310.4)
+	$music.play(279.5)
 	events.sort_custom(sort_by_trigger_beat)
 	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
 
@@ -300,6 +439,11 @@ func _process(delta: float) -> void:
 				global.chromabb_intensity = event.intensity
 				event_index += 1
 				continue
+			elif event.type == "glitch":
+				glitch_timeout(event.length)
+				global.glitch_strength = event.strength
+				event_index += 1
+				continue
 			elif event.type in event_types:
 				temp = event_types[event.type].instantiate()
 				temp.fire_beat = event.beat
@@ -315,11 +459,19 @@ func _process(delta: float) -> void:
 						temp.edges = event.edges
 						temp.amount = event.amount
 						temp.colour = event.colour
+						temp.direction = event.direction
 					"laser_sweep":
 						temp.speed = event.speed
 						temp.amount = event.amount
 						temp.distance = event.distance
 						temp.outwards = event.outwards
+						temp.colour = event.colour
+					"laser_spread":
+						temp.speed = event.speed
+						temp.colours = event.colours
+						temp.amount = event.amount
+						temp.length = event.length
+					"laser_slam":
 						temp.colour = event.colour
 				add_child(temp)
 				event_index += 1
@@ -342,3 +494,8 @@ func timeout_sun(time):
 	showing_sun = true
 	await get_tree().create_timer((60.0/bpm)*time).timeout
 	showing_sun = false
+
+func glitch_timeout(time):
+	global.glitch = true
+	await get_tree().create_timer((60.0/bpm)*time).timeout
+	global.glitch = false

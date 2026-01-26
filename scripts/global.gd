@@ -19,6 +19,9 @@ var camera_kick_speed = 1.0
 
 var current_col: Color
 
+var glitch = false
+var glitch_strength = 1
+
 var shake = false
 var shake_strength = 0.5
 
@@ -26,6 +29,8 @@ var prefire_sec = {
 	"laser": 0.6,
 	"laser_circle": 0.6,
 	"laser_sweep": 0.6,
+	"laser_spread": 0.6,
+	"laser_slam": 0.6,
 	
 	"platform_colour": 0.0,
 	"sun": 0.0,
@@ -33,21 +38,25 @@ var prefire_sec = {
 	"shake": 0.0,
 	"visualizer": 0.0,
 	"vhs": 0.0,
-	"chromabb": 0.0
+	"chromabb": 0.0,
+	"glitch": 0.0
 }
 
 var prefire_beat = {
 	"laser": prefire_sec.laser * (bpm / 60.0),
 	"laser_circle": prefire_sec.laser_circle * (bpm / 60.0),
 	"laser_sweep": prefire_sec.laser_sweep * (bpm / 60.0),
+	"laser_spread": prefire_sec.laser_spread * (bpm / 60.0),
+	"laser_slam": prefire_sec.laser_slam * (bpm / 60.0),
 	
-	"platform_colour": prefire_sec.platform_colour * (bpm / 60.0),
-	"sun": prefire_sec.sun * (bpm / 60.0),
-	"camera_kick": prefire_sec.camera_kick * (bpm / 60.0),
-	"shake": prefire_sec.shake * (bpm/60.0),
-	"visualizer": prefire_sec.visualizer * (bpm/60.0),
-	"vhs": prefire_sec.vhs * (bpm/60.0),
-	"chromabb": prefire_sec.chromabb * (bpm/60.0)
+	"platform_colour": 0,
+	"sun": prefire_sec.sun * 0,
+	"camera_kick": prefire_sec.camera_kick * 0,
+	"shake": 0,
+	"visualizer": 0,
+	"vhs": 0,
+	"chromabb": 0,
+	"glitch": 0
 }
 
 const defaults = {
@@ -84,7 +93,8 @@ const defaults = {
 	"platform_colour": {
 		"type": "platform_colour",
 		"beat": 0,
-		"colour": "pink"
+		"colour": "pink",
+		"speed": 5
 	},
 	"sun": {
 		"type": "sun",
@@ -146,10 +156,14 @@ const colours_raw = {
 }
 
 func _ready() -> void:
-	pass
+	apply_prefire()
 
 func _process(delta: float) -> void:
 	pass
 
 func apply_grid(value: Vector2):
 	return (value*grid_mult) + grid_offset
+
+func apply_prefire():
+	for key in prefire_sec:
+		prefire_sec[key] = prefire_sec[key]*(bpm / 60.0)

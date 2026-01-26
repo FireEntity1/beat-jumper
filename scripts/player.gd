@@ -17,6 +17,7 @@ var scale_target = Vector2(1,1)
 @onready var chromabb = $layer/chromabb.material as ShaderMaterial
 @onready var shake = $layer2/shake.material as ShaderMaterial
 @onready var vhs = $layer3/vhs.material as ShaderMaterial
+@onready var glitch = $layer4/glitch.material as ShaderMaterial
 
 func _ready() -> void:
 	pulse_loop()
@@ -51,12 +52,16 @@ func _process(delta: float) -> void:
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(ci*3,-ci*1.2),delta*300))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-ci*3,ci*1.2),delta*300))
-	print(chromabb.get_shader_parameter("r_displacement"))
-	print(chromabb.get_shader_parameter("b_displacement"))
+	print(global.shake)
 	if global.shake:
 		shake.set_shader_parameter("ShakeStrength",global.shake_strength)
 	else:
 		shake.set_shader_parameter("ShakeStrength",0.0)
+	if global.glitch:
+		glitch.set_shader_parameter("running", true)
+		glitch.set_shader_parameter("shake_power",float(global.glitch_strength)/100)
+	else:
+		glitch.set_shader_parameter("running", false)
 	if global.vhs:
 		vhs.set_shader_parameter("intensity",
 		move_toward(vhs.get_shader_parameter("intensity"),global.vhs_intensity,delta*3))

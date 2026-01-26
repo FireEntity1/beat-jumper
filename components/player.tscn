@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dg2baiggrj1"]
+[gd_scene load_steps=12 format=3 uid="uid://dg2baiggrj1"]
 
 [ext_resource type="Script" uid="uid://o3l8jxgj15gh" path="res://scripts/player.gd" id="1_51jd6"]
 [ext_resource type="Texture2D" uid="uid://cp00voqwjwugr" path="res://sprites/player.png" id="2_51jd6"]
 [ext_resource type="Shader" uid="uid://cfougkojpbfp6" path="res://shaders/chromabb.gdshader" id="3_uapwn"]
 [ext_resource type="Shader" uid="uid://d1dhhkfpacurf" path="res://shaders/shake.gdshader" id="4_5odhx"]
 [ext_resource type="Shader" uid="uid://b71npkfnggvy6" path="res://shaders/vhs.gdshader" id="5_1kub6"]
+[ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="6_kuobi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0g4kb"]
 size = Vector2(86, 87)
@@ -26,6 +27,15 @@ shader_parameter/magnitude = Vector2(0.01, 0.01)
 shader = ExtResource("5_1kub6")
 shader_parameter/scanline_count = 108.065
 shader_parameter/intensity = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0lm1f"]
+shader = ExtResource("6_kuobi")
+shader_parameter/running = false
+shader_parameter/shake_power = 0.03
+shader_parameter/shake_rate = 1.0
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [node name="player" type="CharacterBody2D"]
 script = ExtResource("1_51jd6")
@@ -73,6 +83,16 @@ layer = 3
 
 [node name="vhs" type="ColorRect" parent="layer3"]
 material = SubResource("ShaderMaterial_kuobi")
+offset_left = -39.0
+offset_top = -27.0
+offset_right = 1950.0
+offset_bottom = 1109.0
+
+[node name="layer4" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="glitch" type="ColorRect" parent="layer4"]
+material = SubResource("ShaderMaterial_0lm1f")
 offset_left = -39.0
 offset_top = -27.0
 offset_right = 1950.0

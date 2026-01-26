@@ -10,7 +10,7 @@ const min_db = 50.0
 
 const rise_speed = 3
 const fall_speed = 0.1
-const normalization_speed = 0.02
+const normalization_speed = 0.002
 
 var bar_energies = []
 var max_energy = 0.1
@@ -44,11 +44,11 @@ func _process(delta: float) -> void:
 		var current_bar = bars[i]
 		var target_height = bar_energies[i] * 50 * clamp(0.2*max(i,1),0.5,3)
 		if global.visualizer:
-			current_bar.scale.y = lerp(current_bar.scale.y, target_height/50, 0.5)
+			current_bar.scale.y = lerp(current_bar.scale.y, target_height/50, 50.0*delta)
 			current_bar.modulate = global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
 		else:
-			current_bar.scale.y = 0
-			current_bar.modulate = 0
+			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, 0.2)
+			global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
 		if i >= count:
 			current_bar.scale.y = 0
 		prev_hz = hz

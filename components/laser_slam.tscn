@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfrny7stmyr2m"]
+
+[ext_resource type="Script" uid="uid://00uu26xp50ky" path="res://scripts/laser.gd" id="1_ch01h"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ch01h"]
+particle_flag_disable_z = true
+angular_velocity_min = -530.53
+angular_velocity_max = 227.37
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+radial_velocity_min = 526.32
+radial_velocity_max = 1000.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.0
+scale_max = 27.32
+scale_over_velocity_max = 328.95
+
+[node name="laser_slam" type="Area2D"]
+script = ExtResource("1_ch01h")
+is_slam = true
+
+[node name="sprite" type="ColorRect" parent="."]
+offset_top = -7848.0
+offset_right = 94.0
+offset_bottom = 2.0
+
+[node name="particles" type="GPUParticles2D" parent="."]
+position = Vector2(44, 1)
+emitting = false
+amount = 128
+lifetime = 0.55
+preprocess = 0.2
+fixed_fps = 120
+process_material = SubResource("ParticleProcessMaterial_ch01h")

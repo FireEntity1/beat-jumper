@@ -53,7 +53,6 @@ func spawn_laser(index: int):
 	temp.fire_beat = start_beat + index * speed
 	temp.colour = colour[cur_col]
 	add_child(temp)
-	
 	cur_col = (cur_col + 1) % max_cols
 
 func crossed(prev: float, now: float, target: float):

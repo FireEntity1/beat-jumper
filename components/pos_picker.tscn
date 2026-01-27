@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=3 uid="uid://d14tti2n1an56"]
+
+[ext_resource type="Script" uid="uid://cfrwiyt20g8b4" path="res://scripts/pos_picker.gd" id="1_skmxb"]
+[ext_resource type="Texture2D" uid="uid://dndvclv1okbcf" path="res://sprites/knob_empty.png" id="2_ouiud"]
+
+[node name="pos_picker" type="Control"]
+custom_minimum_size = Vector2(700, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1223.0
+offset_bottom = -794.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_skmxb")
+
+[node name="hslider" type="HSlider" parent="."]
+layout_mode = 2
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 534.0
+offset_bottom = 38.0
+scale = Vector2(1, 1.2)
+max_value = 10.0
+value = 5.0
+tick_count = 11
+ticks_on_borders = true
+
+[node name="vslider" type="VSlider" parent="."]
+layout_mode = 2
+offset_left = 17.0
+offset_top = 271.0
+offset_right = 33.0
+offset_bottom = 516.0
+scale = Vector2(1.3, -1)
+max_value = 5.0
+value = 5.0
+tick_count = 6
+ticks_on_borders = true
+
+[node name="angle" type="TextureProgressBar" parent="."]
+layout_mode = 2
+offset_left = 561.0
+offset_top = 64.0
+offset_right = 689.0
+offset_bottom = 192.0
+max_value = 360.0
+step = 5.0
+fill_mode = 4
+radial_initial_angle = 180.0
+texture_under = ExtResource("2_ouiud")
+
+[node name="pointer" type="ColorRect" parent="."]
+layout_mode = 2
+offset_left = 567.0
+offset_top = 126.0
+offset_right = 685.0
+offset_bottom = 130.0
+pivot_offset = Vector2(58.5, 2)
+
+[node name="laser_preview" type="ColorRect" parent="."]
+visible = false
+layout_mode = 0
+offset_right = 410.0
+offset_bottom = 5.0
+pivot_offset = Vector2(207.5, 2)
+
+[node name="circle_preview" type="Node2D" parent="."]
+position = Vector2(28.5, 34)
+
+[node name="update" type="Timer" parent="."]
+autostart = true
+
+[connection signal="drag_ended" from="hslider" to="." method="_on_slider_drag_ended"]
+[connection signal="drag_started" from="hslider" to="." method="_on_slider_drag_started"]
+[connection signal="drag_ended" from="vslider" to="." method="_on_slider_drag_ended"]
+[connection signal="drag_started" from="vslider" to="." method="_on_slider_drag_started"]
+[connection signal="gui_input" from="angle" to="." method="_on_angle_gui_input"]
+[connection signal="timeout" from="update" to="." method="_on_update_timeout"]

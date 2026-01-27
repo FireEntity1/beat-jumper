@@ -11,6 +11,13 @@ grow_horizontal = 2
 color = Color(0.144063, 0.144063, 0.144063, 1)
 script = ExtResource("1_7bdol")
 
+[node name="hbox" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 330.0
+offset_right = 1921.0
+offset_bottom = 148.0
+theme_override_constants/separation = 0
+
 [node name="textbg" type="ColorRect" parent="."]
 layout_mode = 0
 offset_left = -1.0
@@ -19,7 +26,7 @@ offset_bottom = 150.0
 color = Color(0, 0, 0, 0.831)
 
 [node name="track_name" type="Label" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_left = 17.0
 offset_top = 2.0
 offset_right = 183.0
@@ -28,9 +35,3 @@ theme_override_font_sizes/font_size = 48
 text = "LASER"
 autowrap_mode = 2
 uppercase = true
-
-[node name="hbox" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 330.0
-offset_right = 1921.0
-offset_bottom = 148.0

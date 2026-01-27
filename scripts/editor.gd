@@ -64,14 +64,14 @@ var temp_testing_map = [
 		"type": "laser",
 		"beat": 15,
 		"pos": Vector2(5,5.2),
-		"rot": 0,
+		"rot": 315,
 		"colour": "orange"
 	},
 	{
 		"type": "laser",
 		"beat": 15.4,
 		"pos": Vector2(5,4.8),
-		"rot": 0,
+		"rot": 45,
 		"colour": "purple"
 	},
 	{
@@ -128,7 +128,7 @@ var temp_testing_map = [
 	{
 		"type": "laser_spread",
 		"beat": 8+4,
-		"colours": ["blue"],
+		"colour": ["blue"],
 		"speed": 3,
 		"amount": 10,
 		"length": 4.0,
@@ -138,7 +138,7 @@ var temp_testing_map = [
 	{
 		"type": "laser_spread",
 		"beat": 8+4,
-		"colours": ["blue"],
+		"colour": ["blue"],
 		"speed": 3,
 		"amount": 10,
 		"length": 4.0,
@@ -166,6 +166,10 @@ var temp_testing_map = [
 ]
 
 func _ready() -> void:
+	var lines_layer = Control.new()
+	lines_layer.name = "lines_layer"
+	lines_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$scroll/tracks.add_child(lines_layer)
 	$scroll/tracks.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for event in global.defaults:
 		var track = TRACK.instantiate()
@@ -183,6 +187,7 @@ func _ready() -> void:
 		$scroll.scroll_horizontal = int(val)
 	)
 	onload()
+	add_lines(1.0,($song.stream.get_length() * bpm) / 60.0, lines_layer)
 	
 func _process(delta: float) -> void:
 	cursor = $hor_scroll.value / EVENT_WIDTH
@@ -257,6 +262,16 @@ func group_events(events):
 			groups[key] = []
 		groups[key].append(event)
 	return groups
+
+func add_lines(scale: float,beats, parent):
+	for beat in beats:
+		var line = ColorRect.new()
+		line.size = Vector2(3,5000)
+		line.color = Color(1,1,1,0.1)
+		line.position = Vector2(EVENT_WIDTH*scale*beat + 30,0)
+		line.z_index = 100
+		if beat != 0:
+			parent.add_child(line)
 
 func onload():
 	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)

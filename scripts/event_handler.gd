@@ -139,7 +139,7 @@ var events = [
 	{
 		"type": "laser_spread",
 		"beat": 8+4,
-		"colours": ["blue"],
+		"colour": ["blue"],
 		"speed": 3,
 		"amount": 10,
 		"length": 4.0,
@@ -149,7 +149,7 @@ var events = [
 	{
 		"type": "laser_spread",
 		"beat": 8+4,
-		"colours": ["blue"],
+		"colour": ["blue"],
 		"speed": 3,
 		"amount": 10,
 		"length": 4.0,
@@ -180,7 +180,7 @@ var events = [
 	#{
 		#"type": "laser_spread",
 		#"beat": 2,
-		#"colours": ["pink","blue","red","orange"],
+		#"colour": ["pink","blue","red","orange"],
 		#"speed": 2,
 		#"amount": 10,
 		#"length": 8.0,

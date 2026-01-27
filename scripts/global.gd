@@ -101,7 +101,7 @@ const defaults = {
 	"laser_spread": {
 		"type": "laser_spread",
 		"beat": 0,
-		"colours": ["pink"],
+		"colour": ["pink"],
 		"speed": 3,
 		"amount": 12,
 		"length": 4.0,
@@ -179,6 +179,7 @@ const colours = {
 	"purple": [6,3,9],
 	"orange": [9,7,2],
 	"white": [7,7,7],
+	"black": [0,0,0]
 }
 
 const colours_raw = {

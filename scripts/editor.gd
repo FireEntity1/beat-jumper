@@ -182,20 +182,82 @@ func _ready() -> void:
 	$hor_scroll.value_changed.connect(func(val): 
 		$scroll.scroll_horizontal = int(val)
 	)
+	onload()
+	
 func _process(delta: float) -> void:
 	cursor = $hor_scroll.value / EVENT_WIDTH
 
 func spawn_events():
-	for event in temp_testing_map:
+	var groups = group_events(temp_testing_map)
+	for key in groups:
+		var events = groups[key]
+		var event = events[0]
 		var track = $scroll/tracks.get_node(event.type + "/hbox")
-		var event_node = EVENT.instantiate()
-		add_spacer(track,event.beat, event)
-		event_node.load_default(event.type,0)
-		event_node.event_data = event
-		track.add_child(event_node)
+		add_spacer(track, event.beat, event)
+		
+		var max_width = EVENT_WIDTH
+		for temp_event in events:
+			if temp_event.has("length"):
+				var width = temp_event.length * EVENT_WIDTH
+				if width > max_width:
+					max_width = width
+		
+		var main_event = EVENT.instantiate()
+		main_event.load_default(event.type, 0)
+		main_event.event_data = event
+		main_event.custom_minimum_size.x = max_width
+		
+		if events.size() > 1:
+			var popup = PopupPanel.new()
+			popup.transparent = false
+			var popup_container = VBoxContainer.new()
+			popup_container.add_theme_constant_override("separation", 4)
+			popup.add_child(popup_container)
+			
+			for e in events:
+				var node = EVENT.instantiate()
+				node.load_default(e.type, 0)
+				node.event_data = e
+				popup_container.add_child(node)
+			
+			add_child(popup)
+			
+			main_event.mouse_entered.connect(func():
+				var global_pos = main_event.global_position
+				popup.position = global_pos + Vector2(0, 44)
+				popup.size = Vector2(EVENT_WIDTH, events.size() * 48)
+				popup.popup()
+		)
+			
+			main_event.mouse_exited.connect(func():
+				await get_tree().create_timer(0.1).timeout
+				var mouse_pos = get_global_mouse_position()
+				var popup_rect = Rect2(popup.position, popup.size)
+				if not popup_rect.has_point(mouse_pos):
+					popup.hide()
+			)
+			
+			popup.mouse_exited.connect(func():
+				popup.hide()
+			)
+		
+		track.add_child(main_event)
 
 func add_spacer(track, beat, event):
 	var spacer = Control.new()
 	spacer.custom_minimum_size.x = (event.beat-last_beat[event.type]) * EVENT_WIDTH
 	last_beat[event.type] = event.beat
 	track.add_child(spacer)
+
+func group_events(events):
+	var groups = {}
+	for event in events:
+		var key = str(event.type, "@", event.beat)
+		if not groups.has(key):
+			groups[key] = []
+		groups[key].append(event)
+	return groups
+
+func onload():
+	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
+	$song_events.text = "EVENTS: " + str(temp_testing_map.size())

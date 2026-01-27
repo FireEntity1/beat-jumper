@@ -13,7 +13,7 @@ script = ExtResource("1_ei43j")
 transparent_bg = false
 initial_position = 2
 size = Vector2i(700, 500)
-visible = true
+transparent = false
 
 [node name="container" type="VBoxContainer" parent="edit"]
 offset_left = 4.0

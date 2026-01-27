@@ -59,6 +59,8 @@ var prefire_beat = {
 	"glitch": 0
 }
 
+const multicolor = ["laser_circle","laser_spread","laser_sweep"]
+
 const defaults = {
 	"laser": {
 		"type": "laser",

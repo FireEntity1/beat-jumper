@@ -49,6 +49,14 @@ func _ready() -> void:
 				editable.step = 1
 				editable.tick_count = 18
 				editable.connect("value_changed", _edges_value_changed)
+			"radius":
+				editable = HSlider.new()
+				editable.value = event_data.edges
+				editable.min_value = 1
+				editable.max_value = 1000
+				editable.step = 10
+				editable.tick_count = 11
+				editable.connect("value_changed", _radius_value_changed)
 			_:
 				editable = LineEdit.new()
 				editable.text = str(event_data[key])
@@ -74,6 +82,11 @@ func _on_speedpicker_changed(text):
 
 func _edges_value_changed(value):
 	event_data.edges = value
+	pos_editor.event_data = event_data
+	pos_editor.update_preview()
+
+func _radius_value_changed(value):
+	event_data.radius = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
 

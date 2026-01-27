@@ -2,7 +2,7 @@ extends Node2D
 
 const LASER = preload("res://components/laser.tscn")
 
-@export var colours = ["pink"]
+@export var colour = ["pink"]
 
 @export var amount = 1
 @export var speed = 10
@@ -25,7 +25,7 @@ func _ready() -> void:
 		temp.rot = 90
 		temp.fire_beat = fire_beat + 0.05*i
 		temp.pos = global_position
-		temp.colour = colours[i%colours.size()]
+		temp.colour = colour[i%colour.size()]
 		temp.snap = false
 		temp.fire_hold = length
 		temp.edge = true

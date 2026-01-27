@@ -482,7 +482,7 @@ func _process(delta: float) -> void:
 						temp.colour = event.colour
 					"laser_spread":
 						temp.speed = event.speed
-						temp.colours = event.colours
+						temp.colour = event.colour
 						temp.amount = event.amount
 						temp.length = event.length
 					"laser_slam":

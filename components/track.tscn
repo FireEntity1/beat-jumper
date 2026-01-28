@@ -11,12 +11,11 @@ grow_horizontal = 2
 color = Color(0.144063, 0.144063, 0.144063, 1)
 script = ExtResource("1_7bdol")
 
-[node name="hbox" type="HBoxContainer" parent="."]
-layout_mode = 0
+[node name="hbox" type="Control" parent="."]
+anchors_preset = 0
 offset_left = 330.0
 offset_right = 1921.0
 offset_bottom = 148.0
-theme_override_constants/separation = 0
 
 [node name="textbg" type="ColorRect" parent="."]
 layout_mode = 0

@@ -13,6 +13,9 @@ config_version=5
 config/name="Beat Jumper"
 run/main_scene="uid://cd0l2flrue8ie"
 config/features=PackedStringArray("4.4", "Mobile")
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/fullsize=false
+boot_splash/image="uid://bsigqixscx35e"
 config/icon="res://icon.svg"
 
 [autoload]

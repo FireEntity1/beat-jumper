@@ -109,3 +109,15 @@ offset_top = 208.0
 offset_right = 340.0
 offset_bottom = 1017.0
 color = Color(1, 1, 1, 0.292)
+
+[node name="scale" type="LineEdit" parent="."]
+offset_left = 199.0
+offset_top = 142.0
+offset_right = 319.0
+offset_bottom = 198.0
+theme_override_font_sizes/font_size = 32
+text = "1/1"
+placeholder_text = "x/x"
+alignment = 1
+
+[connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]

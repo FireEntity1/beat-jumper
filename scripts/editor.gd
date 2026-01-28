@@ -5,6 +5,8 @@ const EVENT = preload("res://components/editor_event.tscn")
 
 var last_beat = {}
 
+var lines_layer
+
 var map: Dictionary
 var selection: Array
 
@@ -166,7 +168,7 @@ var temp_testing_map = [
 ]
 
 func _ready() -> void:
-	var lines_layer = Control.new()
+	lines_layer = Control.new()
 	lines_layer.name = "lines_layer"
 	lines_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$scroll/tracks.add_child(lines_layer)
@@ -211,6 +213,8 @@ func spawn_events():
 		main_event.load_default(event.type, 0)
 		main_event.event_data = event
 		main_event.custom_minimum_size.x = max_width
+		
+		main_event.position.x = event.beat*EVENT_WIDTH
 		
 		if events.size() > 1:
 			var popup = PopupPanel.new()
@@ -276,3 +280,20 @@ func add_lines(scale: float,beats, parent):
 func onload():
 	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
 	$song_events.text = "EVENTS: " + str(temp_testing_map.size())
+
+func eval_exp(text):
+	var exp = Expression.new()
+	var regex = RegEx.new()
+	regex.compile(r"\b(\d+)\b")
+	text = regex.sub(text,"$1.0", true)
+	if exp.parse(str(text)) == OK:
+		var value = exp.execute()
+		return value
+	else:
+		return null
+
+func _on_scale_text_submitted(new_text: String) -> void:
+	if eval_exp(new_text) != null:
+		for child in lines_layer.get_children():
+			child.queue_free()
+		add_lines(eval_exp(new_text),($song.stream.get_length() * bpm) / 60.0,lines_layer)

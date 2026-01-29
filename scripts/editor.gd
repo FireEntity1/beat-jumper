@@ -5,6 +5,8 @@ const EVENT = preload("res://components/editor_event.tscn")
 
 var last_beat = {}
 
+var editor_scale = 1.0
+
 var lines_layer
 
 var map: Dictionary
@@ -168,15 +170,19 @@ var temp_testing_map = [
 ]
 
 func _ready() -> void:
+	$timeline.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$cursor.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	$hor_scroll.mouse_filter = Control.MOUSE_FILTER_STOP
+
 	lines_layer = Control.new()
 	lines_layer.name = "lines_layer"
 	lines_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	$scroll/tracks.add_child(lines_layer)
 	$scroll/tracks.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	for event in global.defaults:
 		var track = TRACK.instantiate()
 		var name: String = global.defaults[event].type
 		track.name = name
+		track.gui_input.connect(_on_tracks_gui_input.bind(name))
 		last_beat[name] = 0.0
 		name = name.replace("_"," ")
 		track.change_name(name)
@@ -189,12 +195,21 @@ func _ready() -> void:
 		$scroll.scroll_horizontal = int(val)
 	)
 	onload()
+	$scroll/tracks.add_child(lines_layer)
 	add_lines(1.0,($song.stream.get_length() * bpm) / 60.0, lines_layer)
 	
 func _process(delta: float) -> void:
 	cursor = $hor_scroll.value / EVENT_WIDTH
 
 func spawn_events():
+	for track in $scroll/tracks.get_children():
+		if track is Control and track.has_node("hbox"):
+			var hbox = track.get_node("hbox")
+			for child in hbox.get_children():
+				child.queue_free()
+	for key in last_beat.keys():
+		last_beat[key] = 0.0
+	
 	var groups = group_events(temp_testing_map)
 	for key in groups:
 		var events = groups[key]
@@ -296,4 +311,25 @@ func _on_scale_text_submitted(new_text: String) -> void:
 	if eval_exp(new_text) != null:
 		for child in lines_layer.get_children():
 			child.queue_free()
-		add_lines(eval_exp(new_text),($song.stream.get_length() * bpm) / 60.0,lines_layer)
+		editor_scale = eval_exp(new_text)
+		add_lines(editor_scale,($song.stream.get_length() * bpm) / 60.0,lines_layer)
+
+func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
+	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		print(event.position)
+		var clicked_beat = (event.position.x - EVENT_WIDTH) / EVENT_WIDTH
+		clicked_beat = snap(clicked_beat)
+		var data = new_event(type,clicked_beat)
+		temp_testing_map.append(data)
+		temp_testing_map.sort_custom(func(a,b):return a.beat < b.beat)
+		spawn_events()
+func pos_to_beat(pos):
+	pass
+
+func snap(value: float):
+	return floor((value/editor_scale)*editor_scale)
+
+func new_event(type, beat):
+	var event = global.defaults[type].duplicate(true)
+	event.beat = beat
+	return event

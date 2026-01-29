@@ -11,6 +11,7 @@ script = ExtResource("1_b1cmn")
 [node name="bg" type="ColorRect" parent="."]
 offset_right = 1926.0
 offset_bottom = 1087.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="title" type="LineEdit" parent="."]
@@ -74,10 +75,13 @@ custom_minimum_size = Vector2(0, 800)
 offset_top = 238.0
 offset_right = 1919.0
 offset_bottom = 1038.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="tracks" type="VBoxContainer" parent="scroll"]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="song_length" type="Label" parent="."]
 offset_left = 8.0
@@ -102,6 +106,7 @@ stream = ExtResource("4_q68jb")
 offset_top = 202.0
 offset_right = 1920.0
 offset_bottom = 242.0
+mouse_filter = 2
 
 [node name="cursor" type="ColorRect" parent="."]
 offset_left = 337.0

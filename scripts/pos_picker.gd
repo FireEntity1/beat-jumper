@@ -73,7 +73,6 @@ func spawn_laser(index: int, edges: int, direction: int, radius: float):
 	temp.pivot_offset = temp.size/2
 	$circle_preview.add_child(temp)
 	circle_lasers.append(temp)
-	print("Spawned laser ", index, " for amount ", event_data.amount)
 
 func _on_update_timeout() -> void:
 	update_preview()

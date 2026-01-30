@@ -30,6 +30,8 @@ func _ready() -> void:
 				editable = OptionButton.new()
 				for colour in global.colours:
 					editable.add_item(colour)
+				if global.defaults[event_data.type].colour is Array:
+					print("jsdhf")
 			"speed":
 				editable = LineEdit.new()
 				editable.text = str(event_data[key])
@@ -98,4 +100,5 @@ func load_default(selected_track: String, beat: float):
 	text = selected_track
 
 func _on_button_up() -> void:
-	$edit.popup()
+	if not Input.is_action_pressed("shift"):
+		$edit.popup()

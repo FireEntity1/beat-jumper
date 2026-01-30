@@ -196,6 +196,8 @@ func _ready() -> void:
 	)
 	onload()
 	$scroll/tracks.add_child(lines_layer)
+	lines_layer.z_index = 100
+	lines_layer = $scroll/tracks/lines_layer
 	add_lines(1.0,($song.stream.get_length() * bpm) / 60.0, lines_layer)
 	
 func _process(delta: float) -> void:
@@ -210,19 +212,22 @@ func spawn_events():
 	for key in last_beat.keys():
 		last_beat[key] = 0.0
 	
+	#for child in get_children():
+		#if child is PopupPanel:
+			#child.queue_free()
+	
 	var groups = group_events(temp_testing_map)
 	for key in groups:
 		var events = groups[key]
-		var event = events[0]
+		var event = events[-1]
 		var track = $scroll/tracks.get_node(event.type + "/hbox")
-		add_spacer(track, event.beat, event)
+		#add_spacer(track, event.beat, event)
 		
-		var max_width = EVENT_WIDTH
+		var max_width = EVENT_WIDTH*float(editor_scale)
 		for temp_event in events:
 			if temp_event.has("length"):
 				var width = temp_event.length * EVENT_WIDTH
-				if width > max_width:
-					max_width = width
+				max_width = width
 		
 		var main_event = EVENT.instantiate()
 		main_event.load_default(event.type, 0)
@@ -264,7 +269,8 @@ func spawn_events():
 			popup.mouse_exited.connect(func():
 				popup.hide()
 			)
-		
+		print(groups[key].size())
+		main_event.beat = float(main_event.beat)
 		track.add_child(main_event)
 
 func add_spacer(track, beat, event):
@@ -276,18 +282,20 @@ func add_spacer(track, beat, event):
 func group_events(events):
 	var groups = {}
 	for event in events:
-		var key = str(event.type, "@", event.beat)
+		var key = str(event.type, "@", float(event.beat))
 		if not groups.has(key):
 			groups[key] = []
 		groups[key].append(event)
 	return groups
 
 func add_lines(scale: float,beats, parent):
-	for beat in beats:
+	for beat in int(beats):
 		var line = ColorRect.new()
 		line.size = Vector2(3,5000)
 		line.color = Color(1,1,1,0.1)
 		line.position = Vector2(EVENT_WIDTH*scale*beat + 30,0)
+		if line.position.x < 300:
+			continue
 		line.z_index = 100
 		if beat != 0:
 			parent.add_child(line)
@@ -313,10 +321,10 @@ func _on_scale_text_submitted(new_text: String) -> void:
 			child.queue_free()
 		editor_scale = eval_exp(new_text)
 		add_lines(editor_scale,($song.stream.get_length() * bpm) / 60.0,lines_layer)
+		spawn_events()
 
 func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
-	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		print(event.position)
+	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Input.is_action_pressed("shift"):
 		var clicked_beat = (event.position.x - EVENT_WIDTH) / EVENT_WIDTH
 		clicked_beat = snap(clicked_beat)
 		var data = new_event(type,clicked_beat)
@@ -327,7 +335,7 @@ func pos_to_beat(pos):
 	pass
 
 func snap(value: float):
-	return floor((value/editor_scale)*editor_scale)
+	return floor((value/editor_scale))*editor_scale
 
 func new_event(type, beat):
 	var event = global.defaults[type].duplicate(true)

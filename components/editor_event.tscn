@@ -1,12 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://y7kdyhv7n15s"]
+[gd_scene load_steps=3 format=3 uid="uid://y7kdyhv7n15s"]
 
 [ext_resource type="Script" uid="uid://cv4855qt3pjhi" path="res://scripts/editor_event.gd" id="1_ei43j"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ei43j"]
+bg_color = Color(0.129558, 0.129559, 0.129558, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.481789, 0.48179, 0.481789, 1)
 
 [node name="editor_event" type="Button"]
 custom_minimum_size = Vector2(250, 120)
 offset_right = 300.0
-offset_bottom = 140.0
+offset_bottom = 120.0
+mouse_filter = 1
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_ei43j")
 script = ExtResource("1_ei43j")
 
 [node name="edit" type="PopupPanel" parent="."]

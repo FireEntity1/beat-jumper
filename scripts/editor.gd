@@ -249,6 +249,7 @@ func _on_pickmusic_button_up() -> void:
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	dialog.access = FileDialog.ACCESS_FILESYSTEM
 	dialog.use_native_dialog = true
+	dialog.add_filter("*.ogg ; OGG Files")
 	dialog.connect("file_selected",load_music)
 	add_child(dialog)
 	dialog.popup()

@@ -140,5 +140,6 @@ alignment = 1
 [node name="FileDialog" type="FileDialog" parent="."]
 
 [connection signal="button_up" from="pickmusic" to="." method="_on_pickmusic_button_up"]
+[connection signal="button_up" from="pickimage" to="." method="_on_pickimage_button_up"]
 [connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]

@@ -62,6 +62,45 @@ func _process(delta: float) -> void:
 	cursor = $hor_scroll.value / EVENT_WIDTH
 	if Input.is_action_just_pressed("save"):
 		save()
+	
+	if not loaded.map:
+		$pickmusic.disabled = true
+		$pickimage.disabled = true
+		$pickfolder.modulate = Color(1,0.6,0.6)
+	else:
+		$pickmusic.disabled = false
+		$pickimage.disabled = false
+		$pickfolder.modulate = Color(0.6,1.0,0.6)
+	
+	if not loaded.song:
+		$pickmusic.modulate = Color(1,0.6,0.6)
+	else:
+		$pickmusic.modulate = Color(0.6,1.0,0.6)
+	if not loaded.image:
+		$pickimage.modulate = Color(1,0.6,0.6)
+	else:
+		$pickimage.modulate = Color(0.6,1.0,0.6)
+	
+	if $pickmusic.button_pressed:
+		$pickmusic.modulate.a = 0.4
+	elif $pickmusic.disabled:
+		$pickmusic.modulate.a = 0.2
+	else:
+		$pickmusic.modulate.a = 1.0
+	
+	if $pickimage.button_pressed:
+		$pickimage.modulate.a = 0.4
+	elif $pickimage.disabled:
+		$pickimage.modulate.a = 0.2
+	else:
+		$pickimage.modulate.a = 1.0
+		
+	if $pickfolder.button_pressed:
+		$pickfolder.modulate.a = 0.4
+	elif $pickfolder.disabled:
+		$pickfolder.modulate.a = 0.2
+	else:
+		$pickfolder.modulate.a = 1.0
 
 func spawn_events():
 	for track in $scroll/tracks.get_children():
@@ -230,9 +269,11 @@ func load_map(dir: String,load: Array = [true,true,true]):
 	else:
 		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(str(map))
 	if FileAccess.file_exists(dir + "/song.ogg") and load[1]:
-		var song = AudioStreamOggVorbis.new()
-		song.load_from_file(dir + "/song.ogg")
+		#var song_path = dir.path_join("song.ogg")
+		var song_path = dir.path_join("song.ogg")
+		var song = AudioStreamOggVorbis.load_from_file(song_path)
 		loaded.song = true
+		$song.stream = song
 	if FileAccess.file_exists(dir + "/cover.png") and load[2]:
 		loaded.image = true
 	elif FileAccess.file_exists(dir + "/cover.jpg") and load[2]:
@@ -265,3 +306,24 @@ func load_music(dir):
 		return
 	dest.store_buffer(data)
 	dest.close()
+	return data
+
+func load_image(dir: String):
+	var file = FileAccess.open(dir,FileAccess.READ)
+	if file == null:
+		return
+	var data = file.get_buffer(file.get_length())
+	var dest = FileAccess.open(save_dir + "/cover." + dir.get_extension(),FileAccess.WRITE)
+	dest.store_buffer(data)
+	dest.close()
+
+
+func _on_pickimage_button_up() -> void:
+	var dialog = FileDialog.new()
+	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.use_native_dialog = true
+	dialog.filters = ["*.png","*.jpg","*.jpeg"]
+	dialog.connect("file_selected",load_image)
+	add_child(dialog)
+	dialog.popup()

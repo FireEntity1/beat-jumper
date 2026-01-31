@@ -12,164 +12,23 @@ var lines_layer
 var map: Dictionary
 var selection: Array
 
+var loaded = {
+	"map": false,
+	"song": false,
+	"image": false
+}
+
+var save_dir: String
+
 var cursor: float
 
 const EVENT_WIDTH = 300
 
-var bpm = 118
-var temp_testing_map = [
-	{
-		"type": "visualizer",
-		"beat": 4,
-		"status": false
-	},
-	{
-		"type": "laser_circle",
-		"beat": 0+4,
-		"pos": Vector2(4,3),
-		"rot": 0,
-		"radius": 400,
-		"amount": 12,
-		"edges": 12,
-		"speed": 1.0/6.0,
-		"colour": ["pink","red"],
-		"direction": 1
-	},
-	{
-		"type": "laser_circle",
-		"beat": 2+4,
-		"pos": Vector2(7,3),
-		"rot": 90,
-		"radius": 400,
-		"amount": 12,
-		"edges": 12,
-		"speed": 1.0/6.0,
-		"colour": ["purple","blue"],
-		"direction": -1
-	},
-	{
-		"type": "platform_colour",
-		"beat": 4,
-		"colour": "black",
-		"speed": 10
-	},
-	{
-		"type": "visualizer",
-		"beat": 4+4,
-		"status": true
-	},
-	{
-		"type": "platform_colour",
-		"beat": 4+3,
-		"colour": "pink",
-		"speed": 5
-	},
-	{
-		"type": "laser",
-		"beat": 15,
-		"pos": Vector2(5,5.2),
-		"rot": 315,
-		"colour": "orange"
-	},
-	{
-		"type": "laser",
-		"beat": 15.4,
-		"pos": Vector2(5,4.8),
-		"rot": 45,
-		"colour": "purple"
-	},
-	{
-		"type": "platform_colour",
-		"beat": 4+4,
-		"colour": "pink",
-		"speed": 50
-	},
-	{
-		"type": "laser_sweep",
-		"beat": 11,
-		"pos": Vector2(5,1),
-		"rot": 90,
-		"amount": 16,
-		"speed": 1.0/16.0,
-		"distance": 300,
-		"outwards": true,
-		"colour": ["pink"]
-	},
-	{
-		"type": "laser_slam",
-		"beat": 8,
-		"pos": Vector2(3,1),
-		"rot": 0,
-		"colour": "pink",
-		"length": 3.0
-	},
-	{
-		"type": "laser_slam",
-		"beat": 8,
-		"pos": Vector2(9,1),
-		"rot": 0,
-		"colour": "pink",
-		"length": 3.0
-	},
-	{
-		"type": "glitch",
-		"beat": 4+4,
-		"length": 3,
-		"strength": 0.5
-	},
-	{
-		"type": "platform_colour",
-		"beat": 7+4,
-		"colour": "black",
-		"speed": 10
-	},
-	{
-		"type": "platform_colour",
-		"beat": 8+4,
-		"colour": "blue",
-		"speed": 50
-	},
-	{
-		"type": "laser_spread",
-		"beat": 8+4,
-		"colour": ["blue"],
-		"speed": 3,
-		"amount": 10,
-		"length": 4.0,
-		"pos": Vector2(5,0),
-		"rot": 0
-	},
-	{
-		"type": "laser_spread",
-		"beat": 8+4,
-		"colour": ["blue"],
-		"speed": 3,
-		"amount": 10,
-		"length": 4.0,
-		"pos": Vector2(7,3),
-		"rot": 0
-	},
-	{
-		"type": "glitch",
-		"beat": 8+4,
-		"length": 4,
-		"strength": 0.5
-	},
-	{
-		"type": "platform_colour",
-		"beat": 12+4,
-		"colour": "black",
-		"speed": 5
-	},
-	{
-		"type": "visualizer",
-		"beat": 12+4,
-		"status": false
-	},
-	
-]
+var cur_bpm: float
 
 func _ready() -> void:
+	map = global.default_map.duplicate(true)
+	cur_bpm = map.bpm
 	$timeline.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$cursor.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$hor_scroll.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -186,22 +45,23 @@ func _ready() -> void:
 		last_beat[name] = 0.0
 		name = name.replace("_"," ")
 		track.change_name(name)
-		track.custom_minimum_size.x = ($song.stream.get_length()*bpm/60) * EVENT_WIDTH
+		track.custom_minimum_size.x = ($song.stream.get_length()*cur_bpm/60) * EVENT_WIDTH
 		track.size_flags_horizontal = Control.SIZE_EXPAND
 		$scroll/tracks.add_child(track)
 	spawn_events()
-	$hor_scroll.max_value = ($song.stream.get_length()*bpm/60) * EVENT_WIDTH
+	$hor_scroll.max_value = ($song.stream.get_length()*cur_bpm/60) * EVENT_WIDTH
 	$hor_scroll.value_changed.connect(func(val): 
 		$scroll.scroll_horizontal = int(val)
 	)
-	onload()
 	$scroll/tracks.add_child(lines_layer)
 	lines_layer.z_index = 100
 	lines_layer = $scroll/tracks/lines_layer
-	add_lines(1.0,($song.stream.get_length() * bpm) / 60.0, lines_layer)
+	add_lines(1.0,($song.stream.get_length() * cur_bpm) / 60.0, lines_layer)
 	
 func _process(delta: float) -> void:
 	cursor = $hor_scroll.value / EVENT_WIDTH
+	if Input.is_action_just_pressed("save"):
+		save()
 
 func spawn_events():
 	for track in $scroll/tracks.get_children():
@@ -216,7 +76,7 @@ func spawn_events():
 		#if child is PopupPanel:
 			#child.queue_free()
 	
-	var groups = group_events(temp_testing_map)
+	var groups = group_events(map.data)
 	for key in groups:
 		var events = groups[key]
 		var event = events[-1]
@@ -301,10 +161,6 @@ func add_lines(scale: float,beats, parent):
 		if beat != 0:
 			parent.add_child(line)
 
-func onload():
-	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
-	$song_events.text = "EVENTS: " + str(temp_testing_map.size())
-
 func eval_exp(text):
 	var exp = Expression.new()
 	var regex = RegEx.new()
@@ -321,7 +177,7 @@ func _on_scale_text_submitted(new_text: String) -> void:
 		for child in lines_layer.get_children():
 			child.queue_free()
 		editor_scale = eval_exp(new_text)
-		add_lines(editor_scale,($song.stream.get_length() * bpm) / 60.0,lines_layer)
+		add_lines(editor_scale,($song.stream.get_length() * cur_bpm) / 60.0,lines_layer)
 		spawn_events()
 
 func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
@@ -329,8 +185,8 @@ func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
 		var clicked_beat = (event.position.x - EVENT_WIDTH) / EVENT_WIDTH
 		clicked_beat = snap(clicked_beat)
 		var data = new_event(type,clicked_beat)
-		temp_testing_map.append(data)
-		temp_testing_map.sort_custom(func(a,b):return a.beat < b.beat)
+		map.data.append(data)
+		map.data.sort_custom(func(a,b):return a.beat < b.beat)
 		spawn_events()
 func pos_to_beat(pos):
 	pass
@@ -344,14 +200,67 @@ func new_event(type, beat):
 	return event
 
 func modify(old: Dictionary, new: Dictionary):
-	for i in range(temp_testing_map.size()):
-		if temp_testing_map[i] == old:
-			temp_testing_map[i] = new
+	for i in range(map.data.size()):
+		if map.data[i] == old:
+			map.data[i] = new
 			print("changed!")
 			return
 
 func delete(event: Dictionary):
-	for i in range(temp_testing_map.size()):
-		if temp_testing_map[i] == event:
-			temp_testing_map.remove_at(i)
+	for i in range(map.data.size()):
+		if map.data[i] == event:
+			map.data.remove_at(i)
 			return
+
+func _on_pickfolder_button_up() -> void:
+	var dialog = FileDialog.new()
+	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+	dialog.use_native_dialog = true
+	dialog.connect("dir_selected",load_map)
+	add_child(dialog)
+	dialog.popup()
+
+func load_map(dir: String,load: Array = [true,true,true]):
+	print(dir)
+	save_dir = dir
+	if FileAccess.file_exists(dir + "/map.jump") and load[0]:
+		var map_string = FileAccess.get_file_as_string(dir + "/map.jump")
+		map = JSON.parse_string(map_string)
+		loaded.map = true
+	else:
+		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(str(map))
+	if FileAccess.file_exists(dir + "/song.ogg") and load[1]:
+		var song = AudioStreamOggVorbis.new()
+		song.load_from_file(dir + "/song.ogg")
+		loaded.song = true
+	if FileAccess.file_exists(dir + "/cover.png") and load[2]:
+		loaded.image = true
+	elif FileAccess.file_exists(dir + "/cover.jpg") and load[2]:
+		loaded.image = true
+	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
+	$song_events.text = "EVENTS: " + str(map.data.size())
+	spawn_events()
+
+func save():
+	FileAccess.open(save_dir+"/map.jump",FileAccess.WRITE).store_string(str(map))
+
+func _on_pickmusic_button_up() -> void:
+	var dialog = FileDialog.new()
+	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	dialog.access = FileDialog.ACCESS_FILESYSTEM
+	dialog.use_native_dialog = true
+	dialog.connect("file_selected",load_music)
+	add_child(dialog)
+	dialog.popup()
+
+func load_music(dir):
+	var file = FileAccess.open(dir,FileAccess.READ)
+	if file == null:
+		return
+	var data = file.get_buffer(file.get_length())
+	file.close()
+	var dest = FileAccess.open(save_dir + "/song.ogg",FileAccess.WRITE)
+	if dest == null:
+		return
+	dest.store_buffer(data)
+	dest.close()

@@ -169,7 +169,7 @@ const default_map = {
 	"offset": 0.0,
 	
 	"preview_start": 0,
-	"map_data": []
+	"data": []
 }
 
 const colours = {

@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bbbc0ialstsck"]
+[gd_scene load_steps=6 format=3 uid="uid://bbbc0ialstsck"]
 
 [ext_resource type="Script" uid="uid://cmet2ui0aer24" path="res://scripts/editor.gd" id="1_b1cmn"]
 [ext_resource type="Texture2D" uid="uid://bx2hdbcsx4v41" path="res://sprites/music_upload.png" id="2_ba0ut"]
 [ext_resource type="Texture2D" uid="uid://chisdg250e4xb" path="res://sprites/image_upload.png" id="3_q68jb"]
 [ext_resource type="AudioStream" uid="uid://c844h23x0bc8g" path="res://components/[For EGCS 2023 FN-TB] trung-nova - Roars of V.E.N.G.E.A.N.C.E -Take Back Everything-.mp3" id="4_q68jb"]
+[ext_resource type="Texture2D" uid="uid://doau53rctjgb7" path="res://sprites/folder.png" id="4_xg7d5"]
 
 [node name="editor" type="Node2D"]
 script = ExtResource("1_b1cmn")
@@ -63,6 +64,13 @@ offset_top = 50.0
 offset_right = 222.0
 offset_bottom = 101.0
 texture_normal = ExtResource("3_q68jb")
+
+[node name="pickfolder" type="TextureButton" parent="."]
+offset_left = 111.0
+offset_top = 3.0
+offset_right = 162.0
+offset_bottom = 54.0
+texture_normal = ExtResource("4_xg7d5")
 
 [node name="hor_scroll" type="HScrollBar" parent="."]
 offset_left = 332.0
@@ -129,4 +137,8 @@ text = "1/1"
 placeholder_text = "x/x"
 alignment = 1
 
+[node name="FileDialog" type="FileDialog" parent="."]
+
+[connection signal="button_up" from="pickmusic" to="." method="_on_pickmusic_button_up"]
+[connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]

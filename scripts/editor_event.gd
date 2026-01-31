@@ -11,6 +11,8 @@ var parent: Node2D
 
 var event_data: Dictionary
 
+var map_dir: String
+
 func _ready() -> void:
 	if event_data.has("colour"):
 		var col_val = event_data["colour"]
@@ -138,3 +140,6 @@ func _on_button_up() -> void:
 	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
 		parent.delete(event_data)
 		queue_free()
+
+func load_map(name: String = ""):
+	return

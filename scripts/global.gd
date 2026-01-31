@@ -196,6 +196,8 @@ const colours_raw = {
 	"black": Color(0.0,0.0,0.0)
 }
 
+const MULTICOLOUR = ["laser_circle", "laser_spread", "laser_sweep"]
+
 func _ready() -> void:
 	apply_prefire()
 

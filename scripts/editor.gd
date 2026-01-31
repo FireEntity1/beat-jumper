@@ -233,6 +233,7 @@ func spawn_events():
 		main_event.load_default(event.type, 0)
 		main_event.event_data = event
 		main_event.custom_minimum_size.x = max_width
+		main_event.parent = self
 		
 		main_event.position.x = event.beat*EVENT_WIDTH
 		
@@ -247,6 +248,7 @@ func spawn_events():
 				var node = EVENT.instantiate()
 				node.load_default(e.type, 0)
 				node.event_data = e
+				node.parent = self
 				popup_container.add_child(node)
 			
 			add_child(popup)
@@ -269,7 +271,6 @@ func spawn_events():
 			popup.mouse_exited.connect(func():
 				popup.hide()
 			)
-		print(groups[key].size())
 		main_event.beat = float(main_event.beat)
 		track.add_child(main_event)
 
@@ -341,3 +342,16 @@ func new_event(type, beat):
 	var event = global.defaults[type].duplicate(true)
 	event.beat = beat
 	return event
+
+func modify(old: Dictionary, new: Dictionary):
+	for i in range(temp_testing_map.size()):
+		if temp_testing_map[i] == old:
+			temp_testing_map[i] = new
+			print("changed!")
+			return
+
+func delete(event: Dictionary):
+	for i in range(temp_testing_map.size()):
+		if temp_testing_map[i] == event:
+			temp_testing_map.remove_at(i)
+			return

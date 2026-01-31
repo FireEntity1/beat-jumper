@@ -7,6 +7,8 @@ var beat: float
 
 var pos_editor
 
+var parent: Node2D
+
 var event_data: Dictionary
 
 func _ready() -> void:
@@ -27,11 +29,18 @@ func _ready() -> void:
 		label.text = key + ": "
 		match key:
 			"colour":
-				editable = OptionButton.new()
+				editable = ItemList.new()
+				if event_data.type in global.MULTICOLOUR:
+					editable.select_mode = ItemList.SELECT_MULTI
 				for colour in global.colours:
 					editable.add_item(colour)
-				if global.defaults[event_data.type].colour is Array:
-					print("jsdhf")
+				var selected = event_data.colour
+				if selected is Array:
+					for item in range(editable.item_count):
+						if editable.get_item_text(item) in selected:
+							editable.select(item,false)
+				editable.custom_minimum_size.y = 200
+				editable.connect("multi_selected",_on_colour_selected.bind(editable))
 			"speed":
 				editable = LineEdit.new()
 				editable.text = str(event_data[key])
@@ -72,6 +81,7 @@ func _on_editable_changed(text: String):
 	print(text)
 
 func _on_speedpicker_changed(text):
+	var old = event_data
 	var exp = Expression.new()
 	var regex = RegEx.new()
 	regex.compile(r"\b(\d+)\b")
@@ -81,16 +91,29 @@ func _on_speedpicker_changed(text):
 		print(value)
 	else:
 		print("error")
+	parent.modify(old,event_data)
 
 func _edges_value_changed(value):
+	var old = event_data
 	event_data.edges = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
+	parent.modify(old,event_data)
 
 func _radius_value_changed(value):
+	var old = event_data
 	event_data.radius = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
+	parent.modify(old,event_data)
+
+func _on_colour_selected(index: int, selected: bool, list: ItemList):
+	var old = event_data
+	var cols = []
+	for i in list.get_selected_items():
+		cols.append(list.get_item_text(i))
+	event_data.colour = cols
+	parent.modify(old,event_data)
 
 func _process(delta: float) -> void:
 	pass
@@ -99,6 +122,19 @@ func load_default(selected_track: String, beat: float):
 	track = selected_track
 	text = selected_track
 
+func _gui_input(event: InputEvent):
+	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and not Input.is_action_pressed("shift"):
+			$edit.popup()
+		elif event.button_index == MOUSE_BUTTON_RIGHT:
+			parent.delete(event_data)
+			queue_free()
+			accept_event()
+
 func _on_button_up() -> void:
-	if not Input.is_action_pressed("shift"):
+	return
+	if not Input.is_action_pressed("shift") and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		$edit.popup()
+	elif Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		parent.delete(event_data)
+		queue_free()

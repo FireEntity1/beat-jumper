@@ -45,26 +45,26 @@ func _ready() -> void:
 		last_beat[name] = 0.0
 		name = name.replace("_"," ")
 		track.change_name(name)
-		track.custom_minimum_size.x = ($song.stream.get_length()*cur_bpm/60) * EVENT_WIDTH
+		track.custom_minimum_size.x = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
 		track.size_flags_horizontal = Control.SIZE_EXPAND
 		$scroll/tracks.add_child(track)
 	spawn_events()
-	$hor_scroll.max_value = ($song.stream.get_length()*cur_bpm/60) * EVENT_WIDTH
+	$hor_scroll.max_value = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
 	$hor_scroll.value_changed.connect(func(val): 
 		$scroll.scroll_horizontal = int(val)
 	)
 	$scroll/tracks.add_child(lines_layer)
 	lines_layer.z_index = 100
 	lines_layer = $scroll/tracks/lines_layer
-	add_lines(1.0,($song.stream.get_length() * cur_bpm) / 60.0, lines_layer)
+	add_lines(1.0,(time_to_beat($song.stream.get_length())), lines_layer)
 	
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("save"):
 		save()
 	
 	if $song.playing:
-		cursor = $song.get_playback_position()
-		$hor_scroll.value = cursor*(60/map.bpm)*EVENT_WIDTH
+		cursor = time_to_beat($song.get_playback_position())
+		$hor_scroll.value = cursor * EVENT_WIDTH
 	
 	if not loaded.map:
 		$pickmusic.disabled = true
@@ -218,7 +218,7 @@ func _on_scale_text_submitted(new_text: String) -> void:
 		for child in lines_layer.get_children():
 			child.queue_free()
 		editor_scale = eval_exp(new_text)
-		add_lines(editor_scale,($song.stream.get_length() * cur_bpm) / 60.0,lines_layer)
+		add_lines(editor_scale, time_to_beat($song.stream.get_length()), lines_layer)
 		spawn_events()
 
 func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
@@ -374,3 +374,50 @@ func sanitize_json(array: Array, to_vector: bool):
 				event.pos = Vector2(event.pos[0],event.pos[1])
 			elif not to_vector and event.pos is Vector2:
 				event.pos = [event.pos.x,event.pos.y]
+
+func get_bpm_changes():
+	var events = []
+	for event in map.data:
+		if event.type == "bpm_change":
+			events.append(event)
+	events.sort_custom(func(a,b): return a.beat < b.beat)
+	
+	if events.is_empty() or events[0].beat > 0:
+		events.push_front({
+			"type": "bpm_change",
+			"beat": 0.0,
+			"new_bpm": map.bpm
+		})
+	return events
+
+func beat_to_time(target: float):
+	var bpm_changes = get_bpm_changes()
+	var time = 0.0
+	for i in range(bpm_changes.size()):
+		var cur = bpm_changes[i]
+		var next_beat = (
+			bpm_changes[i+1].beat
+			if i+1 < bpm_changes.size()
+			else target
+		)
+		if target <= cur.beat:
+			break
+		var segment_beats = min(target, next_beat) - cur.beat
+		time += segment_beats * (60.0/ cur.new_bpm)
+	return time
+
+func time_to_beat(time: float):
+	var bpm_changes = get_bpm_changes()
+	var elapsed = 0.0
+	for i in range(bpm_changes.size()):
+		var cur = bpm_changes[i]
+		var next_beat = (
+			bpm_changes[i+1].beat
+			if i+1 < bpm_changes.size()
+			else INF
+		)
+		var segment_time = (next_beat - cur.beat) * (60.0/cur.new_bpm)
+		if elapsed + segment_time >= time:
+			return cur.beat + (time - elapsed) * (cur.new_bpm/60.0)
+		elapsed += segment_time
+	return bpm_changes[-1].beat

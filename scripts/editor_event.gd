@@ -73,14 +73,19 @@ func _ready() -> void:
 			_:
 				editable = LineEdit.new()
 				editable.text = str(event_data[key])
-				editable.connect("text_changed",_on_editable_changed)
+				editable.connect("text_changed",_on_editable_changed.bind(key))
 		if key != "rot":
 			$edit/container.add_child(label)
 			$edit/container.add_child(editable)
 		if key == "length":
 			custom_minimum_size.x = 300 * event_data.length
-func _on_editable_changed(text: String):
-	print(text)
+
+func _on_editable_changed(text: String,key: String):
+	var old = event_data
+	match key:
+		"new_bpm":
+			event_data[key] = float(text)
+	parent.modify(old,event_data)
 
 func _on_speedpicker_changed(text):
 	var old = event_data

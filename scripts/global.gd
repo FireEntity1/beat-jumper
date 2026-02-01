@@ -39,7 +39,9 @@ var prefire_sec = {
 	"visualizer": 0.0,
 	"vhs": 0.0,
 	"chromabb": 0.0,
-	"glitch": 0.0
+	"glitch": 0.0,
+	
+	"bpm_change": 0.0
 }
 
 var prefire_beat = {
@@ -56,7 +58,9 @@ var prefire_beat = {
 	"visualizer": 0,
 	"vhs": 0,
 	"chromabb": 0,
-	"glitch": 0
+	"glitch": 0,
+	
+	"bpm_change": 0,
 }
 
 const multicolor = ["laser_circle","laser_spread","laser_sweep"]
@@ -156,6 +160,11 @@ const defaults = {
 		"length": 4,
 		"strength": 0.5
 	},
+	"bpm_change": {
+		"type": "bpm_change",
+		"beat": 0,
+		"new_bpm": 120.0
+	}
 }
 
 const default_map = {

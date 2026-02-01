@@ -66,6 +66,11 @@ var events = [
 		"status": true
 	},
 	{
+		"type": "bpm_change",
+		"beat": 8,
+		"new_bpm": 500
+	},
+	{
 		"type": "platform_colour",
 		"beat": 4+3,
 		"colour": "pink",
@@ -252,6 +257,10 @@ func _process(delta: float) -> void:
 			elif event.type == "glitch":
 				glitch_timeout(event.length)
 				global.glitch_strength = event.strength
+				event_index += 1
+				continue
+			elif event.type == "bpm_change":
+				bpm = event.new_bpm
 				event_index += 1
 				continue
 			elif event.type in event_types:

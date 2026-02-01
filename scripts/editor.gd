@@ -32,7 +32,7 @@ func _ready() -> void:
 	$timeline.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$cursor.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$hor_scroll.mouse_filter = Control.MOUSE_FILTER_STOP
-
+	
 	lines_layer = Control.new()
 	lines_layer.name = "lines_layer"
 	lines_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -59,9 +59,12 @@ func _ready() -> void:
 	add_lines(1.0,($song.stream.get_length() * cur_bpm) / 60.0, lines_layer)
 	
 func _process(delta: float) -> void:
-	cursor = $hor_scroll.value / EVENT_WIDTH
 	if Input.is_action_just_pressed("save"):
 		save()
+	
+	if $song.playing:
+		cursor = $song.get_playback_position()
+		$hor_scroll.value = cursor*(60/map.bpm)*EVENT_WIDTH
 	
 	if not loaded.map:
 		$pickmusic.disabled = true
@@ -87,7 +90,6 @@ func _process(delta: float) -> void:
 		$pickmusic.modulate.a = 0.2
 	else:
 		$pickmusic.modulate.a = 1.0
-	
 	if $pickimage.button_pressed:
 		$pickimage.modulate.a = 0.4
 	elif $pickimage.disabled:
@@ -258,6 +260,7 @@ func _on_pickfolder_button_up() -> void:
 	dialog.connect("dir_selected",load_map)
 	add_child(dialog)
 	dialog.popup()
+	$pickfolder.release_focus()
 
 func load_map(dir: String,load: Array = [true,true,true]):
 	print(dir)
@@ -265,9 +268,10 @@ func load_map(dir: String,load: Array = [true,true,true]):
 	if FileAccess.file_exists(dir + "/map.jump") and load[0]:
 		var map_string = FileAccess.get_file_as_string(dir + "/map.jump")
 		map = JSON.parse_string(map_string)
+		sanitize_json(map.data,true)
 		loaded.map = true
 	else:
-		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(str(map))
+		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(JSON.stringify(map))
 	if FileAccess.file_exists(dir + "/song.ogg") and load[1]:
 		#var song_path = dir.path_join("song.ogg")
 		var song_path = dir.path_join("song.ogg")
@@ -278,12 +282,26 @@ func load_map(dir: String,load: Array = [true,true,true]):
 		loaded.image = true
 	elif FileAccess.file_exists(dir + "/cover.jpg") and load[2]:
 		loaded.image = true
-	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
-	$song_events.text = "EVENTS: " + str(map.data.size())
+	update_info()
+	
 	spawn_events()
 
 func save():
-	FileAccess.open(save_dir+"/map.jump",FileAccess.WRITE).store_string(str(map))
+	if save_dir == "":
+		return
+	sanitize_json(map.data,false)
+	var file = FileAccess.open(save_dir+"/map.jump",FileAccess.WRITE)
+	file.store_string(JSON.stringify(map))
+	file.close
+	sanitize_json(map.data,true)
+
+func update_info():
+	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
+	$song_events.text = "EVENTS: " + str(map.data.size())
+	$title.text = map.name
+	$subtitle.text = map.sub
+	$artist.text = map.artist
+	$bpm.text = str(map.bpm)
 
 func _on_pickmusic_button_up() -> void:
 	var dialog = FileDialog.new()
@@ -294,6 +312,7 @@ func _on_pickmusic_button_up() -> void:
 	dialog.connect("file_selected",load_music)
 	add_child(dialog)
 	dialog.popup()
+	$pickmusic.release_focus()
 
 func load_music(dir):
 	var file = FileAccess.open(dir,FileAccess.READ)
@@ -306,6 +325,7 @@ func load_music(dir):
 		return
 	dest.store_buffer(data)
 	dest.close()
+	load_map(save_dir)
 	return data
 
 func load_image(dir: String):
@@ -317,7 +337,6 @@ func load_image(dir: String):
 	dest.store_buffer(data)
 	dest.close()
 
-
 func _on_pickimage_button_up() -> void:
 	var dialog = FileDialog.new()
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_FILE
@@ -327,3 +346,31 @@ func _on_pickimage_button_up() -> void:
 	dialog.connect("file_selected",load_image)
 	add_child(dialog)
 	dialog.popup()
+	$pickimage.release_focus()
+
+
+func _on_play_button_up() -> void:
+	if not $song.playing:
+		$song.play()
+	elif $song.playing:
+		$song.stop()
+		cursor = snap(cursor)
+
+
+func _on_title_text_changed(new_text: String) -> void:
+	map.name = new_text
+func _on_subtitle_text_changed(new_text: String) -> void:
+	map.sub = new_text
+func _on_artist_text_changed(new_text: String) -> void:
+	map.artist = new_text
+func _on_bpm_text_changed(new_text: String) -> void:
+	if float(new_text) > 0:
+		map.bpm = float(new_text)
+
+func sanitize_json(array: Array, to_vector: bool):
+	for event in array:
+		if event.has("pos"):
+			if to_vector and event.pos is Array:
+				event.pos = Vector2(event.pos[0],event.pos[1])
+			elif not to_vector and event.pos is Vector2:
+				event.pos = [event.pos.x,event.pos.y]

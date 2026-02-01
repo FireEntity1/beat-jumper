@@ -139,7 +139,19 @@ alignment = 1
 
 [node name="FileDialog" type="FileDialog" parent="."]
 
+[node name="play" type="Button" parent="."]
+offset_left = 94.0
+offset_top = 130.0
+offset_right = 176.0
+offset_bottom = 198.0
+text = "play"
+
+[connection signal="text_changed" from="title" to="." method="_on_title_text_changed"]
+[connection signal="text_changed" from="subtitle" to="." method="_on_subtitle_text_changed"]
+[connection signal="text_changed" from="artist" to="." method="_on_artist_text_changed"]
+[connection signal="text_changed" from="bpm" to="." method="_on_bpm_text_changed"]
 [connection signal="button_up" from="pickmusic" to="." method="_on_pickmusic_button_up"]
 [connection signal="button_up" from="pickimage" to="." method="_on_pickimage_button_up"]
 [connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]
+[connection signal="button_up" from="play" to="." method="_on_play_button_up"]

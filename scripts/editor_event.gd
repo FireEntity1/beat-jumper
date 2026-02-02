@@ -70,21 +70,38 @@ func _ready() -> void:
 				editable.step = 10
 				editable.tick_count = 11
 				editable.connect("value_changed", _radius_value_changed)
+			"intensity":
+				editable = HSlider.new()
+				editable.value = event_data.intensity
+				editable.min_value = 0.0
+				editable.max_value = 2.0
+				editable.step = 0.05
+				editable.tick_count = 21
+				editable.connect("value_changed", _intensity_value_changed)
 			_:
-				editable = LineEdit.new()
-				editable.text = str(event_data[key])
-				editable.connect("text_changed",_on_editable_changed.bind(key))
+				if key == "type":
+					continue
+				if event_data[key] is bool:
+					editable = CheckBox.new()
+					editable.button_pressed = event_data[key]
+					editable.connect("toggled",_on_editable_changed.bind(key))
+				else:
+					editable = LineEdit.new()
+					editable.text = str(event_data[key])
+					editable.connect("text_changed",_on_editable_changed.bind(key))
 		if key != "rot":
 			$edit/container.add_child(label)
 			$edit/container.add_child(editable)
 		if key == "length":
 			custom_minimum_size.x = 300 * event_data.length
 
-func _on_editable_changed(text: String,key: String):
-	var old = event_data
+func _on_editable_changed(data,key: String):
+	var old = event_data.duplicate(true)
 	match key:
 		"new_bpm":
-			event_data[key] = float(text)
+			event_data[key] = float(data)
+		"status":
+			event_data[key] = data
 	parent.modify(old,event_data)
 
 func _on_speedpicker_changed(text):
@@ -120,6 +137,11 @@ func _on_colour_selected(index: int, selected: bool, list: ItemList):
 	for i in list.get_selected_items():
 		cols.append(list.get_item_text(i))
 	event_data.colour = cols
+	parent.modify(old,event_data)
+
+func _intensity_value_changed(value: float):
+	var old = event_data
+	event_data.intensity = value
 	parent.modify(old,event_data)
 
 func _process(delta: float) -> void:

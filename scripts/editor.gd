@@ -3,6 +3,8 @@ extends Node2D
 const TRACK = preload("res://components/track.tscn")
 const EVENT = preload("res://components/editor_event.tscn")
 
+const EVENT_WIDTH = 300
+
 var last_beat = {}
 
 var editor_scale = 1.0
@@ -21,8 +23,6 @@ var loaded = {
 var save_dir: String
 
 var cursor: float
-
-const EVENT_WIDTH = 300
 
 var cur_bpm: float
 
@@ -122,7 +122,6 @@ func spawn_events():
 		var events = groups[key]
 		var event = events[-1]
 		var track = $scroll/tracks.get_node(event.type + "/hbox")
-		#add_spacer(track, event.beat, event)
 		
 		var max_width = EVENT_WIDTH*float(editor_scale)
 		for temp_event in events:
@@ -174,12 +173,6 @@ func spawn_events():
 			)
 		main_event.beat = float(main_event.beat)
 		track.add_child(main_event)
-
-func add_spacer(track, beat, event):
-	var spacer = Control.new()
-	spacer.custom_minimum_size.x = (event.beat-last_beat[event.type]) * EVENT_WIDTH
-	last_beat[event.type] = event.beat
-	track.add_child(spacer)
 
 func group_events(events):
 	var groups = {}
@@ -244,7 +237,6 @@ func modify(old: Dictionary, new: Dictionary):
 	for i in range(map.data.size()):
 		if map.data[i] == old:
 			map.data[i] = new
-			print("changed!")
 			return
 
 func delete(event: Dictionary):
@@ -272,6 +264,7 @@ func load_map(dir: String,load: Array = [true,true,true]):
 		loaded.map = true
 	else:
 		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(JSON.stringify(map))
+		loaded.map = true
 	if FileAccess.file_exists(dir + "/song.ogg") and load[1]:
 		#var song_path = dir.path_join("song.ogg")
 		var song_path = dir.path_join("song.ogg")
@@ -348,14 +341,12 @@ func _on_pickimage_button_up() -> void:
 	dialog.popup()
 	$pickimage.release_focus()
 
-
 func _on_play_button_up() -> void:
 	if not $song.playing:
 		$song.play()
 	elif $song.playing:
 		$song.stop()
 		cursor = snap(cursor)
-
 
 func _on_title_text_changed(new_text: String) -> void:
 	map.name = new_text

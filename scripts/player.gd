@@ -29,7 +29,6 @@ func pulse_loop():
 			kick_in = !kick_in
 
 func _process(delta: float) -> void:
-	print("Dashing: ", $sprite.material.get_shader_parameter("dir"))
 	if not global.camera_kick and not global.chromabb:
 		chromabb.set_shader_parameter("r_displacement",Vector2(0,0))
 		chromabb.set_shader_parameter("b_displacement",Vector2(0,0))
@@ -54,12 +53,13 @@ func _process(delta: float) -> void:
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-ci*3,ci*1.2),delta*300))
 	if global.shake:
-		shake.set_shader_parameter("ShakeStrength",global.shake_strength)
+		shake.set_shader_parameter("Shakeintensity",global.shake_intensity)
+		print("SHAKING")
 	else:
-		shake.set_shader_parameter("ShakeStrength",0.0)
+		shake.set_shader_parameter("Shakeintensity",0.0)
 	if global.glitch:
 		glitch.set_shader_parameter("running", true)
-		glitch.set_shader_parameter("shake_power",float(global.glitch_strength)/100)
+		glitch.set_shader_parameter("shake_power",float(global.glitch_intensity)/100)
 	else:
 		glitch.set_shader_parameter("running", false)
 	if global.vhs:

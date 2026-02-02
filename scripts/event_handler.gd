@@ -66,11 +66,6 @@ var events = [
 		"status": true
 	},
 	{
-		"type": "bpm_change",
-		"beat": 8,
-		"new_bpm": 500
-	},
-	{
 		"type": "platform_colour",
 		"beat": 4+3,
 		"colour": "pink",
@@ -127,7 +122,13 @@ var events = [
 		"type": "glitch",
 		"beat": 4+4,
 		"length": 3,
-		"strength": 0.5
+		"intensity": 0.5
+	},
+	{
+		"type": "shake",
+		"beat": 8,
+		"status": true,
+		"intensity": 1.0
 	},
 	{
 		"type": "platform_colour",
@@ -165,7 +166,7 @@ var events = [
 		"type": "glitch",
 		"beat": 8+4,
 		"length": 4,
-		"strength": 0.5
+		"intensity": 0.5
 	},
 	{
 		"type": "platform_colour",
@@ -236,9 +237,9 @@ func _process(delta: float) -> void:
 				continue
 			elif event.type == "shake":
 				global.shake = event.status
-				global.shake_strength = event.strength
+				global.shake_intensity = event.intensity
 				event_index += 1
-				print("shake set to ", event.status, " strength: ", event.strength)
+				print("shake set to ", event.status, " intensity: ", event.intensity)
 				continue
 			elif event.type == "visualizer":
 				global.visualizer = event.status
@@ -256,7 +257,7 @@ func _process(delta: float) -> void:
 				continue
 			elif event.type == "glitch":
 				glitch_timeout(event.length)
-				global.glitch_strength = event.strength
+				global.glitch_intensity = event.intensity
 				event_index += 1
 				continue
 			elif event.type == "bpm_change":

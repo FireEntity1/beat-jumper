@@ -20,10 +20,10 @@ var camera_kick_speed = 1.0
 var current_col: Color
 
 var glitch = false
-var glitch_strength = 1
+var glitch_intensity = 1
 
 var shake = false
-var shake_strength = 0.5
+var shake_intensity = 0.5
 
 var prefire_sec = {
 	"laser": 0.6,
@@ -135,7 +135,7 @@ const defaults = {
 		"type": "shake",
 		"beat": 0,
 		"status": true,
-		"strength": 0.5
+		"intensity": 0.5
 	},
 	"visualizer": {
 		"type": "visualizer",
@@ -158,7 +158,7 @@ const defaults = {
 		"type": "glitch",
 		"beat": 0,
 		"length": 4,
-		"strength": 0.5
+		"intensity": 0.5
 	},
 	"bpm_change": {
 		"type": "bpm_change",

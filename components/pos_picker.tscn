@@ -14,6 +14,7 @@ offset_bottom = -794.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_skmxb")
+event_type = "laser_sweep"
 
 [node name="hslider" type="HSlider" parent="."]
 layout_mode = 2
@@ -57,6 +58,7 @@ offset_left = 567.0
 offset_top = 126.0
 offset_right = 685.0
 offset_bottom = 130.0
+rotation = 1.5708
 pivot_offset = Vector2(58.5, 2)
 
 [node name="laser_preview" type="ColorRect" parent="."]

@@ -93,6 +93,7 @@ const defaults = {
 		"amount": 12,
 		"speed": 1.0/8.0,
 		"distance": 300,
+		"direction": true,
 		"outwards": true,
 		"colour": ["pink"]
 	},
@@ -195,7 +196,7 @@ const colours = {
 
 const colours_raw = {
 	"hotpink": Color(3,1,2.5),
-	"pink": Color(3,1.5,1.5),
+	"pink": Color(2.4,1.5,1.5),
 	"blue": Color(1,3,3),
 	"green": Color(1.3,2.3,1.3),
 	"red": Color(3,1,1.5),

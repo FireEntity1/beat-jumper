@@ -6,6 +6,7 @@ extends Node2D
 @export var speed: float
 @export var fire_beat = 1.0
 @export var distance: int
+@export var direction: bool = true
 var offset
 
 @export var colour = ["hotpink", "red"]
@@ -40,9 +41,10 @@ func _process(delta: float) -> void:
 			break
 
 func spawn_laser(pos):
+	var dir = float(direction)*2-1
 	var temp = laser.instantiate()
 	temp.rot = rot
-	temp.pos = position + Vector2(distance*current,0)
+	temp.pos = position + Vector2(distance*current*dir,0)
 	temp.snap = false
 	temp.fire_beat = fire_beat + (speed * (current - 1))
 	temp.colour = colour[cur_col]
@@ -50,7 +52,7 @@ func spawn_laser(pos):
 	if outwards:
 		temp = laser.instantiate()
 		temp.rot = rot
-		temp.pos = position - Vector2(distance*current,0)
+		temp.pos = position - Vector2(distance*current*dir,0)
 		temp.snap = false
 		temp.fire_beat = fire_beat + (speed * (current - 1))
 		temp.colour = colour[cur_col]

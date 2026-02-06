@@ -95,11 +95,12 @@ var events = [
 		"type": "laser_sweep",
 		"beat": 11,
 		"pos": Vector2(5,1),
-		"rot": 90,
+		"rot": 45,
 		"amount": 16,
 		"speed": 1.0/16.0,
 		"distance": 300,
-		"outwards": true,
+		"outwards": false,
+		"direction": false,
 		"colour": ["pink"]
 	},
 	{
@@ -171,13 +172,13 @@ var events = [
 	{
 		"type": "platform_colour",
 		"beat": 12+4,
-		"colour": "black",
+		"colour": "blue",
 		"speed": 5
 	},
 	{
 		"type": "visualizer",
 		"beat": 12+4,
-		"status": false
+		"status": true
 	},
 	
 ]
@@ -286,6 +287,7 @@ func _process(delta: float) -> void:
 						temp.distance = event.distance
 						temp.outwards = event.outwards
 						temp.colour = event.colour
+						temp.direction = event.direction
 					"laser_spread":
 						temp.speed = event.speed
 						temp.colour = event.colour

@@ -64,12 +64,20 @@ func _ready() -> void:
 				editable.connect("value_changed", _edges_value_changed)
 			"radius":
 				editable = HSlider.new()
-				editable.value = event_data.edges
+				editable.value = event_data.radius
 				editable.min_value = 1
 				editable.max_value = 1000
 				editable.step = 10
 				editable.tick_count = 11
 				editable.connect("value_changed", _radius_value_changed)
+			"distance":
+				editable = HSlider.new()
+				editable.value = event_data.distance
+				editable.min_value = 1
+				editable.max_value = 1000
+				editable.step = 10
+				editable.tick_count = 11
+				editable.connect("value_changed", _distance_value_changed)
 			"intensity":
 				editable = HSlider.new()
 				editable.value = event_data.intensity
@@ -102,6 +110,10 @@ func _on_editable_changed(data,key: String):
 			event_data[key] = float(data)
 		"status":
 			event_data[key] = data
+		_:
+			event_data[key] = data
+	if pos_editor is Control:
+		pos_editor.update_preview()
 	parent.modify(old,event_data)
 
 func _on_speedpicker_changed(text):
@@ -127,6 +139,13 @@ func _edges_value_changed(value):
 func _radius_value_changed(value):
 	var old = event_data
 	event_data.radius = value
+	pos_editor.event_data = event_data
+	pos_editor.update_preview()
+	parent.modify(old,event_data)
+
+func _distance_value_changed(value):
+	var old = event_data
+	event_data.distance = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
 	parent.modify(old,event_data)

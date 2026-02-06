@@ -1,8 +1,10 @@
 extends Control
 
-var event_type = "laser"
+@export var event_type = "laser"
 
 var dragging = false
+
+var first = true
 
 var event_data: Dictionary
 
@@ -11,7 +13,7 @@ var rot: float
 
 @onready var knob = $angle
 
-var circle_lasers = []
+var lasers = []
 
 var angle = 0
 
@@ -48,20 +50,28 @@ func _set_value_from_mouse(pos:Vector2):
 	angle = fmod(angle + 360, 360)
 	knob.value = angle
 	$pointer.rotation_degrees = angle + 90
+	event_data.rot = angle + 90
+	first = false
 	update_preview()
 
 func update_preview():
 	$laser_preview.position = Vector2($hslider.value*30-70,$vslider.value*30+90)
 	$laser_preview.rotation_degrees = angle + 90
-	for laser in circle_lasers:
+	for laser in lasers:
 		laser.queue_free()
-	circle_lasers = []
+	lasers = []
 	$circle_preview.position = Vector2($hslider.value*30,$vslider.value*30) + Vector2(100,100)
 	if event_type == "laser_circle":
 		for laser in range(event_data.edges):
-			spawn_laser(laser,event_data.edges,event_data.direction,event_data.radius)
-	$circle_preview.rotation_degrees = angle+90
-func spawn_laser(index: int, edges: int, direction: int, radius: float):
+			spawn_laser_circle(laser,event_data.edges,event_data.direction,event_data.radius)
+		$circle_preview.rotation_degrees = angle+90
+	if event_type == "laser_sweep":
+		for index in range(event_data.amount):
+			spawn_laser_sweep(index,event_data.distance,event_data.outwards,angle + 90, event_data.direction)
+		if first: 
+			for laser in lasers:
+				laser.rotation_degrees += 90
+func spawn_laser_circle(index: int, edges: int, direction: int, radius: float):
 	var step = 360.0 / edges
 	var current_angle_deg = step * index * direction
 	var current_angle_rad = deg_to_rad(current_angle_deg)
@@ -72,7 +82,26 @@ func spawn_laser(index: int, edges: int, direction: int, radius: float):
 	temp.rotation_degrees = current_angle_deg + 90
 	temp.pivot_offset = temp.size/2
 	$circle_preview.add_child(temp)
-	circle_lasers.append(temp)
+	lasers.append(temp)
+
+func spawn_laser_sweep(index: int, distance: float, outwards: bool, rot: float, dir: bool):
+	var direc = float(dir)*2-1
+	var temp = ColorRect.new()
+	temp.size = Vector2(200,2)
+	temp.position = Vector2(float(index)*distance/15*direc,40)
+	temp.rotation_degrees = rot
+	temp.pivot_offset = temp.size/2
+	$circle_preview.add_child(temp)
+	lasers.append(temp)
+	
+	if outwards:
+		temp = ColorRect.new()
+		temp.size = Vector2(200,2)
+		temp.position = Vector2(float(index)*-distance/15*direc,40)
+		temp.rotation_degrees = rot
+		temp.pivot_offset = temp.size/2
+		$circle_preview.add_child(temp)
+		lasers.append(temp)
 
 func _on_update_timeout() -> void:
 	update_preview()

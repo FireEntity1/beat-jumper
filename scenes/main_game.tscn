@@ -187,3 +187,5 @@ autoplay = true
 max_distance = 10000.0
 attenuation = 5.31342e-05
 panning_strength = 0.0
+
+[node name="events" type="Node2D" parent="."]

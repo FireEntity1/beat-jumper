@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bbbc0ialstsck"]
+[gd_scene load_steps=7 format=3 uid="uid://bbbc0ialstsck"]
 
 [ext_resource type="Script" uid="uid://cmet2ui0aer24" path="res://scripts/editor.gd" id="1_b1cmn"]
 [ext_resource type="Texture2D" uid="uid://bx2hdbcsx4v41" path="res://sprites/music_upload.png" id="2_ba0ut"]
 [ext_resource type="Texture2D" uid="uid://chisdg250e4xb" path="res://sprites/image_upload.png" id="3_q68jb"]
 [ext_resource type="AudioStream" uid="uid://c844h23x0bc8g" path="res://components/[For EGCS 2023 FN-TB] trung-nova - Roars of V.E.N.G.E.A.N.C.E -Take Back Everything-.mp3" id="4_q68jb"]
 [ext_resource type="Texture2D" uid="uid://doau53rctjgb7" path="res://sprites/folder.png" id="4_xg7d5"]
+[ext_resource type="PackedScene" uid="uid://cd0l2flrue8ie" path="res://scenes/main_game.tscn" id="6_eqbpn"]
 
 [node name="editor" type="Node2D"]
 script = ExtResource("1_b1cmn")
@@ -146,6 +147,25 @@ offset_right = 176.0
 offset_bottom = 198.0
 text = "play"
 
+[node name="layer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="preview_container" type="SubViewportContainer" parent="layer"]
+offset_left = 426.0
+offset_top = 149.0
+offset_right = 2346.0
+offset_bottom = 1229.0
+scale = Vector2(0.6, 0.6)
+
+[node name="preview" type="SubViewport" parent="layer/preview_container"]
+disable_3d = true
+handle_input_locally = false
+use_hdr_2d = true
+size = Vector2i(1920, 1080)
+render_target_update_mode = 0
+
+[node name="main_game" parent="layer/preview_container/preview" instance=ExtResource("6_eqbpn")]
+
 [connection signal="text_changed" from="title" to="." method="_on_title_text_changed"]
 [connection signal="text_changed" from="subtitle" to="." method="_on_subtitle_text_changed"]
 [connection signal="text_changed" from="artist" to="." method="_on_artist_text_changed"]
@@ -153,5 +173,6 @@ text = "play"
 [connection signal="button_up" from="pickmusic" to="." method="_on_pickmusic_button_up"]
 [connection signal="button_up" from="pickimage" to="." method="_on_pickimage_button_up"]
 [connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]
+[connection signal="scroll_ended" from="scroll" to="." method="_on_scroll_scroll_ended"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]
 [connection signal="button_up" from="play" to="." method="_on_play_button_up"]

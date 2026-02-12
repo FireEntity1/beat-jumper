@@ -54,7 +54,6 @@ func _process(delta: float) -> void:
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-ci*3,ci*1.2),delta*300))
 	if global.shake:
 		shake.set_shader_parameter("Shakeintensity",global.shake_intensity)
-		print("SHAKING")
 	else:
 		shake.set_shader_parameter("Shakeintensity",0.0)
 	if global.glitch:

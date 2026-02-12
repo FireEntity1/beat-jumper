@@ -9,6 +9,8 @@ var last_beat = {}
 
 var editor_scale = 1.0
 
+@onready var preview = $layer/preview_container/preview/main_game
+
 var lines_layer
 
 var map: Dictionary
@@ -52,6 +54,7 @@ func _ready() -> void:
 	$hor_scroll.max_value = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
 	$hor_scroll.value_changed.connect(func(val): 
 		$scroll.scroll_horizontal = int(val)
+		cursor = val/EVENT_WIDTH
 	)
 	$scroll/tracks.add_child(lines_layer)
 	lines_layer.z_index = 100
@@ -65,6 +68,9 @@ func _process(delta: float) -> void:
 	if $song.playing:
 		cursor = time_to_beat($song.get_playback_position())
 		$hor_scroll.value = cursor * EVENT_WIDTH
+		$layer.show()
+	else:
+		$layer.hide()
 	
 	if not loaded.map:
 		$pickmusic.disabled = true
@@ -343,10 +349,12 @@ func _on_pickimage_button_up() -> void:
 
 func _on_play_button_up() -> void:
 	if not $song.playing:
-		$song.play()
+		$song.play(beat_to_time(cursor))
+		preview.modify(true,beat_to_time(cursor),cursor,map)
 	elif $song.playing:
 		$song.stop()
 		cursor = snap(cursor)
+		$hor_scroll.value = cursor*EVENT_WIDTH - 10
 
 func _on_title_text_changed(new_text: String) -> void:
 	map.name = new_text
@@ -412,3 +420,6 @@ func time_to_beat(time: float):
 			return cur.beat + (time - elapsed) * (cur.new_bpm/60.0)
 		elapsed += segment_time
 	return bpm_changes[-1].beat
+
+func _on_scroll_scroll_ended() -> void:
+	print("scroll ended")

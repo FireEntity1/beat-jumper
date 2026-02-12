@@ -1,5 +1,7 @@
 extends Node2D
 
+@export var is_preview = false
+
 var event_types = {
 	"laser": preload("res://components/laser.tscn"),
 	"laser_circle": preload("res://components/laser_circle.tscn"),
@@ -23,6 +25,8 @@ var target_platform_colour = global.colours_raw["pink"]
 var platform_colour_speed = 1
 var showing_sun = false
 var sun_mult = 0.0
+
+var map: Dictionary = global.default_map.duplicate(true)
 
 var events = [
 	{
@@ -184,10 +188,11 @@ var events = [
 ]
 
 func _ready() -> void:
+	map.data = events
 	bpm += epsilon
 	#$music.play(310.4)
 	$music.play(279.55)
-	events.sort_custom(sort_by_trigger_beat)
+	map.data.sort_custom(sort_by_trigger_beat)
 	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
 
 func _process(delta: float) -> void:
@@ -217,8 +222,8 @@ func _process(delta: float) -> void:
 					$main_platform/platform_sprite.modulate.b*sun_mult
 				))
 	
-	while event_index < events.size():
-		var event = events[event_index]
+	while event_index < map.data.size():
+		var event = map.data[event_index]
 		var trigger_beat = event["beat"] - global.prefire_beat[event["type"]]
 		if crossed(last_beat,beat,trigger_beat):
 			var temp
@@ -297,7 +302,7 @@ func _process(delta: float) -> void:
 						temp.colour = event.colour
 						temp.fire_hold = event.length
 						temp.rot = 0
-				add_child(temp)
+				$events.add_child(temp)
 				event_index += 1
 			
 		else:
@@ -323,3 +328,29 @@ func glitch_timeout(time):
 	global.glitch = true
 	await get_tree().create_timer((60.0/bpm)*time).timeout
 	global.glitch = false
+
+func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {}):
+	for event in $events.get_children():
+		event.queue_free()
+	if new_map.has("map"):
+		map = new_map
+	event_index = 0
+	reset_states()
+	for event in map.data:
+		if event.beat < new_beat:
+			event_index += 1
+		else:
+			break
+	if playing:
+		beat = new_beat
+		$music.play(time)
+	else:
+		$music.stop()
+
+func reset_states():
+	target_platform_colour = global.colours_raw.purple
+	platform_colour_speed = 1
+	showing_sun = false
+	global.visualizer = true
+	global.shake = false
+	global.camera_kick = false

@@ -100,7 +100,7 @@ var events = [
 		"beat": 11,
 		"pos": Vector2(5,1),
 		"rot": 45,
-		"amount": 16,
+		"amount": 8,
 		"speed": 1.0/16.0,
 		"distance": 300,
 		"outwards": false,
@@ -332,10 +332,15 @@ func glitch_timeout(time):
 func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {}):
 	for event in $events.get_children():
 		event.queue_free()
-	if new_map.has("map"):
-		map = new_map
+	if new_map.has("data"):
+		map = new_map.duplicate(true)
+		print(map)
+		
 	event_index = 0
 	reset_states()
+	
+	map.data.sort_custom(sort_by_trigger_beat)
+	
 	for event in map.data:
 		if event.beat < new_beat:
 			event_index += 1
@@ -348,9 +353,13 @@ func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {
 		$music.stop()
 
 func reset_states():
+	$player.position = Vector2(0,0)
 	target_platform_colour = global.colours_raw.purple
 	platform_colour_speed = 1
 	showing_sun = false
 	global.visualizer = true
 	global.shake = false
 	global.camera_kick = false
+
+func click():
+	$click.play()

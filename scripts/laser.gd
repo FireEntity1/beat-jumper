@@ -50,6 +50,12 @@ func _process(delta: float) -> void:
 			queue_free()
 
 func start_fire_seq():
+	var parent: Node2D
+	if get_parent().get_parent().get_parent().has_method("click"):
+		parent = get_parent().get_parent().get_parent()
+	else:
+		parent = get_parent().get_parent()
+	parent.click()
 	if is_fired:
 		return
 	is_fired = true

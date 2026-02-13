@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cd0l2flrue8ie"]
+[gd_scene load_steps=19 format=3 uid="uid://cd0l2flrue8ie"]
 
 [ext_resource type="Script" uid="uid://6bbe45ewoge8" path="res://scripts/event_handler.gd" id="1_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://cau03qpr1fblt" path="res://sprites/platform.png" id="1_72e8q"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="4_0rdsr"]
 [ext_resource type="PackedScene" uid="uid://c6pfcul8lmyr6" path="res://components/visualizer.tscn" id="7_wi4c7"]
 [ext_resource type="AudioStream" uid="uid://c844h23x0bc8g" path="res://components/[For EGCS 2023 FN-TB] trung-nova - Roars of V.E.N.G.E.A.N.C.E -Take Back Everything-.mp3" id="8_70vka"]
+[ext_resource type="AudioStream" uid="uid://p7omwgbrer7h" path="res://audio/sfx/click.wav" id="9_2l77h"]
 
 [sub_resource type="Environment" id="Environment_72e8q"]
 background_mode = 3
@@ -189,3 +190,8 @@ attenuation = 5.31342e-05
 panning_strength = 0.0
 
 [node name="events" type="Node2D" parent="."]
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-1, 235)
+stream = ExtResource("9_2l77h")
+attenuation = 0.000850147

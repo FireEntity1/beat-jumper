@@ -47,6 +47,10 @@ func _ready() -> void:
 				editable = LineEdit.new()
 				editable.text = str(event_data[key])
 				editable.connect("text_changed", _on_speedpicker_changed)
+			"length":
+				editable = LineEdit.new()
+				editable.text = str(event_data[key])
+				editable.connect("text_changed", _on_length_changed)
 			"pos":
 				editable = POS_EDITOR.instantiate()
 				pos_editor = editable
@@ -101,7 +105,7 @@ func _ready() -> void:
 			$edit/container.add_child(label)
 			$edit/container.add_child(editable)
 		if key == "length":
-			custom_minimum_size.x = 300 * event_data.length
+			custom_minimum_size.x = 300 * float(event_data.length)
 
 func _on_editable_changed(data,key: String):
 	var old = event_data.duplicate(true)
@@ -124,6 +128,20 @@ func _on_speedpicker_changed(text):
 	text = regex.sub(text,"$1.0", true)
 	if exp.parse(str(text)) == OK:
 		var value = exp.execute()
+		event_data.speed = value
+	else:
+		print("error")
+	parent.modify(old,event_data)
+
+func _on_length_changed(text):
+	var old = event_data
+	var exp = Expression.new()
+	var regex = RegEx.new()
+	regex.compile(r"\b(\d+)\b")
+	text = regex.sub(text,"$1.0", true)
+	if exp.parse(str(text)) == OK:
+		var value = exp.execute()
+		event_data.length = value
 		print(value)
 	else:
 		print("error")

@@ -30,6 +30,7 @@ var cur_bpm: float
 
 func _ready() -> void:
 	map = global.default_map.duplicate(true)
+	preview.is_preview = true
 	cur_bpm = map.bpm
 	$timeline.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$cursor.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -64,6 +65,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("save"):
 		save()
+	if Input.is_action_just_pressed("ui_accept"):
+		_on_play_button_up()
 	
 	if $song.playing:
 		cursor = time_to_beat($song.get_playback_position())
@@ -301,6 +304,7 @@ func update_info():
 	$subtitle.text = map.sub
 	$artist.text = map.artist
 	$bpm.text = str(map.bpm)
+	$offset.text = str(map.offset)
 
 func _on_pickmusic_button_up() -> void:
 	var dialog = FileDialog.new()
@@ -348,6 +352,7 @@ func _on_pickimage_button_up() -> void:
 	$pickimage.release_focus()
 
 func _on_play_button_up() -> void:
+	$play.release_focus()
 	if not $song.playing:
 		$song.play(beat_to_time(cursor))
 		preview.modify(true,beat_to_time(cursor),cursor,map)
@@ -403,9 +408,10 @@ func beat_to_time(target: float):
 			break
 		var segment_beats = min(target, next_beat) - cur.beat
 		time += segment_beats * (60.0/ cur.new_bpm)
-	return time
+	return time + map.offset
 
 func time_to_beat(time: float):
+	time -= map.offset
 	var bpm_changes = get_bpm_changes()
 	var elapsed = 0.0
 	for i in range(bpm_changes.size()):
@@ -423,3 +429,6 @@ func time_to_beat(time: float):
 
 func _on_scroll_scroll_ended() -> void:
 	print("scroll ended")
+
+func _on_offset_text_changed(new_text: String) -> void:
+	map.offset = float(new_text)

@@ -47,9 +47,18 @@ alignment = 1
 offset_left = 1799.0
 offset_top = 11.0
 offset_right = 1904.0
-offset_bottom = 85.0
+offset_bottom = 51.0
 theme_override_font_sizes/font_size = 24
 placeholder_text = "BPM"
+alignment = 1
+
+[node name="offset" type="LineEdit" parent="."]
+offset_left = 1799.0
+offset_top = 52.0
+offset_right = 1904.0
+offset_bottom = 92.0
+theme_override_font_sizes/font_size = 24
+placeholder_text = "OFFSET"
 alignment = 1
 
 [node name="pickmusic" type="TextureButton" parent="."]
@@ -161,6 +170,7 @@ scale = Vector2(0.6, 0.6)
 disable_3d = true
 handle_input_locally = false
 use_hdr_2d = true
+audio_listener_enable_2d = true
 size = Vector2i(1920, 1080)
 render_target_update_mode = 0
 
@@ -170,6 +180,7 @@ render_target_update_mode = 0
 [connection signal="text_changed" from="subtitle" to="." method="_on_subtitle_text_changed"]
 [connection signal="text_changed" from="artist" to="." method="_on_artist_text_changed"]
 [connection signal="text_changed" from="bpm" to="." method="_on_bpm_text_changed"]
+[connection signal="text_changed" from="offset" to="." method="_on_offset_text_changed"]
 [connection signal="button_up" from="pickmusic" to="." method="_on_pickmusic_button_up"]
 [connection signal="button_up" from="pickimage" to="." method="_on_pickimage_button_up"]
 [connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]

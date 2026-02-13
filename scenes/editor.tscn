@@ -175,6 +175,7 @@ size = Vector2i(1920, 1080)
 render_target_update_mode = 0
 
 [node name="main_game" parent="layer/preview_container/preview" instance=ExtResource("6_eqbpn")]
+is_preview = true
 
 [connection signal="text_changed" from="title" to="." method="_on_title_text_changed"]
 [connection signal="text_changed" from="subtitle" to="." method="_on_subtitle_text_changed"]

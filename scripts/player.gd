@@ -4,6 +4,8 @@ extends CharacterBody2D
 const SPEED = 1300.0
 const JUMP_VELOCITY = -1700.0
 
+var is_preview = false
+
 var prev_dir = 1
 var dashing = false
 var jumps = 1
@@ -20,6 +22,9 @@ var scale_target = Vector2(1,1)
 @onready var glitch = $layer4/glitch.material as ShaderMaterial
 
 func _ready() -> void:
+	if get_parent().is_preview:
+		hide()
+		is_preview = true
 	pulse_loop()
 
 func pulse_loop():
@@ -121,3 +126,5 @@ func _physics_process(delta: float) -> void:
 	
 	scale = scale.move_toward(scale_target,0.09)
 	move_and_slide()
+	if is_preview:
+		position = Vector2(0,0)

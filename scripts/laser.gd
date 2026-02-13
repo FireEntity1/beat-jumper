@@ -55,7 +55,8 @@ func start_fire_seq():
 		parent = get_parent().get_parent().get_parent()
 	else:
 		parent = get_parent().get_parent()
-	parent.click()
+	if parent.is_preview == true:
+		parent.click()
 	if is_fired:
 		return
 	is_fired = true

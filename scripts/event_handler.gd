@@ -190,10 +190,10 @@ var events = [
 func _ready() -> void:
 	map.data = events
 	bpm += epsilon
-	#$music.play(310.4)
-	$music.play(279.55)
+	if not is_preview:
+		$music.play(279.55)
 	map.data.sort_custom(sort_by_trigger_beat)
-	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
+	$main_platform/platform_sprite.modulate = global.colours_raw["pink"]
 
 func _process(delta: float) -> void:
 	global.bpm = bpm

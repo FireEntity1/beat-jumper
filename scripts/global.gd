@@ -7,6 +7,9 @@ var grid_mult = Vector2(275,160)
 var grid_offset = Vector2(-1660,-670)
 
 var visualizer = true
+var visualizer_line = false
+var visualizer_smooth = true
+var visualizer_bar = true
 
 var vhs = false
 var vhs_intensity = 0.5
@@ -141,7 +144,10 @@ const defaults = {
 	"visualizer": {
 		"type": "visualizer",
 		"beat": 0,
-		"status": true
+		"status": true,
+		"line": false,
+		"smooth_line": true,
+		"bar": true
 	},
 	"vhs": {
 		"type": "vhs",

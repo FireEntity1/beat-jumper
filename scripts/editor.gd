@@ -359,6 +359,7 @@ func _on_play_button_up() -> void:
 	elif $song.playing:
 		$song.stop()
 		cursor = snap(cursor)
+		preview.modify(false,beat_to_time(cursor),cursor,map)
 		$hor_scroll.value = cursor*EVENT_WIDTH - 10
 
 func _on_title_text_changed(new_text: String) -> void:
@@ -431,4 +432,5 @@ func _on_scroll_scroll_ended() -> void:
 	print("scroll ended")
 
 func _on_offset_text_changed(new_text: String) -> void:
-	map.offset = float(new_text)
+	map.offset = max(new_text, 0)
+	$offset.text = str(map.offset)

@@ -127,4 +127,4 @@ func _physics_process(delta: float) -> void:
 	scale = scale.move_toward(scale_target,0.09)
 	move_and_slide()
 	if is_preview:
-		position = Vector2(0,0)
+		position = Vector2(0,150)

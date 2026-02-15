@@ -172,19 +172,20 @@ offset_bottom = 1250.0
 [node name="visualizer" parent="." instance=ExtResource("7_wi4c7")]
 position = Vector2(-2, 458)
 scale = Vector2(0.35, -1)
+smooth = true
 
 [node name="visualizer2" parent="." instance=ExtResource("7_wi4c7")]
 position = Vector2(-2, 458)
 rotation = -3.14159
 scale = Vector2(0.35, 1)
+smooth = true
 
 [node name="music" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(-3.99996, -93)
 rotation = -3.14159
 scale = Vector2(0.35, 1)
 stream = ExtResource("8_70vka")
-volume_db = -16.343
-autoplay = true
+volume_db = -13.0
 max_distance = 10000.0
 attenuation = 5.31342e-05
 panning_strength = 0.0

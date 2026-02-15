@@ -9,3 +9,6 @@ script = ExtResource("1_egsck")
 position = Vector2(970, -448)
 scale = Vector2(1.10907, 1.10907)
 zoom = Vector2(0.3, 0.3)
+
+[node name="line" type="Line2D" parent="."]
+antialiased = true

@@ -123,6 +123,9 @@ text = "EVENTS: 0"
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_q68jb")
+volume_db = -13.0
+max_distance = 10000.0
+attenuation = 1e-05
 
 [node name="timeline" type="HBoxContainer" parent="."]
 offset_top = 202.0

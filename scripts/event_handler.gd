@@ -28,172 +28,12 @@ var sun_mult = 0.0
 
 var map: Dictionary = global.default_map.duplicate(true)
 
-var events = [
-	{
-		"type": "visualizer",
-		"beat": 4,
-		"status": false
-	},
-	{
-		"type": "laser_circle",
-		"beat": 0+4,
-		"pos": Vector2(4,3),
-		"rot": 0,
-		"radius": 400,
-		"amount": 12,
-		"edges": 12,
-		"speed": 1.0/6.0,
-		"colour": ["pink","red"],
-		"direction": 1
-	},
-	{
-		"type": "laser_circle",
-		"beat": 2+4,
-		"pos": Vector2(7,3),
-		"rot": 90,
-		"radius": 400,
-		"amount": 12,
-		"edges": 12,
-		"speed": 1.0/6.0,
-		"colour": ["purple","blue"],
-		"direction": -1
-	},
-	{
-		"type": "platform_colour",
-		"beat": 4,
-		"colour": "black",
-		"speed": 10
-	},
-	{
-		"type": "visualizer",
-		"beat": 4+4,
-		"status": true
-	},
-	{
-		"type": "platform_colour",
-		"beat": 4+3,
-		"colour": "pink",
-		"speed": 5
-	},
-	{
-		"type": "laser",
-		"beat": 15,
-		"pos": Vector2(5,5.2),
-		"rot": 0,
-		"colour": "orange"
-	},
-	{
-		"type": "laser",
-		"beat": 15.4,
-		"pos": Vector2(5,4.8),
-		"rot": 0,
-		"colour": "purple"
-	},
-	{
-		"type": "platform_colour",
-		"beat": 4+4,
-		"colour": "pink",
-		"speed": 50
-	},
-	{
-		"type": "laser_sweep",
-		"beat": 11,
-		"pos": Vector2(5,1),
-		"rot": 45,
-		"amount": 8,
-		"speed": 1.0/16.0,
-		"distance": 300,
-		"outwards": false,
-		"direction": false,
-		"colour": ["pink"]
-	},
-	{
-		"type": "laser_slam",
-		"beat": 8,
-		"pos": Vector2(3,1),
-		"rot": 0,
-		"colour": "pink",
-		"length": 3.0
-	},
-	{
-		"type": "laser_slam",
-		"beat": 8,
-		"pos": Vector2(9,1),
-		"rot": 0,
-		"colour": "pink",
-		"length": 3.0
-	},
-	{
-		"type": "glitch",
-		"beat": 4+4,
-		"length": 3,
-		"intensity": 0.5
-	},
-	{
-		"type": "shake",
-		"beat": 8,
-		"status": true,
-		"intensity": 1.0
-	},
-	{
-		"type": "platform_colour",
-		"beat": 7+4,
-		"colour": "black",
-		"speed": 10
-	},
-	{
-		"type": "platform_colour",
-		"beat": 8+4,
-		"colour": "blue",
-		"speed": 50
-	},
-	{
-		"type": "laser_spread",
-		"beat": 8+4,
-		"colour": ["blue"],
-		"speed": 3,
-		"amount": 10,
-		"length": 4.0,
-		"pos": Vector2(5,0),
-		"rot": 0
-	},
-	{
-		"type": "laser_spread",
-		"beat": 8+4,
-		"colour": ["blue"],
-		"speed": 3,
-		"amount": 10,
-		"length": 4.0,
-		"pos": Vector2(7,3),
-		"rot": 0
-	},
-	{
-		"type": "glitch",
-		"beat": 8+4,
-		"length": 4,
-		"intensity": 0.5
-	},
-	{
-		"type": "platform_colour",
-		"beat": 12+4,
-		"colour": "blue",
-		"speed": 5
-	},
-	{
-		"type": "visualizer",
-		"beat": 12+4,
-		"status": true
-	},
-	
-]
-
 func _ready() -> void:
-	map.data = events
 	bpm += epsilon
 	if not is_preview:
-		$music.play(279.55)
+		$music.play(0)
 	map.data.sort_custom(sort_by_trigger_beat)
-	$main_platform/platform_sprite.modulate = global.colours_raw["pink"]
+	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
 
 func _process(delta: float) -> void:
 	global.bpm = bpm
@@ -249,6 +89,9 @@ func _process(delta: float) -> void:
 				continue
 			elif event.type == "visualizer":
 				global.visualizer = event.status
+				global.visualizer_line = event.line
+				global.visualizer_smooth = event.smooth_line
+				global.visualizer_bar = event.bar
 				event_index += 1
 				continue
 			elif event.type == "vhs":
@@ -348,9 +191,10 @@ func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {
 			break
 	if playing:
 		beat = new_beat
-		$music.play(time)
+		#$music.play(time)
 	else:
-		$music.stop()
+		0
+		#$music.stop()
 
 func reset_states():
 	$player.position = Vector2(0,0)

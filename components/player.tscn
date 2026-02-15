@@ -66,12 +66,13 @@ shape = SubResource("RectangleShape2D_0g4kb")
 
 [node name="camera" type="Camera2D" parent="."]
 position = Vector2(0, -198)
+ignore_rotation = false
 zoom = Vector2(0.67, 0.67)
 limit_left = -2000
 limit_top = -1300
 limit_right = 2000
+limit_smoothed = true
 position_smoothing_enabled = true
-rotation_smoothing_enabled = true
 
 [node name="layer" type="CanvasLayer" parent="."]
 

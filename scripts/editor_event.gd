@@ -44,9 +44,18 @@ func _ready() -> void:
 				editable.custom_minimum_size.y = 200
 				editable.connect("multi_selected",_on_colour_selected.bind(editable))
 			"speed":
-				editable = LineEdit.new()
-				editable.text = str(event_data[key])
-				editable.connect("text_changed", _on_speedpicker_changed)
+				if not event_data.type == "cam_zoom":
+					editable = LineEdit.new()
+					editable.text = str(event_data[key])
+					editable.connect("text_changed", _on_speedpicker_changed)
+				else:
+					editable = HSlider.new()
+					editable.value = event_data.speed
+					editable.min_value = 0.1
+					editable.max_value = 7.0
+					editable.step = 0.2
+					editable.tick_count = 4
+					editable.connect("value_changed",_on_editable_changed.bind(key))
 			"length":
 				editable = LineEdit.new()
 				editable.text = str(event_data[key])
@@ -90,6 +99,23 @@ func _ready() -> void:
 				editable.step = 0.05
 				editable.tick_count = 21
 				editable.connect("value_changed", _intensity_value_changed)
+			"zoom":
+				editable = HSlider.new()
+				editable.value = event_data.zoom
+				editable.min_value = 0.0
+				editable.max_value = 4.0
+				editable.step = 0.02
+				editable.tick_count = 10
+				editable.connect("value_changed", _on_editable_changed.bind(key))
+			"rot":
+				if event_data.type == "cam_zoom":
+					editable = HSlider.new()
+					editable.value = event_data.rot
+					editable.min_value = -45.0
+					editable.max_value = 45.0
+					editable.step = 2.0
+					editable.tick_count = 7
+					editable.connect("value_changed",_on_editable_changed.bind(key))
 			_:
 				if key == "type":
 					continue
@@ -102,6 +128,9 @@ func _ready() -> void:
 					editable.text = str(event_data[key])
 					editable.connect("text_changed",_on_editable_changed.bind(key))
 		if key != "rot":
+			$edit/container.add_child(label)
+			$edit/container.add_child(editable)
+		if key == "rot" and event_data.type == "cam_zoom":
 			$edit/container.add_child(label)
 			$edit/container.add_child(editable)
 		if key == "length":

@@ -25,6 +25,10 @@ var current_col: Color
 var glitch = false
 var glitch_intensity = 1
 
+var cam_zoom = 1.0
+var cam_rot = 0.0
+var cam_speed = 1.0
+
 var shake = false
 var shake_intensity = 0.5
 
@@ -43,6 +47,7 @@ var prefire_sec = {
 	"vhs": 0.0,
 	"chromabb": 0.0,
 	"glitch": 0.0,
+	"cam_zoom": 0.0,
 	
 	"bpm_change": 0.0
 }
@@ -62,6 +67,7 @@ var prefire_beat = {
 	"vhs": 0,
 	"chromabb": 0,
 	"glitch": 0,
+	"cam_zoom": 0,
 	
 	"bpm_change": 0,
 }
@@ -166,6 +172,13 @@ const defaults = {
 		"beat": 0,
 		"length": 4,
 		"intensity": 0.5
+	},
+	"cam_zoom": {
+		"type": "cam_zoom",
+		"beat": 0,
+		"zoom": 1.0,
+		"rot": 0.0,
+		"speed": 1.0
 	},
 	"bpm_change": {
 		"type": "bpm_change",

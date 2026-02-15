@@ -4,6 +4,8 @@ extends CharacterBody2D
 const SPEED = 1300.0
 const JUMP_VELOCITY = -1700.0
 
+const BASE_ZOOM = 0.67 # haha six seven
+
 var is_preview = false
 
 var prev_dir = 1
@@ -38,15 +40,15 @@ func _process(delta: float) -> void:
 		chromabb.set_shader_parameter("r_displacement",Vector2(0,0))
 		chromabb.set_shader_parameter("b_displacement",Vector2(0,0))
 	if kick_in and not global.chromabb:
-		$camera.zoom.x = lerpf($camera.zoom.x,0.69, delta*5)
-		$camera.zoom.y = lerpf($camera.zoom.y,0.69, delta*5)
+		$camera.zoom.x = lerpf($camera.zoom.x,BASE_ZOOM + 0.02, delta*5)
+		$camera.zoom.y = lerpf($camera.zoom.y,BASE_ZOOM + 0.02, delta*5)
 		chromabb.set_shader_parameter("r_displacement",
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(10.0,-4.0),delta*300))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-10.0,4.0),delta*300))
 	elif not kick_in and not global.chromabb:
-		$camera.zoom.x = move_toward($camera.zoom.x,0.67, delta)
-		$camera.zoom.y = move_toward($camera.zoom.y,0.67, delta)
+		$camera.zoom.x = move_toward($camera.zoom.x,BASE_ZOOM, delta)
+		$camera.zoom.y = move_toward($camera.zoom.y,BASE_ZOOM, delta)
 		chromabb.set_shader_parameter("r_displacement",
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(3.0,0),delta*100))
 		chromabb.set_shader_parameter("b_displacement",
@@ -72,6 +74,12 @@ func _process(delta: float) -> void:
 	else:
 		vhs.set_shader_parameter("intensity",
 		move_toward(vhs.get_shader_parameter("intensity"),0.0,delta*3))
+	if not global.camera_kick:
+		var target = lerpf($camera.zoom.x,
+		global.cam_zoom*BASE_ZOOM,
+		global.cam_speed*delta)
+		$camera.zoom = Vector2(target,target)
+	$camera.rotation_degrees = lerpf($camera.rotation_degrees,float(global.cam_rot),float(global.cam_speed)/10.0)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.

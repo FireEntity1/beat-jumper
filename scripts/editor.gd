@@ -69,8 +69,13 @@ func _process(delta: float) -> void:
 		_on_play_button_up()
 	
 	if $song.playing:
+		var next_beat = time_to_beat($song.get_playback_position())
 		cursor = time_to_beat($song.get_playback_position())
-		$hor_scroll.value = cursor * EVENT_WIDTH
+		preview.last_beat = preview.beat
+		preview.beat = next_beat
+		#$hor_scroll.value = cursor * EVENT_WIDTH
+		$hor_scroll.set_value_no_signal(cursor*EVENT_WIDTH)
+		$scroll.scroll_horizontal = int($hor_scroll.value)
 		$layer.show()
 	else:
 		$layer.hide()
@@ -355,7 +360,7 @@ func _on_play_button_up() -> void:
 	$play.release_focus()
 	if not $song.playing:
 		$song.play(beat_to_time(cursor))
-		preview.modify(true,beat_to_time(cursor),cursor,map)
+		preview.modify(true,beat_to_time(cursor),cursor,map,cur_bpm)
 	elif $song.playing:
 		$song.stop()
 		cursor = snap(cursor)

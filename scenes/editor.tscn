@@ -123,7 +123,7 @@ text = "EVENTS: 0"
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_q68jb")
-volume_db = -13.0
+volume_db = -80.0
 max_distance = 10000.0
 attenuation = 1e-05
 

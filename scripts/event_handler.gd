@@ -14,6 +14,8 @@ var epsilon = 0.000000001
 var beat = 0.0
 var last_beat = 0.0
 
+var manual_last_beat = 0.0
+
 var event_index = 0
 
 var event_classes = {
@@ -37,8 +39,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	global.bpm = bpm
-	last_beat = beat
-	beat += (bpm/60)*delta
+	if not is_preview:
+		last_beat = beat
+		beat += (bpm/60.0)*delta
 	global.beat = beat
 	global.current_col = $main_platform/platform_sprite.modulate
 	$main_platform/platform_sprite.modulate.r = move_toward($main_platform/platform_sprite.modulate.r,target_platform_colour[0],delta*platform_colour_speed)
@@ -85,7 +88,6 @@ func _process(delta: float) -> void:
 				global.shake = event.status
 				global.shake_intensity = event.intensity
 				event_index += 1
-				print("shake set to ", event.status, " intensity: ", event.intensity)
 				continue
 			elif event.type == "visualizer":
 				global.visualizer = event.status
@@ -107,6 +109,12 @@ func _process(delta: float) -> void:
 			elif event.type == "glitch":
 				glitch_timeout(event.length)
 				global.glitch_intensity = event.intensity
+				event_index += 1
+				continue
+			elif event.type == "cam_zoom":
+				global.cam_rot = event.rot
+				global.cam_speed = event.speed
+				global.cam_zoom = event.zoom
 				event_index += 1
 				continue
 			elif event.type == "bpm_change":
@@ -172,12 +180,12 @@ func glitch_timeout(time):
 	await get_tree().create_timer((60.0/bpm)*time).timeout
 	global.glitch = false
 
-func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {}):
+func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {},new_bpm: float = bpm):
+	bpm = new_bpm
 	for event in $events.get_children():
 		event.queue_free()
 	if new_map.has("data"):
 		map = new_map.duplicate(true)
-		print(map)
 		
 	event_index = 0
 	reset_states()
@@ -191,10 +199,10 @@ func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {
 			break
 	if playing:
 		beat = new_beat
-		#$music.play(time)
+		$music.play(time)
 	else:
 		0
-		#$music.stop()
+		$music.stop()
 
 func reset_states():
 	$player.position = Vector2(0,0)

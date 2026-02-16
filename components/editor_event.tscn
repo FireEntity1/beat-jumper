@@ -11,12 +11,14 @@ border_width_bottom = 3
 border_color = Color(0.481789, 0.48179, 0.481789, 1)
 
 [node name="editor_event" type="Button"]
-custom_minimum_size = Vector2(250, 120)
-offset_right = 300.0
+custom_minimum_size = Vector2(10, 120)
+offset_right = 10.0
 offset_bottom = 120.0
 mouse_filter = 1
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_ei43j")
+text_overrun_behavior = 1
+autowrap_mode = 1
 script = ExtResource("1_ei43j")
 
 [node name="edit" type="PopupPanel" parent="."]

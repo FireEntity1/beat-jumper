@@ -193,7 +193,7 @@ func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {
 	map.data.sort_custom(sort_by_trigger_beat)
 	
 	for event in map.data:
-		if event.beat < new_beat:
+		if event["beat"] - global.prefire_beat[event["type"]] < new_beat:
 			event_index += 1
 		else:
 			break
@@ -206,10 +206,11 @@ func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {
 
 func reset_states():
 	$player.position = Vector2(0,0)
-	target_platform_colour = global.colours_raw.purple
 	platform_colour_speed = 1
 	showing_sun = false
 	global.visualizer = true
+	global.cam_zoom = 1.0
+	global.cam_rot = 0.0
 	global.shake = false
 	global.camera_kick = false
 

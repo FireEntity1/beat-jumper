@@ -8,3 +8,7 @@ func _process(delta: float) -> void:
 
 func change_name(name: String):
 	$track_name.text = name
+
+func update_length(scale):
+	for child in $hbox.get_children():
+		child.update_length(scale)

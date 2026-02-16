@@ -198,11 +198,11 @@ func group_events(events):
 	return groups
 
 func add_lines(scale: float,beats, parent):
-	for beat in int(beats):
+	for beat in int(beats * (1/scale)):
 		var line = ColorRect.new()
 		line.size = Vector2(3,5000)
 		line.color = Color(1,1,1,0.1)
-		line.position = Vector2(EVENT_WIDTH*scale*beat + 30,0)
+		line.position = Vector2(EVENT_WIDTH*editor_scale*beat + 30 + EVENT_WIDTH,0)
 		if line.position.x < 300:
 			continue
 		line.z_index = 100
@@ -226,6 +226,9 @@ func _on_scale_text_submitted(new_text: String) -> void:
 			child.queue_free()
 		editor_scale = eval_exp(new_text)
 		add_lines(editor_scale, time_to_beat($song.stream.get_length()), lines_layer)
+		for child in $scroll/tracks.get_children():
+			if child is ColorRect:
+				child.update_length(editor_scale)
 		spawn_events()
 
 func _on_tracks_gui_input(event: InputEvent, type: String)-> void:

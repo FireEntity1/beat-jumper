@@ -5,6 +5,8 @@ const POS_EDITOR = preload("res://components/pos_picker.tscn")
 var track: String
 var beat: float
 
+const EVENT_WIDTH = 300
+
 var pos_editor
 
 var parent: Node2D
@@ -219,6 +221,8 @@ func load_default(selected_track: String, beat: float):
 
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
+		if event.button_index == MOUSE_BUTTON_LEFT and Input.is_action_pressed("control"):
+			pass
 		if event.button_index == MOUSE_BUTTON_LEFT and not Input.is_action_pressed("shift"):
 			$edit.popup()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
@@ -236,3 +240,11 @@ func _on_button_up() -> void:
 
 func load_map(name: String = ""):
 	return
+
+func update_length(scale):
+	custom_minimum_size.x = EVENT_WIDTH * scale
+	size.x = EVENT_WIDTH * scale
+	print(scale)
+	print(EVENT_WIDTH*scale)
+	print(size.x)
+	print("-----------------")

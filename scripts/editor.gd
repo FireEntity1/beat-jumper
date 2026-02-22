@@ -65,7 +65,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("save"):
 		save()
-	if Input.is_action_just_pressed("ui_accept"):
+	if Input.is_action_just_pressed("play"):
 		_on_play_button_up()
 	
 	if $song.playing:

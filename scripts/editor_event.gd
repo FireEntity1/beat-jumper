@@ -69,6 +69,7 @@ func _ready() -> void:
 				editable.rot = event_data.rot
 				editable.event_data = event_data
 				editable.event_type = event_data.type
+				editable.parent = self
 			"edges":
 				editable = HSlider.new()
 				editable.value = event_data.edges
@@ -248,3 +249,9 @@ func update_length(scale):
 	print(EVENT_WIDTH*scale)
 	print(size.x)
 	print("-----------------")
+
+func pos_edit(x,y,rot):
+	var old = event_data
+	event_data.pos = Vector2(x,y)
+	event_data.rot = rot
+	parent.modify(old,event_data)

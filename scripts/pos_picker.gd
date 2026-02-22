@@ -11,6 +11,8 @@ var event_data: Dictionary
 var pos: Vector2
 var rot: float
 
+var parent
+
 @onready var knob = $angle
 
 var lasers = []
@@ -71,6 +73,7 @@ func update_preview():
 		if first: 
 			for laser in lasers:
 				laser.rotation_degrees += 90
+	parent.pos_edit($hslider.value,$vslider.value,$angle.value-90)
 func spawn_laser_circle(index: int, edges: int, direction: int, radius: float):
 	var step = 360.0 / edges
 	var current_angle_deg = step * index * direction

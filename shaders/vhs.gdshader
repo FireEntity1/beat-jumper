@@ -18,7 +18,7 @@ vec2 uv_curve(vec2 uv)
 }
 
 void fragment()
-{    
+{
     float r = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * 0.0), 0.0).r;
     float g = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * 3.0), 0.0).g;
     float b = texture(SCREEN_TEXTURE, uv_curve(SCREEN_UV) + vec2(SCREEN_PIXEL_SIZE.x * -3.0), 0.0).b;

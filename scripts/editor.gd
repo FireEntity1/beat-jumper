@@ -14,7 +14,8 @@ var editor_scale = 1.0
 var lines_layer
 
 var map: Dictionary
-var selection: Array
+var selection = []
+var clipboard = []
 
 var loaded = {
 	"map": false,
@@ -40,6 +41,8 @@ func _ready() -> void:
 	lines_layer.name = "lines_layer"
 	lines_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	$scroll/tracks.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	
+	var i = 0
 	for event in global.defaults:
 		var track = TRACK.instantiate()
 		var name: String = global.defaults[event].type
@@ -51,6 +54,15 @@ func _ready() -> void:
 		track.custom_minimum_size.x = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
 		track.size_flags_horizontal = Control.SIZE_EXPAND
 		$scroll/tracks.add_child(track)
+		var textbox = Label.new()
+		textbox.text = name
+		textbox.global_position = Vector2(1500,i*150 + 250)
+		textbox.z_index = 1
+		textbox.add_theme_color_override("font_color",Color(0.3,0.3,0.3))
+		textbox.add_theme_font_size_override("font_size",50)
+		$label_layer.add_child(textbox)
+		i += 1
+		
 	spawn_events()
 	$hor_scroll.max_value = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
 	$hor_scroll.value_changed.connect(func(val): 
@@ -67,6 +79,11 @@ func _process(delta: float) -> void:
 		save()
 	if Input.is_action_just_pressed("play"):
 		_on_play_button_up()
+	var i = 0
+	for child in $label_layer.get_children():
+		if child is Label:
+			child.position.y = $scroll/tracks.position.y + i*154 + 50
+			i += 1
 	
 	if $song.playing:
 		var next_beat = time_to_beat($song.get_playback_position())
@@ -117,7 +134,28 @@ func _process(delta: float) -> void:
 		$pickfolder.modulate.a = 0.2
 	else:
 		$pickfolder.modulate.a = 1.0
-
+	
+	if Input.is_action_just_pressed("copy"):
+		clipboard = selection.duplicate(true)
+	if Input.is_action_just_pressed("paste"):
+		var lowest = 0
+		var highest = 0
+		var events = clipboard.duplicate(true)
+		for event in events:
+			if event.beat < lowest:
+				lowest = event.beat
+			if event.beat > highest:
+				highest = event.beat
+		for event in events:
+			var new_event = event.duplicate(true)
+			new_event.beat -= lowest
+			new_event.beat += cursor
+			new_event.beat = snap(new_event.beat)
+			map.data.append(new_event)
+		cursor += highest
+		$hor_scroll.value = cursor*EVENT_WIDTH
+		spawn_events()
+		selection.clear()
 func spawn_events():
 	for track in $scroll/tracks.get_children():
 		if track is Control and track.has_node("hbox"):
@@ -150,6 +188,10 @@ func spawn_events():
 		main_event.parent = self
 		
 		main_event.position.x = event.beat*EVENT_WIDTH
+		
+		if selection.has(event):
+			main_event.selected = true
+			main_event.update_selection_visual()
 		
 		if events.size() > 1:
 			var popup = PopupPanel.new()
@@ -206,6 +248,7 @@ func add_lines(scale: float,beats, parent):
 		if line.position.x < 300:
 			continue
 		line.z_index = 100
+		line.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		if beat != 0:
 			parent.add_child(line)
 
@@ -260,7 +303,11 @@ func delete(event: Dictionary):
 	for i in range(map.data.size()):
 		if map.data[i] == event:
 			map.data.remove_at(i)
-			return
+			break
+	for i in range(selection.size()):
+		if selection[i] == event:
+			selection.remove_at(i)
+			break
 
 func _on_pickfolder_button_up() -> void:
 	var dialog = FileDialog.new()
@@ -442,3 +489,14 @@ func _on_scroll_scroll_ended() -> void:
 func _on_offset_text_changed(new_text: String) -> void:
 	map.offset = max(new_text, 0)
 	$offset.text = str(map.offset)
+
+func select(event_data: Dictionary, selected: bool):
+	if not selected:
+		selection.erase(event_data)
+	else:
+		selection.append(event_data)
+	if selection.size() >= 1:
+		$selected.show()
+	else:
+		$selected.hide()
+	$selected.text = "SELECTED: " + str(selection.size())

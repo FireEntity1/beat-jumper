@@ -2,12 +2,16 @@ extends Button
 
 const POS_EDITOR = preload("res://components/pos_picker.tscn")
 
+var selected_style: StyleBoxFlat
+
 var track: String
 var beat: float
 
 const EVENT_WIDTH = 300
 
 var pos_editor
+
+var selected = false
 
 var parent: Node2D
 
@@ -16,6 +20,12 @@ var event_data: Dictionary
 var map_dir: String
 
 func _ready() -> void:
+	selected_style = StyleBoxFlat.new()
+	selected_style.border_width_left = 4
+	selected_style.border_width_right = 4
+	selected_style.border_width_top = 4
+	selected_style.border_width_bottom = 4
+	selected_style.border_color = Color(1, 1, 0)
 	if event_data.has("colour"):
 		var col_val = event_data["colour"]
 		var target_col
@@ -223,9 +233,13 @@ func load_default(selected_track: String, beat: float):
 func _gui_input(event: InputEvent):
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_LEFT and Input.is_action_pressed("control"):
-			pass
-		if event.button_index == MOUSE_BUTTON_LEFT and not Input.is_action_pressed("shift"):
+			selected = not selected
+			parent.select(event_data, selected)
+			update_selection_visual()
+			get_viewport().set_input_as_handled()
+		elif event.button_index == MOUSE_BUTTON_LEFT and not Input.is_action_pressed("shift"):
 			$edit.popup()
+			get_viewport().set_input_as_handled()
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			parent.delete(event_data)
 			queue_free()
@@ -245,13 +259,15 @@ func load_map(name: String = ""):
 func update_length(scale):
 	custom_minimum_size.x = EVENT_WIDTH * scale
 	size.x = EVENT_WIDTH * scale
-	print(scale)
-	print(EVENT_WIDTH*scale)
-	print(size.x)
-	print("-----------------")
 
 func pos_edit(x,y,rot):
 	var old = event_data
 	event_data.pos = Vector2(x,y)
 	event_data.rot = rot
 	parent.modify(old,event_data)
+
+func update_selection_visual():
+	if selected:
+		add_theme_stylebox_override("normal", selected_style)
+	else:
+		remove_theme_stylebox_override("normal")

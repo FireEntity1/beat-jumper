@@ -16,6 +16,12 @@ offset_bottom = 1087.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="bg2" type="ColorRect" parent="."]
+offset_right = 1926.0
+offset_bottom = 236.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [node name="title" type="LineEdit" parent="."]
 offset_left = 661.0
 offset_top = 11.0
@@ -60,6 +66,14 @@ offset_bottom = 92.0
 theme_override_font_sizes/font_size = 24
 placeholder_text = "OFFSET"
 alignment = 1
+
+[node name="label_layer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 242.0
+offset_right = 1919.0
+offset_bottom = 242.0
+mouse_filter = 2
 
 [node name="pickmusic" type="TextureButton" parent="."]
 offset_left = 171.0
@@ -120,6 +134,15 @@ offset_right = 1914.0
 offset_bottom = 1080.0
 theme_override_font_sizes/font_size = 32
 text = "EVENTS: 0"
+
+[node name="selected" type="Label" parent="."]
+offset_left = 849.0
+offset_top = 1037.0
+offset_right = 1087.0
+offset_bottom = 1080.0
+theme_override_font_sizes/font_size = 32
+text = "SELECTED: 1"
+horizontal_alignment = 1
 
 [node name="song" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_q68jb")

@@ -271,3 +271,7 @@ func update_selection_visual():
 		add_theme_stylebox_override("normal", selected_style)
 	else:
 		remove_theme_stylebox_override("normal")
+
+func _deselect():
+	selected = false
+	update_selection_visual()

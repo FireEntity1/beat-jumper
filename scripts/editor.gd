@@ -5,6 +5,8 @@ const EVENT = preload("res://components/editor_event.tscn")
 
 const EVENT_WIDTH = 300
 
+signal deselect
+
 var last_beat = {}
 
 var editor_scale = 1.0
@@ -138,9 +140,14 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("copy"):
 		clipboard = selection.duplicate(true)
 	if Input.is_action_just_pressed("paste"):
-		var lowest = 0
-		var highest = 0
 		var events = clipboard.duplicate(true)
+		var highest
+		var lowest
+		if events.size() > 0:
+			lowest = events[0]["beat"]
+			highest = events[0]["beat"]
+		else:
+			return
 		for event in events:
 			if event.beat < lowest:
 				lowest = event.beat
@@ -152,11 +159,14 @@ func _process(delta: float) -> void:
 			new_event.beat += cursor
 			new_event.beat = snap(new_event.beat)
 			map.data.append(new_event)
-		cursor += highest
+		deselect.emit()
+		cursor += highest - lowest + editor_scale
 		$hor_scroll.value = cursor*EVENT_WIDTH
-		spawn_events()
+		emit_signal("deselect")
 		selection.clear()
+		spawn_events()
 func spawn_events():
+	$selected.text = "SELECTED: " + str(selection.size())
 	for track in $scroll/tracks.get_children():
 		if track is Control and track.has_node("hbox"):
 			var hbox = track.get_node("hbox")
@@ -228,6 +238,7 @@ func spawn_events():
 				popup.hide()
 			)
 		main_event.beat = float(main_event.beat)
+		deselect.connect(main_event._deselect)
 		track.add_child(main_event)
 
 func group_events(events):
@@ -308,6 +319,7 @@ func delete(event: Dictionary):
 		if selection[i] == event:
 			selection.remove_at(i)
 			break
+	spawn_events()
 
 func _on_pickfolder_button_up() -> void:
 	var dialog = FileDialog.new()
@@ -415,7 +427,7 @@ func _on_play_button_up() -> void:
 		$song.stop()
 		cursor = snap(cursor)
 		preview.modify(false,beat_to_time(cursor),cursor,map)
-		$hor_scroll.value = cursor*EVENT_WIDTH - 10
+		$hor_scroll.value = cursor*EVENT_WIDTH
 
 func _on_title_text_changed(new_text: String) -> void:
 	map.name = new_text

@@ -3,7 +3,7 @@ extends Node2D
 const TRACK = preload("res://components/track.tscn")
 const EVENT = preload("res://components/editor_event.tscn")
 
-const EVENT_WIDTH = 300
+var event_width = 300
 
 signal deselect
 
@@ -53,7 +53,7 @@ func _ready() -> void:
 		last_beat[name] = 0.0
 		name = name.replace("_"," ")
 		track.change_name(name)
-		track.custom_minimum_size.x = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
+		track.custom_minimum_size.x = time_to_beat($song.stream.get_length()) * event_width
 		track.size_flags_horizontal = Control.SIZE_EXPAND
 		$scroll/tracks.add_child(track)
 		var textbox = Label.new()
@@ -66,10 +66,10 @@ func _ready() -> void:
 		i += 1
 		
 	spawn_events()
-	$hor_scroll.max_value = time_to_beat($song.stream.get_length()) * EVENT_WIDTH
+	$hor_scroll.max_value = time_to_beat($song.stream.get_length()) * event_width
 	$hor_scroll.value_changed.connect(func(val): 
 		$scroll.scroll_horizontal = int(val)
-		cursor = val/EVENT_WIDTH
+		cursor = val/event_width
 	)
 	$scroll/tracks.add_child(lines_layer)
 	lines_layer.z_index = 100
@@ -92,8 +92,8 @@ func _process(delta: float) -> void:
 		cursor = time_to_beat($song.get_playback_position())
 		preview.last_beat = preview.beat
 		preview.beat = next_beat
-		#$hor_scroll.value = cursor * EVENT_WIDTH
-		$hor_scroll.set_value_no_signal(cursor*EVENT_WIDTH)
+		#$hor_scroll.value = cursor * event_width
+		$hor_scroll.set_value_no_signal(cursor*event_width)
 		$scroll.scroll_horizontal = int($hor_scroll.value)
 		$layer.show()
 	else:
@@ -137,6 +137,17 @@ func _process(delta: float) -> void:
 	else:
 		$pickfolder.modulate.a = 1.0
 	
+	if Input.is_action_just_pressed("ui_left"):
+		cursor -= editor_scale
+		$hor_scroll.value = cursor*event_width
+	if Input.is_action_just_pressed("ui_right"):
+		cursor += editor_scale
+		$hor_scroll.value = cursor*event_width
+	if Input.is_action_just_pressed("ui_down"):
+		$scroll.get_v_scroll_bar().value += 154
+	if Input.is_action_just_pressed("ui_up"):
+		$scroll.get_v_scroll_bar().value -= 154
+	
 	if Input.is_action_just_pressed("copy"):
 		clipboard = selection.duplicate(true)
 	if Input.is_action_just_pressed("paste"):
@@ -161,7 +172,7 @@ func _process(delta: float) -> void:
 			map.data.append(new_event)
 		deselect.emit()
 		cursor += highest - lowest + editor_scale
-		$hor_scroll.value = cursor*EVENT_WIDTH
+		$hor_scroll.value = cursor*event_width
 		emit_signal("deselect")
 		selection.clear()
 		spawn_events()
@@ -185,10 +196,10 @@ func spawn_events():
 		var event = events[-1]
 		var track = $scroll/tracks.get_node(event.type + "/hbox")
 		
-		var max_width = EVENT_WIDTH*float(editor_scale)
+		var max_width = event_width*float(editor_scale)
 		for temp_event in events:
 			if temp_event.has("length"):
-				var width = temp_event.length * EVENT_WIDTH
+				var width = temp_event.length * event_width
 				max_width = width
 		
 		var main_event = EVENT.instantiate()
@@ -197,7 +208,9 @@ func spawn_events():
 		main_event.custom_minimum_size.x = max_width
 		main_event.parent = self
 		
-		main_event.position.x = event.beat*EVENT_WIDTH
+		main_event.position.x = event.beat*event_width
+		
+		print("EVENT beat:", event.beat, " x:", main_event.position.x, " ew:", event_width)
 		
 		if selection.has(event):
 			main_event.selected = true
@@ -222,7 +235,7 @@ func spawn_events():
 			main_event.mouse_entered.connect(func():
 				var global_pos = main_event.global_position
 				popup.position = global_pos + Vector2(0, 44)
-				popup.size = Vector2(EVENT_WIDTH, events.size() * 48)
+				popup.size = Vector2(event_width, events.size() * 48)
 				popup.popup()
 		)
 			
@@ -250,16 +263,21 @@ func group_events(events):
 		groups[key].append(event)
 	return groups
 
-func add_lines(scale: float,beats, parent):
-	for beat in int(beats * (1/scale)):
+func add_lines(view_scale: float,beats, parent):
+	for beat in int(beats * (1/view_scale)):
 		var line = ColorRect.new()
 		line.size = Vector2(3,5000)
 		line.color = Color(1,1,1,0.1)
-		line.position = Vector2(EVENT_WIDTH*editor_scale*beat + 30 + EVENT_WIDTH,0)
-		if line.position.x < 300:
-			continue
+		line.position = Vector2(event_width*editor_scale*beat + 30 + event_width,0)
+		
+		#line.position = Vector2(event_width * beat, 0)
+		
+		#line.position = Vector2(event_width * view_scale * beat, 0)
+		#if line.position.x < event_width*editor_scale:
+			#continue
 		line.z_index = 100
 		line.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		print("LINE beat:", beat, " x:", line.position.x, " ew:", event_width, " scale:", view_scale)
 		if beat != 0:
 			parent.add_child(line)
 
@@ -282,12 +300,13 @@ func _on_scale_text_submitted(new_text: String) -> void:
 		add_lines(editor_scale, time_to_beat($song.stream.get_length()), lines_layer)
 		for child in $scroll/tracks.get_children():
 			if child is ColorRect:
-				child.update_length(editor_scale)
+				child.update_length(editor_scale,event_width)
 		spawn_events()
 
 func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Input.is_action_pressed("shift"):
-		var clicked_beat = (event.position.x - EVENT_WIDTH) / EVENT_WIDTH
+		var clicked_beat = (event.position.x - event_width) / event_width
+		print("CLICK x:", event.position.x, " beat:", clicked_beat)
 		clicked_beat = snap(clicked_beat)
 		var data = new_event(type,clicked_beat)
 		map.data.append(data)
@@ -427,7 +446,7 @@ func _on_play_button_up() -> void:
 		$song.stop()
 		cursor = snap(cursor)
 		preview.modify(false,beat_to_time(cursor),cursor,map)
-		$hor_scroll.value = cursor*EVENT_WIDTH
+		$hor_scroll.value = cursor*event_width
 
 func _on_title_text_changed(new_text: String) -> void:
 	map.name = new_text
@@ -512,3 +531,17 @@ func select(event_data: Dictionary, selected: bool):
 	else:
 		$selected.hide()
 	$selected.text = "SELECTED: " + str(selection.size())
+
+func _on_editor_scale_drag_ended(value_changed: bool) -> void:
+	event_width = $editor_scale.value
+	for child in lines_layer.get_children():
+		child.queue_free()
+	add_lines(editor_scale, time_to_beat($song.stream.get_length()), lines_layer)
+	var total_width = time_to_beat($song.stream.get_length()) * event_width
+	for track in $scroll/tracks.get_children():
+		if track is Control:
+			track.custom_minimum_size.x = total_width
+	$hor_scroll.max_value = total_width
+	$hor_scroll.value = cursor*event_width
+	spawn_events()
+	$editor_scale.release_focus()

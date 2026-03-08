@@ -163,11 +163,22 @@ offset_right = 340.0
 offset_bottom = 1017.0
 color = Color(1, 1, 1, 0.292)
 
+[node name="editor_scale" type="HSlider" parent="."]
+offset_left = 199.0
+offset_top = 181.0
+offset_right = 320.0
+offset_bottom = 197.0
+scale = Vector2(1, 2.4)
+min_value = 150.0
+max_value = 500.0
+step = 10.0
+value = 300.0
+
 [node name="scale" type="LineEdit" parent="."]
 offset_left = 199.0
-offset_top = 142.0
+offset_top = 117.0
 offset_right = 319.0
-offset_bottom = 198.0
+offset_bottom = 173.0
 theme_override_font_sizes/font_size = 32
 text = "1/1"
 placeholder_text = "x/x"
@@ -212,5 +223,6 @@ is_preview = true
 [connection signal="button_up" from="pickimage" to="." method="_on_pickimage_button_up"]
 [connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]
 [connection signal="scroll_ended" from="scroll" to="." method="_on_scroll_scroll_ended"]
+[connection signal="drag_ended" from="editor_scale" to="." method="_on_editor_scale_drag_ended"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]
 [connection signal="button_up" from="play" to="." method="_on_play_button_up"]

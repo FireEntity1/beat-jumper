@@ -7,7 +7,7 @@ var selected_style: StyleBoxFlat
 var track: String
 var beat: float
 
-const EVENT_WIDTH = 300
+var event_width = 300
 
 var pos_editor
 
@@ -147,7 +147,7 @@ func _ready() -> void:
 			$edit/container.add_child(label)
 			$edit/container.add_child(editable)
 		if key == "length":
-			custom_minimum_size.x = 300 * float(event_data.length)
+			custom_minimum_size.x = parent.event_width * float(event_data.length)
 
 func _on_editable_changed(data,key: String):
 	var old = event_data.duplicate(true)
@@ -256,9 +256,10 @@ func _on_button_up() -> void:
 func load_map(name: String = ""):
 	return
 
-func update_length(scale):
-	custom_minimum_size.x = EVENT_WIDTH * scale
-	size.x = EVENT_WIDTH * scale
+func update_length(editor_scale, new_event_width):
+	event_width = new_event_width
+	custom_minimum_size.x = event_width * editor_scale
+	size.x = event_width * editor_scale
 
 func pos_edit(x,y,rot):
 	var old = event_data

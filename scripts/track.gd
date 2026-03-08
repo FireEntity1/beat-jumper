@@ -9,6 +9,6 @@ func _process(delta: float) -> void:
 func change_name(name: String):
 	$track_name.text = name
 
-func update_length(scale):
+func update_length(new_scale, new_width):
 	for child in $hbox.get_children():
-		child.update_length(scale)
+		child.update_length(new_scale,new_width)

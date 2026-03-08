@@ -210,8 +210,6 @@ func spawn_events():
 		
 		main_event.position.x = event.beat*event_width
 		
-		print("EVENT beat:", event.beat, " x:", main_event.position.x, " ew:", event_width)
-		
 		if selection.has(event):
 			main_event.selected = true
 			main_event.update_selection_visual()
@@ -268,7 +266,7 @@ func add_lines(view_scale: float,beats, parent):
 		var line = ColorRect.new()
 		line.size = Vector2(3,5000)
 		line.color = Color(1,1,1,0.1)
-		line.position = Vector2(event_width*editor_scale*beat + 30 + event_width,0)
+		line.position = Vector2(event_width*editor_scale*beat +330,0)
 		
 		#line.position = Vector2(event_width * beat, 0)
 		
@@ -277,7 +275,6 @@ func add_lines(view_scale: float,beats, parent):
 			#continue
 		line.z_index = 100
 		line.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		print("LINE beat:", beat, " x:", line.position.x, " ew:", event_width, " scale:", view_scale)
 		if beat != 0:
 			parent.add_child(line)
 
@@ -306,7 +303,6 @@ func _on_scale_text_submitted(new_text: String) -> void:
 func _on_tracks_gui_input(event: InputEvent, type: String)-> void:
 	if event is InputEventMouseButton and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Input.is_action_pressed("shift"):
 		var clicked_beat = (event.position.x - event_width) / event_width
-		print("CLICK x:", event.position.x, " beat:", clicked_beat)
 		clicked_beat = snap(clicked_beat)
 		var data = new_event(type,clicked_beat)
 		map.data.append(data)
@@ -350,7 +346,6 @@ func _on_pickfolder_button_up() -> void:
 	$pickfolder.release_focus()
 
 func load_map(dir: String,load: Array = [true,true,true]):
-	print(dir)
 	save_dir = dir
 	if FileAccess.file_exists(dir + "/map.jump") and load[0]:
 		var map_string = FileAccess.get_file_as_string(dir + "/map.jump")

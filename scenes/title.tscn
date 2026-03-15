@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv2ys532c6hk5"]
+[gd_scene load_steps=14 format=3 uid="uid://cv2ys532c6hk5"]
 
 [ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="1_4ignj"]
 [ext_resource type="Script" uid="uid://cpr4vxn7hutd2" path="res://scripts/title.gd" id="1_4rr2b"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c6pfcul8lmyr6" path="res://components/visualizer.tscn" id="3_p6dhs"]
 [ext_resource type="AudioStream" uid="uid://c844h23x0bc8g" path="res://components/[For EGCS 2023 FN-TB] trung-nova - Roars of V.E.N.G.E.A.N.C.E -Take Back Everything-.mp3" id="4_pyl7j"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="5_b3w7a"]
+[ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="5_yql1r"]
 
 [sub_resource type="Environment" id="Environment_p6dhs"]
 background_mode = 3
@@ -51,6 +52,15 @@ shader_parameter/distortion_speed = 0.15
 shader_parameter/density = 0.025
 shader_parameter/bloom = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ia1n6"]
+shader = ExtResource("5_yql1r")
+shader_parameter/running = true
+shader_parameter/shake_power = 0.005
+shader_parameter/shake_rate = 0.33
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.0
+shader_parameter/shake_color_rate = 0.005
+
 [node name="title" type="Node2D"]
 script = ExtResource("1_4rr2b")
 
@@ -93,17 +103,26 @@ rotation = -2.09174
 scale = Vector2(0.3, -0.6)
 title = true
 
-[node name="Control" type="Control" parent="."]
+[node name="titlehover" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 496.0
-offset_top = 45.0
-offset_right = 1414.0
-offset_bottom = 433.0
+offset_left = 252.0
+offset_top = 137.0
+offset_right = 1682.0
+offset_bottom = 341.0
 
 [node name="title" type="Sprite2D" parent="."]
 position = Vector2(975, 244)
-scale = Vector2(0.518519, 0.518519)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("1_4ignj")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="titleglitch" type="Sprite2D" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ia1n6")
+position = Vector2(975, 244)
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("1_4ignj")
 
 [node name="[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-" type="AudioStreamPlayer2D" parent="."]
@@ -137,8 +156,8 @@ offset_bottom = 1086.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
-[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
-[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
+[connection signal="mouse_entered" from="titlehover" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="titlehover" to="." method="_on_control_mouse_exited"]
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
 [connection signal="mouse_entered" from="play" to="." method="_on_play_mouse_entered"]
 [connection signal="mouse_exited" from="play" to="." method="_on_play_mouse_exited"]

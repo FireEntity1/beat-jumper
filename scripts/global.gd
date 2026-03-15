@@ -1,6 +1,6 @@
 extends Node
 
-var path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS).path_join("/beat-jumper")
+var path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS).path_join("/beat-jumper-data")
 
 var bpm = 120
 var beat = 0

@@ -36,12 +36,12 @@ func _process(delta: float) -> void:
 		$editor.scale.x = lerpf($editor.scale.x,1.0,delta*10)
 		
 	if title:
-		$title.scale.x = lerpf($title.scale.x, 0.56,delta*5)
-		$title.scale.y = lerpf($title.scale.y, 0.56,delta*5)
+		$title.scale.x = lerpf($title.scale.x, 0.93,delta*5)
+		$title.scale.y = lerpf($title.scale.y, 0.93,delta*5)
 		$title.position.y = lerpf($title.position.y,260,delta*5)
 	else:
-		$title.scale.x = lerpf($title.scale.x, 0.54,delta*5)
-		$title.scale.y = lerpf($title.scale.y, 0.54,delta*5)
+		$title.scale.x = lerpf($title.scale.x, 0.9,delta*5)
+		$title.scale.y = lerpf($title.scale.y, 0.9,delta*5)
 		$title.position.y = lerpf($title.position.y,244,delta*5)
 
 

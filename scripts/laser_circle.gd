@@ -24,6 +24,7 @@ var angle: float
 var lasers_spawned = 0
 
 func _ready() -> void:
+	rotation_degrees = rot
 	global_position = global.apply_grid(pos) + Vector2(300,350)
 	max_cols = colour.size()
 	cur_col = 0
@@ -43,7 +44,7 @@ func _process(delta: float) -> void:
 
 func spawn_laser(index: int):
 	var edge_index = index % edges
-	var current_angle_deg = ((angle * edge_index) + offset) * direction
+	var current_angle_deg = ((angle * edge_index) + offset) * int(direction)
 	var current_angle_rad = deg_to_rad(current_angle_deg)
 	
 	var temp = laser.instantiate()

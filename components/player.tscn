@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dg2baiggrj1"]
+[gd_scene load_steps=15 format=3 uid="uid://dg2baiggrj1"]
 
 [ext_resource type="Script" uid="uid://o3l8jxgj15gh" path="res://scripts/player.gd" id="1_51jd6"]
 [ext_resource type="Shader" uid="uid://cnh8usaonapbf" path="res://shaders/motion_blur.gdshader" id="2_0lm1f"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://d1dhhkfpacurf" path="res://shaders/shake.gdshader" id="4_5odhx"]
 [ext_resource type="Shader" uid="uid://b71npkfnggvy6" path="res://shaders/vhs.gdshader" id="5_1kub6"]
 [ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="6_kuobi"]
+[ext_resource type="AudioStream" uid="uid://0ux10s8tfgy8" path="res://audio/sfx/miss.mp3" id="8_couud"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_couud"]
 shader = ExtResource("2_0lm1f")
@@ -112,3 +113,7 @@ offset_left = -39.0
 offset_top = -27.0
 offset_right = 1950.0
 offset_bottom = 1109.0
+
+[node name="miss" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(7, -131)
+stream = ExtResource("8_couud")

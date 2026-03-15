@@ -12,6 +12,9 @@ var prev_dir = 1
 var dashing = false
 var jumps = 1
 
+var iframe = false
+var hits = 0
+
 var was_on_ground = true
 
 var kick_in = false
@@ -136,3 +139,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	if is_preview:
 		position = Vector2(0,150)
+
+func hit():
+	if not iframe:
+		iframe = true
+		hits += 1
+		$miss.play()
+		await get_tree().create_timer(0.5).timeout
+		iframe = false
+		

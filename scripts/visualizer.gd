@@ -14,6 +14,8 @@ const rise_speed = 0.3
 const fall_speed = 0.3
 const normalization_speed = 0.0001
 
+@export var title = false
+
 @export var smooth = false
 @export var show_bars = true
 @export var show_line = false
@@ -43,9 +45,12 @@ func _ready() -> void:
 		bar_energies[i] = 0.0
 
 func _process(delta: float) -> void:
-	smooth = global.visualizer_smooth
-	show_line = global.visualizer_line
-	show_bars = global.visualizer_bar
+	if not title:
+		smooth = global.visualizer_smooth
+		show_line = global.visualizer_line
+		show_bars = global.visualizer_bar
+	elif title:
+		global.current_col = global.colours_raw["red"]
 	if fadein < 0.2:
 		for bar in bars:
 			bar.scale.y = 0

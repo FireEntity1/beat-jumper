@@ -72,7 +72,7 @@ scale_over_velocity_max = 323.08
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_0rdsr"]
 noise_type = 2
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ipu61"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2l77h"]
 width = 1920
 height = 1080
 seamless = true
@@ -82,7 +82,7 @@ noise = SubResource("FastNoiseLite_0rdsr")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ygxny"]
 shader = ExtResource("4_0rdsr")
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_ipu61")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_2l77h")
 shader_parameter/color_a = Color(0, 0.810918, 0.902412, 1)
 shader_parameter/color_b = Color(0.968595, 0.827412, 0.925751, 1)
 shader_parameter/distortion_speed = 0.15

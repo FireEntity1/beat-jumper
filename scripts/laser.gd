@@ -60,6 +60,9 @@ func start_fire_seq():
 	if is_fired:
 		return
 	is_fired = true
+	for body in get_overlapping_bodies():
+		if body is CharacterBody2D:
+			body.hit()
 	if is_slam:
 		$particles.emitting = true
 		$sprite.scale.x = 7

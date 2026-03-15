@@ -1,15 +1,147 @@
-[gd_scene load_steps=2 format=3 uid="uid://cv2ys532c6hk5"]
+[gd_scene load_steps=12 format=3 uid="uid://cv2ys532c6hk5"]
 
 [ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="1_4ignj"]
+[ext_resource type="Script" uid="uid://cpr4vxn7hutd2" path="res://scripts/title.gd" id="1_4rr2b"]
+[ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="2_wosw1"]
+[ext_resource type="PackedScene" uid="uid://c6pfcul8lmyr6" path="res://components/visualizer.tscn" id="3_p6dhs"]
+[ext_resource type="AudioStream" uid="uid://c844h23x0bc8g" path="res://components/[For EGCS 2023 FN-TB] trung-nova - Roars of V.E.N.G.E.A.N.C.E -Take Back Everything-.mp3" id="4_pyl7j"]
+[ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="5_b3w7a"]
+
+[sub_resource type="Environment" id="Environment_p6dhs"]
+background_mode = 3
+tonemap_white = 4.25
+glow_enabled = true
+glow_intensity = 2.15
+glow_strength = 0.63
+glow_blend_mode = 1
+glow_hdr_threshold = 0.8
+volumetric_fog_detail_spread = 2.46229
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pyl7j"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(150, 150, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, 1, 0)
+spread = 139.337
+initial_velocity_min = 1.1
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 6.85
+scale_max = 7.0
+scale_over_velocity_max = 323.08
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_b3w7a"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4rr2b"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 1.0
+bump_strength = 0.0
+noise = SubResource("FastNoiseLite_b3w7a")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4rr2b"]
+shader = ExtResource("2_wosw1")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_4rr2b")
+shader_parameter/color_a = Color(0, 0.810918, 0.902412, 1)
+shader_parameter/color_b = Color(0.968595, 0.827412, 0.925751, 1)
+shader_parameter/distortion_speed = 0.15
+shader_parameter/density = 0.025
+shader_parameter/bloom = 1.0
 
 [node name="title" type="Node2D"]
+script = ExtResource("1_4rr2b")
 
 [node name="bg" type="ColorRect" parent="."]
 offset_right = 1939.0
 offset_bottom = 1090.0
 color = Color(0, 0, 0, 1)
 
-[node name="Logo" type="Sprite2D" parent="."]
-position = Vector2(962, 528)
-scale = Vector2(0.818519, 0.818519)
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_p6dhs")
+
+[node name="world_particles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.085)
+position = Vector2(977, 566)
+scale = Vector2(8.07574, 5.05253)
+amount = 512
+lifetime = 60.0
+preprocess = 10.0
+speed_scale = 1.5
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_pyl7j")
+
+[node name="fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_4rr2b")
+offset_left = -30.0001
+offset_top = -40.0001
+offset_right = 4999.0
+offset_bottom = 2845.0
+scale = Vector2(0.401734, 0.401734)
+
+[node name="visualizer" parent="." instance=ExtResource("3_p6dhs")]
+position = Vector2(1872, 1137)
+rotation = -1.12478
+scale = Vector2(0.3, 0.6)
+title = true
+
+[node name="visualizer2" parent="." instance=ExtResource("3_p6dhs")]
+position = Vector2(78, 1129)
+rotation = -2.09174
+scale = Vector2(0.3, -0.6)
+title = true
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 496.0
+offset_top = 45.0
+offset_right = 1414.0
+offset_bottom = 433.0
+
+[node name="title" type="Sprite2D" parent="."]
+position = Vector2(975, 244)
+scale = Vector2(0.518519, 0.518519)
 texture = ExtResource("1_4ignj")
+
+[node name="[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(986, 734)
+stream = ExtResource("4_pyl7j")
+autoplay = true
+
+[node name="play" type="Button" parent="."]
+offset_left = 648.0
+offset_top = 491.0
+offset_right = 1256.0
+offset_bottom = 650.0
+pivot_offset = Vector2(307, 80)
+theme = ExtResource("5_b3w7a")
+theme_override_font_sizes/font_size = 100
+text = "P L A Y"
+
+[node name="editor" type="Button" parent="."]
+offset_left = 648.0
+offset_top = 691.0
+offset_right = 1256.0
+offset_bottom = 850.0
+pivot_offset = Vector2(307, 80)
+theme = ExtResource("5_b3w7a")
+theme_override_font_sizes/font_size = 100
+text = "E D I TO R"
+
+[node name="fade" type="ColorRect" parent="."]
+offset_right = 1935.0
+offset_bottom = 1086.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[connection signal="mouse_entered" from="Control" to="." method="_on_control_mouse_entered"]
+[connection signal="mouse_exited" from="Control" to="." method="_on_control_mouse_exited"]
+[connection signal="button_down" from="play" to="." method="_on_play_button_down"]
+[connection signal="mouse_entered" from="play" to="." method="_on_play_mouse_entered"]
+[connection signal="mouse_exited" from="play" to="." method="_on_play_mouse_exited"]
+[connection signal="button_down" from="editor" to="." method="_on_editor_button_down"]
+[connection signal="mouse_entered" from="editor" to="." method="_on_editor_mouse_entered"]
+[connection signal="mouse_exited" from="editor" to="." method="_on_editor_mouse_exited"]

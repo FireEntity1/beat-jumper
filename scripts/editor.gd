@@ -136,11 +136,14 @@ func _process(delta: float) -> void:
 		$pickfolder.modulate.a = 0.2
 	else:
 		$pickfolder.modulate.a = 1.0
-	
-	if Input.is_action_just_pressed("ui_left"):
+	if Input.is_action_just_pressed("ui_left") and Input.is_action_pressed("shift"):
+		move(false)
+	elif Input.is_action_just_pressed("ui_right") and Input.is_action_pressed("shift"):
+		move(false)
+	elif Input.is_action_just_pressed("ui_left"):
 		cursor -= editor_scale
 		$hor_scroll.value = cursor*event_width
-	if Input.is_action_just_pressed("ui_right"):
+	elif Input.is_action_just_pressed("ui_right"):
 		cursor += editor_scale
 		$hor_scroll.value = cursor*event_width
 	if Input.is_action_just_pressed("ui_down"):
@@ -177,6 +180,9 @@ func _process(delta: float) -> void:
 		selection.clear()
 		spawn_events()
 func spawn_events():
+	for child in get_children():
+		if child is PopupPanel:
+			child.queue_free()
 	$selected.text = "SELECTED: " + str(selection.size())
 	for track in $scroll/tracks.get_children():
 		if track is Control and track.has_node("hbox"):
@@ -336,6 +342,13 @@ func delete(event: Dictionary):
 			break
 	spawn_events()
 
+func move(dir: bool):
+	if selection.size() > 0:
+		for i in range(selection.size()):
+			for event in selection:
+				if map.data[i] == event:
+					event.beat += (int(dir)*2-1) * editor_scale
+
 func _on_pickfolder_button_up() -> void:
 	var dialog = FileDialog.new()
 	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
@@ -350,7 +363,7 @@ func load_map(dir: String,load: Array = [true,true,true]):
 	if FileAccess.file_exists(dir + "/map.jump") and load[0]:
 		var map_string = FileAccess.get_file_as_string(dir + "/map.jump")
 		map = JSON.parse_string(map_string)
-		sanitize_json(map.data,true)
+		map.data = sanitize_json(map.data,true)
 		loaded.map = true
 	else:
 		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(JSON.stringify(map))
@@ -372,11 +385,12 @@ func load_map(dir: String,load: Array = [true,true,true]):
 func save():
 	if save_dir == "":
 		return
-	sanitize_json(map.data,false)
+	var sanitized = sanitize_json(map.data,false)
+	var to_save = map.duplicate(true)
+	to_save.data = sanitized
 	var file = FileAccess.open(save_dir+"/map.jump",FileAccess.WRITE)
-	file.store_string(JSON.stringify(map))
-	file.close
-	sanitize_json(map.data,true)
+	file.store_string(JSON.stringify(to_save))
+	file.close()
 
 func update_info():
 	$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
@@ -454,12 +468,14 @@ func _on_bpm_text_changed(new_text: String) -> void:
 		map.bpm = float(new_text)
 
 func sanitize_json(array: Array, to_vector: bool):
-	for event in array:
+	var sanitized = array.duplicate(true)
+	for event in sanitized:
 		if event.has("pos"):
 			if to_vector and event.pos is Array:
 				event.pos = Vector2(event.pos[0],event.pos[1])
 			elif not to_vector and event.pos is Vector2:
 				event.pos = [event.pos.x,event.pos.y]
+	return sanitized
 
 func get_bpm_changes():
 	var events = []
@@ -540,3 +556,38 @@ func _on_editor_scale_drag_ended(value_changed: bool) -> void:
 	$hor_scroll.value = cursor*event_width
 	spawn_events()
 	$editor_scale.release_focus()
+
+func _on_back_button_up() -> void:
+	if loaded.map:
+		var map_string = FileAccess.get_file_as_string(save_dir + "/map.jump")
+		var saved_map = JSON.parse_string(map_string)
+		if map != saved_map:
+			var popup = AcceptDialog.new()
+			popup.title = "Unsaved Changes"
+			popup.dialog_text = "You have unsaved changes."
+			
+			popup.ok_button_text = "Save"
+			
+			var dont_save = popup.add_button("Don't Save", true, "dont_save")
+			var cancel = popup.add_button("Cancel", true, "cancel")
+			
+			add_child(popup)
+			popup.popup_centered()
+			
+			popup.confirmed.connect(func(): 
+				save()
+				popup.queue_free()
+				get_tree().change_scene_to_file("res://scenes/title.tscn")
+		)
+		
+			popup.custom_action.connect(func(action):
+				match action:
+					"cancel":
+						popup.queue_free()
+						return
+					"dont_save":
+						get_tree().change_scene_to_file("res://scenes/title.tscn")
+						return
+			)
+			return
+	get_tree().change_scene_to_file("res://scenes/title.tscn")

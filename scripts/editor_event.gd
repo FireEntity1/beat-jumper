@@ -163,7 +163,7 @@ func _on_editable_changed(data,key: String):
 	parent.modify(old,event_data)
 
 func _on_speedpicker_changed(text):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	var exp = Expression.new()
 	var regex = RegEx.new()
 	regex.compile(r"\b(\d+)\b")
@@ -176,7 +176,7 @@ func _on_speedpicker_changed(text):
 	parent.modify(old,event_data)
 
 func _on_length_changed(text):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	var exp = Expression.new()
 	var regex = RegEx.new()
 	regex.compile(r"\b(\d+)\b")
@@ -190,28 +190,28 @@ func _on_length_changed(text):
 	parent.modify(old,event_data)
 
 func _edges_value_changed(value):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	event_data.edges = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
 	parent.modify(old,event_data)
 
 func _radius_value_changed(value):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	event_data.radius = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
 	parent.modify(old,event_data)
 
 func _distance_value_changed(value):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	event_data.distance = value
 	pos_editor.event_data = event_data
 	pos_editor.update_preview()
 	parent.modify(old,event_data)
 
 func _on_colour_selected(index: int, selected: bool, list: ItemList):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	var cols = []
 	for i in list.get_selected_items():
 		cols.append(list.get_item_text(i))
@@ -219,7 +219,7 @@ func _on_colour_selected(index: int, selected: bool, list: ItemList):
 	parent.modify(old,event_data)
 
 func _intensity_value_changed(value: float):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	event_data.intensity = value
 	parent.modify(old,event_data)
 
@@ -262,7 +262,7 @@ func update_length(editor_scale, new_event_width):
 	size.x = event_width * editor_scale
 
 func pos_edit(x,y,rot):
-	var old = event_data
+	var old = event_data.duplicate(true)
 	event_data.pos = Vector2(x,y)
 	event_data.rot = rot
 	parent.modify(old,event_data)

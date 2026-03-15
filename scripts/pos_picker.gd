@@ -24,7 +24,7 @@ func _ready() -> void:
 	$vslider.value = floor(pos.y)
 	angle = rot
 	$pointer.rotation_degrees = angle
-	$angle.value = rotation_degrees+90
+	$angle.value = rot+90
 	update_preview()
 	
 	if event_type == "laser":
@@ -65,10 +65,10 @@ func update_preview():
 	$circle_preview.position = Vector2($hslider.value*30,$vslider.value*30) + Vector2(100,100)
 	if event_type == "laser_circle":
 		for laser in range(event_data.edges):
-			spawn_laser_circle(laser,event_data.edges,event_data.direction,event_data.radius)
+			spawn_laser_circle(laser,event_data.edges,int(event_data.direction),event_data.radius)
 		$circle_preview.rotation_degrees = angle+90
 	if event_type == "laser_sweep":
-		for index in range(event_data.amount):
+		for index in range(int(event_data.amount)):
 			spawn_laser_sweep(index,event_data.distance,event_data.outwards,angle + 90, event_data.direction)
 		if first: 
 			for laser in lasers:

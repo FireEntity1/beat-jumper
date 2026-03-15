@@ -1,5 +1,7 @@
 extends Node
 
+var path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS).path_join("/beat-jumper")
+
 var bpm = 120
 var beat = 0
 var last_beat = 0
@@ -238,4 +240,10 @@ func apply_grid(value: Vector2):
 
 func apply_prefire():
 	for key in prefire_sec:
-		prefire_sec[key] = prefire_sec[key]*(bpm / 60.0)
+		prefire_sec[key] = prefire_beat[key]*(bpm / 60.0)
+
+func create_map_dir():
+	if not DirAccess.dir_exists_absolute(path):
+		DirAccess.make_dir_recursive_absolute(path)
+		DirAccess.make_dir_recursive_absolute(path.path_join("wip"))
+		DirAccess.make_dir_recursive_absolute(path.path_join("maps"))

@@ -186,6 +186,14 @@ alignment = 1
 
 [node name="FileDialog" type="FileDialog" parent="."]
 
+[node name="back" type="Button" parent="."]
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 94.0
+offset_bottom = 103.0
+theme_override_font_sizes/font_size = 64
+text = "<"
+
 [node name="play" type="Button" parent="."]
 offset_left = 94.0
 offset_top = 130.0
@@ -225,4 +233,5 @@ is_preview = true
 [connection signal="scroll_ended" from="scroll" to="." method="_on_scroll_scroll_ended"]
 [connection signal="drag_ended" from="editor_scale" to="." method="_on_editor_scale_drag_ended"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]
+[connection signal="button_up" from="back" to="." method="_on_back_button_up"]
 [connection signal="button_up" from="play" to="." method="_on_play_button_up"]

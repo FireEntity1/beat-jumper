@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://p5fyskuevnje"]
+
+[ext_resource type="Script" uid="uid://cqhqu2gd35yd5" path="res://scripts/song_picker.gd" id="1_gy5sp"]
+[ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="1_l61d0"]
+
+[sub_resource type="Environment" id="Environment_gy5sp"]
+background_mode = 3
+tonemap_white = 4.25
+glow_enabled = true
+glow_intensity = 2.15
+glow_strength = 0.63
+glow_blend_mode = 1
+glow_hdr_threshold = 0.8
+volumetric_fog_detail_spread = 2.46229
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rm185"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(150, 150, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, 1, 0)
+spread = 139.337
+initial_velocity_min = 1.1
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 6.85
+scale_max = 7.0
+scale_over_velocity_max = 323.08
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_teqfl"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ipu61"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 1.0
+bump_strength = 0.0
+noise = SubResource("FastNoiseLite_teqfl")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qphs"]
+shader = ExtResource("1_l61d0")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_ipu61")
+shader_parameter/color_a = Color(0, 0.810918, 0.902412, 1)
+shader_parameter/color_b = Color(0.968595, 0.827412, 0.925751, 1)
+shader_parameter/distortion_speed = 0.15
+shader_parameter/density = 0.025
+shader_parameter/bloom = 1.0
+
+[node name="songpicker" type="Node2D"]
+script = ExtResource("1_gy5sp")
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 1939.0
+offset_bottom = 1090.0
+color = Color(0, 0, 0, 1)
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_gy5sp")
+
+[node name="world_particles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.085)
+position = Vector2(977, 566)
+scale = Vector2(8.07574, 5.05253)
+amount = 512
+lifetime = 60.0
+preprocess = 10.0
+speed_scale = 1.5
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_rm185")
+
+[node name="fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6qphs")
+offset_left = -30.0001
+offset_top = -40.0001
+offset_right = 4999.0
+offset_bottom = 2845.0
+scale = Vector2(0.401734, 0.401734)

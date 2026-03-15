@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cfrny7stmyr2m"]
+[gd_scene load_steps=6 format=3 uid="uid://cfrny7stmyr2m"]
 
 [ext_resource type="Script" uid="uid://00uu26xp50ky" path="res://scripts/laser.gd" id="1_ch01h"]
 
@@ -25,6 +25,9 @@ scale_min = 0.0
 scale_max = 27.32
 scale_over_velocity_curve = SubResource("CurveTexture_xyndk")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ch01h"]
+size = Vector2(7142, 14)
+
 [node name="laser_slam" type="Area2D"]
 script = ExtResource("1_ch01h")
 is_slam = true
@@ -47,3 +50,8 @@ speed_scale = 6.33
 randomness = 1.0
 fixed_fps = 120
 process_material = SubResource("ParticleProcessMaterial_ch01h")
+
+[node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -3583)
+rotation = 1.5708
+shape = SubResource("RectangleShape2D_ch01h")

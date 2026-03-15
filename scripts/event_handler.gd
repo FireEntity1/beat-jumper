@@ -28,20 +28,28 @@ var platform_colour_speed = 1
 var showing_sun = false
 var sun_mult = 0.0
 
-var map: Dictionary = global.default_map.duplicate(true)
+#var map: Dictionary = global.default_map.duplicate(true)
+
+var map = {"artist":"trung-nova","audiofilename":"song.ogg","bpm":166.0,"data":[{"beat":0.0,"intensity":0.5,"status":true,"type":"vhs"},{"amount":"24","beat":2.0,"colour":["pink"],"direction":true,"distance":300.0,"outwards":false,"pos":[0.0,1.0],"rot":90.0,"speed":0.25,"type":"laser_sweep"},{"beat":7.0,"colour":"pink","pos":[3.0,1.0],"rot":50.0,"type":"laser"},{"beat":7.5,"colour":"pink","pos":[7.0,1.0],"rot":-65.0,"type":"laser"},{"beat":8.0,"colour":"pink","pos":[1.0,3.0],"rot":-10.0,"type":"laser"},{"beat":9.0,"colour":"pink","pos":[7.0,3.0],"rot":40.0,"type":"laser"},{"beat":10.0,"colour":"pink","pos":[1.0,1.0],"rot":110.0,"type":"laser"},{"beat":10.5,"colour":"pink","pos":[7.0,1.0],"rot":-45.0,"type":"laser"},{"beat":11.0,"colour":"pink","pos":[1.0,3.0],"rot":270.0,"type":"laser"},{"beat":11.5,"colour":"pink","pos":[9.0,1.0],"rot":225.0,"type":"laser"},{"beat":12.0,"colour":"pink","pos":[3.0,2.0],"rot":20.0,"type":"laser"},{"beat":13.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":14.0,"colour":"pink","pos":[2.0,1.0],"rot":25.0,"type":"laser"},{"beat":15.0,"colour":"pink","pos":[3.0,1.0],"rot":15.0,"type":"laser"},{"beat":16.0,"colour":"pink","pos":[1.0,1.0],"rot":50.0,"type":"laser"},{"beat":17.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":18.0,"colour":"pink","pos":[1.0,3.0],"rot":80.0,"type":"laser"},{"beat":18.5,"colour":"pink","pos":[8.0,1.0],"rot":-70.0,"type":"laser"},{"beat":19.0,"colour":"pink","pos":[7.0,4.0],"rot":55.0,"type":"laser"},{"beat":19.5,"colour":"pink","pos":[4.0,3.0],"rot":-25.0,"type":"laser"},{"beat":20.0,"colour":"pink","pos":[1.0,3.0],"rot":25.0,"type":"laser"},{"beat":21.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":22.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":23.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":24.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":24.6666666666667,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":25.3333333333333,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":26.5,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":27.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":120.0,"rot":0.0,"speed":1.0,"type":"cam_zoom","zoom":1.0},{"beat":122.0,"rot":0.0,"speed":1.0,"type":"cam_zoom","zoom":1.0},{"bar":false,"beat":123.0,"line":true,"smooth_line":true,"status":true,"type":"visualizer"},{"beat":123.0,"speed":0.25,"status":true,"type":"camera_kick"},{"bar":true,"beat":145.0,"line":false,"smooth_line":false,"status":true,"type":"visualizer"},{"beat":145.0,"speed":0.125,"status":true,"type":"camera_kick"},{"beat":156.0,"speed":0.0625,"status":true,"type":"camera_kick"},{"beat":162.0,"rot":-15.0,"speed":1.9,"type":"cam_zoom","zoom":4.0},{"beat":162.0,"new_bpm":118.0,"type":"bpm_change"},{"beat":162.0,"speed":0.25,"status":false,"type":"camera_kick"},{"beat":163.0,"rot":15.0,"speed":1.0,"type":"cam_zoom","zoom":4.0},{"beat":164.0,"rot":-15.0,"speed":1.0,"type":"cam_zoom","zoom":4.0},{"beat":165.0,"rot":15.0,"speed":1.0,"type":"cam_zoom","zoom":3.7},{"beat":166.0,"rot":0.0,"speed":6.9,"type":"cam_zoom","zoom":4.0},{"beat":166.0,"speed":0.25,"status":true,"type":"camera_kick"},{"beat":166.5,"colour":"pink","length":0.25,"pos":[4.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":166.5,"colour":"pink","length":0.25,"pos":[6.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":167.0,"intensity":0.5,"length":1.0,"type":"glitch"},{"amount":12.0,"beat":174.5,"colour":["hotpink","purple"],"direction":true,"distance":300.0,"outwards":true,"pos":[4.0,1.0],"rot":120.0,"speed":0.03125,"type":"laser_sweep"},{"beat":175.0,"intensity":0.5,"length":0.0,"type":"glitch"},{"amount":24.0,"beat":179.5,"colour":["pink"],"direction":1.0,"edges":3.0,"pos":[5.0,3.0],"radius":241.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"beat":179.5,"rot":0.0,"speed":6.9,"type":"cam_zoom","zoom":1.22},{"amount":24.0,"beat":179.875,"colour":["green"],"direction":1.0,"edges":4.0,"pos":[5.0,3.0],"radius":301.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"beat":179.875,"rot":-5.0,"speed":6.3,"type":"cam_zoom","zoom":1.38},{"beat":180.25,"rot":1.0,"speed":7.0,"type":"cam_zoom","zoom":0.84},{"amount":24.0,"beat":180.25,"colour":["orange"],"direction":1.0,"edges":5.0,"pos":[5.0,3.0],"radius":301.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"amount":24.0,"beat":180.5,"colour":["orange"],"direction":1.0,"edges":6.0,"pos":[5.0,3.0],"radius":391.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"beat":180.75,"rot":0.0,"speed":6.3,"type":"cam_zoom","zoom":1.42},{"amount":24.0,"beat":180.875,"colour":["blue"],"direction":1.0,"edges":7.0,"pos":[5.0,3.0],"radius":481.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"beat":181.25,"rot":-5.0,"speed":6.3,"type":"cam_zoom","zoom":1.64},{"amount":24.0,"beat":181.25,"colour":["hotpink"],"direction":1.0,"edges":8.0,"pos":[5.0,3.0],"radius":491.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"amount":24.0,"beat":181.625,"colour":["purple"],"direction":1.0,"edges":9.0,"pos":[5.0,3.0],"radius":511.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"beat":181.75,"rot":-1.0,"speed":6.3,"type":"cam_zoom","zoom":1.82},{"amount":24.0,"beat":182.0,"colour":["green"],"direction":1.0,"edges":9.0,"pos":[5.0,3.0],"radius":601.0,"rot":0.0,"speed":0.0,"type":"laser_circle"},{"beat":182.25,"rot":-3.0,"speed":6.3,"type":"cam_zoom","zoom":1.98},{"amount":12.0,"beat":182.5,"colour":["hotpink","red"],"direction":true,"distance":300.0,"outwards":true,"pos":[5.0,1.0],"rot":90.0,"speed":0.125,"type":"laser_sweep"},{"beat":182.625,"rot":0.0,"speed":6.7,"type":"cam_zoom","zoom":0.44},{"amount":"36","beat":183.5,"colour":["hotpink","pink","blue","green","red","purple","orange"],"direction":"-17","edges":12.0,"pos":[5.0,2.0],"radius":400.0,"rot":0.0,"speed":0.0625,"type":"laser_circle"},{"beat":183.75,"rot":0.0,"speed":1.1,"type":"cam_zoom","zoom":1.32},{"beat":258.5,"colour":"pink","length":0.0,"pos":[5.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":258.5,"intensity":0.5,"status":false,"type":"vhs"},{"beat":258.75,"colour":"pink","length":0.0,"pos":[9.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":259.0,"colour":"pink","length":0.0,"pos":[2.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":259.5,"colour":"pink","length":0.0,"pos":[6.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":259.75,"colour":"pink","length":0.0,"pos":[2.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":260.25,"colour":"pink","length":0.0,"pos":[6.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":260.5,"colour":"pink","length":0.0,"pos":[2.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":261.0,"colour":"pink","length":0.0,"pos":[2.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":261.25,"colour":"pink","length":0.0,"pos":[9.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":261.75,"colour":"pink","length":0.0,"pos":[6.0,1.0],"rot":0.0,"type":"laser_slam"},{"beat":262.0,"colour":"pink","length":0.0,"pos":[2.0,1.0],"rot":0.0,"type":"laser_slam"},{"amount":"16","beat":262.5,"colour":["hotpink","pink","blue","green","red","purple","orange","white"],"direction":1.0,"edges":12.0,"pos":[10.0,5.0],"radius":91.0,"rot":0.0,"speed":0.5,"type":"laser_circle"},{"amount":"16","beat":262.5,"colour":["hotpink","pink","blue","green","red","purple","orange","white"],"direction":"-1","edges":12.0,"pos":[0.0,5.0],"radius":81.0,"rot":0.0,"speed":0.5,"type":"laser_circle"},{"amount":"8","beat":270.5,"colour":["hotpink","pink","blue","green","red","purple"],"direction":1.0,"edges":12.0,"pos":[9.0,3.0],"radius":181.0,"rot":0.0,"speed":0.25,"type":"laser_circle"},{"amount":"8","beat":270.5,"colour":["hotpink","pink","blue","green","red","purple"],"direction":"-1","edges":12.0,"pos":[1.0,3.0],"radius":181.0,"rot":0.0,"speed":0.25,"type":"laser_circle"},{"amount":"8","beat":272.5,"colour":["pink"],"direction":1.0,"edges":12.0,"pos":[8.0,1.0],"radius":400.0,"rot":0.0,"speed":0.125,"type":"laser_circle"},{"amount":"8","beat":273.5,"colour":["pink"],"direction":"-1","edges":12.0,"pos":[3.0,1.0],"radius":400.0,"rot":240.0,"speed":0.125,"type":"laser_circle"},{"amount":"16","beat":278.5,"colour":["pink"],"direction":true,"distance":531.0,"outwards":true,"pos":[1.0,1.0],"rot":50.0,"speed":0.0625,"type":"laser_sweep"},{"amount":"16","beat":279.5,"colour":["pink"],"direction":false,"distance":531.0,"outwards":true,"pos":[10.0,1.0],"rot":-50.0,"speed":0.0625,"type":"laser_sweep"},{"amount":"18","beat":280.5,"colour":["red"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":261.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"beat":280.5,"intensity":2.0,"status":true,"type":"chromabb"},{"amount":"18","beat":281.0,"colour":["pink","blue","purple"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":301.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"amount":"18","beat":281.5,"colour":["pink","blue","purple"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":461.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"amount":"18","beat":282.0,"colour":["pink","blue","purple"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":681.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"beat":282.5,"intensity":1.0,"status":false,"type":"chromabb"},{"amount":256.0,"beat":671.0,"colour":["purple"],"direction":1.0,"edges":5.0,"pos":[1.0,1.0],"radius":281.0,"rot":0.0,"speed":0.5,"type":"laser_circle"},{"amount":12.0,"beat":799.0,"colour":["pink"],"direction":1.0,"edges":12.0,"pos":[1.0,1.0],"radius":400.0,"rot":0.0,"speed":0.00390625,"type":"laser_circle"},{"amount":12.0,"beat":799.25,"colour":["pink"],"direction":1.0,"edges":12.0,"pos":[1.0,1.0],"radius":400.0,"rot":0.0,"speed":0.00390625,"type":"laser_circle"},{"amount":12.0,"beat":799.75,"colour":["pink"],"direction":1.0,"edges":12.0,"pos":[1.0,1.0],"radius":400.0,"rot":0.0,"speed":0.00390625,"type":"laser_circle"},{"beat":831.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":833.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"beat":835.0,"colour":"pink","pos":[1.0,1.0],"rot":0.0,"type":"laser"},{"amount":"16","beat":282.5,"colour":["pink"],"direction":true,"distance":531.0,"outwards":true,"pos":[1.0,1.0],"rot":50.0,"speed":0.0625,"type":"laser_sweep"},{"amount":"16","beat":283.5,"colour":["pink"],"direction":false,"distance":531.0,"outwards":true,"pos":[10.0,1.0],"rot":-50.0,"speed":0.0625,"type":"laser_sweep"},{"beat":284.5,"intensity":2.0,"status":true,"type":"chromabb"},{"beat":286.5,"intensity":1.0,"status":false,"type":"chromabb"},{"amount":"18","beat":284.5,"colour":["red"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":261.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"amount":"18","beat":285.0,"colour":["pink","blue","purple"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":301.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"amount":"18","beat":285.5,"colour":["pink","blue","purple"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":461.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"},{"amount":"18","beat":286.0,"colour":["pink","blue","purple"],"direction":1,"edges":5.0,"pos":[5.0,2.0],"radius":681.0,"rot":0.0,"speed":0.015625,"type":"laser_circle"}],"imagename":"image.png","name":"Roars of Vengeance","offset":0.0,"preview_start":0.0,"sub":"","version":1.0}
 
 func _ready() -> void:
+	map.data = sanitize_json(map.data,true)
+	bpm = map.bpm
 	bpm += epsilon
 	if not is_preview:
+		await get_tree().create_timer(map.offset).timeout
 		$music.play(0)
 	map.data.sort_custom(sort_by_trigger_beat)
 	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
+	global.bpm = bpm
+	global.apply_prefire()
 
 func _process(delta: float) -> void:
 	global.bpm = bpm
 	if not is_preview:
 		last_beat = beat
-		beat += (bpm/60.0)*delta
+		if $music.playing:
+			beat += (bpm/60.0)*delta 
 	global.beat = beat
 	global.current_col = $main_platform/platform_sprite.modulate
 	$main_platform/platform_sprite.modulate.r = move_toward($main_platform/platform_sprite.modulate.r,target_platform_colour[0],delta*platform_colour_speed)
@@ -119,6 +127,7 @@ func _process(delta: float) -> void:
 				continue
 			elif event.type == "bpm_change":
 				bpm = event.new_bpm
+				global.apply_prefire()
 				event_index += 1
 				continue
 			elif event.type in event_types:
@@ -137,6 +146,7 @@ func _process(delta: float) -> void:
 						temp.amount = event.amount
 						temp.colour = event.colour
 						temp.direction = event.direction
+						temp.rot = event.rot
 					"laser_sweep":
 						temp.speed = event.speed
 						temp.amount = event.amount
@@ -216,3 +226,24 @@ func reset_states():
 
 func click():
 	$click.play()
+
+func sanitize_json(array: Array, to_vector: bool):
+	var sanitized = array.duplicate(true)
+	for event in sanitized:
+		if event.has("pos"):
+			if to_vector and event.pos is Array:
+				event.pos = Vector2(event.pos[0],event.pos[1])
+			elif not to_vector and event.pos is Vector2:
+				event.pos = [event.pos.x,event.pos.y]
+	return sanitized
+
+func load_map(dir: String):
+	if FileAccess.file_exists(dir.path_join("map.jump")):
+		var map_string = FileAccess.get_file_as_string(dir.path_join("map.jump"))
+		map = JSON.parse_string(map_string)
+		sanitize_json(map.data,true)
+	if FileAccess.file_exists(dir.path_join("song.ogg")):
+		var song_path = dir.path_join("song.ogg")
+		var song = AudioStreamOggVorbis.load_from_file(song_path)
+		$song.stream = song
+	print(map)

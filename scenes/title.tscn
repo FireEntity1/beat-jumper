@@ -172,7 +172,7 @@ texture = ExtResource("1_4ignj")
 offset_right = 1935.0
 offset_bottom = 1086.0
 mouse_filter = 2
-color = Color(0, 0, 0, 0)
+color = Color(0, 0, 0, 1)
 
 [connection signal="mouse_entered" from="titlehover" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="titlehover" to="." method="_on_control_mouse_exited"]

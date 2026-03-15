@@ -16,13 +16,18 @@ var quit = {
 	"done": false
 }
 
+var fade_active = false
+
 var title = false
 
 func _ready() -> void:
-	pass # Replace with function body.
-
+	await get_tree().create_timer(0.8).timeout
+	fade_active = true
 
 func _process(delta: float) -> void:
+	if not editor.pressed and not play.pressed and not quit.pressed and fade_active:
+		$fade.color.a = lerpf($fade.color.a,0.0,delta*2)
+	
 	if play["pressed"]:
 		$play.scale.x = lerpf($play.scale.x,2.0,delta*5)
 		$fade.color.a = lerpf($fade.color.a,1.0,delta*15)

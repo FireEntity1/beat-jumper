@@ -117,3 +117,4 @@ deselect={
 [rendering]
 
 viewport/hdr_2d=true
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

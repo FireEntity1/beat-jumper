@@ -1,7 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://p5fyskuevnje"]
+[gd_scene load_steps=13 format=3 uid="uid://p5fyskuevnje"]
 
 [ext_resource type="Script" uid="uid://cqhqu2gd35yd5" path="res://scripts/song_picker.gd" id="1_gy5sp"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="1_l61d0"]
+[ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="3_teqfl"]
+[ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="4_6qphs"]
+[ext_resource type="PackedScene" uid="uid://tv4ao5qps7u3" path="res://components/song_category.tscn" id="5_6qphs"]
+[ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="6_nj1yl"]
 
 [sub_resource type="Environment" id="Environment_gy5sp"]
 background_mode = 3
@@ -47,6 +51,15 @@ shader_parameter/distortion_speed = 0.15
 shader_parameter/density = 0.025
 shader_parameter/bloom = 1.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nj1yl"]
+shader = ExtResource("3_teqfl")
+shader_parameter/running = true
+shader_parameter/shake_power = 0.005
+shader_parameter/shake_rate = 0.33
+shader_parameter/shake_speed = 5.0
+shader_parameter/shake_block_size = 30.0
+shader_parameter/shake_color_rate = 0.005
+
 [node name="songpicker" type="Node2D"]
 script = ExtResource("1_gy5sp")
 
@@ -76,3 +89,67 @@ offset_top = -40.0001
 offset_right = 4999.0
 offset_bottom = 2845.0
 scale = Vector2(0.401734, 0.401734)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="titleglitch" type="Sprite2D" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_nj1yl")
+position = Vector2(1005.3, 158.4)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_6qphs")
+
+[node name="bgline" type="ColorRect" parent="."]
+offset_top = 350.0
+offset_right = 1939.0
+offset_bottom = 364.0
+color = Color(2, 2, 2, 1)
+
+[node name="bg2" type="ColorRect" parent="."]
+offset_top = 359.0
+offset_right = 1939.0
+offset_bottom = 1090.0
+color = Color(0, 0, 0, 0.757)
+
+[node name="song_category" parent="." instance=ExtResource("5_6qphs")]
+position = Vector2(371, 370)
+
+[node name="categories" type="ScrollContainer" parent="."]
+offset_left = 10.0
+offset_top = 367.0
+offset_right = 355.0
+offset_bottom = 1078.0
+
+[node name="vbox" type="VBoxContainer" parent="categories"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="title" type="Sprite2D" parent="."]
+position = Vector2(1005.3, 158.4)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("4_6qphs")
+
+[node name="songpreview" type="AudioStreamPlayer2D" parent="."]
+
+[node name="fade" type="CanvasLayer" parent="."]
+
+[node name="fade" type="ColorRect" parent="fade"]
+visible = false
+offset_right = 1935.0
+offset_bottom = 1086.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="back" type="Button" parent="."]
+offset_left = 75.0
+offset_top = 85.0
+offset_right = 203.0
+offset_bottom = 223.0
+pivot_offset = Vector2(64, 75)
+theme = ExtResource("6_nj1yl")
+theme_override_font_sizes/font_size = 100
+text = "<"
+
+[connection signal="button_down" from="back" to="." method="_on_back_button_down"]
+[connection signal="mouse_entered" from="back" to="." method="_on_back_mouse_entered"]
+[connection signal="mouse_exited" from="back" to="." method="_on_back_mouse_exited"]

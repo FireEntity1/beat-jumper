@@ -10,6 +10,12 @@ var editor = {
 	"pressed": false
 }
 
+var quit = {
+	"hover": false,
+	"pressed": false,
+	"done": false
+}
+
 var title = false
 
 func _ready() -> void:
@@ -38,11 +44,27 @@ func _process(delta: float) -> void:
 	if title:
 		$title.scale.x = lerpf($title.scale.x, 0.93,delta*5)
 		$title.scale.y = lerpf($title.scale.y, 0.93,delta*5)
-		$title.position.y = lerpf($title.position.y,260,delta*5)
+		$title.position.y = lerpf($title.position.y,254,delta*5)
 	else:
 		$title.scale.x = lerpf($title.scale.x, 0.9,delta*5)
 		$title.scale.y = lerpf($title.scale.y, 0.9,delta*5)
 		$title.position.y = lerpf($title.position.y,244,delta*5)
+	
+	if quit["pressed"]:
+		$quit.scale.x = lerpf($quit.scale.x,2.0,delta*5)
+		$quit.scale.y = lerpf($quit.scale.y,0.0,delta*10)
+		$title.scale.x = lerpf($title.scale.x,1.2,delta*10)
+		$title.scale.y = lerpf($title.scale.y,1.2,delta*10)
+		$title.position.y = lerpf($title.position.y,800,delta*5)
+		$fadeback.color.a = lerpf($fadeback.color.a,1.0,delta*20)
+		
+	elif quit["hover"]:
+		$quit.scale.x = lerpf($quit.scale.x,1.3,delta*10)
+	else:
+		$quit.scale.x = lerpf($quit.scale.x,1.0,delta*10)
+	
+	if quit["done"]:
+		$fade.color.a = lerpf($fade.color.a,1.0,delta*3)
 
 
 # ts comments not ai i just want to be able to read my shitty code
@@ -56,6 +78,8 @@ func _on_play_mouse_exited() -> void:
 
 func _on_play_button_down() -> void:
 	play.pressed = true
+	await get_tree().create_timer(1).timeout
+	get_tree().change_scene_to_file("res://scenes/song_picker.tscn")
 
 # -------------------- EDITOR BUTON --------------
 func _on_editor_button_down() -> void:
@@ -76,3 +100,17 @@ func _on_control_mouse_entered() -> void:
 
 func _on_control_mouse_exited() -> void:
 	title = false
+
+# -------------------- QUIT -----------
+func _on_quit_button_down() -> void:
+	quit.pressed = true
+	await get_tree().create_timer(1.0).timeout
+	quit.done = true
+	await get_tree().create_timer(2.0).timeout
+	get_tree().quit()
+
+func _on_quit_mouse_entered() -> void:
+	quit.hover = true
+
+func _on_quit_mouse_exited() -> void:
+	quit.hover = false

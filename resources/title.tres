@@ -2,6 +2,12 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_37il8"]
 bg_color = Color(0.101868, 0.101868, 0.101867, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(3.1, 2.1, 2.9, 1)
+border_blend = true
 corner_radius_top_left = 45
 corner_radius_top_right = 45
 corner_radius_bottom_right = 45
@@ -9,10 +15,16 @@ corner_radius_bottom_left = 45
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2yc47"]
 bg_color = Color(0, 0, 0, 1)
-corner_radius_top_left = 45
-corner_radius_top_right = 45
-corner_radius_bottom_right = 45
-corner_radius_bottom_left = 45
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(3.187, 2.108, 2.899, 1)
+border_blend = true
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_right = 60
+corner_radius_bottom_left = 60
 
 [resource]
 Button/colors/font_color = Color(1.9, 1.9, 2.1, 1)

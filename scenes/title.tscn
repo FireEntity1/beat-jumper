@@ -111,6 +111,49 @@ offset_top = 137.0
 offset_right = 1682.0
 offset_bottom = 341.0
 
+[node name="[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(986, 734)
+stream = ExtResource("4_pyl7j")
+autoplay = true
+
+[node name="play" type="Button" parent="."]
+offset_left = 648.0
+offset_top = 417.0
+offset_right = 1256.0
+offset_bottom = 576.0
+pivot_offset = Vector2(307, 80)
+theme = ExtResource("5_b3w7a")
+theme_override_font_sizes/font_size = 100
+text = "P L A Y"
+
+[node name="editor" type="Button" parent="."]
+offset_left = 648.0
+offset_top = 617.0
+offset_right = 1256.0
+offset_bottom = 776.0
+pivot_offset = Vector2(307, 80)
+theme = ExtResource("5_b3w7a")
+theme_override_font_sizes/font_size = 100
+text = "E D I T O R"
+
+[node name="quit" type="Button" parent="."]
+offset_left = 648.0
+offset_top = 810.0
+offset_right = 1256.0
+offset_bottom = 969.0
+pivot_offset = Vector2(307, 80)
+theme = ExtResource("5_b3w7a")
+theme_override_font_sizes/font_size = 100
+text = "Q U I T"
+
+[node name="fadeback" type="ColorRect" parent="."]
+offset_left = -110.0
+offset_top = -61.0
+offset_right = 2050.0
+offset_bottom = 1151.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
 [node name="title" type="Sprite2D" parent="."]
 position = Vector2(975, 244)
 scale = Vector2(0.9, 0.9)
@@ -124,31 +167,6 @@ material = SubResource("ShaderMaterial_ia1n6")
 position = Vector2(975, 244)
 scale = Vector2(0.9, 0.9)
 texture = ExtResource("1_4ignj")
-
-[node name="[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(986, 734)
-stream = ExtResource("4_pyl7j")
-autoplay = true
-
-[node name="play" type="Button" parent="."]
-offset_left = 648.0
-offset_top = 491.0
-offset_right = 1256.0
-offset_bottom = 650.0
-pivot_offset = Vector2(307, 80)
-theme = ExtResource("5_b3w7a")
-theme_override_font_sizes/font_size = 100
-text = "P L A Y"
-
-[node name="editor" type="Button" parent="."]
-offset_left = 648.0
-offset_top = 691.0
-offset_right = 1256.0
-offset_bottom = 850.0
-pivot_offset = Vector2(307, 80)
-theme = ExtResource("5_b3w7a")
-theme_override_font_sizes/font_size = 100
-text = "E D I TO R"
 
 [node name="fade" type="ColorRect" parent="."]
 offset_right = 1935.0
@@ -164,3 +182,6 @@ color = Color(0, 0, 0, 0)
 [connection signal="button_down" from="editor" to="." method="_on_editor_button_down"]
 [connection signal="mouse_entered" from="editor" to="." method="_on_editor_mouse_entered"]
 [connection signal="mouse_exited" from="editor" to="." method="_on_editor_mouse_exited"]
+[connection signal="button_down" from="quit" to="." method="_on_quit_button_down"]
+[connection signal="mouse_entered" from="quit" to="." method="_on_quit_mouse_entered"]
+[connection signal="mouse_exited" from="quit" to="." method="_on_quit_mouse_exited"]

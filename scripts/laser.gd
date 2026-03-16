@@ -38,6 +38,9 @@ func _process(delta: float) -> void:
 		start_fire_seq()
 	
 	if is_fired and not finished:
+		for body in get_overlapping_bodies():
+			if body is CharacterBody2D:
+				body.hit()
 		$sprite.modulate += Color(global.colours[colour][0]*delta,global.colours[colour][1]*delta,global.colours[colour][2]*delta)
 		$sprite.modulate.r = clamp($sprite.modulate.r,0,global.colours[colour][0]/3)
 		$sprite.modulate.g = clamp($sprite.modulate.g,0,global.colours[colour][1]/3)
@@ -60,9 +63,6 @@ func start_fire_seq():
 	if is_fired:
 		return
 	is_fired = true
-	for body in get_overlapping_bodies():
-		if body is CharacterBody2D:
-			body.hit()
 	if is_slam:
 		$particles.emitting = true
 		$sprite.scale.x = 7

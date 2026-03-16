@@ -166,14 +166,17 @@ func _on_speedpicker_changed(text):
 	var old = event_data.duplicate(true)
 	var exp = Expression.new()
 	var regex = RegEx.new()
-	regex.compile(r"\b(\d+)\b")
-	text = regex.sub(text,"$1.0", true)
+
+	regex.compile(r"(?<!\.)\b(\d+)\b(?!\.)")
+	text = regex.sub(text, "$1.0", true)
+
 	if exp.parse(str(text)) == OK:
 		var value = exp.execute()
 		event_data.speed = value
 	else:
 		print("error")
-	parent.modify(old,event_data)
+
+	parent.modify(old, event_data)
 
 func _on_length_changed(text):
 	var old = event_data.duplicate(true)

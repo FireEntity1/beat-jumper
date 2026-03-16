@@ -561,6 +561,7 @@ func _on_back_button_up() -> void:
 	if loaded.map:
 		var map_string = FileAccess.get_file_as_string(save_dir + "/map.jump")
 		var saved_map = JSON.parse_string(map_string)
+		saved_map.data = sanitize_json(saved_map.data, true)
 		if map != saved_map:
 			var popup = AcceptDialog.new()
 			popup.title = "Unsaved Changes"

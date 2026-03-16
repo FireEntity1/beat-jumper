@@ -239,8 +239,8 @@ func apply_grid(value: Vector2):
 	return (value*grid_mult) + grid_offset
 
 func apply_prefire():
-	for key in prefire_sec:
-		prefire_sec[key] = prefire_beat[key]*(bpm / 60.0)
+	for key in prefire_beat:
+		prefire_beat[key] = prefire_sec[key] * (bpm / 60.0)
 
 func create_map_dir():
 	if not DirAccess.dir_exists_absolute(path):

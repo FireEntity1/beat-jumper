@@ -55,11 +55,11 @@ shader_parameter/bloom = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ia1n6"]
 shader = ExtResource("5_yql1r")
 shader_parameter/running = true
-shader_parameter/shake_power = 0.005
-shader_parameter/shake_rate = 0.33
+shader_parameter/shake_power = 0.002
+shader_parameter/shake_rate = 1.0
 shader_parameter/shake_speed = 5.0
-shader_parameter/shake_block_size = 30.0
-shader_parameter/shake_color_rate = 0.005
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.004
 
 [node name="title" type="Node2D"]
 script = ExtResource("1_4rr2b")

@@ -1,6 +1,6 @@
 extends Node
 
-var path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS).path_join("/beat-jumper-data")
+var path = OS.get_system_dir(OS.SYSTEM_DIR_DOCUMENTS).path_join("lightbound-data")
 
 var bpm = 120
 var beat = 0
@@ -231,6 +231,7 @@ const MULTICOLOUR = ["laser_circle", "laser_spread", "laser_sweep"]
 
 func _ready() -> void:
 	apply_prefire()
+	create_map_dir()
 
 func _process(delta: float) -> void:
 	pass

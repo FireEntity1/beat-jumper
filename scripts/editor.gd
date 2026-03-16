@@ -350,18 +350,32 @@ func move(dir: bool):
 					event.beat += (int(dir)*2-1) * editor_scale
 
 func _on_pickfolder_button_up() -> void:
-	var dialog = FileDialog.new()
-	dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
-	dialog.use_native_dialog = true
-	dialog.connect("dir_selected",load_map)
+	#var dialog = FileDialog.new()
+	#dialog.file_mode = FileDialog.FILE_MODE_OPEN_DIR
+	#dialog.use_native_dialog = true
+	#dialog.connect("dir_selected",load_map)
+	#add_child(dialog)
+	#dialog.popup()
+	var dialog = PopupMenu.new()
+	var dir = DirAccess.open(global.path.path_join("wip"))
+	var maps = dir.get_directories()
+	dialog.add_theme_font_size_override("font_size",64)
+	for i in maps:
+		dialog.add_item(i)
 	add_child(dialog)
-	dialog.popup()
+	dialog.popup_centered()
+	dialog.connect("id_pressed",func(id):
+		load_map(global.path.path_join("wip").path_join(maps[id]),[true,true,true])
+		)
 	$pickfolder.release_focus()
+	
 
 func load_map(dir: String,load: Array = [true,true,true]):
 	save_dir = dir
 	if FileAccess.file_exists(dir + "/map.jump") and load[0]:
 		var map_string = FileAccess.get_file_as_string(dir + "/map.jump")
+		map.data = []
+		spawn_events()
 		map = JSON.parse_string(map_string)
 		map.data = sanitize_json(map.data,true)
 		loaded.map = true
@@ -497,6 +511,8 @@ func sanitize_json(array: Array, to_vector: bool):
 		if event.has("pos"):
 			if to_vector and event.pos is Array:
 				event.pos = Vector2(event.pos[0],event.pos[1])
+			elif event.pos is String:
+					event.pos = str_to_var("Vector2" + event.pos)
 			elif not to_vector and event.pos is Vector2:
 				event.pos = [event.pos.x,event.pos.y]
 	return sanitized
@@ -616,3 +632,37 @@ func _on_back_button_up() -> void:
 			)
 			return
 	get_tree().change_scene_to_file("res://scenes/title.tscn")
+
+
+func _on_newmap_button_up() -> void:
+	var dir = DirAccess.open(global.path.path_join("wip"))
+	var popup = PopupPanel.new()
+	popup.title = "Choose a name"
+	var title = Label.new()
+	title.text = "Choose a name"
+	title.add_theme_font_size_override("font_size",32)
+	var input = LineEdit.new()
+	input.add_theme_font_size_override("font_size",24)
+	input.connect("text_submitted",make_new_map.bind(dir))
+	popup.min_size.x = 500
+	popup.add_child(title)
+	popup.add_child(input)
+	add_child(popup)
+	popup.popup_centered()
+ 
+func make_new_map(text: String,dir: DirAccess) -> void:
+	var folderpath = sanitize_name(text)
+	if not dir.dir_exists(folderpath):
+		var finalpath = global.path.path_join("wip").path_join(folderpath)
+		DirAccess.make_dir_recursive_absolute(finalpath)
+		if DirAccess.dir_exists_absolute(finalpath):
+			map = global.default_map.duplicate(true)
+			load_map(finalpath,[true,true,true])
+		
+
+func sanitize_name(name: String) -> String:
+	var bad_chars = ["/", "\\", ":", "*", "?", "\"", "<", ">", "|",".", " "]
+	var result = name
+	for c in bad_chars:
+		result = result.replace(c, "-")
+	return result

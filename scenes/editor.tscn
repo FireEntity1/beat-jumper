@@ -96,6 +96,14 @@ offset_right = 162.0
 offset_bottom = 54.0
 texture_normal = ExtResource("4_xg7d5")
 
+[node name="newmap" type="Button" parent="."]
+offset_left = 110.0
+offset_top = 50.0
+offset_right = 161.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 32
+text = "+"
+
 [node name="hor_scroll" type="HScrollBar" parent="."]
 offset_left = 332.0
 offset_top = 134.0
@@ -230,6 +238,7 @@ is_preview = true
 [connection signal="button_up" from="pickmusic" to="." method="_on_pickmusic_button_up"]
 [connection signal="button_up" from="pickimage" to="." method="_on_pickimage_button_up"]
 [connection signal="button_up" from="pickfolder" to="." method="_on_pickfolder_button_up"]
+[connection signal="button_up" from="newmap" to="." method="_on_newmap_button_up"]
 [connection signal="scroll_ended" from="scroll" to="." method="_on_scroll_scroll_ended"]
 [connection signal="drag_ended" from="editor_scale" to="." method="_on_editor_scale_drag_ended"]
 [connection signal="text_submitted" from="scale" to="." method="_on_scale_text_submitted"]

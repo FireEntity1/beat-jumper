@@ -69,6 +69,7 @@ func play(song):
 func _on_back_button_down() -> void:
 	back.pressed = true
 	fade = true
+	$back.release_focus()
 	await get_tree().create_timer(0.1).timeout
 	back.pressed = false
 	await get_tree().create_timer(1.2).timeout

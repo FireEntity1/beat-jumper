@@ -94,13 +94,13 @@ scale = Vector2(0.401734, 0.401734)
 [node name="visualizer" parent="." instance=ExtResource("3_p6dhs")]
 position = Vector2(1872, 1137)
 rotation = -1.12478
-scale = Vector2(0.3, 0.6)
+scale = Vector2(0.3, 1.5)
 title = true
 
 [node name="visualizer2" parent="." instance=ExtResource("3_p6dhs")]
 position = Vector2(78, 1129)
 rotation = -2.09174
-scale = Vector2(0.3, -0.6)
+scale = Vector2(0.3, -1.5)
 title = true
 
 [node name="titlehover" type="Control" parent="."]
@@ -111,10 +111,11 @@ offset_top = 137.0
 offset_right = 1682.0
 offset_bottom = 341.0
 
-[node name="[forEgcs2023Fn-tb]Trung-nova-RoarsOfV_e_n_g_e_a_n_c_e-takeBackEverything-" type="AudioStreamPlayer2D" parent="."]
+[node name="titlemusic" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(986, 734)
 stream = ExtResource("4_pyl7j")
 autoplay = true
+bus = &"music"
 
 [node name="play" type="Button" parent="."]
 offset_left = 648.0

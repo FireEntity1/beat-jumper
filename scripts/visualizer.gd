@@ -12,7 +12,7 @@ var bars_visibility = 0.0
 
 const rise_speed = 0.3
 const fall_speed = 0.3
-const normalization_speed = 0.0001
+const normalization_speed = 0.05
 
 @export var title = false
 
@@ -37,7 +37,7 @@ func _ready() -> void:
 	for child in get_children():
 		if child is ColorRect:
 			bars.append(child)
-	spectrum = AudioServer.get_bus_effect_instance(0, 0)
+	spectrum = AudioServer.get_bus_effect_instance(AudioServer.get_bus_index("music"), 2)
 	bar_energies.resize(count)
 	for bar in bars:
 			bar.scale.y = 0
@@ -61,16 +61,19 @@ func _process(delta: float) -> void:
 	var target_visibility = 1.0 if show_bars else 0.0
 	bars_visibility = lerp(bars_visibility, target_visibility, 20.0 * delta)
 
+	var bus_volume_db = AudioServer.get_bus_volume_db(0)
+
 	for i in range(count):
 		#var hz = min_freq * pow(max_freq / min_freq, float(i + 1) / count)
 		var hz = lerp(min_freq, max_freq, float(i + 1) / count)
 		var magnitude = spectrum.get_magnitude_for_frequency_range(prev_hz, hz)
-		#var raw_energy = magnitude.length() * 100.0
-		#if raw_energy > current_max:
-			#current_max = raw_energy
+		var raw_energy = magnitude.length()
+		if raw_energy > current_max:
+			current_max = raw_energy
+		var db_floor = -70.0 - bus_volume_db
 		var magnitude_db = linear_to_db(magnitude.length())
-		var energy = clamp((linear_to_db(magnitude.length()) + 60.0) / 60.0, 0.0, 1.0)
-		
+		var energy = clamp((linear_to_db(magnitude.length()) + 70.0) / 70.0, 0.0, 1.0)
+		energy = energy / max(max_energy * 2.0, 1.0)
 		if energy < 0.05:
 			energy = 0.0
 		if energy > bar_energies[i]:
@@ -92,10 +95,10 @@ func _process(delta: float) -> void:
 		if i >= count:
 			current_bar.scale.y = 0
 		prev_hz = hz
-		if current_max > max_energy:
-			max_energy = lerp(max_energy, current_max, 0.3)
-		else:
-			max_energy = lerp(max_energy, current_max, normalization_speed)
+	if current_max > max_energy:
+		max_energy = lerp(max_energy, current_max, 0.3)
+	else:
+		max_energy = lerp(max_energy, current_max, normalization_speed)
 	$line.clear_points()
 	$line.scale = Vector2.ONE
 	curve.clear_points()

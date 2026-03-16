@@ -369,10 +369,10 @@ func load_map(dir: String,load: Array = [true,true,true]):
 		FileAccess.open(dir+"/map.jump",FileAccess.WRITE).store_string(JSON.stringify(map))
 		loaded.map = true
 	if FileAccess.file_exists(dir + "/song.ogg") and load[1]:
-		#var song_path = dir.path_join("song.ogg")
 		var song_path = dir.path_join("song.ogg")
 		var song = AudioStreamOggVorbis.load_from_file(song_path)
 		loaded.song = true
+		$layer/preview_container/preview/main_game/music.stream = song
 		$song.stream = song
 	if FileAccess.file_exists(dir + "/cover.png") and load[2]:
 		loaded.image = true
@@ -400,6 +400,30 @@ func update_info():
 	$artist.text = map.artist
 	$bpm.text = str(map.bpm)
 	$offset.text = str(map.offset)
+	
+	var total_width = time_to_beat($song.stream.get_length()) * event_width
+	$hor_scroll.max_value = total_width
+	$hor_scroll.value = 0
+	cursor = 0.0
+	
+	for track in $scroll/tracks.get_children():
+		if track is Control:
+			track.custom_minimum_size.x = total_width
+	
+	for child in lines_layer.get_children():
+		child.queue_free()
+	add_lines(editor_scale, time_to_beat($song.stream.get_length()), lines_layer)
+	
+	spawn_events()  
+
+#func update_info():
+	#$song_length.text = "LENGTH: " + str(int(floor($song.stream.get_length()/60))) + ":" + str(int($song.stream.get_length())%60)
+	#$song_events.text = "EVENTS: " + str(map.data.size())
+	#$title.text = map.name
+	#$subtitle.text = map.sub
+	#$artist.text = map.artist
+	#$bpm.text = str(map.bpm)
+	#$offset.text = str(map.offset)
 
 func _on_pickmusic_button_up() -> void:
 	var dialog = FileDialog.new()

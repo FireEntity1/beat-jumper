@@ -26,6 +26,15 @@ func update(new_title, new_songs):
 			button.add_theme_font_size_override("font_size",64)
 			button.connect("button_down",play.bind(song.song))
 			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			button.custom_minimum_size.y = 450
+			var stylebox = StyleBoxTexture.new()
+			stylebox.texture = song.image
+			stylebox.modulate_color = Color(0.5, 0.5, 0.5, 1.0)
+			button.add_theme_stylebox_override("normal", stylebox)
+			button.add_theme_stylebox_override("hover", stylebox)
+			button.add_theme_stylebox_override("pressed", stylebox)
+			button.add_theme_stylebox_override("focus", stylebox)
+
 			$scroll/vbox.add_child(button)
 
 func play(song):

@@ -17,12 +17,18 @@ var quit = {
 }
 
 var fade_active = false
+var startup_fade = true
 
 var title = false
 
 func _ready() -> void:
+	$title.position.y = 800
+	$title.scale = Vector2(1.2,1.2)
 	await get_tree().create_timer(0.8).timeout
 	fade_active = true
+	await get_tree().create_timer(1.2).timeout
+	startup_fade = false
+	
 
 func _process(delta: float) -> void:
 	if not editor.pressed and not play.pressed and not quit.pressed and fade_active:
@@ -65,8 +71,18 @@ func _process(delta: float) -> void:
 		
 	elif quit["hover"]:
 		$quit.scale.x = lerpf($quit.scale.x,1.3,delta*10)
-	else:
+	elif not quit["hover"]:
 		$quit.scale.x = lerpf($quit.scale.x,1.0,delta*10)
+	
+	if startup_fade:
+		$title.position.y = 500
+		$title.scale = Vector2(1.2,1.2)
+		$fadeback.color.a = 1.0
+	elif not quit["pressed"]:
+		$title.scale.x = lerpf($title.scale.x,0.9,delta*10)
+		$title.scale.y = lerpf($title.scale.y,0.9,delta*10)
+		$title.position.y = lerpf($title.position.y,244,delta*5)
+		$fadeback.color.a = lerpf($fadeback.color.a,0.0,delta*5)
 	
 	if quit["done"]:
 		$fade.color.a = lerpf($fade.color.a,1.0,delta*3)

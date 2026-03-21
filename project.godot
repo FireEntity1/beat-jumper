@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Beat Jumper"
-run/main_scene="uid://cv2ys532c6hk5"
+run/main_scene="uid://cd0l2flrue8ie"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/show_image=false
@@ -117,5 +117,6 @@ deselect={
 
 [rendering]
 
+textures/vram_compression/import_etc2_astc=true
 viewport/hdr_2d=true
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)

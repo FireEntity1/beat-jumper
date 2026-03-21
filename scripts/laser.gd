@@ -72,7 +72,8 @@ func start_fire_seq():
 		hold_time = (60/global.bpm)*fire_hold
 	await get_tree().create_timer(hold_time).timeout
 	finished = true
-	await get_tree().create_timer(10.0).timeout
+	monitoring = false
+	await get_tree().create_timer(3.0).timeout
 	queue_free()
 	
 func crossed(prev: float, now: float, target: float) -> bool:

@@ -28,6 +28,7 @@ var categories = {
 }
 
 func _ready() -> void:
+	global.add_hover_press_effect($back)
 	$fade/fade.show()
 	var i = 0
 	for key in categories:
@@ -37,7 +38,11 @@ func _ready() -> void:
 		button.add_theme_font_size_override("font_size", 36)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		global.add_hover_press_effect(button)
 		$categories/vbox.add_child(button)
+		await get_tree().process_frame
+		button.pivot_offset = button.size / 2
+		global.add_hover_press_effect(button,true)
 	await get_tree().create_timer(0.5).timeout
 	fade = false
 
@@ -47,15 +52,15 @@ func _process(delta: float) -> void:
 	else:
 		$fade/fade.color.a = lerpf($fade/fade.color.a, 1,delta*5)
 	
-	if back["pressed"]:
-		$back.scale.x = lerpf($back.scale.x,0.5,delta*5)
-		$back.scale.y = lerpf($back.scale.y,0.5,delta*5)
-	elif back["hover"]:
-		$back.scale.x = lerpf($back.scale.x,1.3,delta*10)
-		$back.scale.y = lerpf($back.scale.y,1.3,delta*10)
-	else:
-		$back.scale.x = lerpf($back.scale.x,1.0,delta*10)
-		$back.scale.y = lerpf($back.scale.y,1.0,delta*10)
+	#if back["pressed"]:
+		#$back.scale.x = lerpf($back.scale.x,0.5,delta*5)
+		#$back.scale.y = lerpf($back.scale.y,0.5,delta*5)
+	#elif back["hover"]:
+		#$back.scale.x = lerpf($back.scale.x,1.3,delta*10)
+		#$back.scale.y = lerpf($back.scale.y,1.3,delta*10)
+	#else:
+		#$back.scale.x = lerpf($back.scale.x,1.0,delta*10)
+		#$back.scale.y = lerpf($back.scale.y,1.0,delta*10)
 
 func spawn_category_view(category):
 	picker.parent = self

@@ -24,8 +24,11 @@ var title = false
 func _ready() -> void:
 	$title.position.y = 800
 	$title.scale = Vector2(1.2,1.2)
-	await get_tree().create_timer(0.8).timeout
+	await get_tree().create_timer(0.4).timeout
+	$titlemusic.play(0)
+	await get_tree().create_timer(0.4).timeout
 	fade_active = true
+	
 	await get_tree().create_timer(1.2).timeout
 	startup_fade = false
 	

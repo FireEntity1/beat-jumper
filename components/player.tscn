@@ -37,7 +37,7 @@ shader_parameter/intensity = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0lm1f"]
 shader = ExtResource("6_kuobi")
-shader_parameter/running = false
+shader_parameter/running = true
 shader_parameter/shake_power = 0.03
 shader_parameter/shake_rate = 1.0
 shader_parameter/shake_speed = 5.0

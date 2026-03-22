@@ -46,15 +46,21 @@ func _ready() -> void:
 				editable = ItemList.new()
 				if event_data.type in global.MULTICOLOUR:
 					editable.select_mode = ItemList.SELECT_MULTI
+					editable.connect("multi_selected", _on_colour_selected.bind(editable))
+				else:
+					editable.connect("item_selected", _on_single_colour_selected.bind(editable))
 				for colour in global.colours:
 					editable.add_item(colour)
 				var selected = event_data.colour
 				if selected is Array:
 					for item in range(editable.item_count):
 						if editable.get_item_text(item) in selected:
-							editable.select(item,false)
+							editable.select(item, false)
+				else:
+					for item in range(editable.item_count):
+						if editable.get_item_text(item) == selected:
+							editable.select(item)
 				editable.custom_minimum_size.y = 200
-				editable.connect("multi_selected",_on_colour_selected.bind(editable))
 			"speed":
 				if not event_data.type == "cam_zoom":
 					editable = LineEdit.new()
@@ -218,12 +224,23 @@ func _on_colour_selected(index: int, selected: bool, list: ItemList):
 	var cols = []
 	for i in list.get_selected_items():
 		cols.append(list.get_item_text(i))
-	event_data.colour = cols
-	parent.modify(old,event_data)
+	
+	if global.defaults[event_data.type].colour is Array:
+		event_data.colour = cols
+	else:
+		event_data.colour = cols[0] if cols.size() > 0 else ""
+	
+	parent.modify(old, event_data)
+
+func _on_single_colour_selected(index: int, list: ItemList):
+	var old = event_data.duplicate(true)
+	event_data.colour = list.get_item_text(index)
+	parent.modify(old, event_data)
 
 func _intensity_value_changed(value: float):
 	var old = event_data.duplicate(true)
 	event_data.intensity = value
+	release_focus()
 	parent.modify(old,event_data)
 
 func _process(delta: float) -> void:

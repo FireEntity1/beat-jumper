@@ -69,7 +69,8 @@ func _process(delta: float) -> void:
 		shake.set_shader_parameter("Shakeintensity",0.0)
 	if global.glitch:
 		glitch.set_shader_parameter("running", true)
-		glitch.set_shader_parameter("shake_power",float(global.glitch_intensity)/100)
+		glitch.set_shader_parameter("shake_power",float(global.glitch_intensity)/100.0)
+		glitch.set_shader_parameter("shake_color_rate",float(global.glitch_intensity)/100.0)
 	else:
 		glitch.set_shader_parameter("running", false)
 	if global.vhs:
@@ -80,9 +81,11 @@ func _process(delta: float) -> void:
 		move_toward(vhs.get_shader_parameter("intensity"),0.0,delta*3))
 	if not global.camera_kick:
 		var target = lerpf($camera.zoom.x, global.cam_zoom * BASE_ZOOM, global.cam_speed * delta)
+		$camera.position.y = -200 + ($camera.zoom.x*50)
 		$camera.zoom = Vector2(target, target)
 	else:
 		var target_zoom = global.cam_zoom * BASE_ZOOM + kick_amount * 0.06
+		$camera.position.y = -200 + ($camera.zoom.x*50)
 		$camera.zoom.x = lerpf($camera.zoom.x, target_zoom, delta * 15)
 		$camera.zoom.y = lerpf($camera.zoom.y, target_zoom, delta * 15)
 	$camera.rotation_degrees = lerpf($camera.rotation_degrees,float(global.cam_rot),float(global.cam_speed)/10.0)

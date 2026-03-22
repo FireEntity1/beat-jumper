@@ -25,6 +25,8 @@ var hits = 0
 
 var was_on_ground = true
 
+var cam_tilt = 0.0
+
 #var kick_in = false
 
 var scale_target = Vector2(1,1)
@@ -88,7 +90,9 @@ func _process(delta: float) -> void:
 		$camera.position.y = -200 + ($camera.zoom.x*50)
 		$camera.zoom.x = lerpf($camera.zoom.x, target_zoom, delta * 15)
 		$camera.zoom.y = lerpf($camera.zoom.y, target_zoom, delta * 15)
-	$camera.rotation_degrees = lerpf($camera.rotation_degrees,float(global.cam_rot),float(global.cam_speed)/10.0)
+	var direction = Input.get_axis("left", "right")
+	cam_tilt = lerpf(cam_tilt, -direction * 4.0, delta * 1.5)
+	$camera.rotation_degrees = lerpf($camera.rotation_degrees, global.cam_rot + cam_tilt, float(global.cam_speed) * 10.0 * delta)
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -138,7 +142,7 @@ func _physics_process(delta: float) -> void:
 		scale_target = Vector2(1,1)
 		dashing = false
 		$sprite.material.set_shader_parameter("dir", Vector2(0,0))
-		await get_tree().create_timer(0.5).timeout
+		await get_tree().create_timer(0.3).timeout
 		can_dash = true
 		
 	if dashing:
@@ -154,7 +158,7 @@ func hit():
 	if not iframe:
 		iframe = true
 		hits += 1
-		$miss.play()
+		$miss.play(0.1)
 		await get_tree().create_timer(0.5).timeout
 		iframe = false
 		

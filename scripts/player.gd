@@ -112,14 +112,24 @@ func _physics_process(delta: float) -> void:
 		scale_target = Vector2(1,1)
 	if is_on_floor():
 		jumps = 1
-		was_on_ground = true
+		#was_on_ground = true
 	was_on_ground = is_on_floor()
 	
 	if Input.is_action_just_pressed("slam"):
 		velocity.y = 10000
-		scale_target = Vector2(0.2,3)
+		var height = position.y - 171
+		
+		$sprite.material.set_shader_parameter("dir", Vector2($sprite.material.get_shader_parameter("dir").x,
+			height/100))
+
+		$sprite.material.set_shader_parameter("dir", Vector2($sprite.material.get_shader_parameter("dir").x,
+		height/1400.0))
+		await get_tree().create_timer(0.002).timeout
+		#scale_target = Vector2(0.2,3)
 		await get_tree().create_timer(0.08).timeout
-		scale_target = Vector2(1,1)
+		$sprite.material.set_shader_parameter("dir", Vector2($sprite.material.get_shader_parameter("dir").x,
+			0.0))
+		#scale_target = Vector2(1,1)
 	
 	if Input.is_action_just_released("left") or Input.is_action_just_released("right"):
 		scale_target = Vector2(1,1)
@@ -136,12 +146,14 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("dash") and can_dash:
 		dashing = true
 		can_dash = false
-		$sprite.material.set_shader_parameter("dir", Vector2(1,0))
+		$sprite.material.set_shader_parameter("dir", Vector2(-1.2*prev_dir,
+			$sprite.material.get_shader_parameter("dir").y))
 		scale_target = Vector2(2,0.2)
 		await get_tree().create_timer(0.05).timeout
 		scale_target = Vector2(1,1)
 		dashing = false
-		$sprite.material.set_shader_parameter("dir", Vector2(0,0))
+		$sprite.material.set_shader_parameter("dir", Vector2(0,
+			$sprite.material.get_shader_parameter("dir").y))
 		await get_tree().create_timer(0.3).timeout
 		can_dash = true
 		

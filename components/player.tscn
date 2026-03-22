@@ -12,7 +12,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_couud"]
 shader = ExtResource("2_0lm1f")
 shader_parameter/dir = Vector2(0, 0)
-shader_parameter/quality = 4
+shader_parameter/quality = 24
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0g4kb"]
 size = Vector2(86, 87)

@@ -106,7 +106,7 @@ func _process(delta: float) -> void:
 	if show_line:
 		$line.modulate.a = lerp($line.modulate.a,1.0,delta*2)
 	else:
-		$line.modulate.a = lerp($line.modulate.a,0.0,delta*2)
+		$line.modulate.a = lerp($line.modulate.a,0.0,delta*10)
 	for i in range(count):
 		#var point = Vector2(i * 115, -bars[i].scale.y*900 + 120)
 		var height = bar_energies[i] * 50 * clamp(0.1*max(i,1),0.5,3)

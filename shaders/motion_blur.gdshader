@@ -4,10 +4,11 @@ uniform vec2 dir = vec2(0.1, 0.0); // Direction and magnitude of blur
 uniform int quality : hint_range(1, 64) = 4;
 
 void vertex() {
-    // Expand the vertex bounds to prevent the blur from clipping at the edges
-    vec2 blurSize = abs(dir) * 2.0;
-    VERTEX *= blurSize + 1.0;
-    UV = (UV - 0.5) * (blurSize + 1.0) + 0.5;
+    vec2 blurSize = dir * 2.0;
+    VERTEX *= abs(blurSize) + 1.0;                    // always expand
+    UV = (UV - 0.5) * (abs(blurSize) + 1.0) + 0.5;  // match UV expansion
+    // shift so expansion only goes in dir's direction
+    VERTEX += blurSize * abs(blurSize) * 0.5;
 }
 
 void fragment() {
@@ -17,7 +18,8 @@ void fragment() {
     // Calculate the step based on quality
     vec2 stepSize = dir / float(quality);
 
-    for(int i = -quality; i <= quality; i++) {
+    //for(int i = -quality; i <= quality; i++) {
+	for(int i = 0; i <= quality; i++) {
         vec2 offset_uv = UV - (stepSize * float(i));
         
         // Only sample if the UV is within the [0, 1] range to avoid edge bleeding

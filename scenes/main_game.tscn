@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://rnv1uk5hcvoo" path="res://sprites/circle.png" id="3_ygxny"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="4_0rdsr"]
 [ext_resource type="PackedScene" uid="uid://c6pfcul8lmyr6" path="res://components/visualizer.tscn" id="7_wi4c7"]
-[ext_resource type="AudioStream" uid="uid://bixh76qxlcxis" path="res://audio/sfx/newversion.mp3" id="8_2l77h"]
+[ext_resource type="AudioStream" uid="uid://dpj4ssei4ac7q" path="res://audio/sfx/FRACTURED-ANOMALY.ogg" id="8_2l77h"]
 [ext_resource type="AudioStream" uid="uid://p7omwgbrer7h" path="res://audio/sfx/click.wav" id="9_2l77h"]
 
 [sub_resource type="Environment" id="Environment_72e8q"]

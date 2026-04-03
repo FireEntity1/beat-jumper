@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cpr4vxn7hutd2" path="res://scripts/title.gd" id="1_4rr2b"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="2_wosw1"]
 [ext_resource type="PackedScene" uid="uid://c6pfcul8lmyr6" path="res://components/visualizer.tscn" id="3_p6dhs"]
-[ext_resource type="AudioStream" uid="uid://bixh76qxlcxis" path="res://audio/sfx/newversion.mp3" id="4_yql1r"]
+[ext_resource type="AudioStream" uid="uid://dpj4ssei4ac7q" path="res://audio/sfx/FRACTURED-ANOMALY.ogg" id="4_yql1r"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="5_b3w7a"]
 [ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="5_yql1r"]
 
@@ -114,7 +114,7 @@ offset_bottom = 341.0
 [node name="titlemusic" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(986, 734)
 stream = ExtResource("4_yql1r")
-volume_db = -9.333
+volume_db = -6.667
 bus = &"music"
 
 [node name="play" type="Button" parent="."]

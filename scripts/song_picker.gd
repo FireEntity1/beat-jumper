@@ -35,14 +35,17 @@ func _ready() -> void:
 		var button = Button.new()
 		button.text = key
 		button.connect("button_down",spawn_category_view.bind(key))
-		button.add_theme_font_size_override("font_size", 36)
+		button.add_theme_font_size_override("font_size", 48)
 		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		#button.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+		button.custom_minimum_size.x = 200
 		button.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		button.theme = preload("res://resources/title.tres")
 		global.add_hover_press_effect(button)
 		$categories/vbox.add_child(button)
 		await get_tree().process_frame
 		button.pivot_offset = button.size / 2
-		global.add_hover_press_effect(button,true)
+		global.add_hover_press_effect(button,false,true)
 	await get_tree().create_timer(0.5).timeout
 	fade = false
 

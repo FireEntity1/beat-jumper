@@ -121,14 +121,16 @@ color = Color(0, 0, 0, 0.757)
 position = Vector2(371, 370)
 
 [node name="categories" type="ScrollContainer" parent="."]
+clip_contents = false
 offset_left = 10.0
-offset_top = 367.0
+offset_top = 389.0
 offset_right = 355.0
 offset_bottom = 1078.0
 
 [node name="vbox" type="VBoxContainer" parent="categories"]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 20
 
 [node name="title" type="Sprite2D" parent="."]
 position = Vector2(1005.3, 158.4)
@@ -147,10 +149,10 @@ mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="back" type="Button" parent="."]
-offset_left = 75.0
+offset_left = 69.0
 offset_top = 85.0
-offset_right = 203.0
-offset_bottom = 223.0
+offset_right = 209.0
+offset_bottom = 225.0
 pivot_offset = Vector2(64, 75)
 theme = ExtResource("6_nj1yl")
 theme_override_font_sizes/font_size = 100

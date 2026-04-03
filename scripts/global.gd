@@ -249,13 +249,13 @@ func create_map_dir():
 		DirAccess.make_dir_recursive_absolute(path.path_join("wip"))
 		DirAccess.make_dir_recursive_absolute(path.path_join("maps"))
 
-func add_hover_press_effect(node: Control, horizontal = false) -> void:
+func add_hover_press_effect(node: Control, horizontal = false, vertical = false) -> void:
 	var tween: Tween
 	
 	node.mouse_entered.connect(func():
 		if tween: tween.kill()
 		tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tween.tween_property(node, "scale", Vector2(1.25, 1.0 if horizontal else 1.25), 0.5))
+		tween.tween_property(node, "scale", Vector2(1.25 if not vertical else 1.0, 1.0 if horizontal else 1.25), 0.5))
 	
 	node.mouse_exited.connect(func():
 		if tween: tween.kill()

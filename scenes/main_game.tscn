@@ -42,7 +42,7 @@ size = Vector2(3240.42, 170.339)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d2op2"]
 particle_flag_disable_z = true
-emission_shape_scale = Vector3(75, 75, 1)
+emission_shape_scale = Vector3(100, 75, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 direction = Vector3(1, 1, 0)
@@ -134,7 +134,7 @@ position = Vector2(10, -535)
 scale = Vector2(12.16, 7.60782)
 amount = 256
 lifetime = 45.0
-preprocess = 3.0
+preprocess = 5.0
 trail_enabled = true
 trail_sections = 4
 trail_section_subdivisions = 1

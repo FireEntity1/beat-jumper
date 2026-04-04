@@ -40,6 +40,15 @@ func _ready() -> void:
 	if get_parent().is_preview:
 		hide()
 		is_preview = true
+	global.shake_changed.connect(func(intensity):
+		shake.set_shader_parameter("Shakeintensity", intensity))
+	global.glitch_changed.connect(func(active, intensity):
+		glitch.set_shader_parameter("running", active)
+		glitch.set_shader_parameter("shake_power", intensity/100.0)
+		glitch.set_shader_parameter("shake_color_rate", intensity/100.0))
+	global.vhs_changed.connect(func(active, _intensity):
+		if not active:
+			vhs.set_shader_parameter("intensity", 0.0))
 
 func _process(delta: float) -> void:
 	if global.camera_kick and not was_kicking:
@@ -65,16 +74,6 @@ func _process(delta: float) -> void:
 		chromabb.get_shader_parameter("r_displacement").move_toward(Vector2(ci*3,-ci*1.2),delta*300))
 		chromabb.set_shader_parameter("b_displacement",
 		chromabb.get_shader_parameter("b_displacement").move_toward(Vector2(-ci*3,ci*1.2),delta*300))
-	if global.shake:
-		shake.set_shader_parameter("Shakeintensity",global.shake_intensity)
-	else:
-		shake.set_shader_parameter("Shakeintensity",0.0)
-	if global.glitch:
-		glitch.set_shader_parameter("running", true)
-		glitch.set_shader_parameter("shake_power",float(global.glitch_intensity)/100.0)
-		glitch.set_shader_parameter("shake_color_rate",float(global.glitch_intensity)/100.0)
-	else:
-		glitch.set_shader_parameter("running", false)
 	if global.vhs:
 		vhs.set_shader_parameter("intensity",
 		move_toward(vhs.get_shader_parameter("intensity"),global.vhs_intensity,delta*3))

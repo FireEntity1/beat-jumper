@@ -102,6 +102,12 @@ func _process(delta: float) -> void:
 				timeout_sun(event.length)
 				event_index += 1
 				continue
+			elif event.type == "cam_zoom":
+				global.cam_rot = event.rot
+				global.cam_speed = event.speed
+				global.cam_zoom = event.zoom
+				event_index += 1
+				continue
 			elif event.type == "camera_kick":
 				global.camera_kick = event.status
 				global.camera_kick_speed = event.speed
@@ -194,8 +200,8 @@ func crossed(prev: float, now: float, target: float):
 	return prev <= target and now >= target
 
 func sort_by_trigger_beat(a, b):
-	var trigger_a = a["beat"] - global.prefire_beat[a["type"]]
-	var trigger_b = b["beat"] - global.prefire_beat[b["type"]]
+	var trigger_a = a["beat"] - global.prefire_beat.get(a["type"], 0.0)
+	var trigger_b = b["beat"] - global.prefire_beat.get(b["type"], 0.0)
 	return trigger_a < trigger_b
 
 func timeout_sun(time):
@@ -207,6 +213,7 @@ func glitch_timeout(time):
 	global.glitch = true
 	await get_tree().create_timer((60.0/bpm)*time).timeout
 	global.glitch = false
+	global.glitch_changed.emit(false, 0.0)
 
 func modify(playing: bool, time: float, new_beat: float, new_map: Dictionary = {},new_bpm: float = bpm):
 	bpm = new_bpm

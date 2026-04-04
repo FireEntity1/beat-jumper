@@ -41,10 +41,13 @@ func _ready() -> void:
 	bar_energies.resize(count)
 	for bar in bars:
 			bar.scale.y = 0
+	$line.scale = Vector2.ONE
 	for i in range(count):
 		bar_energies[i] = 0.0
 
 func _process(delta: float) -> void:
+	if not global.visualizer and $line.modulate.a < 0.01 and bars_visibility < 0.01:
+		return
 	if not title:
 		smooth = global.visualizer_smooth
 		show_line = global.visualizer_line
@@ -71,7 +74,7 @@ func _process(delta: float) -> void:
 		if raw_energy > current_max:
 			current_max = raw_energy
 		var db_floor = -70.0 - bus_volume_db
-		var magnitude_db = linear_to_db(magnitude.length())
+		#var magnitude_db = linear_to_db(magnitude.length())
 		var energy = clamp((linear_to_db(magnitude.length()) + 70.0) / 70.0, 0.0, 1.0)
 		energy = energy / max(max_energy * 2.0, 1.0)
 		if energy < 0.05:
@@ -90,7 +93,7 @@ func _process(delta: float) -> void:
 		elif not show_bars and show_line:
 			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, 0.2)
 		else:
-			global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
+			#global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
 			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, 0.2)
 		if i >= count:
 			current_bar.scale.y = 0
@@ -100,7 +103,6 @@ func _process(delta: float) -> void:
 	else:
 		max_energy = lerp(max_energy, current_max, normalization_speed)
 	$line.clear_points()
-	$line.scale = Vector2.ONE
 	curve.clear_points()
 	curve.bake_interval = 10.0
 	if show_line:
@@ -117,21 +119,37 @@ func _process(delta: float) -> void:
 			$line.add_point(point)
 	curve.add_point(Vector2(3600,120))
 	$line.add_point(Vector2(3600,120))
-	if smooth:
-		for i in range(curve.point_count):
-			var p_prev = curve.get_point_position(max(i - 1, 0))
-			var p_next = curve.get_point_position(min(i + 1, curve.point_count - 1))
-			
-			var tangent = (p_next - p_prev) * 0.2
-			
-			if i == 0:
-				tangent.y = 0
-			
-			curve.set_point_in(i, -tangent)
-			curve.set_point_out(i, tangent)
+	if smooth and show_line:
+		var raw = []
+		for i in range(count):
+			var height = bar_energies[i] * 50 * clamp(0.1*max(i,1),0.5,3)
+			raw.append(Vector2(i * 115, min(-height * 18 + 120, 120)))
+		raw.append(Vector2(3600, 120))
 		
-		var points = []
-		for point in curve.get_baked_points():
-			point.y = min(point.y, 120)
-			points.append(point)
-		$line.points = points
+		raw[0] = Vector2(raw[0].x, raw[1].y)
+		
+		var smoothed = PackedVector2Array()
+		var steps = 4
+		
+		for i in range(raw.size() - 1):
+			var p0 = raw[max(i-1, 0)]
+			var p1 = raw[i]
+			var p2 = raw[min(i+1, raw.size()-1)]
+			var p3 = raw[min(i+2, raw.size()-1)]
+			
+			for s in range(steps):
+				var t = float(s) / float(steps)
+				var t2 = t * t
+				var t3 = t2 * t
+				
+				var point = 0.5 * (
+					2.0 * p1 +
+					(-p0 + p2) * t +
+					(2.0*p0 - 5.0*p1 + 4.0*p2 - p3) * t2 +
+					(-p0 + 3.0*p1 - 3.0*p2 + p3) * t3
+				)
+				point.y = min(point.y, 120)
+				smoothed.append(point)
+		
+		smoothed.append(raw[-1])
+		$line.points = smoothed

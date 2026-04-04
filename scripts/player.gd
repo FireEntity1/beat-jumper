@@ -95,7 +95,6 @@ func _process(delta: float) -> void:
 	$camera.rotation_degrees = lerpf($camera.rotation_degrees, global.cam_rot + cam_tilt, float(global.cam_speed) * 10.0 * delta)
 
 func _physics_process(delta: float) -> void:
-	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	if Input.is_action_just_pressed("jump") and is_on_floor():

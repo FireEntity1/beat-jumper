@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cd0l2flrue8ie"]
+[gd_scene load_steps=19 format=3 uid="uid://cd0l2flrue8ie"]
 
 [ext_resource type="Script" uid="uid://6bbe45ewoge8" path="res://scripts/event_handler.gd" id="1_0rdsr"]
 [ext_resource type="Texture2D" uid="uid://cau03qpr1fblt" path="res://sprites/platform.png" id="1_72e8q"]
@@ -35,21 +35,6 @@ shader_parameter/circle_softness = 0.033
 shader_parameter/edge_thickness = 0.01
 shader_parameter/edge_intensity = 1.249
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ygxny"]
-particle_flag_disable_z = true
-emission_shape_offset = Vector3(-1000, 0, 0)
-emission_shape_scale = Vector3(100, 100, 1)
-emission_shape = 3
-emission_box_extents = Vector3(10, 10, 1)
-velocity_pivot = Vector3(1, 0, 0)
-initial_velocity_min = 1000.0
-initial_velocity_max = 1000.0
-gravity = Vector3(10000, -50, 0)
-linear_accel_min = -100.0
-linear_accel_max = -100.0
-scale_min = 16.38
-scale_max = 77.92
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s3esy"]
 size = Vector2(3240.42, 170.339)
 
@@ -57,7 +42,7 @@ size = Vector2(3240.42, 170.339)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d2op2"]
 particle_flag_disable_z = true
-emission_shape_scale = Vector3(150, 150, 1)
+emission_shape_scale = Vector3(75, 75, 1)
 emission_shape = 3
 emission_box_extents = Vector3(1, 1, 1)
 direction = Vector3(1, 1, 0)
@@ -73,8 +58,7 @@ scale_over_velocity_max = 323.08
 noise_type = 2
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2l77h"]
-width = 1920
-height = 1080
+generate_mipmaps = false
 seamless = true
 seamless_blend_skirt = 1.0
 bump_strength = 0.0
@@ -120,15 +104,6 @@ offset_right = 1230.0
 offset_bottom = 406.0
 color = Color(0, 0, 0, 0.781)
 
-[node name="backlit_particles" type="GPUParticles2D" parent="parallax"]
-visible = false
-modulate = Color(0.27, 0.27, 0.27, 0.776471)
-position = Vector2(-603, -559)
-amount = 1024
-lifetime = 3.79
-preprocess = 10.0
-process_material = SubResource("ParticleProcessMaterial_ygxny")
-
 [node name="sun_blocker" type="ColorRect" parent="."]
 offset_left = -1853.0
 offset_top = -1519.0
@@ -157,19 +132,20 @@ position = Vector2(-11, -4)
 modulate = Color(1, 1, 1, 0.085)
 position = Vector2(10, -535)
 scale = Vector2(12.16, 7.60782)
-amount = 512
-lifetime = 60.0
-preprocess = 10.0
-speed_scale = 1.5
+amount = 256
+lifetime = 45.0
+preprocess = 3.0
 trail_enabled = true
+trail_sections = 4
+trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_d2op2")
 
 [node name="fog" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ygxny")
-offset_left = -2520.0
-offset_top = -1635.0
-offset_right = 2509.0
-offset_bottom = 1250.0
+offset_left = -2028.0
+offset_top = -1415.0
+offset_right = 2017.0
+offset_bottom = 1081.0
 
 [node name="visualizer" parent="." instance=ExtResource("7_wi4c7")]
 position = Vector2(-2, 458)

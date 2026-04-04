@@ -20,8 +20,8 @@ var lasers = []
 var angle = 0
 
 func _ready() -> void:
-	$hslider.value = floor(pos.x)
-	$vslider.value = floor(pos.y)
+	$hslider.value = pos.x
+	$vslider.value = pos.y
 	angle = rot
 	$pointer.rotation_degrees = angle
 	$angle.value = rot+90

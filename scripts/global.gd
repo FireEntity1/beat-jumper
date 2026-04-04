@@ -13,6 +13,11 @@ var visualizer_line = false
 var visualizer_smooth = true
 var visualizer_bar = true
 
+signal shake_changed(intensity)
+signal glitch_changed(active, intensity)
+signal chromabb_changed(active, intensity)
+signal vhs_changed(active, intensity)
+
 var vhs = false
 var vhs_intensity = 0.5
 

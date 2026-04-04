@@ -15,7 +15,9 @@ var finished = false
 @export var edge = false
 
 func _ready() -> void:
-	print("Began prefire: ", global.beat, " for fire beat: ", fire_beat)
+	#print("Began prefire: ", global.beat, " for fire beat: ", fire_beat)
+	body_entered.connect(_on_body_entered)
+	rotation_degrees = rot
 	if edge:
 		$sprite.position = Vector2(-7147,-4)
 	$sprite.modulate.r = global.colours[colour][0]/8
@@ -27,10 +29,10 @@ func _ready() -> void:
 		position = pos
 	if is_slam:
 		position.y = 242
-	await get_tree().create_timer(2).timeout
+	#await get_tree().create_timer(2).timeout
 
 func _process(delta: float) -> void:
-	rotation_degrees = rot
+	
 	if not is_fired and $sprite.modulate.a < 1:
 		$sprite.modulate.a += delta*2
 	
@@ -38,9 +40,6 @@ func _process(delta: float) -> void:
 		start_fire_seq()
 	
 	if is_fired and not finished:
-		for body in get_overlapping_bodies():
-			if body is CharacterBody2D:
-				body.hit()
 		$sprite.modulate += Color(global.colours[colour][0]*delta,global.colours[colour][1]*delta,global.colours[colour][2]*delta)
 		$sprite.modulate.r = clamp($sprite.modulate.r,0,global.colours[colour][0]/3)
 		$sprite.modulate.g = clamp($sprite.modulate.g,0,global.colours[colour][1]/3)
@@ -66,10 +65,13 @@ func start_fire_seq():
 	if is_slam:
 		$particles.emitting = true
 		$sprite.scale.x = 7
-	print("Fired: ", fire_beat, " at ", global.beat)
+	#print("Fired: ", fire_beat, " at ", global.beat)
 	var hold_time = 0.2
 	if fire_hold >= 0.1:
 		hold_time = (60/global.bpm)*fire_hold
+	for body in get_overlapping_bodies():
+		if body is CharacterBody2D:
+			body.hit()
 	await get_tree().create_timer(hold_time).timeout
 	finished = true
 	monitoring = false
@@ -78,3 +80,7 @@ func start_fire_seq():
 	
 func crossed(prev: float, now: float, target: float) -> bool:
 	return prev < target and now >= target
+
+func _on_body_entered(body):
+	if is_fired and not finished and body is CharacterBody2D:
+		body.hit()

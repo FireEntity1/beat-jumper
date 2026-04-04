@@ -66,6 +66,9 @@ func _process(delta: float) -> void:
 
 	var bus_volume_db = AudioServer.get_bus_volume_db(0)
 
+	if show_line:
+		$line.modulate = Color(global.current_col * 2.0, $line.modulate.a)
+
 	for i in range(count):
 		#var hz = min_freq * pow(max_freq / min_freq, float(i + 1) / count)
 		var hz = lerp(min_freq, max_freq, float(i + 1) / count)
@@ -89,7 +92,6 @@ func _process(delta: float) -> void:
 			current_bar.scale.y = lerp(current_bar.scale.y, target_height/50*bars_visibility, 20.0*delta)
 			#current_bar.scale.y = target_height/50
 			current_bar.modulate = global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
-			$line.modulate = global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0) * 2
 		elif not show_bars and show_line:
 			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, 0.2)
 		else:

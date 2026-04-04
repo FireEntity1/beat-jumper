@@ -40,6 +40,9 @@ func _ready() -> void:
 	if get_parent().is_preview:
 		hide()
 		is_preview = true
+	shake.set_shader_parameter("Shakeintensity", 0.0)
+	glitch.set_shader_parameter("running", false)
+	vhs.set_shader_parameter("intensity", 0.0)
 	global.shake_changed.connect(func(intensity):
 		shake.set_shader_parameter("Shakeintensity", intensity))
 	global.glitch_changed.connect(func(active, intensity):

@@ -29,7 +29,7 @@ func _ready() -> void:
 	$title.position.y = 800
 	$title.scale = Vector2(1.2,1.2)
 	await get_tree().create_timer(0.4).timeout
-	$titlemusic.play(0)
+	$titlemusic.play(13)
 	await get_tree().create_timer(0.4).timeout
 	fade_active = true
 	
@@ -101,7 +101,8 @@ func _process(delta: float) -> void:
 func _on_play_button_down() -> void:
 	play.pressed = true
 	await get_tree().create_timer(1.2).timeout
-	get_tree().change_scene_to_file("res://scenes/song_picker.tscn")
+	#get_tree().change_scene_to_file("res://scenes/song_picker.tscn")
+	get_tree().change_scene_to_file("res://scenes/main_game.tscn")
 
 # -------------------- EDITOR BUTON --------------
 func _on_editor_button_down() -> void:

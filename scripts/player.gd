@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 		vhs.set_shader_parameter("intensity",
 		move_toward(vhs.get_shader_parameter("intensity"),0.0,delta*3))
 	if not global.camera_kick:
-		var target = lerpf($camera.zoom.x, global.cam_zoom * BASE_ZOOM, global.cam_speed * delta)
+		var target = lerpf($camera.zoom.x, global.cam_zoom * BASE_ZOOM, clamp(global.cam_speed * delta, 0.0, 1.0))
 		$camera.position.y = -200 + ($camera.zoom.x*50)
 		$camera.zoom = Vector2(target, target)
 	else:
@@ -93,8 +93,8 @@ func _process(delta: float) -> void:
 		$camera.zoom.x = lerpf($camera.zoom.x, target_zoom, delta * 15)
 		$camera.zoom.y = lerpf($camera.zoom.y, target_zoom, delta * 15)
 	var direction = Input.get_axis("left", "right")
-	cam_tilt = lerpf(cam_tilt, -direction * 4.0, delta * 1.5)
-	$camera.rotation_degrees = lerpf($camera.rotation_degrees, global.cam_rot + cam_tilt, float(global.cam_speed) * 10.0 * delta)
+	cam_tilt = lerpf(cam_tilt, -direction * 4.0, clamp(delta * 1.5, 0.0, 1.0))
+	$camera.rotation_degrees = lerpf($camera.rotation_degrees, global.cam_rot + cam_tilt, clamp(float(global.cam_speed) * 10.0 * delta,0.0,1.0))
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():

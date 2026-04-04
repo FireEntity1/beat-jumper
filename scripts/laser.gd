@@ -65,7 +65,7 @@ func start_fire_seq():
 	if is_slam:
 		$particles.emitting = true
 		$sprite.scale.x = 7
-	#print("Fired: ", fire_beat, " at ", global.beat)
+	print("Fired: ", fire_beat, " at ", global.beat)
 	var hold_time = 0.2
 	if fire_hold >= 0.1:
 		hold_time = (60/global.bpm)*fire_hold

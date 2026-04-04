@@ -515,6 +515,8 @@ func sanitize_json(array: Array, to_vector: bool):
 					event.pos = str_to_var("Vector2" + event.pos)
 			elif not to_vector and event.pos is Vector2:
 				event.pos = [event.pos.x,event.pos.y]
+		if event.has("amount"):
+			event.amount = int(event.amount)
 	return sanitized
 
 func get_bpm_changes():
@@ -569,8 +571,8 @@ func _on_scroll_scroll_ended() -> void:
 	print("scroll ended")
 
 func _on_offset_text_changed(new_text: String) -> void:
-	map.offset = max(new_text, 0)
-	$offset.text = str(map.offset)
+	map.offset = max(float(new_text), 0)
+	#$offset.text = str(map.offset)
 
 func select(event_data: Dictionary, selected: bool):
 	if not selected:

@@ -91,7 +91,6 @@ func _process(delta: float) -> void:
 	while event_index < map.data.size():
 		var event = map.data[event_index]
 		var trigger_beat = event["beat"] - global.prefire_beat[event["type"]]
-		#if crossed(last_beat,beat,trigger_beat):
 		if crossed(last_beat, beat, trigger_beat) or (trigger_beat < last_beat):
 			var temp
 			if event.type == "platform_colour":

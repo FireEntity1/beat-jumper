@@ -63,7 +63,8 @@ func _process(delta: float) -> void:
 			smear.modulate.a = lerpf(smear.modulate.a, 0.0,min(delta*1000.0,1.0))
 			smear.scale.x = lerpf(smear.scale.x,0.0,min(delta*5.0,1.0))
 	elif move.focus:
-		self.global_position = parent
+		global_position = parent.get_node("player").global_position
+		
 	position += velocity*delta
 	if not is_fired and $sprite.modulate.a < 1:
 		$sprite.modulate.a += delta*2

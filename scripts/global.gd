@@ -87,7 +87,14 @@ const defaults = {
 		"beat": 0,
 		"pos": Vector2(1,1),
 		"rot": 0,
-		"colour": "pink"
+		"colour": "pink",
+		"movement": {
+			"enabled": false,
+			"speed": 1.0,
+			"ease": 1.0,
+			"always": false,
+			"focus": false
+		}
 	},
 	"laser_circle": {
 		"type": "laser_circle",

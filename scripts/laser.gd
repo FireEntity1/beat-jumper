@@ -11,6 +11,14 @@ extends Area2D
 var is_fired = false
 var finished = false
 
+var move = {
+	"enabled": false,
+	"speed": 1.0,
+	"ease": 1.0,
+	"always": false,
+	"focus": false
+}
+
 @export var fire_hold = 0.0
 @export var edge = false
 

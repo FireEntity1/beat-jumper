@@ -16,7 +16,7 @@ var categories = {
 		{
 			"song": preload("res://ost/ost1/doorless_room/song.ogg"),
 			"map": "res://ost/ost1/doorless_room/map.jump",
-			"image": preload("res://ost/ost1/doorless_room/cover.jpg")
+			#"image": preload("res://ost/ost1/doorless_room/cover.jpg")
 		}
 	],
 	"EXTRAS": [

@@ -26,6 +26,17 @@ func _ready() -> void:
 	selected_style.border_width_top = 4
 	selected_style.border_width_bottom = 4
 	selected_style.border_color = Color(1, 1, 0)
+	if not event_data.has("move"):
+		if global.defaults.has(event_data.type) and global.defaults[event_data.type].has("move"):
+			var old = event_data.duplicate(true)
+			event_data["move"] = global.defaults[event_data.type]["move"].duplicate(true)
+			parent.modify(old, event_data)
+	elif event_data["move"].has("dir"):
+		event_data.erase("move")
+		event_data["pos_x"] = 0.0
+		event_data["pos_y"] = 0.0
+	if not event_data.has("hold") and global.defaults[event_data.type].has("hold"):
+		event_data["hold"] = 0.0
 	if event_data.has("colour"):
 		var col_val = event_data["colour"]
 		var target_col
@@ -135,6 +146,24 @@ func _ready() -> void:
 					editable.step = 2.0
 					editable.tick_count = 7
 					editable.connect("value_changed",_on_editable_changed.bind(key))
+			"move":
+				var move_data: Dictionary = event_data["move"]
+				for mkey in move_data.keys():
+					var sub_label = Label.new()
+					sub_label.text = "move." + str(mkey) + ": "
+					var sub_editable
+					var val = move_data[mkey]
+					if val is bool:
+						sub_editable = CheckBox.new()
+						sub_editable.button_pressed = val
+						sub_editable.toggled.connect(_on_move_param_changed.bind("move", mkey))
+					else:
+						sub_editable = LineEdit.new()
+						sub_editable.text = str(val)
+						sub_editable.text_changed.connect(_on_move_param_changed.bind("move", mkey))
+					$edit/scroll/container.add_child(sub_label)
+					$edit/scroll/container.add_child(sub_editable)
+				continue
 			_:
 				if key == "type":
 					continue
@@ -147,11 +176,11 @@ func _ready() -> void:
 					editable.text = str(event_data[key])
 					editable.connect("text_changed",_on_editable_changed.bind(key))
 		if key != "rot":
-			$edit/container.add_child(label)
-			$edit/container.add_child(editable)
+			$edit/scroll/container.add_child(label)
+			$edit/scroll/container.add_child(editable)
 		if key == "rot" and event_data.type == "cam_zoom":
-			$edit/container.add_child(label)
-			$edit/container.add_child(editable)
+			$edit/scroll/container.add_child(label)
+			$edit/scroll/container.add_child(editable)
 		if key == "length":
 			custom_minimum_size.x = parent.event_width * float(event_data.length)
 
@@ -167,6 +196,19 @@ func _on_editable_changed(data,key: String):
 	if pos_editor is Control:
 		pos_editor.update_preview()
 	parent.modify(old,event_data)
+
+func _on_move_param_changed(value, move_root_key: String, param_key: String):
+	var old = event_data.duplicate(true)
+	if not event_data.has(move_root_key):
+		event_data[move_root_key] = {}
+	var current = event_data[move_root_key].get(param_key)
+	if current is bool:
+		event_data[move_root_key][param_key] = bool(value)
+	elif current is float or current is int:
+		event_data[move_root_key][param_key] = float(value)
+	else:
+		event_data[move_root_key][param_key] = value
+	parent.modify(old, event_data)
 
 func _on_speedpicker_changed(text):
 	var old = event_data.duplicate(true)

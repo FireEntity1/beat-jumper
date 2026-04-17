@@ -1,5 +1,7 @@
 extends Area2D
 
+@onready var parent = get_parent() if get_parent().name=="main_game" else get_parent().get_parent()
+
 @export var is_slam = false
 
 @export var fire_pos: String
@@ -11,18 +13,26 @@ extends Area2D
 var is_fired = false
 var finished = false
 
+@onready var smear = $smear
+
+var velocity = Vector2(0,0)
+var moving = false
 var move = {
 	"enabled": false,
 	"speed": 1.0,
 	"ease": 1.0,
 	"always": false,
-	"focus": false
+	"dir_x": 0.0,
+	"dir_y": 0.0,
+	"focus": false,
 }
 
 @export var fire_hold = 0.0
 @export var edge = false
 
 func _ready() -> void:
+	parent = get_parent() if get_parent().name=="main_game" else get_parent().get_parent()
+	moving = move.always
 	#print("Began prefire: ", global.beat, " for fire beat: ", fire_beat)
 	body_entered.connect(_on_body_entered)
 	rotation_degrees = rot
@@ -37,10 +47,24 @@ func _ready() -> void:
 		position = pos
 	if is_slam:
 		position.y = 242
-	#await get_tree().create_timer(2).timeout
+	if smear:
+		smear.modulate = $sprite.modulate/2
+		smear.modulate.a = 0
 
 func _process(delta: float) -> void:
-	
+	if moving and not move.focus:
+		velocity.x = move.dir_x*move.speed
+		velocity.y = move.dir_y*move.speed
+		if smear:
+			print("smearing!")
+			smear.modulate.a = lerpf(smear.modulate.a,1.0,min(delta*1000.0,1.0))
+			smear.scale.x = lerpf(smear.scale.x, move.speed/1000,min(delta*5.0,1.0))
+		if smear and finished:
+			smear.modulate.a = lerpf(smear.modulate.a, 0.0,min(delta*1000.0,1.0))
+			smear.scale.x = lerpf(smear.scale.x,0.0,min(delta*5.0,1.0))
+	elif move.focus:
+		self.global_position = parent
+	position += velocity*delta
 	if not is_fired and $sprite.modulate.a < 1:
 		$sprite.modulate.a += delta*2
 	
@@ -70,10 +94,13 @@ func start_fire_seq():
 	if is_fired:
 		return
 	is_fired = true
+	
 	if is_slam:
 		$particles.emitting = true
 		$sprite.scale.x = 7
 	print("Fired: ", fire_beat, " at ", global.beat)
+	if move.enabled:
+		moving = true
 	var hold_time = 0.2
 	if fire_hold >= 0.1:
 		hold_time = (60/global.bpm)*fire_hold
@@ -82,6 +109,7 @@ func start_fire_seq():
 			body.hit()
 	await get_tree().create_timer(hold_time).timeout
 	finished = true
+	
 	monitoring = false
 	await get_tree().create_timer(3.0).timeout
 	queue_free()

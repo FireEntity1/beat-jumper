@@ -164,6 +164,10 @@ func _process(delta: float) -> void:
 				if event.type in event_classes.movable:
 					temp.pos = event.pos
 					temp.rot = event.rot
+					if event.has("move"):
+						temp.move = event.move
+					if event.has("hold"):
+						temp.fire_hold = float(event.hold)
 				match event.type:
 					"laser":
 						temp.colour = event.colour
@@ -193,7 +197,6 @@ func _process(delta: float) -> void:
 						temp.rot = 0
 				$events.add_child(temp)
 				event_index += 1
-			
 		else:
 			break
 	

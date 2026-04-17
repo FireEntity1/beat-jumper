@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dbgowdk1hoq0q"]
+[gd_scene load_steps=5 format=3 uid="uid://dbgowdk1hoq0q"]
 
 [ext_resource type="Script" uid="uid://00uu26xp50ky" path="res://scripts/laser.gd" id="1_wu1ai"]
+[ext_resource type="Texture2D" uid="uid://cmefdfmgufx28" path="res://sprites/smear.png" id="2_2colv"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_wu1ai"]
 blend_mode = 1
@@ -21,3 +22,10 @@ offset_bottom = 4.0
 
 [node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_wu1ai")
+
+[node name="smear" type="Sprite2D" parent="."]
+position = Vector2(-69, -4)
+rotation = 4.71239
+scale = Vector2(0.128117, 711.534)
+texture = ExtResource("2_2colv")
+offset = Vector2(149.47, 0.116148)

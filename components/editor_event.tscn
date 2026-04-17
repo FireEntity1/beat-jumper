@@ -24,13 +24,17 @@ script = ExtResource("1_ei43j")
 [node name="edit" type="PopupPanel" parent="."]
 transparent_bg = false
 initial_position = 2
-size = Vector2i(700, 500)
+size = Vector2i(700, 800)
 transparent = false
 
-[node name="container" type="VBoxContainer" parent="edit"]
+[node name="scroll" type="ScrollContainer" parent="edit"]
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 696.0
-offset_bottom = 496.0
+offset_bottom = 796.0
+horizontal_scroll_mode = 0
+
+[node name="container" type="VBoxContainer" parent="edit/scroll"]
+layout_mode = 2
 
 [connection signal="button_up" from="." to="." method="_on_button_up"]

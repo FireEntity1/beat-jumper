@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chv361ntr2ga0"
-path="res://.godot/imported/WindowImage.jpg-f410605c269ba43e8fe83a7903e1b841.ctex"
+path="res://.godot/imported/WindowImage.jpg-cff7e068961c1d89e205a7f656d13d70.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://song-projects/FRACTURED::ANOMALY.band/Alternatives/000/WindowImage.jpg"
-dest_files=["res://.godot/imported/WindowImage.jpg-f410605c269ba43e8fe83a7903e1b841.ctex"]
+source_file="res://song-projects/HARD::LIGHT.band/Alternatives/000/WindowImage.jpg"
+dest_files=["res://.godot/imported/WindowImage.jpg-cff7e068961c1d89e205a7f656d13d70.ctex"]
 
 [params]
 

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dgvgwsv7hv5vr"
+path="res://.godot/imported/untitled_MixDown_28.wav-41d9e4c90b6dd4cc3f18e92cf688511a.sample"
+
+[deps]
+
+source_file="res://song-projects/doorless_room.band/Media/Audio Files/untitled_MixDown_28.wav"
+dest_files=["res://.godot/imported/untitled_MixDown_28.wav-41d9e4c90b6dd4cc3f18e92cf688511a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

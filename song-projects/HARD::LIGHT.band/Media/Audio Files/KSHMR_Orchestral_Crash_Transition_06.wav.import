@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://0j8ycbx7ot4f"
-path="res://.godot/imported/KSHMR_Orchestral_Crash_Transition_06.wav-f0871e6f010e292b71bfc3b90f6fd6ad.sample"
+path="res://.godot/imported/KSHMR_Orchestral_Crash_Transition_06.wav-17decc6ca11739603136bb90b3be3e63.sample"
 
 [deps]
 
-source_file="res://song-projects/FRACTURED::ANOMALY.band/Media/Audio Files/KSHMR_Orchestral_Crash_Transition_06.wav"
-dest_files=["res://.godot/imported/KSHMR_Orchestral_Crash_Transition_06.wav-f0871e6f010e292b71bfc3b90f6fd6ad.sample"]
+source_file="res://song-projects/HARD::LIGHT.band/Media/Audio Files/KSHMR_Orchestral_Crash_Transition_06.wav"
+dest_files=["res://.godot/imported/KSHMR_Orchestral_Crash_Transition_06.wav-17decc6ca11739603136bb90b3be3e63.sample"]
 
 [params]
 

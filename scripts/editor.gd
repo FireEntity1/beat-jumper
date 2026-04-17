@@ -246,10 +246,11 @@ func spawn_events():
 			main_event.mouse_exited.connect(func():
 				await get_tree().create_timer(0.1).timeout
 				var mouse_pos = get_global_mouse_position()
-				var popup_rect = Rect2(popup.position, popup.size)
-				if not popup_rect.has_point(mouse_pos):
-					popup.hide()
-			)
+				if is_instance_valid(popup):
+					var popup_rect = Rect2(popup.position, popup.size)
+					if not popup_rect.has_point(mouse_pos):
+						popup.hide()
+				)
 			
 			popup.mouse_exited.connect(func():
 				popup.hide()

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://6b3gkmjsa5cf"
-path="res://.godot/imported/KSHMR_Vocal_Shout_37_Whoo_E.wav-d70cbe02deabc0eb99b959be2ce6e144.sample"
+path="res://.godot/imported/KSHMR_Vocal_Shout_37_Whoo_E.wav-f7248571ce7d5243a8e3acf031e9da59.sample"
 
 [deps]
 
-source_file="res://song-projects/FRACTURED::ANOMALY.band/Media/Audio Files/KSHMR_Vocal_Shout_37_Whoo_E.wav"
-dest_files=["res://.godot/imported/KSHMR_Vocal_Shout_37_Whoo_E.wav-d70cbe02deabc0eb99b959be2ce6e144.sample"]
+source_file="res://song-projects/HARD::LIGHT.band/Media/Audio Files/KSHMR_Vocal_Shout_37_Whoo_E.wav"
+dest_files=["res://.godot/imported/KSHMR_Vocal_Shout_37_Whoo_E.wav-f7248571ce7d5243a8e3acf031e9da59.sample"]
 
 [params]
 

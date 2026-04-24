@@ -25,7 +25,7 @@ var categories = {
 		{
 			"song": preload("res://ost/ost1/fractured--anomaly/song.ogg"),
 			"map": "res://ost/ost1/fractured--anomaly/map.jump",
-			"image": preload("res://ost/ost1/fractured--anomaly/cover.png")
+			"image": preload("res://sprites/icon.png")
 		}
 	],
 	"EXTRAS": [
@@ -57,9 +57,10 @@ func _ready() -> void:
 		button.pivot_offset = button.size / 2
 		global.add_hover_press_effect(button,false,true)
 	global.add_hover_press_effect($play)
-	await get_tree().create_timer(0.2).timeout
-	fade = false
 	spawn_category_view("ALL SONGS")
+	await get_tree().create_timer(0.2).timeout
+	select(categories["ALL SONGS"][0])
+	fade = false
 
 func _process(delta: float) -> void:
 	if not fade:
@@ -99,7 +100,8 @@ func spawn_category_view(category):
 		for key in categories:
 			for song in categories[key]:
 				all_songs.push_back(song)
-				print(song.map)
+				print(song)
+		categories["ALL SONGS"] = all_songs
 		picker.update(category, all_songs)
 
 func play(song):

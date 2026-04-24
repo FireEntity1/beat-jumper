@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://bkqqg6sap4ct5"]
+
+[ext_resource type="Script" uid="uid://dbxywsfgd77pl" path="res://scripts/startup_notice.gd" id="1_cncm6"]
+[ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="1_wg6w5"]
+[ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="2_c2nmj"]
+
+[sub_resource type="Environment" id="Environment_c2nmj"]
+background_mode = 3
+tonemap_white = 4.25
+glow_enabled = true
+glow_intensity = 2.15
+glow_strength = 0.63
+glow_blend_mode = 1
+glow_hdr_threshold = 0.8
+volumetric_fog_detail_spread = 2.46229
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cncm6"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(150, 150, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(1, 1, 0)
+spread = 139.337
+initial_velocity_min = 1.1
+initial_velocity_max = 5.0
+gravity = Vector3(0, 0, 0)
+scale_min = 6.85
+scale_max = 7.0
+scale_over_velocity_max = 323.08
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_r3iqn"]
+noise_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4rr2b"]
+width = 1920
+height = 1080
+seamless = true
+seamless_blend_skirt = 1.0
+bump_strength = 0.0
+noise = SubResource("FastNoiseLite_r3iqn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_00oos"]
+shader = ExtResource("1_wg6w5")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_4rr2b")
+shader_parameter/color_a = Color(0, 0.810918, 0.902412, 1)
+shader_parameter/color_b = Color(0.968595, 0.827412, 0.925751, 1)
+shader_parameter/distortion_speed = 0.15
+shader_parameter/density = 0.025
+shader_parameter/bloom = 1.0
+
+[node name="startup_notice" type="Node2D"]
+script = ExtResource("1_cncm6")
+
+[node name="bg" type="ColorRect" parent="."]
+offset_right = 1939.0
+offset_bottom = 1090.0
+color = Color(0, 0, 0, 1)
+
+[node name="environment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_c2nmj")
+
+[node name="world_particles" type="GPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.085)
+position = Vector2(977, 566)
+scale = Vector2(8.07574, 5.05253)
+amount = 512
+lifetime = 60.0
+preprocess = 10.0
+speed_scale = 1.5
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_cncm6")
+
+[node name="fog" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_00oos")
+offset_left = -30.0001
+offset_top = -40.0001
+offset_right = 4999.0
+offset_bottom = 2845.0
+scale = Vector2(0.401734, 0.401734)
+
+[node name="title" type="Label" parent="."]
+offset_left = 724.0
+offset_top = 125.0
+offset_right = 1169.0
+offset_bottom = 292.0
+theme_override_font_sizes/font_size = 128
+text = "NOTICE"
+horizontal_alignment = 1
+
+[node name="notice" type="Label" parent="."]
+offset_left = 261.0
+offset_top = 337.0
+offset_right = 1632.0
+offset_bottom = 640.0
+theme_override_font_sizes/font_size = 48
+text = "This is a pre-release demo alpha version of LIGHT//BOUND
+
+Expect bugs, unfinished sections.
+Visuals, UI, and gameplay are subject to change"
+horizontal_alignment = 1
+
+[node name="enter" type="Button" parent="."]
+offset_left = 630.0
+offset_top = 678.0
+offset_right = 1290.0
+offset_bottom = 830.0
+theme = ExtResource("2_c2nmj")
+theme_override_font_sizes/font_size = 96
+text = "E N T E R"
+
+[node name="fade" type="ColorRect" parent="."]
+offset_right = 1935.0
+offset_bottom = 1086.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[connection signal="button_up" from="enter" to="." method="_on_enter_button_up"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://p5fyskuevnje"]
+[gd_scene load_steps=18 format=3 uid="uid://p5fyskuevnje"]
 
 [ext_resource type="Script" uid="uid://cqhqu2gd35yd5" path="res://scripts/song_picker.gd" id="1_gy5sp"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="1_l61d0"]
@@ -6,6 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="4_6qphs"]
 [ext_resource type="PackedScene" uid="uid://tv4ao5qps7u3" path="res://components/song_category.tscn" id="5_6qphs"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="6_nj1yl"]
+[ext_resource type="Shader" uid="uid://bea4ihourecfu" path="res://shaders/round_edge.gdshader" id="7_5nk3x"]
+[ext_resource type="Texture2D" uid="uid://chisdg250e4xb" path="res://sprites/image_upload.png" id="8_l6s30"]
+[ext_resource type="Shader" uid="uid://bmn2m6knf8nmh" path="res://shaders/blur.gdshader" id="9_l6s30"]
 
 [sub_resource type="Environment" id="Environment_gy5sp"]
 background_mode = 3
@@ -59,6 +62,15 @@ shader_parameter/shake_rate = 0.33
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.0
 shader_parameter/shake_color_rate = 0.005
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ke4hw"]
+shader = ExtResource("7_5nk3x")
+shader_parameter/corner_radius = 50.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2e5y"]
+shader = ExtResource("9_l6s30")
+shader_parameter/blur_strength = 0.0
+shader_parameter/darken = 0.0
 
 [node name="songpicker" type="Node2D"]
 script = ExtResource("1_gy5sp")
@@ -118,13 +130,13 @@ offset_bottom = 1090.0
 color = Color(0, 0, 0, 0.757)
 
 [node name="song_category" parent="." instance=ExtResource("5_6qphs")]
-position = Vector2(371, 370)
+position = Vector2(525, 370)
 
 [node name="categories" type="ScrollContainer" parent="."]
 clip_contents = false
-offset_left = 10.0
+offset_left = 54.0
 offset_top = 389.0
-offset_right = 355.0
+offset_right = 399.0
 offset_bottom = 1078.0
 
 [node name="vbox" type="VBoxContainer" parent="categories"]
@@ -158,6 +170,76 @@ theme = ExtResource("6_nj1yl")
 theme_override_font_sizes/font_size = 100
 text = "<"
 
+[node name="preview_title" type="Label" parent="."]
+offset_left = 1177.0
+offset_top = 385.0
+offset_right = 1862.0
+offset_bottom = 463.0
+theme_override_font_sizes/font_size = 60
+text = "SONG NAME GOES HERE"
+horizontal_alignment = 1
+
+[node name="preview_artist" type="Label" parent="."]
+offset_left = 1272.0
+offset_top = 461.0
+offset_right = 1767.0
+offset_bottom = 520.0
+theme_override_colors/font_color = Color(0.607302, 0.607302, 0.607302, 1)
+theme_override_font_sizes/font_size = 45
+text = "SONG ARTIST"
+horizontal_alignment = 1
+
+[node name="bpm" type="Label" parent="."]
+offset_left = 1050.0
+offset_top = 599.0
+offset_right = 1853.0
+offset_bottom = 677.0
+theme_override_colors/font_color = Color(0.607302, 0.607302, 0.607302, 1)
+theme_override_font_sizes/font_size = 45
+text = "XXX BPM"
+horizontal_alignment = 2
+
+[node name="duration" type="Label" parent="."]
+offset_left = 1050.0
+offset_top = 532.0
+offset_right = 1853.0
+offset_bottom = 610.0
+theme_override_colors/font_color = Color(0.607302, 0.607302, 0.607302, 1)
+theme_override_font_sizes/font_size = 45
+text = "XX:XX"
+horizontal_alignment = 2
+
+[node name="cover" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_ke4hw")
+offset_left = 1202.0
+offset_top = 535.0
+offset_right = 1237.0
+offset_bottom = 570.0
+scale = Vector2(7, 7)
+mouse_filter = 2
+texture = ExtResource("8_l6s30")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_v2e5y")
+offset_left = -38.0
+offset_top = -37.0
+offset_right = 1939.0
+offset_bottom = 1109.0
+mouse_filter = 2
+
+[node name="play" type="Button" parent="."]
+offset_left = 1284.0
+offset_top = 819.0
+offset_right = 1770.0
+offset_bottom = 990.0
+theme = ExtResource("6_nj1yl")
+theme_override_font_sizes/font_size = 125
+text = " P L A Y "
+
 [connection signal="button_down" from="back" to="." method="_on_back_button_down"]
 [connection signal="mouse_entered" from="back" to="." method="_on_back_mouse_entered"]
 [connection signal="mouse_exited" from="back" to="." method="_on_back_mouse_exited"]
+[connection signal="gui_input" from="blur" to="." method="_on_blur_gui_input"]
+[connection signal="button_up" from="play" to="." method="_on_play_button_up"]

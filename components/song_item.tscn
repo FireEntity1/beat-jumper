@@ -1,0 +1,84 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdd47uix6lwt"]
+
+[ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="1_tr5eb"]
+[ext_resource type="Shader" uid="uid://bea4ihourecfu" path="res://shaders/round_edge.gdshader" id="2_56xjp"]
+[ext_resource type="Texture2D" uid="uid://chisdg250e4xb" path="res://sprites/image_upload.png" id="2_yxfm6"]
+
+[sub_resource type="GDScript" id="GDScript_nic3r"]
+resource_name = "song_item"
+script/source = "extends Control
+
+var song: Dictionary
+
+func _ready() -> void:
+	#global.add_hover_press_effect($enter)
+	return
+
+func _process(delta: float) -> void:
+	pass
+
+func _on_enter_button_up() -> void:
+	pass
+
+
+func _on_play_button_up() -> void:
+	get_parent().get_parent().get_parent().get_parent().select(song)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nic3r"]
+shader = ExtResource("2_56xjp")
+shader_parameter/corner_radius = 50.0
+
+[node name="song_item" type="Control"]
+custom_minimum_size = Vector2(688, 244)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 688.0
+offset_bottom = 300.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = SubResource("GDScript_nic3r")
+
+[node name="play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 20.0
+offset_right = 618.0
+offset_bottom = 259.0
+pivot_offset = Vector2(303, 122)
+mouse_filter = 1
+theme = ExtResource("1_tr5eb")
+theme_override_font_sizes/font_size = 100
+
+[node name="cover" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_nic3r")
+layout_mode = 0
+offset_left = 84.0
+offset_top = 52.0
+offset_right = 109.0
+offset_bottom = 77.0
+scale = Vector2(7, 7)
+mouse_filter = 2
+texture = ExtResource("2_yxfm6")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="name" type="Label" parent="."]
+layout_mode = 0
+offset_left = 262.0
+offset_top = 41.0
+offset_right = 655.0
+offset_bottom = 106.0
+theme_override_font_sizes/font_size = 30
+text = "TEST // MAP"
+
+[node name="artist" type="Label" parent="."]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 118.0
+offset_right = 581.0
+offset_bottom = 183.0
+theme_override_font_sizes/font_size = 30
+text = "ARTIST"
+
+[connection signal="button_up" from="play" to="." method="_on_play_button_up"]

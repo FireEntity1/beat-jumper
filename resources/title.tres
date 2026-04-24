@@ -27,7 +27,9 @@ corner_radius_bottom_right = 60
 corner_radius_bottom_left = 60
 
 [resource]
-Button/colors/font_color = Color(1.9, 1.9, 2.1, 1)
-Button/colors/font_hover_color = Color(1.9, 1.9, 2.3, 1)
+Button/colors/font_color = Color(1.583, 1.583, 1.75, 1)
+Button/colors/font_hover_color = Color(1.583, 1.9, 2.3, 1)
+Button/colors/font_hover_pressed_color = Color(1.583, 1.583, 1.917, 1)
 Button/styles/hover = SubResource("StyleBoxFlat_37il8")
 Button/styles/normal = SubResource("StyleBoxFlat_2yc47")
+Button/styles/pressed = SubResource("StyleBoxFlat_2yc47")

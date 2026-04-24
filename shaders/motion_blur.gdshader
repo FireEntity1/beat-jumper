@@ -14,14 +14,14 @@ void vertex() {
 void fragment() {
     vec4 acc = vec4(0.0);
     float total_weight = 0.0;
-    
+
     // Calculate the step based on quality
     vec2 stepSize = dir / float(quality);
 
     //for(int i = -quality; i <= quality; i++) {
 	for(int i = 0; i <= quality; i++) {
         vec2 offset_uv = UV - (stepSize * float(i));
-        
+
         // Only sample if the UV is within the [0, 1] range to avoid edge bleeding
         if (offset_uv.x >= 0.0 && offset_uv.x <= 1.0 && offset_uv.y >= 0.0 && offset_uv.y <= 1.0) {
             vec4 samp = texture(TEXTURE, offset_uv);

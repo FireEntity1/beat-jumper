@@ -39,6 +39,8 @@ var cam_speed = 1.0
 var shake = false
 var shake_intensity = 0.5
 
+var selected_song = {}
+
 var prefire_sec = {
 	"laser": 0.6,
 	"laser_circle": 0.6,
@@ -264,27 +266,82 @@ func create_map_dir():
 		DirAccess.make_dir_recursive_absolute(path.path_join("wip"))
 		DirAccess.make_dir_recursive_absolute(path.path_join("maps"))
 
-func add_hover_press_effect(node: Control, horizontal = false, vertical = false) -> void:
-	var tween: Tween
-	
+#func add_hover_press_effect(node: Control, horizontal = false, vertical = false, scale_amt = 1.0) -> void:
+	#var tween: Tween
+	#
+	#node.mouse_entered.connect(func():
+		#if tween: tween.kill()
+		#tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		#tween.tween_property(node, "scale", Vector2(1.25*scale_amt if not vertical else 1.0, 1.0 if horizontal else 1.25*scale_amt), 0.5))
+	#
+	#node.mouse_exited.connect(func():
+		#if tween: tween.kill()
+		#tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		#tween.tween_property(node, "scale", Vector2(1.0, 1.0), 0.5)
+	#)
+	#
+	#node.gui_input.connect(func(event: InputEvent):
+		#if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+			#node.release_focus()
+			#if tween: tween.kill()
+			#tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+			#if event.pressed:
+				#tween.tween_property(node, "scale", Vector2(0.9*scale_amt, 0.9*scale_amt), 0.2)
+			#else:
+				#tween.tween_property(node, "scale", Vector2(1.15*scale_amt, 1.15*scale_amt), 0.4)
+	#)
+func add_hover_press_effect(node: Control, horizontal: bool = false, vertical: bool = false, scale_amt: float = 1.0, interact_scale = 1.0) -> void:
+	var update_pivot = func(): node.pivot_offset = node.size / 2.0
+	update_pivot.call()
+	node.resized.connect(update_pivot)
+
+	var state = {
+		"tween": null,
+		"hovered": false,
+		"pressed": false
+	}
+
+	var hover_x = 1.0 if vertical else 1.25 * scale_amt
+	var hover_y = 1.0 if horizontal else 1.25 * scale_amt
+	var hover_scale = Vector2(hover_x, hover_y)
+	var press_scale = Vector2(0.9 * scale_amt * interact_scale, 0.9 * scale_amt * interact_scale)
+
+	var apply_animation = func():
+		if state.tween: 
+			state.tween.kill()
+		
+		state.tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+		
+		var target_scale = Vector2.ONE
+		var duration = 0.5
+		
+		if state.pressed:
+			target_scale = press_scale
+			duration = 0.2
+		elif state.hovered:
+			target_scale = hover_scale
+			duration = 0.4
+			
+		state.tween.tween_property(node, "scale", target_scale, duration)
+
 	node.mouse_entered.connect(func():
-		if tween: tween.kill()
-		tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tween.tween_property(node, "scale", Vector2(1.25 if not vertical else 1.0, 1.0 if horizontal else 1.25), 0.5))
+		state.hovered = true
+		apply_animation.call()
+	)
 	
 	node.mouse_exited.connect(func():
-		if tween: tween.kill()
-		tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-		tween.tween_property(node, "scale", Vector2(1.0, 1.0), 0.5)
+		state.hovered = false
+		state.pressed = false
+		apply_animation.call()
 	)
 	
 	node.gui_input.connect(func(event: InputEvent):
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-			node.release_focus()
-			if tween: tween.kill()
-			tween = node.create_tween().set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 			if event.pressed:
-				tween.tween_property(node, "scale", Vector2(0.9, 0.9), 0.2)
+				node.release_focus()
+				state.pressed = true
 			else:
-				tween.tween_property(node, "scale", Vector2(1.15, 1.15), 0.4)
+				state.pressed = false
+			
+			apply_animation.call()
 	)

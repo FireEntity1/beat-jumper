@@ -22,6 +22,7 @@ var startup_fade = true
 var title = false
 
 func _ready() -> void:
+	global.visualizer = true
 	global.add_hover_press_effect($play,true)
 	global.add_hover_press_effect($editor,true)
 	global.add_hover_press_effect($quit,true)
@@ -100,16 +101,16 @@ func _process(delta: float) -> void:
 
 func _on_play_button_down() -> void:
 	play.pressed = true
-	await get_tree().create_timer(1.2).timeout
-	#get_tree().change_scene_to_file("res://scenes/song_picker.tscn")
-	get_tree().change_scene_to_file("res://scenes/main_game.tscn")
+	await get_tree().create_timer(0.75).timeout
+	get_tree().change_scene_to_file("res://scenes/song_picker.tscn")
+	#get_tree().change_scene_to_file("res://scenes/main_game.tscn")
 
 # -------------------- EDITOR BUTON --------------
 func _on_editor_button_down() -> void:
 	fade_active = true
 	editor.pressed = true
 	play.pressed = true
-	await get_tree().create_timer(1.2).timeout
+	await get_tree().create_timer(0.75).timeout
 	get_tree().change_scene_to_file("res://scenes/editor.tscn")
 
 

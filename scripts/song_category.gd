@@ -1,14 +1,17 @@
 extends Node2D
 
+const SONG_ITEM = preload("res://components/song_item.tscn")
+
 var title = "Title"
 var songs = []
+
+var selected: Node2D
 
 var parent: Node2D
 
 func _ready() -> void:
 	pass # Replace with function body.
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
@@ -19,23 +22,17 @@ func update(new_title, new_songs):
 		child.queue_free()
 	$title.text = title
 	for song in songs:
-		var button = Button.new()
+		var song_item = SONG_ITEM.instantiate()
+		global.add_hover_press_effect(song_item.get_node("play"),true,false,0.9,1.3)
+		$scroll/vbox.add_child(song_item)
+		
 		var data = load_map_data(song.map)
 		if data != null:
-			button.text = data.name
-			button.add_theme_font_size_override("font_size",64)
-			button.connect("button_down",play.bind(song.song))
-			button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			button.custom_minimum_size.y = 450
-			var stylebox = StyleBoxTexture.new()
-			stylebox.texture = song.image
-			stylebox.modulate_color = Color(0.5, 0.5, 0.5, 1.0)
-			button.add_theme_stylebox_override("normal", stylebox)
-			button.add_theme_stylebox_override("hover", stylebox)
-			button.add_theme_stylebox_override("pressed", stylebox)
-			button.add_theme_stylebox_override("focus", stylebox)
-
-			$scroll/vbox.add_child(button)
+			var cover = song_item.get_node("cover")
+			cover.texture = song.image
+			song_item.get_node("name").text = data.name
+			song_item.get_node("artist").text = data.artist
+			song_item.song = song
 
 func play(song):
 	parent.play(song)

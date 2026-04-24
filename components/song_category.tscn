@@ -5,39 +5,37 @@
 [node name="song_category" type="Node2D"]
 script = ExtResource("1_hj7pn")
 
-[node name="outline2" type="ColorRect" parent="."]
-offset_left = -12.0
-offset_top = -14.0
-offset_right = 561.0
-offset_bottom = 663.0
-color = Color(1.9, 1, 1, 1)
-
-[node name="outline" type="ColorRect" parent="."]
-offset_left = -12.0
-offset_top = -14.0
-offset_right = 544.0
-offset_bottom = 648.0
-color = Color(1, 1, 1.64, 1)
-
 [node name="bg" type="ColorRect" parent="."]
-offset_right = 544.0
-offset_bottom = 648.0
+visible = false
+offset_left = -108.0
+offset_right = 652.0
+offset_bottom = 694.0
 color = Color(0, 0, 0, 1)
 
 [node name="title" type="Label" parent="."]
 offset_right = 542.0
 offset_bottom = 86.0
+theme_override_colors/font_color = Color(2, 2, 2, 1)
 theme_override_font_sizes/font_size = 50
-text = "PICK A CATEGORY"
+text = "ALL SONGS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="divider" type="ColorRect" parent="."]
+offset_left = 76.0
+offset_top = 85.0
+offset_right = 468.0
+offset_bottom = 95.0
+color = Color(2, 2, 2, 1)
+
 [node name="scroll" type="ScrollContainer" parent="."]
-offset_top = 65.0
-offset_right = 544.0
-offset_bottom = 644.0
+offset_left = -84.0
+offset_top = 136.0
+offset_right = 628.0
+offset_bottom = 698.0
 
 [node name="vbox" type="VBoxContainer" parent="scroll"]
+clip_contents = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3

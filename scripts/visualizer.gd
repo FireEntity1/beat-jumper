@@ -42,6 +42,7 @@ func _ready() -> void:
 	for bar in bars:
 			bar.scale.y = 0
 	$line.scale = Vector2.ONE
+	$line.hide()
 	for i in range(count):
 		bar_energies[i] = 0.0
 
@@ -66,8 +67,8 @@ func _process(delta: float) -> void:
 
 	var bus_volume_db = AudioServer.get_bus_volume_db(0)
 
-	if show_line:
-		$line.modulate = Color(global.current_col * 2.0, $line.modulate.a)
+	#if show_line:
+		#$line.modulate = Color(global.current_col * 2.0, $line.modulate.a)
 
 	for i in range(count):
 		#var hz = min_freq * pow(max_freq / min_freq, float(i + 1) / count)
@@ -104,54 +105,54 @@ func _process(delta: float) -> void:
 		max_energy = lerp(max_energy, current_max, 0.3)
 	else:
 		max_energy = lerp(max_energy, current_max, normalization_speed)
-	$line.clear_points()
-	curve.clear_points()
-	curve.bake_interval = 10.0
-	if show_line:
-		$line.modulate.a = lerp($line.modulate.a,1.0,delta*2)
-	else:
-		$line.modulate.a = lerp($line.modulate.a,0.0,delta*10)
-	for i in range(count):
-		#var point = Vector2(i * 115, -bars[i].scale.y*900 + 120)
-		var height = bar_energies[i] * 50 * clamp(0.1*max(i,1),0.5,3)
-		var point = Vector2(i * 115, -height * 18 + 120)
-		if smooth:
-			curve.add_point(point)
-		else:
-			$line.add_point(point)
-	curve.add_point(Vector2(3600,120))
-	$line.add_point(Vector2(3600,120))
-	if smooth and show_line:
-		var raw = []
-		for i in range(count):
-			var height = bar_energies[i] * 50 * clamp(0.1*max(i,1),0.5,3)
-			raw.append(Vector2(i * 115, min(-height * 18 + 120, 120)))
-		raw.append(Vector2(3600, 120))
-		
-		raw[0] = Vector2(raw[0].x, raw[1].y)
-		
-		var smoothed = PackedVector2Array()
-		var steps = 4
-		
-		for i in range(raw.size() - 1):
-			var p0 = raw[max(i-1, 0)]
-			var p1 = raw[i]
-			var p2 = raw[min(i+1, raw.size()-1)]
-			var p3 = raw[min(i+2, raw.size()-1)]
-			
-			for s in range(steps):
-				var t = float(s) / float(steps)
-				var t2 = t * t
-				var t3 = t2 * t
-				
-				var point = 0.5 * (
-					2.0 * p1 +
-					(-p0 + p2) * t +
-					(2.0*p0 - 5.0*p1 + 4.0*p2 - p3) * t2 +
-					(-p0 + 3.0*p1 - 3.0*p2 + p3) * t3
-				)
-				point.y = min(point.y, 120)
-				smoothed.append(point)
-		
-		smoothed.append(raw[-1])
-		$line.points = smoothed
+	#$line.clear_points()
+	#curve.clear_points()
+	#curve.bake_interval = 10.0
+	#if show_line:
+		#$line.modulate.a = lerp($line.modulate.a,1.0,delta*2)
+	#else:
+		#$line.modulate.a = lerp($line.modulate.a,0.0,delta*10)
+	#for i in range(count):
+		##var point = Vector2(i * 115, -bars[i].scale.y*900 + 120)
+		#var height = bar_energies[i] * 50 * clamp(0.1*max(i,1),0.5,3)
+		#var point = Vector2(i * 115, -height * 18 + 120)
+		#if smooth:
+			#curve.add_point(point)
+		#else:
+			#$line.add_point(point)
+	#curve.add_point(Vector2(3600,120))
+	#$line.add_point(Vector2(3600,120))
+	#if smooth and show_line:
+		#var raw = []
+		#for i in range(count):
+			#var height = bar_energies[i] * 50 * clamp(0.1*max(i,1),0.5,3)
+			#raw.append(Vector2(i * 115, min(-height * 18 + 120, 120)))
+		#raw.append(Vector2(3600, 120))
+		#
+		#raw[0] = Vector2(raw[0].x, raw[1].y)
+		#
+		#var smoothed = PackedVector2Array()
+		#var steps = 4
+		#
+		#for i in range(raw.size() - 1):
+			#var p0 = raw[max(i-1, 0)]
+			#var p1 = raw[i]
+			#var p2 = raw[min(i+1, raw.size()-1)]
+			#var p3 = raw[min(i+2, raw.size()-1)]
+			#
+			#for s in range(steps):
+				#var t = float(s) / float(steps)
+				#var t2 = t * t
+				#var t3 = t2 * t
+				#
+				#var point = 0.5 * (
+					#2.0 * p1 +
+					#(-p0 + p2) * t +
+					#(2.0*p0 - 5.0*p1 + 4.0*p2 - p3) * t2 +
+					#(-p0 + 3.0*p1 - 3.0*p2 + p3) * t3
+				#)
+				#point.y = min(point.y, 120)
+				#smoothed.append(point)
+		#
+		#smoothed.append(raw[-1])
+		#$line.points = smoothed

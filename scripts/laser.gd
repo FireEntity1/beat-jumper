@@ -62,6 +62,9 @@ func _process(delta: float) -> void:
 		if smear and finished:
 			smear.modulate.a = lerpf(smear.modulate.a, 0.0,min(delta*1000.0,1.0))
 			smear.scale.x = lerpf(smear.scale.x,0.0,min(delta*5.0,1.0))
+	elif not moving and move.enabled:
+		smear.modulate.a = lerpf(smear.modulate.a,0.3,min(delta*10.0,1.0))
+		smear.scale.x = lerpf(smear.scale.x, -move.speed/1000,min(delta*2.0,1.0))
 	elif move.focus:
 		global_position = parent.get_node("player").global_position
 		

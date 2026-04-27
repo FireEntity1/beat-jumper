@@ -44,11 +44,10 @@ pivot_offset = Vector2(10, 7856)
 position = Vector2(-4, -6)
 emitting = false
 amount = 256
-lifetime = 1.49
+lifetime = 0.28
 preprocess = 0.2
 speed_scale = 6.33
 randomness = 1.0
-fixed_fps = 120
 process_material = SubResource("ParticleProcessMaterial_ch01h")
 
 [node name="collision" type="CollisionShape2D" parent="."]

@@ -36,5 +36,6 @@ horizontal_scroll_mode = 0
 
 [node name="container" type="VBoxContainer" parent="edit/scroll"]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [connection signal="button_up" from="." to="." method="_on_button_up"]

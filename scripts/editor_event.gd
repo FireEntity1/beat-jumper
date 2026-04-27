@@ -175,6 +175,7 @@ func _ready() -> void:
 					editable = LineEdit.new()
 					editable.text = str(event_data[key])
 					editable.connect("text_changed",_on_editable_changed.bind(key))
+				editable.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		if key != "rot":
 			$edit/scroll/container.add_child(label)
 			$edit/scroll/container.add_child(editable)

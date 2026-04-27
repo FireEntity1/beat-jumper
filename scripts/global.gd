@@ -21,6 +21,10 @@ signal vhs_changed(active, intensity)
 var vhs = false
 var vhs_intensity = 0.5
 
+var settings = {
+	"volume": -40
+}
+
 var chromabb = false
 var chromabb_intensity = 0.0
 
@@ -40,6 +44,10 @@ var shake = false
 var shake_intensity = 0.5
 
 var selected_song = {}
+
+var damage = 0
+
+var returning = false
 
 var prefire_sec = {
 	"laser": 0.6,

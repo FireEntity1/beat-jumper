@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cv2ys532c6hk5"]
+[gd_scene load_steps=15 format=3 uid="uid://cv2ys532c6hk5"]
 
 [ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="1_4ignj"]
 [ext_resource type="Script" uid="uid://cpr4vxn7hutd2" path="res://scripts/title.gd" id="1_4rr2b"]
@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dpj4ssei4ac7q" path="res://audio/sfx/FRACTURED-ANOMALY.ogg" id="4_yql1r"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="5_b3w7a"]
 [ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="5_yql1r"]
+[ext_resource type="Texture2D" uid="uid://dee8piw2jaun5" path="res://sprites/settings.svg" id="8_ia1n6"]
 
 [sub_resource type="Environment" id="Environment_p6dhs"]
 background_mode = 3
@@ -147,6 +148,35 @@ theme = ExtResource("5_b3w7a")
 theme_override_font_sizes/font_size = 100
 text = "Q U I T"
 
+[node name="settings" type="TextureButton" parent="."]
+offset_left = 1728.0
+offset_top = 46.0
+offset_right = 1872.0
+offset_bottom = 190.0
+texture_normal = ExtResource("8_ia1n6")
+stretch_mode = 4
+
+[node name="settings_menu" type="Popup" parent="."]
+size = Vector2i(500, 400)
+
+[node name="volume" type="HSlider" parent="settings_menu"]
+offset_left = 195.0
+offset_top = 30.0
+offset_right = 476.0
+offset_bottom = 46.0
+scale = Vector2(1, 1.92)
+min_value = -72.0
+max_value = 6.0
+value = 6.0
+
+[node name="volume_label" type="Label" parent="settings_menu"]
+offset_left = 14.0
+offset_top = 18.0
+offset_right = 171.0
+offset_bottom = 70.0
+theme_override_font_sizes/font_size = 40
+text = "VOLUME"
+
 [node name="fadeback" type="ColorRect" parent="."]
 offset_left = -110.0
 offset_top = -61.0
@@ -180,3 +210,4 @@ color = Color(0, 0, 0, 1)
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="editor" to="." method="_on_editor_button_down"]
 [connection signal="button_down" from="quit" to="." method="_on_quit_button_down"]
+[connection signal="button_up" from="settings" to="." method="_on_settings_button_up"]

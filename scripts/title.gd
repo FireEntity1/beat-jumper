@@ -38,6 +38,11 @@ func _ready() -> void:
 	startup_fade = false
 
 func _process(delta: float) -> void:
+	if $fade.color.a >= 0.2 or $fadeback.color.a >= 0.2:
+		$fade.mouse_filter = Control.MOUSE_FILTER_STOP
+	else:
+		$fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	if not editor.pressed and not play.pressed and not quit.pressed and fade_active:
 		$fade.color.a = lerpf($fade.color.a,0.0,delta*2)
 	#
@@ -129,3 +134,7 @@ func _on_quit_button_down() -> void:
 	quit.done = true
 	await get_tree().create_timer(2.0).timeout
 	get_tree().quit()
+
+
+func _on_settings_button_up() -> void:
+	$settings_menu.popup_centered()

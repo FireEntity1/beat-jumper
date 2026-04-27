@@ -238,8 +238,41 @@ theme = ExtResource("6_nj1yl")
 theme_override_font_sizes/font_size = 125
 text = " P L A Y "
 
+[node name="thanks" type="Popup" parent="."]
+title = "Thanks!"
+size = Vector2i(900, 380)
+
+[node name="ok" type="Button" parent="thanks"]
+offset_left = 263.0
+offset_top = 245.0
+offset_right = 652.0
+offset_bottom = 330.0
+theme = ExtResource("6_nj1yl")
+theme_override_font_sizes/font_size = 48
+text = "C O N T I N U E"
+
+[node name="center" type="CenterContainer" parent="thanks"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 71.0
+offset_bottom = -149.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="message" type="Label" parent="thanks/center"]
+custom_minimum_size = Vector2(800, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Thank you for playing LIGHT//BOUND's demo. If you are interested in the full release, follow fireentity_music on YouTube!"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [connection signal="button_down" from="back" to="." method="_on_back_button_down"]
 [connection signal="mouse_entered" from="back" to="." method="_on_back_mouse_entered"]
 [connection signal="mouse_exited" from="back" to="." method="_on_back_mouse_exited"]
 [connection signal="gui_input" from="blur" to="." method="_on_blur_gui_input"]
 [connection signal="button_up" from="play" to="." method="_on_play_button_up"]
+[connection signal="button_up" from="thanks/ok" to="." method="_on_ok_button_up"]

@@ -38,9 +38,12 @@ var categories = {
 
 func _ready() -> void:
 	global.add_hover_press_effect($back)
+	if global.returning == true:
+		$thanks.popup_centered()
 	$fade/fade.show()
 	popup = false
 	var i = 0
+	global.add_hover_press_effect($thanks/ok,true,false)
 	for key in categories:
 		var button = Button.new()
 		button.text = key
@@ -163,3 +166,7 @@ func _on_blur_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and popup:
 		$blur.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		popup = false
+
+
+func _on_ok_button_up() -> void:
+	$thanks.hide()

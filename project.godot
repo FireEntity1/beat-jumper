@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Beat Jumper"
+config/name="LIGHT\\\\BOUND"
 run/main_scene="uid://bkqqg6sap4ct5"
 config/features=PackedStringArray("4.4", "Mobile")
 boot_splash/bg_color=Color(0, 0, 0, 1)

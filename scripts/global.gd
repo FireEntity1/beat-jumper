@@ -221,13 +221,13 @@ const default_map = {
 }
 
 const colours = {
-	"hotpink": [9,2,7],
-	"pink": [8,4,8],
-	"blue": [5,8,8],
-	"green": [4,8,6],
-	"red": [9,6,6],
-	"purple": [6,3,9],
+	"red": [9,4,4],
 	"orange": [9,7,2],
+	"green": [5,8,5],
+	"blue": [5,8,8],
+	"pink": [8,4,8],
+	"hotpink": [9,2,7],
+	"purple": [6,3,9],
 	"white": [7,7,7],
 	"black": [0,0,0]
 }

@@ -79,6 +79,9 @@ func _process(delta: float) -> void:
 		$sprite.modulate.b = clamp($sprite.modulate.b,0,global.colours[colour][2]/3)
 		$sprite.modulate.a = 4
 	
+	if fire_hold >= 0.1 and global.beat >= (fire_beat+fire_hold) and not finished:
+		finish_laser()
+	
 	if finished:
 		$sprite.modulate -= Color(10*delta, 10*delta, 10*delta, delta*70)
 		if $sprite.modulate.a <= 0:
@@ -109,9 +112,7 @@ func start_fire_seq():
 		if body is CharacterBody2D:
 			body.hit()
 	await get_tree().create_timer(hold_time).timeout
-	finished = true
-	
-	monitoring = false
+	finish_laser()
 	await get_tree().create_timer(3.0).timeout
 	queue_free()
 	
@@ -121,3 +122,7 @@ func crossed(prev: float, now: float, target: float) -> bool:
 func _on_body_entered(body):
 	if is_fired and not finished and body is CharacterBody2D:
 		body.hit()
+
+func finish_laser():
+	finished = true
+	monitoring = false

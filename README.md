@@ -21,6 +21,7 @@
 <div align="center">
 <img width="516" height="288" alt="LIGHTBOUND_GIF_CROP" src="https://github.com/user-attachments/assets/d85bc89a-9831-48ac-acde-0971a1989f60" />
 </div>
+
 ---
 
 ## How to play

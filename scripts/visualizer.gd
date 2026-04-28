@@ -63,7 +63,7 @@ func _process(delta: float) -> void:
 	var current_max = 0.0
 
 	var target_visibility = 1.0 if show_bars else 0.0
-	bars_visibility = lerp(bars_visibility, target_visibility, 20.0 * delta)
+	bars_visibility = lerp(bars_visibility, target_visibility,min(20.0 * delta,1.0))
 
 	var bus_volume_db = AudioServer.get_bus_volume_db(0)
 
@@ -84,25 +84,25 @@ func _process(delta: float) -> void:
 		if energy < 0.05:
 			energy = 0.0
 		if energy > bar_energies[i]:
-			bar_energies[i] = lerp(bar_energies[i], energy, rise_speed*delta*60)
+			bar_energies[i] = lerp(bar_energies[i], energy, min(rise_speed*delta*60,1.0))
 		else:
-			bar_energies[i] = lerp(bar_energies[i], energy, fall_speed*delta*60)
+			bar_energies[i] = lerp(bar_energies[i], energy, min(fall_speed*delta*60,1.0))
 		var current_bar = bars[i]
 		var target_height = bar_energies[i] * 50 * clamp(0.2*max(i,1),0.5,3)
 		if global.visualizer and show_bars:
-			current_bar.scale.y = lerp(current_bar.scale.y, target_height/50*bars_visibility, 20.0*delta)
+			current_bar.scale.y = lerp(current_bar.scale.y, target_height/50*bars_visibility, min(20.0*delta,1.0))
 			#current_bar.scale.y = target_height/50
 			current_bar.modulate = global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
 		elif not show_bars and show_line:
-			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, 0.2)
+			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, min(0.2,1.0))
 		else:
 			#global.current_col*(2.0/3.0) * (1.0 + bar_energies[i] * 1.0)
-			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, 0.2)
+			current_bar.scale.y = lerp(current_bar.scale.y, 0.0, min(0.2,1.0))
 		if i >= count:
 			current_bar.scale.y = 0
 		prev_hz = hz
 	if current_max > max_energy:
-		max_energy = lerp(max_energy, current_max, 0.3)
+		max_energy = lerp(max_energy, current_max, min(0.3,1.0))
 	else:
 		max_energy = lerp(max_energy, current_max, normalization_speed)
 	#$line.clear_points()

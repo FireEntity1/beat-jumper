@@ -2,7 +2,7 @@
   <img width="1920" src="https://cdn.hackclub.com/019cf45f-7cfe-7d67-a6ff-e8e395578dc4/lb-logo.png" alt="logo" />
 </p>
 <p align="center"><i>Play here! https://fire-entity.itch.io/lightbound </i></p>
-
+<p align="center"><i>Demo video here! https://www.youtube.com/watch?v=Z8Xa9AA1s14 </i></p>
 ### <p align="center">A 2D stage-based rhythm game where the players movements are ***bound*** to the ***light***.</p>
 
 <p align="center">

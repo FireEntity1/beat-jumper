@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 		velocity.x = move.dir_x*move.speed
 		velocity.y = move.dir_y*move.speed
 		if smear:
-			print("smearing!")
+			#print("smearing!")
 			smear.modulate.a = lerpf(smear.modulate.a,1.0,min(delta*1000.0,1.0))
 			smear.scale.x = lerpf(smear.scale.x, move.speed/1000,min(delta*5.0,1.0))
 		if smear and finished:
@@ -105,7 +105,7 @@ func start_fire_seq():
 	if is_slam:
 		$particles.emitting = true
 		$sprite.scale.x = 7
-	print("Fired: ", fire_beat, " at ", global.beat)
+	#print("Fired: ", fire_beat, " at ", global.beat)
 	if move.enabled:
 		moving = true
 	var hold_time = 0.2

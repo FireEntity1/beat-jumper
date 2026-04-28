@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://p5fyskuevnje"]
+[gd_scene load_steps=20 format=3 uid="uid://p5fyskuevnje"]
 
 [ext_resource type="Script" uid="uid://cqhqu2gd35yd5" path="res://scripts/song_picker.gd" id="1_gy5sp"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="1_l61d0"]
@@ -9,6 +9,8 @@
 [ext_resource type="Shader" uid="uid://bea4ihourecfu" path="res://shaders/round_edge.gdshader" id="7_5nk3x"]
 [ext_resource type="Texture2D" uid="uid://chisdg250e4xb" path="res://sprites/image_upload.png" id="8_l6s30"]
 [ext_resource type="Shader" uid="uid://bmn2m6knf8nmh" path="res://shaders/blur.gdshader" id="9_l6s30"]
+[ext_resource type="AudioStream" uid="uid://rh0poj5i3oea" path="res://audio/sfx/ui_click.wav" id="10_v2e5y"]
+[ext_resource type="AudioStream" uid="uid://btpa47qhw5jel" path="res://audio/sfx/enter.mp3" id="11_v2e5y"]
 
 [sub_resource type="Environment" id="Environment_gy5sp"]
 background_mode = 3
@@ -123,6 +125,26 @@ offset_right = 1939.0
 offset_bottom = 1081.0
 color = Color(2, 2, 2, 1)
 
+[node name="bgline3" type="ColorRect" parent="."]
+offset_top = 961.0
+offset_right = 779.0
+offset_bottom = 969.0
+color = Color(2, 2, 2, 1)
+
+[node name="bgline4" type="ColorRect" parent="."]
+offset_left = 776.0
+offset_top = 961.0
+offset_right = 783.0
+offset_bottom = 1077.0
+color = Color(2, 2, 2, 1)
+
+[node name="bgline5" type="ColorRect" parent="."]
+offset_left = -2.0
+offset_top = 961.0
+offset_right = 7.0
+offset_bottom = 1081.0
+color = Color(2, 2, 2, 1)
+
 [node name="bg2" type="ColorRect" parent="."]
 offset_top = 359.0
 offset_right = 1939.0
@@ -169,6 +191,14 @@ pivot_offset = Vector2(64, 75)
 theme = ExtResource("6_nj1yl")
 theme_override_font_sizes/font_size = 100
 text = "<"
+
+[node name="notice" type="Label" parent="."]
+offset_left = 30.0
+offset_top = 982.0
+offset_right = 760.0
+offset_bottom = 1045.0
+theme_override_font_sizes/font_size = 48
+text = "More songs will be added soon!"
 
 [node name="preview_title" type="Label" parent="."]
 offset_left = 1177.0
@@ -269,6 +299,15 @@ theme_override_font_sizes/font_size = 32
 text = "Thank you for playing LIGHT//BOUND's demo. If you are interested in the full release, follow fireentity_music on YouTube!"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_v2e5y")
+volume_db = 5.0
+
+[node name="enter" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_v2e5y")
+volume_db = -14.333
+attenuation = 1e-05
 
 [connection signal="button_down" from="back" to="." method="_on_back_button_down"]
 [connection signal="mouse_entered" from="back" to="." method="_on_back_mouse_entered"]

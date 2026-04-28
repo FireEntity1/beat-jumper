@@ -21,10 +21,6 @@ signal vhs_changed(active, intensity)
 var vhs = false
 var vhs_intensity = 0.5
 
-var settings = {
-	"volume": -40
-}
-
 var chromabb = false
 var chromabb_intensity = 0.0
 
@@ -39,6 +35,10 @@ var glitch_intensity = 1
 var cam_zoom = 1.0
 var cam_rot = 0.0
 var cam_speed = 1.0
+
+var volume:float = 6.0
+
+var settings: ConfigFile
 
 var shake = false
 var shake_intensity = 0.5
@@ -257,6 +257,8 @@ const MULTICOLOUR = ["laser_circle", "laser_spread", "laser_sweep"]
 func _ready() -> void:
 	apply_prefire()
 	create_map_dir()
+	load_settings()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), volume)
 
 func _process(delta: float) -> void:
 	pass
@@ -302,18 +304,18 @@ func add_hover_press_effect(node: Control, horizontal: bool = false, vertical: b
 	var update_pivot = func(): node.pivot_offset = node.size / 2.0
 	update_pivot.call()
 	node.resized.connect(update_pivot)
-
+	
 	var state = {
 		"tween": null,
 		"hovered": false,
 		"pressed": false
 	}
-
+	
 	var hover_x = 1.0 if vertical else 1.25 * scale_amt
 	var hover_y = 1.0 if horizontal else 1.25 * scale_amt
 	var hover_scale = Vector2(hover_x, hover_y)
 	var press_scale = Vector2(0.9 * scale_amt * interact_scale, 0.9 * scale_amt * interact_scale)
-
+	
 	var apply_animation = func():
 		if state.tween: 
 			state.tween.kill()
@@ -329,9 +331,9 @@ func add_hover_press_effect(node: Control, horizontal: bool = false, vertical: b
 		elif state.hovered:
 			target_scale = hover_scale
 			duration = 0.4
-			
+		
 		state.tween.tween_property(node, "scale", target_scale, duration)
-
+	
 	node.mouse_entered.connect(func():
 		state.hovered = true
 		apply_animation.call()
@@ -352,4 +354,30 @@ func add_hover_press_effect(node: Control, horizontal: bool = false, vertical: b
 				state.pressed = false
 			
 			apply_animation.call()
+	)
+
+func modify_settings(new_volume: float):
+	volume = new_volume 
+	settings.set_value("audio", "master_volume", volume)
+	settings.save("user://settings.cfg")
+	
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"), 
+		volume
+	)
+
+func load_settings():
+	settings = ConfigFile.new()
+	var err = settings.load("user://settings.cfg")
+	
+	if err != OK:
+		settings.set_value("audio", "master_volume", 1.0)
+		settings.save("user://settings.cfg")
+		volume = 1.0
+	else:
+		volume = settings.get_value("audio", "master_volume", 1.0)
+	
+	AudioServer.set_bus_volume_db(
+		AudioServer.get_bus_index("Master"),
+		volume
 	)

@@ -16,6 +16,8 @@ var quit = {
 	"done": false
 }
 
+var fade_music = false
+
 var fade_active = false
 var startup_fade = true
 
@@ -26,11 +28,13 @@ func _ready() -> void:
 	global.add_hover_press_effect($play,true)
 	global.add_hover_press_effect($editor,true)
 	global.add_hover_press_effect($quit,true)
-	
+	global.add_hover_press_effect($settings_menu/close,true,false)
+	global.add_hover_press_effect($settings,true,true)
 	$title.position.y = 800
 	$title.scale = Vector2(1.2,1.2)
 	await get_tree().create_timer(0.4).timeout
-	$titlemusic.play(13)
+	$settings_menu/volume.value = global.volume
+	$titlemusic.play(24)
 	await get_tree().create_timer(0.4).timeout
 	fade_active = true
 	
@@ -38,6 +42,10 @@ func _ready() -> void:
 	startup_fade = false
 
 func _process(delta: float) -> void:
+	if not fade_music:
+		$titlemusic.volume_db = lerpf($titlemusic.volume_db,-14.667,delta*2)
+	else:
+		$titlemusic.volume_db = lerpf($titlemusic.volume_db,-40.0,delta*2)
 	if $fade.color.a >= 0.2 or $fadeback.color.a >= 0.2:
 		$fade.mouse_filter = Control.MOUSE_FILTER_STOP
 	else:
@@ -97,7 +105,8 @@ func _process(delta: float) -> void:
 		$fadeback.color.a = lerpf($fadeback.color.a,0.0,delta*5)
 	
 	if quit["done"]:
-		$fade.color.a = lerpf($fade.color.a,1.0,delta*3)
+		fade_music = true
+		$fade.color.a = lerpf($fade.color.a,1.0,delta*4)
 
 
 # ts comments not ai i just want to be able to read my shitty code
@@ -105,6 +114,9 @@ func _process(delta: float) -> void:
 # -------------------- PLAY BUTON --------------
 
 func _on_play_button_down() -> void:
+	fade_music = true
+	$click.play()
+	$click.pitch_scale = 1.2
 	play.pressed = true
 	await get_tree().create_timer(0.75).timeout
 	get_tree().change_scene_to_file("res://scenes/song_picker.tscn")
@@ -113,6 +125,8 @@ func _on_play_button_down() -> void:
 # -------------------- EDITOR BUTON --------------
 func _on_editor_button_down() -> void:
 	fade_active = true
+	$click.play()
+	$click.pitch_scale = 1.0
 	editor.pressed = true
 	play.pressed = true
 	await get_tree().create_timer(0.75).timeout
@@ -129,6 +143,8 @@ func _on_control_mouse_exited() -> void:
 # -------------------- QUIT -----------
 func _on_quit_button_down() -> void:
 	fade_active = true
+	$click.play()
+	$click.pitch_scale = 0.8
 	quit.pressed = true
 	await get_tree().create_timer(1.0).timeout
 	quit.done = true
@@ -137,4 +153,15 @@ func _on_quit_button_down() -> void:
 
 
 func _on_settings_button_up() -> void:
+	$click.play()
+	$click.pitch_scale = 1.0
 	$settings_menu.popup_centered()
+
+func _on_volume_drag_ended(value_changed: bool) -> void:
+	global.modify_settings($settings_menu/volume.value)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), $settings_menu/volume.value)
+
+
+func _on_close_button_up() -> void:
+	$click.play()
+	$settings_menu.hide()

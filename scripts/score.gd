@@ -6,6 +6,7 @@ var damage: int = 0
 var rank = "SS"
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	damage = global.damage
 	global.returning = true
 	global.add_hover_press_effect($exit,true,false)
@@ -54,5 +55,6 @@ func generate_rank(damage):
 
 func _on_exit_button_up() -> void:
 	fade = true
+	$click.play()
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://scenes/song_picker.tscn")

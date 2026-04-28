@@ -1,13 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://cv2ys532c6hk5"]
+[gd_scene load_steps=16 format=3 uid="uid://cv2ys532c6hk5"]
 
 [ext_resource type="Texture2D" uid="uid://bsigqixscx35e" path="res://sprites/logo.png" id="1_4ignj"]
 [ext_resource type="Script" uid="uid://cpr4vxn7hutd2" path="res://scripts/title.gd" id="1_4rr2b"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="2_wosw1"]
 [ext_resource type="PackedScene" uid="uid://c6pfcul8lmyr6" path="res://components/visualizer.tscn" id="3_p6dhs"]
-[ext_resource type="AudioStream" uid="uid://dpj4ssei4ac7q" path="res://audio/sfx/FRACTURED-ANOMALY.ogg" id="4_yql1r"]
+[ext_resource type="AudioStream" uid="uid://cfqqvoac0smns" path="res://audio/sfx/title_edit.wav" id="4_ia1n6"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="5_b3w7a"]
 [ext_resource type="Shader" uid="uid://bey2vtoslpwr5" path="res://shaders/glitch.gdshader" id="5_yql1r"]
 [ext_resource type="Texture2D" uid="uid://dee8piw2jaun5" path="res://sprites/settings.svg" id="8_ia1n6"]
+[ext_resource type="AudioStream" uid="uid://rh0poj5i3oea" path="res://audio/sfx/ui_click.wav" id="9_hiwto"]
 
 [sub_resource type="Environment" id="Environment_p6dhs"]
 background_mode = 3
@@ -93,14 +94,14 @@ offset_bottom = 2845.0
 scale = Vector2(0.401734, 0.401734)
 
 [node name="visualizer" parent="." instance=ExtResource("3_p6dhs")]
-position = Vector2(1872, 1137)
-rotation = -1.12478
+position = Vector2(1776, 1094)
+rotation = -1.3516
 scale = Vector2(0.3, 1.5)
 title = true
 
 [node name="visualizer2" parent="." instance=ExtResource("3_p6dhs")]
-position = Vector2(78, 1129)
-rotation = -2.09174
+position = Vector2(170, 1098)
+rotation = -1.82746
 scale = Vector2(0.3, -1.5)
 title = true
 
@@ -114,8 +115,9 @@ offset_bottom = 341.0
 
 [node name="titlemusic" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(986, 734)
-stream = ExtResource("4_yql1r")
-volume_db = -6.667
+stream = ExtResource("4_ia1n6")
+volume_db = -80.0
+attenuation = 1e-05
 bus = &"music"
 
 [node name="play" type="Button" parent="."]
@@ -158,24 +160,42 @@ stretch_mode = 4
 
 [node name="settings_menu" type="Popup" parent="."]
 size = Vector2i(500, 400)
+theme = ExtResource("5_b3w7a")
 
 [node name="volume" type="HSlider" parent="settings_menu"]
-offset_left = 195.0
-offset_top = 30.0
-offset_right = 476.0
-offset_bottom = 46.0
+offset_left = 26.0
+offset_top = 183.0
+offset_right = 474.0
+offset_bottom = 214.0
 scale = Vector2(1, 1.92)
 min_value = -72.0
 max_value = 6.0
 value = 6.0
 
 [node name="volume_label" type="Label" parent="settings_menu"]
-offset_left = 14.0
-offset_top = 18.0
-offset_right = 171.0
-offset_bottom = 70.0
+offset_top = 137.0
+offset_right = 500.0
+offset_bottom = 189.0
 theme_override_font_sizes/font_size = 40
 text = "VOLUME"
+horizontal_alignment = 1
+
+[node name="volume_label2" type="Label" parent="settings_menu"]
+offset_top = 23.0
+offset_right = 500.0
+offset_bottom = 101.0
+theme_override_font_sizes/font_size = 60
+text = "S E T T I N G S"
+horizontal_alignment = 1
+
+[node name="close" type="Button" parent="settings_menu"]
+offset_left = 138.0
+offset_top = 271.0
+offset_right = 361.0
+offset_bottom = 359.0
+theme = ExtResource("5_b3w7a")
+theme_override_font_sizes/font_size = 48
+text = "CLOSE"
 
 [node name="fadeback" type="ColorRect" parent="."]
 offset_left = -110.0
@@ -205,9 +225,15 @@ offset_bottom = 1086.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_hiwto")
+volume_db = 5.0
+
 [connection signal="mouse_entered" from="titlehover" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="titlehover" to="." method="_on_control_mouse_exited"]
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
 [connection signal="button_down" from="editor" to="." method="_on_editor_button_down"]
 [connection signal="button_down" from="quit" to="." method="_on_quit_button_down"]
 [connection signal="button_up" from="settings" to="." method="_on_settings_button_up"]
+[connection signal="drag_ended" from="settings_menu/volume" to="." method="_on_volume_drag_ended"]
+[connection signal="button_up" from="settings_menu/close" to="." method="_on_close_button_up"]

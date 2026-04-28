@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bkqqg6sap4ct5"]
+[gd_scene load_steps=10 format=3 uid="uid://bkqqg6sap4ct5"]
 
 [ext_resource type="Script" uid="uid://dbxywsfgd77pl" path="res://scripts/startup_notice.gd" id="1_cncm6"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="1_wg6w5"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="2_c2nmj"]
+[ext_resource type="AudioStream" uid="uid://rh0poj5i3oea" path="res://audio/sfx/ui_click.wav" id="4_r3iqn"]
 
 [sub_resource type="Environment" id="Environment_c2nmj"]
 background_mode = 3
@@ -88,22 +89,24 @@ text = "NOTICE"
 horizontal_alignment = 1
 
 [node name="notice" type="Label" parent="."]
-offset_left = 261.0
-offset_top = 337.0
-offset_right = 1632.0
-offset_bottom = 640.0
+offset_left = 225.0
+offset_top = 336.0
+offset_right = 1686.0
+offset_bottom = 730.0
 theme_override_font_sizes/font_size = 48
 text = "This is a pre-release demo alpha version of LIGHT//BOUND
 
 Expect bugs, unfinished sections.
-Visuals, UI, and gameplay are subject to change"
+Visuals, UI, and gameplay are subject to change
+
+If you suffer from epilepsy or are light sensitive, do not play."
 horizontal_alignment = 1
 
 [node name="enter" type="Button" parent="."]
 offset_left = 630.0
-offset_top = 678.0
+offset_top = 789.0
 offset_right = 1290.0
-offset_bottom = 830.0
+offset_bottom = 941.0
 theme = ExtResource("2_c2nmj")
 theme_override_font_sizes/font_size = 96
 text = "E N T E R"
@@ -113,5 +116,9 @@ offset_right = 1935.0
 offset_bottom = 1086.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_r3iqn")
+volume_db = 5.0
 
 [connection signal="button_up" from="enter" to="." method="_on_enter_button_up"]

@@ -223,7 +223,8 @@ func _on_speedpicker_changed(text):
 		var value = exp.execute()
 		event_data.speed = value
 	else:
-		print("error")
+		#print("error")
+		0
 
 	parent.modify(old, event_data)
 
@@ -236,9 +237,10 @@ func _on_length_changed(text):
 	if exp.parse(str(text)) == OK:
 		var value = exp.execute()
 		event_data.length = value
-		print(value)
+		#print(value)
 	else:
-		print("error")
+		#print("error")
+		0
 	parent.modify(old,event_data)
 
 func _edges_value_changed(value):

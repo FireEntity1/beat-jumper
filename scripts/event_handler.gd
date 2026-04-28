@@ -43,7 +43,9 @@ func _ready() -> void:
 		#global.selected_map = {}
 	map.data = sanitize_json(map.data,true)
 	bpm = float(map.bpm)
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	bpm_changes = get_bpm_changes()
+	$main_platform/platform_sprite.modulate = global.colours_raw["black"]
 	if not is_preview:
 		await get_tree().create_timer(1.0).timeout
 		fade = false
@@ -52,7 +54,6 @@ func _ready() -> void:
 		await get_tree().create_timer(map.offset).timeout
 		beat_running = true
 	map.data.sort_custom(sort_by_trigger_beat)
-	$main_platform/platform_sprite.modulate = global.colours_raw["purple"]
 	global.bpm = bpm
 	global.apply_prefire()
 
@@ -158,7 +159,6 @@ func _process(delta: float) -> void:
 					if e["beat"] - global.prefire_beat[e["type"]] < beat:
 						event_index += 1
 					else:
-						print("BREAK at idx:", event_index, " trigger:", trigger_beat, " beat:", beat, " event:", event.type, " event_beat:", event.beat)
 						break
 				continue
 			elif event.type in event_types:
@@ -280,7 +280,6 @@ func load_map(dir: String):
 		var song_path = dir.path_join("song.ogg")
 		var song = AudioStreamOggVorbis.load_from_file(song_path)
 		$music.stream = song
-	print(map)
 
 func _on_border_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D:

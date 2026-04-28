@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://csltaaox0gb5x"]
+[gd_scene load_steps=10 format=3 uid="uid://csltaaox0gb5x"]
 
 [ext_resource type="Script" uid="uid://bkp7i0u4ifnos" path="res://scripts/score.gd" id="1_plgac"]
 [ext_resource type="Shader" uid="uid://cbpa8qugk4ew0" path="res://shaders/fog.gdshader" id="2_lew60"]
 [ext_resource type="Theme" uid="uid://pxynnlhi5yky" path="res://resources/title.tres" id="3_68bkv"]
+[ext_resource type="AudioStream" uid="uid://rh0poj5i3oea" path="res://audio/sfx/ui_click.wav" id="4_lew60"]
 
 [sub_resource type="Environment" id="Environment_xcjqx"]
 background_mode = 3
@@ -140,5 +141,9 @@ offset_right = 1935.0
 offset_bottom = 1086.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
+
+[node name="click" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_lew60")
+volume_db = 5.0
 
 [connection signal="button_up" from="exit" to="." method="_on_exit_button_up"]

@@ -12,6 +12,8 @@ var back = {
 	"hover": false
 }
 
+var loaded = false
+
 var fade = true
 
 var categories = {
@@ -21,18 +23,10 @@ var categories = {
 			"song": preload("res://ost/ost1/fractured--anomaly/song.ogg"),
 			"map": "res://ost/ost1/fractured--anomaly/map.jump",
 			"image": preload("res://ost/ost1/fractured--anomaly/cover.png")
-		},
-		{
-			"song": preload("res://ost/ost1/fractured--anomaly/song.ogg"),
-			"map": "res://ost/ost1/fractured--anomaly/map.jump",
-			"image": preload("res://sprites/icon.png")
 		}
 	],
 	"EXTRAS": [
-		{
-			"song": null,
-			"map": null
-		}
+		
 	]
 }
 
@@ -95,15 +89,18 @@ func _process(delta: float) -> void:
 		popup = false
 
 func spawn_category_view(category):
+	if loaded:
+		$click.play()
 	picker.parent = self
 	if not category == "ALL SONGS":
 		picker.update(category, categories[category])
 	else:
 		var all_songs = []
 		for key in categories:
+			if key == "ALL SONGS":
+				continue
 			for song in categories[key]:
 				all_songs.push_back(song)
-				print(song)
 		categories["ALL SONGS"] = all_songs
 		picker.update(category, all_songs)
 
@@ -113,6 +110,7 @@ func play(song):
 
 func _on_back_button_down() -> void:
 	back.pressed = true
+	$click.play()
 	fade = true
 	$back.release_focus()
 	await get_tree().create_timer(0.1).timeout
@@ -128,13 +126,18 @@ func _on_back_mouse_exited() -> void:
 
 func select(map):
 	var loaded_map = load_map_data(map.map)
+	if loaded:
+		$click.play()
+	else:
+		loaded = true
 	selected = map
-	print(loaded_map)
 	$preview_title.text = loaded_map.name
 	$preview_artist.text = loaded_map.artist
 	$bpm.text = str(int(loaded_map.bpm)) + " BPM"
 	$duration.text = str(floori(map.song.get_length()/60)) + ":" + str(int(map.song.get_length())%60)
 	$cover.texture = map.image
+	$songpreview.stream = map.song
+	$songpreview.play(1.0)
 
 func load_map_data(path):
 	if path == null:
@@ -149,24 +152,27 @@ func load_map_data(path):
 	return data
 
 func _on_play_button_up() -> void:
-	print(selected)
 	if selected.has("map") and not popup:
 		popup = true
+		$click.pitch_scale = 1.0
+		$click.play()
 		$blur.mouse_filter = Control.MOUSE_FILTER_STOP
 	elif popup:
-		global.selected_song = selected
+		$click.pitch_scale = 1.0
+		$click.play()
 		await get_tree().create_timer(0.1).timeout
+		global.selected_song = selected
 		fade = true
 		await get_tree().create_timer(0.8).timeout
 		get_tree().change_scene_to_file("res://scenes/main_game.tscn")
 
 
 func _on_blur_gui_input(event: InputEvent) -> void:
-	print("CLICKED")
 	if event is InputEventMouseButton and event.pressed and popup:
 		$blur.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		popup = false
 
 
 func _on_ok_button_up() -> void:
+	$click.play()
 	$thanks.hide()

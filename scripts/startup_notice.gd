@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 		$fade.color.a = lerpf($fade.color.a, 1,delta*10)
 
 func _on_enter_button_up() -> void:
+	$click.play()
 	fade = true
 	await get_tree().create_timer(1).timeout
 	get_tree().change_scene_to_file("res://scenes/title.tscn")

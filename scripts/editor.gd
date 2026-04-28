@@ -569,7 +569,7 @@ func time_to_beat(time: float):
 	return bpm_changes[-1].beat
 
 func _on_scroll_scroll_ended() -> void:
-	print("scroll ended")
+	pass
 
 func _on_offset_text_changed(new_text: String) -> void:
 	map.offset = max(float(new_text), 0)

@@ -15,6 +15,7 @@ func _ready() -> void:
 	if damage == 0:
 		$damage_num.text = "NO HIT"
 	await get_tree().create_timer(0.2).timeout
+	$uiclick.play()
 	fade = false
 
 func _process(delta: float) -> void:

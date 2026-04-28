@@ -118,6 +118,7 @@ position = Vector2(986, 734)
 stream = ExtResource("4_ia1n6")
 volume_db = -80.0
 attenuation = 1e-05
+panning_strength = 0.0
 bus = &"music"
 
 [node name="play" type="Button" parent="."]

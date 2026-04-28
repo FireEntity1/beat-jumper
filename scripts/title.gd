@@ -43,7 +43,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if not fade_music:
-		$titlemusic.volume_db = lerpf($titlemusic.volume_db,-14.667,delta*2)
+		$titlemusic.volume_db = lerpf($titlemusic.volume_db,-11.667,delta*2)
 	else:
 		$titlemusic.volume_db = lerpf($titlemusic.volume_db,-40.0,delta*2)
 	if $fade.color.a >= 0.2 or $fadeback.color.a >= 0.2:

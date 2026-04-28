@@ -166,7 +166,6 @@ func _on_play_button_up() -> void:
 		await get_tree().create_timer(0.8).timeout
 		get_tree().change_scene_to_file("res://scenes/main_game.tscn")
 
-
 func _on_blur_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and popup:
 		$blur.mouse_filter = Control.MOUSE_FILTER_IGNORE

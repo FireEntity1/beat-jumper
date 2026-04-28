@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/enter.mp3-59ad4fb90228bb7272846d8a3184cdff.mp
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

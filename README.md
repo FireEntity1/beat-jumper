@@ -3,6 +3,7 @@
 </p>
 <p align="center"><i>Play here! https://fire-entity.itch.io/lightbound </i></p>
 <p align="center"><i>Demo video here! https://www.youtube.com/watch?v=Z8Xa9AA1s14 </i></p>
+
 ### <p align="center">A 2D stage-based rhythm game where the players movements are ***bound*** to the ***light***.</p>
 
 <p align="center">

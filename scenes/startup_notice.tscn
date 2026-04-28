@@ -73,10 +73,10 @@ process_material = SubResource("ParticleProcessMaterial_cncm6")
 
 [node name="fog" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_00oos")
-offset_left = -30.0001
-offset_top = -40.0001
-offset_right = 4999.0
-offset_bottom = 2845.0
+offset_left = -907.0
+offset_top = -543.0
+offset_right = 8487.0
+offset_bottom = 4846.0
 scale = Vector2(0.401734, 0.401734)
 
 [node name="title" type="Label" parent="."]
@@ -120,5 +120,6 @@ color = Color(0, 0, 0, 1)
 [node name="click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_r3iqn")
 volume_db = 5.0
+panning_strength = 0.0
 
 [connection signal="button_up" from="enter" to="." method="_on_enter_button_up"]

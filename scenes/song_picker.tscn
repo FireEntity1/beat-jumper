@@ -98,10 +98,10 @@ process_material = SubResource("ParticleProcessMaterial_rm185")
 
 [node name="fog" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_6qphs")
-offset_left = -30.0001
-offset_top = -40.0001
-offset_right = 4999.0
-offset_bottom = 2845.0
+offset_left = -875.0
+offset_top = -525.0
+offset_right = 8363.0
+offset_bottom = 4775.0
 scale = Vector2(0.401734, 0.401734)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -172,6 +172,7 @@ scale = Vector2(0.9, 0.9)
 texture = ExtResource("4_6qphs")
 
 [node name="songpreview" type="AudioStreamPlayer2D" parent="."]
+panning_strength = 0.0
 
 [node name="fade" type="CanvasLayer" parent="."]
 
@@ -303,6 +304,7 @@ autowrap_mode = 2
 [node name="click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("10_v2e5y")
 volume_db = 5.0
+panning_strength = 0.0
 
 [node name="enter" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_v2e5y")

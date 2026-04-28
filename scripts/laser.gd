@@ -108,7 +108,7 @@ func start_fire_seq():
 	#print("Fired: ", fire_beat, " at ", global.beat)
 	if move.enabled:
 		moving = true
-	var hold_time = 0.2
+	var hold_time = 0.1
 	if fire_hold >= 0.1:
 		hold_time = (60/global.bpm)*fire_hold
 	for body in get_overlapping_bodies():
@@ -127,5 +127,6 @@ func _on_body_entered(body):
 		body.hit()
 
 func finish_laser():
-	finished = true
 	monitoring = false
+	await get_tree().create_timer(0.1).timeout
+	finished = true

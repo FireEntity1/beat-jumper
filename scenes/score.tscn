@@ -145,5 +145,6 @@ color = Color(0, 0, 0, 1)
 [node name="click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_lew60")
 volume_db = 5.0
+panning_strength = 0.0
 
 [connection signal="button_up" from="exit" to="." method="_on_exit_button_up"]

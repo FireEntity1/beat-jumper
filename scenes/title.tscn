@@ -87,10 +87,10 @@ process_material = SubResource("ParticleProcessMaterial_pyl7j")
 
 [node name="fog" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_4rr2b")
-offset_left = -30.0001
-offset_top = -40.0001
-offset_right = 4999.0
-offset_bottom = 2845.0
+offset_left = -975.0
+offset_top = -582.0
+offset_right = 8758.0
+offset_bottom = 5001.0
 scale = Vector2(0.401734, 0.401734)
 
 [node name="visualizer" parent="." instance=ExtResource("3_p6dhs")]
@@ -228,6 +228,7 @@ color = Color(0, 0, 0, 1)
 [node name="click" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("9_hiwto")
 volume_db = 5.0
+panning_strength = 0.0
 
 [connection signal="mouse_entered" from="titlehover" to="." method="_on_control_mouse_entered"]
 [connection signal="mouse_exited" from="titlehover" to="." method="_on_control_mouse_exited"]

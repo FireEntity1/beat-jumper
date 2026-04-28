@@ -95,6 +95,7 @@ func _process(delta: float) -> void:
 	var direction = Input.get_axis("left", "right")
 	cam_tilt = lerpf(cam_tilt, -direction * 4.0, clamp(delta * 1.5, 0.0, 1.0))
 	$camera.rotation_degrees = lerpf($camera.rotation_degrees, global.cam_rot + cam_tilt, clamp(float(global.cam_speed) * 10.0 * delta,0.0,1.0))
+	# $sprite/red.scale = $sprite.scale
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
@@ -172,6 +173,14 @@ func hit():
 		iframe = true
 		hits += 1
 		$miss.play(0.1)
-		await get_tree().create_timer(0.5).timeout
+		$sprite/red.show()
+		await get_tree().create_timer(0.1).timeout
+		$sprite/red.hide()
+		await get_tree().create_timer(0.1).timeout
+		$sprite/red.show()
+		await get_tree().create_timer(0.1).timeout
+		$sprite/red.hide()
+		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.1).timeout
 		iframe = false
 		

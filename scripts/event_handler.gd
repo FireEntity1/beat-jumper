@@ -43,10 +43,10 @@ func _ready() -> void:
 		#global.selected_map = {}
 	map.data = sanitize_json(map.data,true)
 	bpm = float(map.bpm)
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	bpm_changes = get_bpm_changes()
 	$main_platform/platform_sprite.modulate = global.colours_raw["black"]
 	if not is_preview:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		await get_tree().create_timer(1.0).timeout
 		fade = false
 		await get_tree().create_timer(2.0).timeout
@@ -60,7 +60,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	global.bpm = bpm
 	if fade:
-		$fade/fade.modulate.a = lerpf($fade/fade.modulate.a,1.0,delta*2)
+		$fade/fade.modulate.a = lerpf($fade/fade.modulate.a,1.0,delta*3)
 	else:
 		$fade/fade.modulate.a = lerpf($fade/fade.modulate.a,0.0,delta*2)
 	if not is_preview:
